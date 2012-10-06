@@ -38,7 +38,7 @@ class skel__skel
                     
                     //now we add a settings menu item
                     add_action('admin_menu', array($this, 'buildSettings'));
-                    add_action('admin_head', array($this, 'loadcss'));
+                    add_action('admin_print_styles',array($this, 'loadcss'));
                 }
             }
         }
@@ -50,48 +50,8 @@ class skel__skel
      * Loads tabified css
      */
     public function loadcss() {
-        ?>
-<style type="text/css">
-<!--
-/* CSS Tabs */
-#navlist {
-        padding: 3px 0;
-        margin-left: 0;
-        border-bottom: 1px solid #778;
-        font: bold 12px Verdana, sans-serif;
-}
-
-#navlist li {
-        list-style: none;
-        margin: 0;
-        display: inline;
-}
-
-#navlist li a {
-        padding: 3px 0.5em;
-        margin-left: 3px;
-        border: 1px solid #778;
-        border-bottom: none;
-        background: #DDE;
-        text-decoration: none;
-}
-
-#navlist li a:link { color: #448; }
-#navlist li a:visited { color: #667; }
-
-#navlist li a:hover {
-        color: #000;
-        background: #AAE;
-        border-color: #227;
-}
-
-#navlist li a#current {
-        background: white;
-        border-bottom: 1px solid white;
-}
--->
-</style>
-        <?php
+        wp_register_style('abunda_admin_css', $this->folders['PluginUrl'] .'/css/admin.css'); 
+        wp_enqueue_style ('abunda_admin_css');
     }
     
     /**
@@ -104,12 +64,12 @@ class skel__skel
             $_GET['tab'] = 0;
         }
         
-        //echo "viewing: " . $this->config['tabs'][$_GET['tab']][1] . " <- here";
-        $this->render_tabs();
+        if (current_user_can('manage_options')) $this->render_tabs();
     }
     
     private function render_tabs() {
         ?>
+        <div id="icon-MoneyPress_Abundatrade_Edition" class="icon32"><br /></div><h2>Abundatrade Settings</h2>
         <div id="navcontainer">
             <ul id="navlist">
                 <?php
@@ -120,8 +80,8 @@ class skel__skel
                 ?>
             </ul>
         </div>
-        <div class="wrap">
-        <h2><?php echo $this->config['tabs'][$_GET['tab']][0]; ?></h2>
+        <div class="tool-box">
+        <h3 class="title"><?php echo $this->config['tabs'][$_GET['tab']][0]; ?></h3>
         <?php
         $display = new $this->config['tabs'][$_GET['tab']][1];
         $display->settings();

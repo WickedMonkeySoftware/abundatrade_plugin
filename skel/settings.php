@@ -80,6 +80,51 @@ class skel__settings
     }
     
     /**
+     * Gets the plugin settings
+     * @return skel__settings This plugin's settings class
+     */
+    public static function Settings() {
+        $settings = apply_filters("abundatrade(settings)", array());
+        return $settings[0];
+    }
+    
+    public static function RenderBox($title, $description = '', $inputs = null) {
+        ?>
+        <div class="postbox"><div class="handlediv" title="Click to open/close"><br /></div>
+        <h3 class="hndle">
+        
+        <span><?php echo $title; ?></span>
+        <a name="<?php echo str_replace(" ", "_", $title); ?>"></a>
+        </h3>
+        <div class="inside">
+        <?php
+        if ($description != '') {
+        ?>
+        
+        <div class="section_description"><p><?php echo $description; ?></p></div>
+        
+        <?php
+        }
+        
+        if (is_array($inputs)) {
+            foreach($inputs as $input) {
+                echo "<p>" . $input['name'] . ": ";
+                echo "<input ";
+                foreach ($input as $part => $value) {
+                    echo $part . "=\"" . $value . "\"";
+                }
+                echo " /></p>";
+                echo "<pre>";
+                var_dump($input);
+                echo "</pre>";
+            }
+        }
+        ?>
+        </div></div>
+        <?php
+    }
+    
+    /**
      * Create a settings class
      */
 	function __construct() {
