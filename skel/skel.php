@@ -101,12 +101,33 @@ class skel__skel
     public function display() {
         if(!isset($_GET['tab']))
         {
-            $_GET['tab'] = 1;
+            $_GET['tab'] = 0;
         }
         
-        echo "viewing: " . $this->config['tabs'][0][1] . " <- here";
-        $display = new $this->config['tabs'][0][1];
+        //echo "viewing: " . $this->config['tabs'][$_GET['tab']][1] . " <- here";
+        $this->render_tabs();
+    }
+    
+    private function render_tabs() {
+        ?>
+        <div id="navcontainer">
+            <ul id="navlist">
+                <?php
+        $count = 0;
+        foreach ($this->config['tabs'] as $tab) {
+            echo "<li><a" . (($tab[0] === $this->config['tabs'][$_GET['tab']][0]) ? " id='current'": "") . " href='". $this->folders['PluginAdmin'] ."&tab=". $count++ ."'>" . $tab[0] . "</a></li>";
+        }
+                ?>
+            </ul>
+        </div>
+        <div class="wrap">
+        <h2><?php echo $this->config['tabs'][$_GET['tab']][0]; ?></h2>
+        <?php
+        $display = new $this->config['tabs'][$_GET['tab']][1];
         $display->settings();
+        ?>
+        </div>
+        <?php
     }
     
     /**
