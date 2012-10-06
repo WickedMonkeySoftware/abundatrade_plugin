@@ -1,13 +1,13 @@
 <?php
 /**
- * @package Abundatrade Plugin
+ * @package abundatrade
  * @version 1.0
  * @author Robert Landers (landers.robert@gmail.com)
  */
 /*
 Plugin Name: Abundatrade Plugin
-Plugin URI: http://wordpress.org/extend/plugins/moneypress-abundatrade/
-Description: Get the value of items easily and make some money.
+Plugin URI: http://wordpress.org/extend/plugins/abundatrade/
+Description: Undecided
 Author: withinboredom
 Version: 1.0
 Author URI: http://withinboredom.info
@@ -15,7 +15,7 @@ Author URI: http://withinboredom.info
 
 if (!defined("WP_CONTENT_DIR")) exit();
 
-class Abundatrade_withinboredom {
+class abundatrade_withinboredom {
     
     private $folders;
     
@@ -46,7 +46,7 @@ class Abundatrade_withinboredom {
             );
         $config['config'] = array(
                 'settings' => true,
-                'page_title' => 'Abundatrade Plugin',
+                'page_title' => 'Abundatrade',
                 'button_title' => 'Abundatrade',
                 'slug' => 'abundatrade',
                 'shortcodes' => array(
@@ -86,8 +86,8 @@ class Abundatrade_withinboredom {
         $folders = apply_filters("abundatrade(getFolders)", array());
         if (file_exists($folders['PluginDir'] . $file . ".php"))
             include_once($folders['PluginDir'] . $file . ".php");
-        else
-            echo "file no exists: " . $folders['PluginDir'] . $file . ".php\n";
+        //else
+            //echo "<pre>file no exists: " . $folders['PluginDir'] . $file . ".php\n</pre>";
     }
     
     /**
@@ -102,7 +102,7 @@ class Abundatrade_withinboredom {
     }
 }
 
-$GLOBALS['Abundatrade_withinboredom'] = new Abundatrade_withinboredom();
+$GLOBALS['abundatrade_withinboredom'] = new abundatrade_withinboredom();
 
 //we don't want to autoload later on
 //spl_autoload_unregister(array($GLOBALS['TheMap_withinboredom'], 'autoload'));
