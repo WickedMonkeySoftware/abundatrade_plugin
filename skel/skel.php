@@ -18,11 +18,17 @@ class skel__skel
     private $config;
     
     /**
+     * The folder list
+     */
+    private $folders;
+    
+    /**
      * Lays out the skel framework
      */
 	function __construct()
     {
     	$this->config = apply_filters("abundatrade(applyConfig)", array());
+        $this->folders = apply_filters("abundatrade(getFolders)", array());
         echo "Incredible<pre>";
         var_dump($this->config);
         
@@ -32,11 +38,60 @@ class skel__skel
                     
                     //now we add a settings menu item
                     add_action('admin_menu', array($this, 'buildSettings'));
+                    add_action('admin_head', array($this, 'loadcss'));
                 }
             }
         }
         
         echo "</pre>";
+    }
+    
+    /**
+     * Loads tabified css
+     */
+    public function loadcss() {
+        ?>
+<style type="text/css">
+<!--
+/* CSS Tabs */
+#navlist {
+        padding: 3px 0;
+        margin-left: 0;
+        border-bottom: 1px solid #778;
+        font: bold 12px Verdana, sans-serif;
+}
+
+#navlist li {
+        list-style: none;
+        margin: 0;
+        display: inline;
+}
+
+#navlist li a {
+        padding: 3px 0.5em;
+        margin-left: 3px;
+        border: 1px solid #778;
+        border-bottom: none;
+        background: #DDE;
+        text-decoration: none;
+}
+
+#navlist li a:link { color: #448; }
+#navlist li a:visited { color: #667; }
+
+#navlist li a:hover {
+        color: #000;
+        background: #AAE;
+        border-color: #227;
+}
+
+#navlist li a#current {
+        background: white;
+        border-bottom: 1px solid white;
+}
+-->
+</style>
+        <?php
     }
     
     /**
