@@ -12,10 +12,10 @@ class skel__settings
     private $settings_array;
     
     /**
-     * The default starting location
-     * @var string $default_location
+     * The Affiliate ID
+     * @var string $Affiliate_ID
      */
-    public $default_location;
+    public $Affiliate_ID;
     
     /**
      * The saved version from the last time this plugin was loaded
@@ -34,15 +34,24 @@ class skel__settings
      * @return mixed The options from the db or the defaults
      */
     function options($default) {
-        if (get_option("skel_themap_options", false) === false) {
-            $default = array_merge_recursive($default, array(
-                    "version" => "0.0"
+        $default = array_merge_recursive($default, array(
+                    "version" => "0.0",
+                    "Affiliate_ID" => "1"
                 ));
-            return $default;
+        
+        if (get_option("skel_abundatrade_options", false) === false) {
+            $options = array();
         }
         else {
-            return get_option("skel_abundatrade_options");
+            $options = get_option("skel_abundatrade_options");
         }
+        
+        $options = array_merge_recursive($options, $default);
+        
+        echo "Options:\n";
+        var_dump($options);
+        
+        return $options;
     }
     
     /**
@@ -72,8 +81,8 @@ class skel__settings
         add_filter("abundatrade(default_options)", array($this, "options"));
         add_action("abundatrade(update)", array($this, "update"), 1, 2);
         add_filter("abundatrade(getSettings)", array($this, "getSettings"));
-        
-        $this->settings_array = apply_filters("themap(default_options)", array());
+        echo "Create options";
+        $this->settings_array = apply_filters("abundatrade(default_options)", array());
         
         foreach ($this->settings_array as $setting => $setto) {
             $this->$setting = $setto;

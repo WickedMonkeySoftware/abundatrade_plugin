@@ -59,6 +59,10 @@ class abundatrade_withinboredom {
     private function shortcode($atts) {
     }
     
+    public function getSettings() {
+        return $$this->settings;
+    }
+    
     /**
      * Creates a map structure
      */
@@ -68,6 +72,8 @@ class abundatrade_withinboredom {
         add_filter("abundatrade(getFolders)", array(&$this, "getFolders"), 1);
         add_filter("abundatrade(applyConfig)", array(&$this, "applyConfig"), 1);
         add_filter("abundatrade(shortcode(abundatrade))", array(&$this, "shortcode"), 1);
+        
+        add_action("abundatrade(settings)", array($this, "getSettings"));
         
         spl_autoload_register(array($this, "autoload"));
         
@@ -94,10 +100,11 @@ class abundatrade_withinboredom {
      * Builds a list of folders for later distribution so we can find ourselves
      */
     private function BuildFolderList() {
+        $config = $this->applyConfig(array());
         $this->folders = array();
         $this->folders['PluginDir'] = plugin_dir_path(__FILE__);
         $this->folders['PluginUrl'] = plugins_url('', __FILE__);
-        $this->folders['PluginAdmin'] = admin_url() . 'admin.php?page=';
+        $this->folders['PluginAdmin'] = admin_url() . 'admin.php?page=' . $config['config']['slug'];
         $this->folders['Basename'] = plugin_basename(__FILE__);
     }
 }
