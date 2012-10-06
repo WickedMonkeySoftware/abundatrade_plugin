@@ -20,7 +20,7 @@ class tabs__about_withinboredom
     
     // display admin stuff ...
     function settings() {
-        $settings = do_action("abundatrade(settings)");
-        $settings->Affiliate_ID = 2;
+        $settings = skel__settings::Settings();
+        
     }
 }

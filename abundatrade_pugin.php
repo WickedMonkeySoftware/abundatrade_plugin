@@ -60,7 +60,7 @@ class abundatrade_withinboredom {
     }
     
     public function getSettings() {
-        return $$this->settings;
+        return array(&$this->settings);
     }
     
     /**
@@ -73,7 +73,7 @@ class abundatrade_withinboredom {
         add_filter("abundatrade(applyConfig)", array(&$this, "applyConfig"), 1);
         add_filter("abundatrade(shortcode(abundatrade))", array(&$this, "shortcode"), 1);
         
-        add_action("abundatrade(settings)", array($this, "getSettings"));
+        add_filter("abundatrade(settings)", array($this, "getSettings"), 200, 0);
         
         spl_autoload_register(array($this, "autoload"));
         

@@ -54,6 +54,12 @@ class skel__settings
         return $options;
     }
     
+    public function applySettings($var) {
+        foreach($var as $setting => $value) {
+            if (isset($this->$setting)) $this->$setting = $value;
+        }
+    }
+    
     /**
      * Reduces the class's settings to an array and returns them
      * @var mixed $settings Other settings to merge these with (for addons)
