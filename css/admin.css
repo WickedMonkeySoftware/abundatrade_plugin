@@ -1,0 +1,161 @@
+﻿/******************************************************************************
+ * File: admin.css 
+ * 
+ * admin pages stylesheet.
+ *
+ ******************************************************************************/
+
+/************************************
+ * Plugin Specific Formatting 
+ */
+
+ 
+/************************************
+ * Generic Formatting 
+ */
+
+/* CSS Tabs */
+#navlist {
+        padding: 3px 0;
+        margin-left: 0;
+        border-bottom: 1px solid #778;
+        font: bold 12px Verdana, sans-serif;
+}
+
+#navlist li {
+        list-style: none;
+        margin: 0;
+        display: inline;
+}
+
+#navlist li a {
+        padding: 3px 0.5em;
+        margin-left: 3px;
+        border: 1px solid #778;
+        border-bottom: none;
+        background: #DDE;
+        text-decoration: none;
+}
+
+#navlist li a:link { color: #448; }
+#navlist li a:visited { color: #667; }
+
+#navlist li a:hover {
+        color: #000;
+        background: #AAE;
+        border-color: #227;
+}
+
+#navlist li a#current {
+        background: white;
+        border-bottom: 1px solid white;
+}
+
+
+/*----------------------------------
+ * The Navbar 
+ */
+ 
+div#mp_navbar {
+    background: none;
+    border: none;
+    margin: 0px;
+    padding: 0px;
+    left: -15px;
+}
+
+#mp_navbar ul {
+    margin: 0px;
+}
+#mp_navbar li {
+  float: left;
+  margin: 6px;
+  padding: 3px;
+}
+
+#mp_navbar div.handlediv {
+    display: none;
+    visibility: hidden;
+}
+#mp_navbar h3.hndle {
+    display: none;
+    visibility: hidden;
+}
+ 
+ 
+/*----------------------------------
+ * A div that looks like a button. 
+ */
+.like-a-button {
+	background: #FFF; /* for non-css3 browsers */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#DDDDDD'); /* for IE */
+    background: -webkit-gradient(linear, left top, left bottom, from(#FFF), to(#DDD)); /* for webkit browsers */
+    background: -moz-linear-gradient(top,  #FFF,  #DDD); /* for firefox 3.6+ */  
+  
+  border: 1px solid #BBBBBB;
+  border-radius: 3px 3px 3px 3px;
+  margin: 6px;
+  padding: 3px;
+  text-align: center;
+  width: 150px;
+  cursor: pointer;
+  color: #5F5E5E;
+  display: block;
+  
+  /* Corners */
+  -webkit-border-radius:6px;
+  -moz-border-radius:6px;
+  border-radius:6px;
+   -khtml-border-radius: 6px;
+   
+   /* Shadow */
+   -moz-box-shadow: 0px 1px 3px #AAA;
+   -webkit-box-shadow: 0px 1px 3px #AAA;
+   box-shadow: 0px 1px 3px #AAA;   
+}
+.like-a-button:hover {
+	background: #DDD; /* for non-css3 browsers */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#DDDDDD', endColorstr='#FFFFFF'); /* for IE */
+    background: -webkit-gradient(linear, left top, left bottom, from(#DDD), to(#FFF)); /* for webkit browsers */
+    background: -moz-linear-gradient(top,  #DDD,  #FFF); /* for firefox 3.6+ */  
+}
+.like-a-button A {
+    text-decoration:none;
+}
+
+
+/*----------------------------------
+ * Floats 
+ */
+ 
+.floatright {
+    float: right;
+}
+.floatleft {
+    float: left;
+}
+
+/*----------------------------------
+ * Icons 
+ */
+ 
+.helpicon {
+    padding-left: 5px;
+    position: relative;
+    vertical-align: top;
+}
+
+div.icon32 {
+    background: url("../images/icons32.png") no-repeat scroll -72px -5px transparent;    
+}
+
+
+/*----------------------------------
+ * Input Labels
+ */
+table.form-table tbody tr th.input_label {
+    vertical-align: top;
+    padding-top: 14px;
+}
+
+
