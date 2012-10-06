@@ -34,7 +34,7 @@ class skel__settings
      * @return mixed The options from the db or the defaults
      */
     function options($default) {
-        $default = array_merge_recursive($default, array(
+        $default = array_merge($default, array(
                     "version" => "0.0",
                     "Affiliate_ID" => "1"
                 ));
@@ -46,7 +46,7 @@ class skel__settings
             $options = get_option("skel_abundatrade_options");
         }
         
-        $options = array_merge_recursive($options, $default);
+        $options = array_merge($default, $options);
         
         echo "Options:\n";
         var_dump($options);
@@ -61,7 +61,7 @@ class skel__settings
      */
     function getSettings($settings) {
         $this->reduceSettings();
-        return array_merge_recursive($settings, $this->settings_array);
+        return array_merge($settings, $this->settings_array);
     }
     
     /**
