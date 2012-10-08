@@ -56,11 +56,66 @@ class abundatrade_withinboredom {
         return $config;
     }
     
-    private function shortcode($atts) {
+    public function shortcode($atts) {
+        $display = '<div id="top_content">';
+        $top = '<div id="top_input_section" class="calc_content_wrap orange_bg">
+
+  <form id="abundaInput" class="abundaInput" onsubmit="handleAddedItem(); return false;" submit="/trade/calculator.php" method="post" >
+    <input id="item_num" value="1" name="item_num" type="hidden"/>
+
+    <div class="input_container">
+            </div>
+    
+    <div class="input_container">
+      <div class="label">UPC or ISBN</div>
+      <div class="product_holder">
+        <input class="validate[\'required\',\'length[3,25]\']" id="product_code" name="product_code" onblur="clean_product_code(this)" type="text"/>
+      </div>
+    </div>
+
+    <div class="input_container">
+      <div class="label"> Quantity </div>
+      <div class="qty_holder">
+        <input class="validate[\'required\',\'digit[1,20]\']" id="product_qty" name="product_qty" value="1" type="text"/>
+      </div>
+    </div>
+
+    <div class="submit_holder">
+      <input class="submit" value="" type="submit"/>
+    </div>';
+        $second = '<div id="second_content" class="calc_content_wrap green_bg">
+                      <div class="second_content_sec1">
+                      <label>Total Items:</label><div id="total_item_count">0</div></div>
+                      <div class="second_content_sec2">
+                        <label>Pre-Valuation Total:</label>
+                        <div id="total_prevaluation">
+                          $0.00                        </div>
+                      </div>
+                      <div class="second_content_sec3"><a id="submitList" href="#"><img style="z-index:0;" src="../images/list-abunda.jpg" alt="" /></a></div>
+                      </div>';
+        $endform = "</form></div>";
+        $endtop = "</div>";
+        $display .= $top;
+        $display .= $endform;
+        $display .= $second;
+        $display .= $endtop;        return $display;
     }
     
+    /**
+     * Retuns a pointer to the settings object
+     */
     public function getSettings() {
         return array(&$this->settings);
+    }
+    
+    public function doshortcode($atts) {
+        $display = apply_filters("abundatrade(shortcode(abundatrade))", $atts);
+        return $display;
+    }
+    
+    public function addScripts() {
+        wp_register_style("abundatrade_classic", $this->folders['PluginUrl'] . '/themes/classic.css');
+        wp_enqueue_style("abundatrade_classic");
     }
     
     /**
@@ -73,7 +128,11 @@ class abundatrade_withinboredom {
         add_filter("abundatrade(applyConfig)", array(&$this, "applyConfig"), 1);
         add_filter("abundatrade(shortcode(abundatrade))", array(&$this, "shortcode"), 1);
         
+        add_shortcode("abundatrade", array($this, "doshortcode"));
+        
         add_filter("abundatrade(settings)", array($this, "getSettings"), 200, 0);
+        
+        add_action("wp_enqueue_scripts", array($this, "addScripts"));
         
         spl_autoload_register(array($this, "autoload"));
         
