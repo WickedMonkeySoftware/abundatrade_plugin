@@ -48,9 +48,6 @@ class skel__settings
         
         $options = array_merge($default, $options);
         
-        echo "Options:\n";
-        var_dump($options);
-        
         return $options;
     }
     
@@ -114,9 +111,6 @@ class skel__settings
                     echo $part . "=\"" . $value . "\"";
                 }
                 echo " /></p>";
-                echo "<pre>";
-                var_dump($input);
-                echo "</pre>";
             }
         }
         ?>
@@ -132,7 +126,6 @@ class skel__settings
         add_filter("abundatrade(default_options)", array($this, "options"));
         add_action("abundatrade(update)", array($this, "update"), 1, 2);
         add_filter("abundatrade(getSettings)", array($this, "getSettings"));
-        echo "Create options";
         $this->settings_array = apply_filters("abundatrade(default_options)", array());
         
         foreach ($this->settings_array as $setting => $setto) {

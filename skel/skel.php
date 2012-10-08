@@ -29,8 +29,6 @@ class skel__skel
     {
     	$this->config = apply_filters("abundatrade(applyConfig)", array());
         $this->folders = apply_filters("abundatrade(getFolders)", array());
-        echo "Incredible<pre>";
-        var_dump($this->config);
         
         if (isset($this->config['config'])) {
             if (isset($this->config['config']['settings']) && $this->config['config']['settings']) {
