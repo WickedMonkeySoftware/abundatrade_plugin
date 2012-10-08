@@ -104,7 +104,7 @@ class abundatrade_withinboredom {
         $this->folders = array();
         $this->folders['PluginDir'] = plugin_dir_path(__FILE__);
         $this->folders['PluginUrl'] = plugins_url('', __FILE__);
-        $this->folders['PluginAdmin'] = admin_url() . 'admin.php?page=' . $config['config']['slug'];
+        $this->folders['PluginAdmin'] = admin_url() . 'options-general.php?page=' . $config['config']['slug'];
         $this->folders['Basename'] = plugin_basename(__FILE__);
     }
 }
