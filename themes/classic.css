@@ -1,0 +1,280 @@
+﻿.calc_content_wrap {
+
+	width: 100%;
+	margin:0 auto;
+	padding: 4px;
+	z-index: 1; color: #ffffff;
+	text-align: left;
+    	font-weight: bold;
+    	font-size: 18px;
+    	clear:none;
+}
+
+
+.orange_bg{background:#257A01;}
+.green_bg{background:#0b5294;}
+
+#second_content {
+    margin: 5px 0 0 0;
+    float: left;
+    width:100%;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -khtml-border-radius: 20px;
+    border-radius: 20px;
+}
+
+.second_content_sec1 
+{
+    width:200px;
+    margin:10px 0 0 12px;
+    padding:7px;
+    float:left;
+    clear:none;
+    font-size:18px;
+    color:White;
+}
+
+.second_content_sec2
+{
+    width:280px;
+    margin-top:10px;
+    padding:7px 0 7px 7px;
+    float:left;
+    clear:none;
+    font-size:18px;
+    color:White;
+}
+
+.second_content_sec3
+{
+    width:188px;
+    margin:3px 18px 0 0;
+    padding:7px 0;
+    float:right;
+    clear:none;
+    font-size:18px;
+    color:White;
+    z-index: 1;
+}
+
+#submitList 
+{
+    margin-left: 25px;
+    clear:none;
+}
+
+.second_content_sec1 label 
+{
+    width:120px;
+    float: left;
+	clear:none;
+	margin:0;
+	padding:0;
+}
+
+.second_content_sec2 div
+{
+    float: left;
+    border:0;
+    clear:none;
+}
+
+
+.second_content_sec3 img 
+{
+    float: right;
+    border:0;
+    clear:none;
+}
+
+.second_content_sec2 label
+{
+    width:200px;
+    float: left;
+	clear:none;
+	margin:0;
+	padding:0;
+}
+
+.second_content_sec1 div {
+	clear:none;
+}
+
+#abundaInput {
+	margin: 0;
+	clear: none;
+}
+
+#top_input_section
+ {
+    margin:0;
+    float:left;
+    width: 100%;
+    clear: none;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -khtml-border-radius: 20px;
+    border-radius: 20px;
+ }
+
+#top_input_section div.input_container
+{
+    height: 40px; margin: 5px 5px 15px 15px; float:left; padding-top:11px; clear: none; width:auto;
+}
+
+#top_input_section div.label{float:left; margin: 5px 6px 0 0; clear:none; }
+
+#top_input_section div.input_container div.product_holder
+ {
+    width:162px;
+    height:32px;
+    float:left;
+    margin-right: 12px;
+    z-index: 1;
+    margin: 0;
+    padding:0;
+    display:block;
+    clear:none;
+ }
+
+#top_input_section div.product_holder #product_code
+{
+    background: white;
+    border: medium none;
+    height: 32px;
+    margin-left: 16px;
+    margin-top: 7px;
+    width: 140px;
+    z-index: 1;
+    clear:none;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -khtml-border-radius: 20px;
+    border-radius: 20px;
+}
+
+
+#top_input_section div.input_container div.qty_holder
+ {
+    width:66px;
+    height:32px;
+    float:left;
+    top: 5px;
+    margin-left: 6px;
+    z-index: 1;
+    clear:none;
+ }
+
+#top_input_section div.qty_holder #product_qty
+{
+    background: white;
+    border: none;
+    width:60px;
+    height:32px;
+    margin-top:7px;
+    margin-left:10px;
+    clear:none;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -khtml-border-radius: 20px;
+    border-radius: 20px;
+}
+
+
+#top_input_section  div.submit_holder
+ {
+    float:right;
+    width: 140px;
+    height: 40px;
+    margin: 5px 15px 15px 5px; padding-top:11px;
+    clear:none;
+ }
+ 
+ #top_input_section .submit
+ {
+     border:none;
+     background: url("../images/additem.jpg") no-repeat;
+     width: 123px;
+     height: 37px;
+     cursor: pointer;
+     margin:0 12px 0 0;
+     padding:0;float:right;
+     clear:none;
+ }
+ 
+ #top_input_section .submit:hover
+ {
+     background: url("../images/additem1.jpg") no-repeat;
+     clear: none;
+ }
+
+#abundaCalcTbl 
+{
+    width:100%;
+    margin-bottom:18px;
+    margin-top: 8px;
+    margin-left: 3px;
+    clear:none;
+    
+    float:left;
+}
+
+#abundaCalcTbl tbody tr 
+{
+    background:#cef4ff;
+}
+
+#abundaCalcTbl tbody {
+	max-height:400px;
+}
+
+#abundaCalcTbl tfoot th 
+{
+    background: #0b5294;
+    border-left:0;
+    border-right:0;
+    border-bottom: 1px solid silver;
+    height:24px;
+    padding:4px 5px 4px 5px;
+    color:white;
+    font-weight:bold;
+    font-size:18px;
+    text-align:right;
+}
+
+#abundaCalcTbl tfoot th a {
+	text-decoration:none;
+	color:#fcf802;
+	font-size:16px;
+	font-weight:bold;
+	
+}
+
+#abundaCalcTbl thead th 
+{
+    background:#0b5294;
+    height:35px;
+    border-bottom: 1px solid silver;
+    border-right:0;
+    border-left:0;
+    padding: 6px 5px 2px 5px;
+    color: White;
+    font-weight: bold;
+	font-size:16px;
+	text-align: center;
+}
+
+#abundaCalcTbl thead th.delete 
+{
+    text-align: right;
+	color:#030;
+}
+
+#abundaCalcTbl thead th a 
+{
+    text-decoration: none;
+    color: #fcf802;
+    font-size: 16px;
+    font-weight: bold;
+}

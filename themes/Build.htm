@@ -1,0 +1,28 @@
+<div id="top_input_section" class="calc_content_wrap orange_bg">
+
+  <form id="abundaInput" class="abundaInput" onsubmit="handleAddedItem(); return false;" submit="/trade/calculator.php" method="post" >
+    <input id="item_num" value="1" name="item_num" type="hidden"/>
+
+    <div class="input_container">
+            </div>
+    
+    <div class="input_container">
+      <div class="label">UPC or ISBN</div>
+      <div class="product_holder">
+        <input class="validate[\'required\',\'length[3,25]\']" id="product_code" name="product_code" onblur="clean_product_code(this)" type="text"/>
+      </div>
+    </div>
+
+    <div class="input_container">
+      <div class="label"> Quantity </div>
+      <div class="qty_holder">
+        <input class="validate[\'required\',\'digit[1,20]\']" id="product_qty" name="product_qty" value="1" type="text"/>
+      </div>
+    </div>
+
+    <div class="submit_holder">
+      <input class="submit" value="" type="submit"/>
+    </div>
+    
+    </form>
+    </div>

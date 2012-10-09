@@ -91,13 +91,44 @@ class abundatrade_withinboredom {
                         <div id="total_prevaluation">
                           $0.00                        </div>
                       </div>
-                      <div class="second_content_sec3"><a id="submitList" href="#"><img style="z-index:0;" src="../images/list-abunda.jpg" alt="" /></a></div>
+                      <div class="second_content_sec3"><a id="submitList" href="#"><img style="z-index:0;" src="'. $this->folders['PluginUrl'] .'/images/list-abunda.jpg" alt="" /></a></div>
                       </div>';
         $endform = "</form></div>";
         $endtop = "</div>";
+        $table = '<table cellspacing="0" cellpadding="0" id="abundaCalcTbl">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>UPC</th>
+                      <th>Product Details</th>
+                      <th>Qty</th>
+                      <th>Per Item</th>
+                      <th>Total</th>
+                      <th class="delete"><a href="./process/deleteAll.php">Delete All</a></th>
+                      <th style="display: none;">ID</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th colspan="2">Total Items:</th>
+                      <th id="item_count">0</th>
+                      <th colspan="2">Pre-Valuation Total</th>
+                      <th id="grand_total">$0.00</th>
+                      <th colspan="2"><a href="./process/deleteAll.php">Delete All </a></th>
+                    </tr>
+                  </tfoot>
+                  <tbody id="abundaCalcBody_process">
+		            </tbody>
+            <tbody id="abundaCalcBody_request" >
+                <tr class="response">
+                </tr>
+            </tbody>
+        </table>';
         $display .= $top;
         $display .= $endform;
         $display .= $second;
+        
+        $display .= $table;
         $display .= $endtop;        return $display;
     }
     
