@@ -17,7 +17,7 @@
 #second_content {
     margin: 5px 0 0 0;
     float: left;
-    width:100%;
+    width:99%;
     -moz-border-radius: 20px;
     -webkit-border-radius: 20px;
     -khtml-border-radius: 20px;
@@ -110,7 +110,7 @@
  {
     margin:0;
     float:left;
-    width: 100%;
+    width: 99%;
     clear: none;
     -moz-border-radius: 20px;
     -webkit-border-radius: 20px;
@@ -121,6 +121,14 @@
 #top_input_section div.input_container
 {
     height: 40px; margin: 5px 5px 15px 15px; float:left; padding-top:11px; clear: none; width:auto;
+}
+
+#top_content {
+	position:relative;
+	display:block;
+	width:90%;
+	height: auto;
+	margin:auto;
 }
 
 #top_input_section div.label{float:left; margin: 5px 6px 0 0; clear:none; }
