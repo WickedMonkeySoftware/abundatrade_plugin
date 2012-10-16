@@ -40,8 +40,6 @@ class skel__skel
                 }
             }
         }
-        
-        echo "</pre>";
     }
     
     /**
