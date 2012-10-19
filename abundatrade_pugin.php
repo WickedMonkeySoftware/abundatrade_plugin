@@ -57,12 +57,12 @@ class abundatrade_withinboredom {
     }
     
     public function shortcode($atts) {
-        $display = '<div id="top_content">';
+        $display = '<div id="abundatrade">';
         $top = '<div id="top_input_section" class="calc_content_wrap orange_bg">
 
-  <form id="abundaInput" class="abundaInput" onsubmit="handleAddedItem(); return false;" submit="/trade/calculator.php" method="post" >
+  <form id="abundaInput" class="abundaInput" onsubmit="return false;" method="post" >
     <input id="item_num" value="1" name="item_num" type="hidden"/>
-
+    <input id="a" value="' . $this->settings->Affiliate_ID . '" type="hidden"/>
     <div class="input_container">
             </div>
     
@@ -91,7 +91,7 @@ class abundatrade_withinboredom {
                         <div id="total_prevaluation">
                           $0.00                        </div>
                       </div>
-                      <div class="second_content_sec3"><a id="submitList" href="#"><img style="z-index:0;" src="'. $this->folders['PluginUrl'] .'/images/list-abunda.jpg" alt="" /></a></div>
+                      <div class="second_content_sec3"><a id="submitList" onclick="submit_the_list(this);"><img style="z-index:0;" src="'. $this->folders['PluginUrl'] .'/images/list-abunda.jpg" alt="" /></a></div>
                       </div>';
         $endform = "</form></div>";
         $endtop = "</div>";
@@ -104,22 +104,24 @@ class abundatrade_withinboredom {
                       <th>Qty</th>
                       <th>Per Item</th>
                       <th>Total</th>
-                      <th class="delete"><a href="./process/deleteAll.php">Delete All</a></th>
+                      <th class="delete"><a onclick="clear_session(this);">Delete All</a></th>
                       <th style="display: none;">ID</th>
                     </tr>
                   </thead>
+                  <tbody id="abundaCalcBody_request">
+                  </tbody>
                   <tfoot>
                     <tr>
                       <th colspan="2">Total Items:</th>
                       <th id="item_count">0</th>
                       <th colspan="2">Pre-Valuation Total</th>
                       <th id="grand_total">$0.00</th>
-                      <th colspan="2"><a href="./process/deleteAll.php">Delete All </a></th>
+                      <th colspan="2"><a onclick="clear_session(this);">Delete All </a></th>
                     </tr>
                   </tfoot>
                   <tbody id="abundaCalcBody_process">
 		            </tbody>
-            <tbody id="abundaCalcBody_request" >
+            <tbody >
                 <tr class="response">
                 </tr>
             </tbody>
@@ -129,7 +131,8 @@ class abundatrade_withinboredom {
         $display .= $second;
         
         $display .= $table;
-        $display .= $endtop;        return $display;
+        $display .= $endtop;
+        return $display;
     }
     
     /**
@@ -146,7 +149,13 @@ class abundatrade_withinboredom {
     
     public function addScripts() {
         wp_register_style("abundatrade_classic", $this->folders['PluginUrl'] . '/themes/classic.css');
+        wp_register_script("abundatrade_remote", $this->folders['PluginUrl'] . '/js/remote.js');
+        wp_register_script("abundatrade_impromptu", $this->folders['PluginUrl'] . '/js/jquery-impromptu.4.0.min.js');
+        
         wp_enqueue_style("abundatrade_classic");
+        wp_enqueue_script("abundatrade_remote");
+        wp_enqueue_script("abundatrade_impromptu");
+        wp_localize_script('abundatrade_remote','abundacalc',array('server' => 'dev.abundatrade.com')); 
     }
     
     /**
