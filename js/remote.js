@@ -19,15 +19,18 @@ function clean_product_code(element) {
 }
 
 /*
-* function: clear_product_code()
+* function: validateEmail()
 *
-* Format the product code with alphanumerics only.
+* Validates an email address
 *
 */
-function email_is_valid(email) {
-    var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-    return (emailReg.test(email));
-}
+function validateEmail(email, confirm) {
+    if (email == confirm) {
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
+    else return 'nomatch';
+} 
 
 /*
 * function: clear_session()
@@ -125,7 +128,7 @@ function display_totals(data) {
 
 
 /*
-* function: load_previous_session()
+* function: delete_the_row()
 *
 * Delete a selected row.
 *
@@ -261,27 +264,157 @@ function submit_the_list(obj) {
 
         please_wait(true);
 
+        var state = 0;
+
         var states =
             {
                 state0: {
-                    html: '<p class="submitform"><label for="first_name">First Name:</label><input name="first_name" value=""><br/>' +
-                    '<label for="last_name">Last Name:</label><input name="last_name" value=""><br/>' +
-                    '<label for="email">Email:</label><input name="email" value="">' +
-                    '<input type="hidden" name="a" value="' + jQuery('#a').val() + '">',
-                    buttons: { Submit: true, Cancel: false },
+                    html: '<label for="first_name">First Name:</label><br/><input type="text" id="name_first" name="first_name" value=""/><br/>' +
+                    '<label for="last_name">Last Name:</label><br/><input type="text" id="name_last" name="last_name" value=""/><br/>' +
+                    '<label for="email">Email:</label><br/><input name="email" value="" type="text" /><br/>' +
+                    '<label for="confirm_email">Confirm Email:</label><br/><input name="confirm_email" type="text" value=""/>' +
+                    '<input type="hidden" name="a" value="' + jQuery('#a').val() + '"/>',
+                    buttons: { Cancel: 0, Next: 1 },
                     focus: 1,
-                    submit: function (v, m, f) {
-                        if (!email_is_valid(f.email)) {
-                            jQuery.prompt.goToState('state1');
+                    submit: function (ev, but, message, val) {
+                        fname = message.children('#name_first');
+                        lname = message.children('#name_last');
+
+                        if (but != 0) {
+                            if (val['first_name'] == '') {
+                                fname.css("border", "solid #ff0000 2px");
+                                return false;
+                            }
+                            else {
+                                fname.css("border", "");
+                            }
+
+                            if (val['last_name'] == '') {
+                                lname.css("border", "solid #ff0000 2px");
+                                return false;
+                            }
+                            else {
+                                lname.css("border", "");
+                            }
+
+                            if (validateEmail(val['email_s'], val['confirm_email']) == 'nomatch') {
+                                jQuery.prompt.goToState('nomatch');
+                            } else if (validateEmail(val['email_s'], val['confirm_email'])) {
+                                state += but;
+                                jQuery.prompt.goToState('state' + state);
+                            }
+                            else {
+                                jQuery.prompt.goToState('invalid');
+                            }
                             return false;
                         }
-                        return true;
+                        else {
+                            jQuery.prompt.close();
+                        }
                     }
                 },
                 state1: {
-                    html: '<p>Please enter a valid email address.</p>',
+                    buttons: { Cancel: 0, Back: -1, Next: 1 },
+                    focus: 2,
+                    submit: function (ev, but, message, val) {
+                        if (but != 0) {
+                            console.log(val);
+                            if (val['scanner'] == 'on') {
+                                state += but;
+                            }
+                            else {
+                                if (but == 1) {
+                                    state += 2;
+                                }
+                                else {
+                                    state += but;
+                                }
+                            }
+                            jQuery.prompt.goToState('state' + state);
+                            return false;
+                        }
+                        else {
+                            jQuery.prompt.close();
+                        }
+                    },
+                    html: '<label for="ddlReferrals">How did you hear about us?<label><select id="referrals" name="ddlReferrals" title="referrals">' +
+                    '<option value="-1" selected="true">Please select one.</option>' +
+                    '<option value="0">Abundatrade Email</option>' +
+                    '<option value="1">Amazon or other marketplace</option>' +
+                    '<option value="2">I previously did a trade</option>' +
+                    '<option value="3">Referred by a friend</option>' +
+                    '<option value="4">First Magazine</option>' +
+                    '<option value="5">Inc. Magazine</option>' +
+                    '<option value="6">Radio Interview</option>' +
+                    '<option value="7">Fox News</option>' +
+                    '<option value="8">Google Search/Ad</option>' +
+                    '<option value="9">Yahoo Search/Ad</option>' +
+                    '<option value="10">Facebook</option>' +
+                    '<option value="11">Twitter</option>' +
+                    '<option value="12">Blog</option>' +
+                    '<option value="13">Youtube Video</option>' +
+                    '<option value="14">Other</option></select><br/><br/>' +
+                    '<label for="promo_code">Promo Code</label><input type="text" name="promo_code" value=""/><br/><br/>' +
+                    '<label for="phone_request">Would you like a scanning app for your smart phone?</label><br/>' +
+                    '<label for="scanner_yes">Yes Please: </label> <input type="checkbox" name="phone_request"/><br/><br/>' +
+                    '<label for="newsletter">Would you like to get the newsletter?</label><br/>' +
+                    '<label for="newsletter_yes">Yes Please: </label><input type="checkbox" name="newsletter"/><br/>'
+                },
+                state2: {
+                    html: '<label for="phone_type">What kind of phone do you have?</label><input type="text" name="phone_type" value=""/>',
+                    buttons: { Back: -1, Cancel: 0, Next: 1 },
+                    focus: 2,
+                    submit: function (ev, but, message, val) {
+                        if (but != 0) {
+                            state += but;
+                            jQuery.prompt.goToState('state' + state);
+                            return false;
+                        }
+                        else {
+                            jQuery.prompt.close();
+                        }
+                    }
+                },
+                state3: {
+                    html: '<h2>Please Note</h2><p>The values shown on the calculator are a pre-valuation.</p><p>Item quality needs to be verified for final valuation.</p><p>This valuation is not a commitment.</p><p>All data is kept private.</p>',
+                    buttons: [{ title: 'Back', value: -1 }, { title: 'Cancel', value: 0 }, { title: 'Agree and Submit', value: 'submit'}],
+                    focus: 2,
+                    submit: function (ev, but, message, val) {
+                        if (but == "submit") {
+                            return true;
+                        }
+
+                        if (but != 0) {
+                            if (val['scanner'] == 'on') {
+                                state += but;
+                            }
+                            else if (but == -1) {
+                                state -= 2;
+                            }
+                            else {
+                                state += but;
+                            }
+                            jQuery.prompt.goToState('state' + state);
+                            return false;
+                        }
+                        else {
+                            jQuery.prompt.close();
+                        }
+                    }
+                },
+                invalid: {
+                    html: '<h2>Email address invalid</h2><br/><p>Please enter a valid email address.</p>',
                     buttons: { OK: true },
-                    focus: 1,
+                    focus: 0,
+                    submit: function (v, m, f) {
+                        jQuery.prompt.goToState('state0');
+                        return false;
+                    }
+                },
+                nomatch: {
+                    html: '<h2>Email Addresses don\'t match!</h2><br/><p>Please check your email address to make sure it is correct.</p>',
+                    buttons: { OK: true },
+                    focus: 0,
                     submit: function (v, m, f) {
                         jQuery.prompt.goToState('state0');
                         return false;
