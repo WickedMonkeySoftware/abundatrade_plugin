@@ -1,5 +1,5 @@
 ﻿/*****************************************************************
-* file: abundacalc.js
+* file: remote.js
 *
 * Abundatrade calculator communication and processing scripts.
 * Handles the AJAX calls to the Abundatrade server.
@@ -159,13 +159,18 @@ function load_previous_session() {
             dataType: 'jsonp'
         });
 
-    request.success(function (data) {
-        
-        build_row(data);
-        //jQuery('#abundaCalcTbl > tbody').prepend(data.row_html);
-        jQuery('#abundaCalcTbl').prepend(data.row_html);
-        display_totals(data);
-    });
+        request.success(function (data) {
+            for (i = 0; i < data.length; i++) {
+                part = data[i];
+                build_row(part);
+                jQuery('#abundaCalcTbl').prepend(part.row_html);
+                display_totals(part);
+            }
+            //build_row(data);
+            //jQuery('#abundaCalcTbl > tbody').prepend(data.row_html);
+            //jQuery('#abundaCalcTbl').prepend(data.row_html);
+            //display_totals(data);
+        });
 
     request.fail(function (jqXHR, textStatus, errorThrown) {
         alert("Request failed: " + textStatus + " - " + errorThrown);
@@ -183,7 +188,6 @@ function lookup_item(obj) {
         //
         if (jQuery('#product_code').val().length > 5) {
             please_wait(true);
-            console.log(jQuery('#abundaInput').serialize());
             var request = jQuery.ajax(
                 {
                     type: 'GET',
@@ -371,9 +375,10 @@ jQuery(document).ready(function () {
 });
 
 function build_row(data) {
-    console.log(data);
     if (data.product_code != null) {
-        data.row_html = "<tr class='new response'> <td class='line_number'>" + (number_item) + "</td> <td class='upc'>" + data.product_code + "</td> <td class='details'> <div class='td_details'> <strong>" + data.title + "</strong>" + /*put artist and type here */"</div> <div class='td_image'> <img src='" + data.image + "' alt='" + data.title + "' /> </div> </td> <td class='quantity'>" + data.quantity + "</td> <td class='item'><div class='item'>" + data.price + "</div></td> <td class='values'>" + (data.price * data.quantity) + "</td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_878037000429'>Delete</a></tr>";
+        data.price = new Number(data.price).toFixed(2);
+        data.total = new Number(data.price * data.quantity).toFixed(2);
+        data.row_html = "<tr class='new response'> <td class='line_number'>" + (number_item) + "</td> <td class='upc'>" + data.product_code + "</td> <td class='details'> <div class='td_details'> <strong>" + data.title + "</strong>" + /*put artist and type here */"</div> <div class='td_image'> <img src='" + data.image + "' alt='" + data.title + "' /> </div> </td> <td class='quantity'>" + data.quantity + "</td> <td class='item'><div class='item'>" + data.price + "</div></td> <td class='values'>" + data.total  + "</td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_878037000429'>Delete</a></tr>";
         number_item++;
     }
     else {
