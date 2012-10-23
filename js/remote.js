@@ -297,9 +297,9 @@ function submit_the_list(obj) {
                                 lname.css("border", "");
                             }
 
-                            if (validateEmail(val['email_s'], val['confirm_email']) == 'nomatch') {
+                            if (validateEmail(val['email'], val['confirm_email']) == 'nomatch') {
                                 jQuery.prompt.goToState('nomatch');
-                            } else if (validateEmail(val['email_s'], val['confirm_email'])) {
+                            } else if (validateEmail(val['email'], val['confirm_email'])) {
                                 state += but;
                                 jQuery.prompt.goToState('state' + state);
                             }
@@ -318,8 +318,7 @@ function submit_the_list(obj) {
                     focus: 2,
                     submit: function (ev, but, message, val) {
                         if (but != 0) {
-                            console.log(val);
-                            if (val['scanner'] == 'on') {
+                            if (val['phone_request'] == 'on') {
                                 state += but;
                             }
                             else {
@@ -423,7 +422,7 @@ function submit_the_list(obj) {
             };
         var str = '';
         jQuery.prompt(states, {
-            callback: function (v, m, f) {
+            callback: function (ev, v, m, f) {
                 if (v) {
                     jQuery.each(f, function (i, obj) {
                         str += '&' + i + '=' + obj;
