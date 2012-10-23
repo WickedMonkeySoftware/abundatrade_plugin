@@ -6,7 +6,38 @@
 *
 *****************************************************************/
 
+/*
+jQuery('td:contains("024543525998")').parent()
+ .find('td')
+ .wrapInner('<div style="display: block;" />')
+ .parent()
+ .find('td > div')
+ .slideUp("slow", function(){
+
+  jQuery(this).parent().parent().remove();
+
+ });
+
+ ^^ Hides a row ^^
+
+ jQuery('#my_table > tbody > tr')
+ .find('td')
+ .wrapInner('<div style="display: none;" />')
+ .parent()
+ .find('td > div')
+ .slideDown("slow", function(){
+
+  var $set = jQuery(this);
+  $set.replaceWith($set.contents());
+
+^^ adds a row ^^
+
+ });
+
+*/
+
 var number_item = 1;
+var items = [];
 
 /*
 * function: clear_product_code()
@@ -59,6 +90,8 @@ function clear_session(obj) {
                             //jQuery('#abundaCalcTbl > tbody').children().remove();
                             jQuery('#abundaCalcBody_request').children().remove();
                             display_totals(data);
+                            console.log(data);
+
                         });
 
                         request.fail(function (jqXHR, textStatus, errorThrown) {
@@ -144,7 +177,17 @@ function delete_the_row(obj) {
             dataType: 'jsonp'
         });
 
-    jQuery(obj).parents('tr').remove();
+        //jQuery(obj).parents('tr').remove();
+        jQuery('td:contains("'+product_code+'")').parent()
+         .find('td')
+         .wrapInner('<div style="display: block;" />')
+         .parent()
+         .find('td > div')
+         .slideUp("slow", function () {
+
+             jQuery(this).parent().parent().remove();
+
+         });
 }
 
 /*
@@ -168,6 +211,13 @@ function load_previous_session() {
                 part = data[i];
                 build_row(part);
                 jQuery('#abundaCalcTbl').prepend(part.row_html);
+                jQuery('td:contains("' + part.product_code + '")').parent()
+                .find('td')
+                .wrapInner('<div style="display: none;" />')
+                .parent()
+                .find('td > div')
+                .slideDown("slow", function () { var $set = jQuery(this); $set.replaceWith($set.contents()); })
+ 
                 display_totals(part);
             }
             //build_row(data);
@@ -200,13 +250,20 @@ function lookup_item(obj) {
                     dataType: 'jsonp'
                 });
 
-            request.done(function (data) {
-                var selector = 'td:contains("' + data.product_code + '")';
-                jQuery(selector).parents('tr').remove();
-                build_row(data);
-                jQuery('#abundaCalcTbl').prepend(data.row_html);
-                display_totals(data);
-            });
+                request.done(function (data) {
+                    var selector = 'td:contains("' + data.product_code + '")';
+                    jQuery(selector).parents('tr').remove();
+                    console.log(data);
+                    build_row(data);
+                    jQuery('#abundaCalcTbl').prepend(data.row_html);
+                    jQuery('td:contains("' + part.product_code + '")').parent()
+                    .find('td')
+                    .wrapInner('<div style="display: none;" />')
+                    .parent()
+                    .find('td > div')
+                    .slideDown("slow", function () { var $set = jQuery(this); $set.replaceWith($set.contents()); })
+                    display_totals(data);
+                });
 
             request.fail(function (jqXHR, textStatus, errorThrown) {
                 alert("Request failed: " + textStatus + " - " + errorThrown);
@@ -234,23 +291,17 @@ function please_wait(UILocked) {
     // Wait Mode
     //
     if (UILocked) {
-        jQuery('#abunda_please_wait').show();
+        /*jQuery('#abunda_please_wait').show();
         jQuery('#lookupItem').addClass('disabled');
         jQuery('#submitList').addClass('disabled');
         jQuery('#delete_all_top').addClass('disabled');
         jQuery('#delete_all_bottom').addClass('disabled');
-        jQuery('.delete_this_row').addClass('disabled');
-
+        jQuery('.delete_this_row').addClass('disabled');*/
 
         // Go,Go,Go...
         //
     } else {
-        jQuery('#abunda_please_wait').hide();
-        jQuery('#lookupItem').removeClass('disabled');
-        jQuery('#submitList').removeClass('disabled');
-        jQuery('#delete_all_top').removeClass('disabled');
-        jQuery('#delete_all_bottom').removeClass('disabled');
-        jQuery('.delete_this_row').removeClass('disabled');
+        
     }
 }
 
