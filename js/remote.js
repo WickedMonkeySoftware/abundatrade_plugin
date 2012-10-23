@@ -315,7 +315,7 @@ function submit_the_list(obj) {
                     }
                 },
                 state1: {
-                    buttons: { Cancel: 0, Back: -1, Next: 1 },
+                    buttons: { Back: -1, Cancel: 0, Next: 1 },
                     focus: 2,
                     submit: function (ev, but, message, val) {
                         if (but != 0) {
