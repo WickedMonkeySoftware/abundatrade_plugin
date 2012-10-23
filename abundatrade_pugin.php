@@ -69,14 +69,14 @@ class abundatrade_withinboredom {
     <div class="input_container">
       <div class="label">UPC or ISBN</div>
       <div class="product_holder">
-        <input class="validate[\'required\',\'length[3,25]\']" id="product_code" name="product_code" onblur="clean_product_code(this)" type="text"/>
+        <input class="center validate[\'required\',\'length[3,25]\']" id="product_code" name="product_code" onblur="clean_product_code(this)" type="text"/>
       </div>
     </div>
 
     <div class="input_container">
       <div class="label"> Quantity </div>
       <div class="qty_holder">
-        <input class="validate[\'required\',\'digit[1,20]\']" id="product_qty" name="product_qty" value="1" type="text"/>
+        <input class="center validate[\'required\',\'digit[1,20]\']" id="product_qty" name="product_qty" value="1" type="text"/>
       </div>
     </div>
 
