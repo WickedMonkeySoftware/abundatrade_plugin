@@ -1,15 +1,15 @@
 <?php
 /**
- * @package abundatrade
+ * @package abundatrade_plugin
  * @version 1.0
  * @author Robert Landers (landers.robert@gmail.com)
  */
 /*
 Plugin Name: Abundatrade Plugin
-Plugin URI: http://wordpress.org/extend/plugins/abundatrade/
-Description: Undecided
+Plugin URI: 
+Description: Earn extra income for your site via the Abundatrade affiliate program!
 Author: withinboredom
-Version: 1.0
+Version: 0.1
 Author URI: http://withinboredom.info
  */
 
@@ -149,8 +149,8 @@ class abundatrade_withinboredom {
     
     public function addScripts() {
         wp_register_style("abundatrade_classic", $this->folders['PluginUrl'] . '/themes/classic.css');
-        wp_register_script("abundatrade_remote", $this->folders['PluginUrl'] . '/js/remote.js');
-        wp_register_script("abundatrade_impromptu", $this->folders['PluginUrl'] . '/js/jquery-impromptu.4.0.min.js');
+        wp_register_script("abundatrade_remote", $this->folders['PluginUrl'] . '/js/remote.js', array('jquery'));
+        wp_register_script("abundatrade_impromptu", $this->folders['PluginUrl'] . '/js/jquery-impromptu.4.0.min.js', array('jquery'));
         
         wp_enqueue_style("abundatrade_classic");
         wp_enqueue_script("abundatrade_remote");

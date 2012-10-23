@@ -25,7 +25,7 @@ function clean_product_code(element) {
 *
 */
 function validateEmail(email, confirm) {
-    if (email == confirm) {
+    if (email.toLowerCase() == confirm.toLowerCase()) {
         var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email);
     }
@@ -78,6 +78,7 @@ function clear_session(obj) {
 *
 */
 function new_session(this_link) {
+    number_item = 0;
     var request = jQuery.ajax(
         {
             type: 'GET',
@@ -318,6 +319,17 @@ function submit_the_list(obj) {
                     focus: 2,
                     submit: function (ev, but, message, val) {
                         if (but != 0) {
+
+                            lname = message.children('#referrals');
+
+                            if (val['ddlReferrals'] == '-1') {
+                                jQuery('#referrals').css("border", "solid #ff0000 2px");
+                                return false;
+                            }
+                            else {
+                                jQuery('#referrals').css("border", "")
+                            }
+
                             if (val['phone_request'] == 'on') {
                                 state += but;
                             }
@@ -336,8 +348,9 @@ function submit_the_list(obj) {
                             jQuery.prompt.close();
                         }
                     },
-                    html: '<label for="ddlReferrals">How did you hear about us?<label><select id="referrals" name="ddlReferrals" title="referrals">' +
-                    '<option value="-1" selected="true">Please select one.</option>' +
+                    html:'How did you hear about us?<div class="field">' +
+                    '<select id="referrals" name="ddlReferrals">' +
+                    '<option value="-1" selected>Please select one.</option>' +
                     '<option value="0">Abundatrade Email</option>' +
                     '<option value="1">Amazon or other marketplace</option>' +
                     '<option value="2">I previously did a trade</option>' +
@@ -352,19 +365,31 @@ function submit_the_list(obj) {
                     '<option value="11">Twitter</option>' +
                     '<option value="12">Blog</option>' +
                     '<option value="13">Youtube Video</option>' +
-                    '<option value="14">Other</option></select><br/><br/>' +
+                    '<option value="14">Other</option></select></div>' +
+                    '<div id="other" style="display: none"><label for="Other">Please tell us where you heard about us:</label><br/><div class="field"><input type="text" name="Other" value="" placeholder="How you found out about us"/></div></div>' +
+                    '<script type="text/javascript">jQuery("#referrals").change(function() { if(jQuery("#referrals").val() == 14) { jQuery("#other").slideDown("slow"); } else { jQuery("#other").slideUp("slow"); } } );</script>' +
                     '<label for="promo_code">Promo Code</label><input type="text" name="promo_code" value=""/><br/><br/>' +
                     '<label for="phone_request">Would you like a scanning app for your smart phone?</label><br/>' +
-                    '<label for="scanner_yes">Yes Please: </label> <input type="checkbox" name="phone_request"/><br/><br/>' +
+                    '<label for="scanner_yes">Yes Please: </label> <input checked="true" type="checkbox" name="phone_request"/><br/><br/>' +
                     '<label for="newsletter">Would you like to get the newsletter?</label><br/>' +
-                    '<label for="newsletter_yes">Yes Please: </label><input type="checkbox" name="newsletter"/><br/>'
+                    '<label for="newsletter_yes">Yes Please: </label><input checked="true" type="checkbox" name="newsletter"/><br/>'
                 },
                 state2: {
-                    html: '<label for="phone_type">What kind of phone do you have?</label><input type="text" name="phone_type" value=""/>',
+                    html: '<label for="phone_type">What kind of phone do you have?</label><input type="text" name="phone_type" id="phone_type" value=""/>',
                     buttons: { Back: -1, Cancel: 0, Next: 1 },
                     focus: 2,
                     submit: function (ev, but, message, val) {
                         if (but != 0) {
+                            lname = message.children('#phone_type');
+
+                            if (val['phone_type'] == '') {
+                                lname.css("border", "solid #ff0000 2px");
+                                return false;
+                            }
+                            else {
+                                lname.css("border", "");
+                            }
+
                             state += but;
                             jQuery.prompt.goToState('state' + state);
                             return false;
