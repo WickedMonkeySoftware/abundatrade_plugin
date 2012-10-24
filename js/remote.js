@@ -89,9 +89,12 @@ function clear_session(obj) {
                         request.done(function (data) {
                             //jQuery('#abundaCalcTbl > tbody').children().remove();
                             jQuery('#abundaCalcBody_request').children().remove();
+                            
+                            data.total_qty = "0.00";
+                            data.currency_for_total = "$";
+                            data.total = "0.00";
                             display_totals(data);
                             console.log(data);
-
                         });
 
                         request.fail(function (jqXHR, textStatus, errorThrown) {
