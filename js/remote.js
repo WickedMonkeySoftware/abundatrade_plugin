@@ -104,6 +104,7 @@ function clear_session(obj) {
             }
             );
     }
+        number_item = 1;
 }
 
 /*
@@ -113,7 +114,7 @@ function clear_session(obj) {
 *
 */
 function new_session(this_link) {
-    number_item = 0;
+    number_item = 1;
     var request = jQuery.ajax(
         {
             type: 'GET',
@@ -182,6 +183,10 @@ function delete_the_row(obj) {
     request.success(function (data) {
         display_totals(data);
     });
+
+    //count affected rows
+    x = jQuery('td:contains("' + product_code + '")');
+    number_item -= x.length;
 
     //jQuery(obj).parents('tr').remove();
     jQuery('td:contains("' + product_code + '")').parent()
@@ -259,6 +264,9 @@ var lastItem;
 
 function Remove_Item(product_code) {
     var selector = 'td:contains("' + product_code + '")';
+    x = jQuery(selector);
+    number_item -= x.length;
+    number_item++;
     jQuery(selector).parents('tr').remove();
 }
 
@@ -307,8 +315,8 @@ function lookup_item(obj) {
                     .parent()
                     .find('td > div')
                     .slideDown("slow", function () { var $set = jQuery(this); $set.replaceWith($set.contents()); })
-                display_totals(data);
-            });
+                    display_totals(data);
+                });
 
             request.fail(function (jqXHR, textStatus, errorThrown) {
                 alert("Request failed: " + textStatus + " - " + errorThrown);
@@ -336,7 +344,7 @@ function please_wait(UILocked) {
     // Wait Mode
     //
     if (UILocked) {
-        jQuery.prompt({ state: { html: "<p>Getting information ...</p>", buttons: {}} });
+        //jQuery.prompt({ state: { html: "<p>Getting information ...</p>", buttons: {}} });
         /*jQuery('#abunda_please_wait').show();
         jQuery('#lookupItem').addClass('disabled');
         jQuery('#submitList').addClass('disabled');
@@ -347,7 +355,7 @@ function please_wait(UILocked) {
         // Go,Go,Go...
         //
     } else {
-        jQuery.prompt.close();
+        //jQuery.prompt.close();
     }
 }
 
@@ -650,6 +658,7 @@ function build_unknown(code, quantity, id) {
 function build_row(data) {
     data.row_html = "";
 
+
     if (jQuery.isArray(data.row)) {
         for (var i = 0; i < data.row.length; i++) {
             row = data.row[i];
@@ -659,8 +668,9 @@ function build_row(data) {
             else {
                 row_price = new Number(row.price_per / 100).toFixed(2);
                 row_total = new Number(row.total_price / 100).toFixed(2);
-                data.row_html += "<tr class='new response'> <td class='line_number'>" + (number_item) + "</td> <td class='upc'>" + row.product_code + "</td> <td class='details'> <div class='td_details'> <strong>" + row.title + "</strong><br /><em>" + (row.author == null ? '' : row.author) + "</em></div> <div class='td_image'> <img src='" + row.images + "' alt='" + row.title + "' /> </div> </td> <td class='quantity'>" + row.quantity + "</td> <td class='item'><div class='item'>" + data.currency_for_total + row_price + "</td> <td class='values'>" + data.currency_for_total + row_total + "</td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + row.item_id + "'>Delete</a></tr>";
+                data.row_html += "<tr class='new response'> <td class='line_number'>" + (number_item) + "</td> <td class='upc'>" + row.product_code + "</td> <td class='details'> <div class='td_details'> <strong>" + row.title + "</strong><br /><em>" + (row.author == null ? '' : row.author) + "</em></div> <div class='td_image'> <img src='" + row.images + "' alt='" + row.title + "' /> </div> </div></td> <td class='quantity'>" + row.quantity + "</td> <td class='item'><div class='item'>" + data.currency_for_total + row_price + "</td> <td class='values'>" + data.currency_for_total + row_total + "</td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + row.item_id + "'>Delete</a></tr>";
             }
+            number_item++;
         }
     }
     else {
@@ -671,8 +681,10 @@ function build_row(data) {
         else {
             row_price = new Number(row.price_per / 100).toFixed(2);
             row_total = new Number(row.total_price / 100).toFixed(2);
-            data.row_html += "<tr class='new response'> <td class='line_number'>" + (number_item) + "</td> <td class='upc'>" + row.product_code + "</td> <td class='details'> <div class='td_details'> <strong>" + row.title + "</strong><br /><em>" + (row.author == null ? '' : row.author) + "</em></div> <div class='td_image'> <img src='" + row.images + "' alt='" + row.title + "' /> </div> </td> <td class='quantity'>" + row.quantity + "</td> <td class='item'><div class='item'>" + data.currency_for_total + row_price + "</td> <td class='values'>" + data.currency_for_total + row_total + "</td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + row.item_id + "'>Delete</a></tr>";
+            data.row_html += "<tr class='new response'> <td class='line_number'>" + (number_item) + "</td> <td class='upc'>" + row.product_code + "</td> <td class='details'> <div class='td_image'> <img src='" + row.images + "' alt='" + row.title + "' /> </div><div class='td_details'> <strong>" + row.title + "</strong><br /><em>" + (row.author == null ? '' : row.author) + "</em></div>  </div></td> <td class='quantity'>" + row.quantity + "</td> <td class='item'><div class='item'>" + data.currency_for_total + row_price + "</td> <td class='values'>" + data.currency_for_total + row_total + "</td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + row.item_id + "'>Delete</a></tr>";
+
         }
+        number_item++;
     }
 
     return data;

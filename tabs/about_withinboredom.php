@@ -74,7 +74,9 @@ class tabs__about_withinboredom
 			focus solely on the online venture. In September 2008, the name, AbundaTrade.com, was
 			officially adopted, as a better reflection of the company's growing concept. To learn more
 			about the trade-in process, please review our online tutorials or contact
-			our <a href="mailto:trade@abundatrade.com">Trade Experience Manager</a>.</p>
+			our <a href="mailto:trade@abundatrade.com">Trade Experience Manager</a>.</p>
+
+
         <?php
     }
 }
