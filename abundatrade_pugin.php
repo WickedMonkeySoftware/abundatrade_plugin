@@ -155,7 +155,7 @@ class abundatrade_withinboredom {
         wp_enqueue_style("abundatrade_classic");
         wp_enqueue_script("abundatrade_remote");
         wp_enqueue_script("abundatrade_impromptu");
-        wp_localize_script('abundatrade_remote','abundacalc',array('server' => 'dev.abundatrade.com')); 
+        wp_localize_script('abundatrade_remote','abundacalc',array('server' => 'dev.abundatrade.com', 'url' => $this->folders['PluginUrl'])); 
     }
     
     /**

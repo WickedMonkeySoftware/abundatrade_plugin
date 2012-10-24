@@ -8,36 +8,36 @@
 
 /*
 jQuery('td:contains("024543525998")').parent()
- .find('td')
- .wrapInner('<div style="display: block;" />')
- .parent()
- .find('td > div')
- .slideUp("slow", function(){
+.find('td')
+.wrapInner('<div style="display: block;" />')
+.parent()
+.find('td > div')
+.slideUp("slow", function(){
 
-  jQuery(this).parent().parent().remove();
+jQuery(this).parent().parent().remove();
 
- });
+});
 
- ^^ Hides a row ^^
+^^ Hides a row ^^
 
- jQuery('#my_table > tbody > tr')
- .find('td')
- .wrapInner('<div style="display: none;" />')
- .parent()
- .find('td > div')
- .slideDown("slow", function(){
+jQuery('#my_table > tbody > tr')
+.find('td')
+.wrapInner('<div style="display: none;" />')
+.parent()
+.find('td > div')
+.slideDown("slow", function(){
 
-  var $set = jQuery(this);
-  $set.replaceWith($set.contents());
+var $set = jQuery(this);
+$set.replaceWith($set.contents());
 
 ^^ adds a row ^^
 
- });
+});
 
 */
 
 var number_item = 1;
-var items = [];
+var itemsToDispose = [];
 
 /*
 * function: clear_product_code()
@@ -61,7 +61,7 @@ function validateEmail(email, confirm) {
         return re.test(email);
     }
     else return 'nomatch';
-} 
+}
 
 /*
 * function: clear_session()
@@ -177,8 +177,12 @@ function delete_the_row(obj) {
             dataType: 'jsonp'
         });
 
-        //jQuery(obj).parents('tr').remove();
-        jQuery('td:contains("'+product_code+'")').parent()
+    request.success(function (data) {
+        display_totals(data);
+    });
+
+    //jQuery(obj).parents('tr').remove();
+    jQuery('td:contains("' + product_code + '")').parent()
          .find('td')
          .wrapInner('<div style="display: block;" />')
          .parent()
@@ -206,29 +210,61 @@ function load_previous_session() {
             dataType: 'jsonp'
         });
 
-        request.success(function (data) {
-            for (i = 0; i < data.length; i++) {
-                part = data[i];
-                build_row(part);
-                jQuery('#abundaCalcTbl').prepend(part.row_html);
-                jQuery('td:contains("' + part.product_code + '")').parent()
+    request.success(function (data) {
+        for (i = 0; i < data.length; i++) {
+            part = data[i];
+            part.row = jQuery.parseJSON(part.row);
+            part = build_row(part);
+            console.log(part);
+            jQuery('#abundaCalcTbl').prepend(part.row_html);
+            jQuery('td:contains("' + part.product_code + '")').parent()
                 .find('td')
                 .wrapInner('<div style="display: none;" />')
                 .parent()
                 .find('td > div')
                 .slideDown("slow", function () { var $set = jQuery(this); $set.replaceWith($set.contents()); })
- 
-                display_totals(part);
-            }
-            //build_row(data);
-            //jQuery('#abundaCalcTbl > tbody').prepend(data.row_html);
-            //jQuery('#abundaCalcTbl').prepend(data.row_html);
-            //display_totals(data);
-        });
+
+            display_totals(part);
+        }
+        //build_row(data);
+        //jQuery('#abundaCalcTbl > tbody').prepend(data.row_html);
+        //jQuery('#abundaCalcTbl').prepend(data.row_html);
+        //display_totals(data);
+    });
 
     request.fail(function (jqXHR, textStatus, errorThrown) {
         alert("Request failed: " + textStatus + " - " + errorThrown);
     });
+}
+
+function addDuplicatesToQuantity(inputUPC) {
+    var upcs = $$('td.upc');
+    var quantities = $$('td.quantity');
+    var duplicateQuantity = 0;
+
+    //Compare the new UPC to each UPC in the existing list
+    for (var idx = 0; idx < upcs.length; idx++) {
+        //Check for existing UPCs matching the new UPC
+        if (inputUPC == upcs[idx].children[0].innerHTML) {
+            //Add the found UPC's quantity to the new UPC's
+            //quantity
+            duplicateQuantity += parseInt(quantities[idx].children[0].innerHTML);
+            queueForDisposal(upcs[idx].getParent());
+        }
+    }
+}
+
+var lastItem;
+
+function Remove_Item(product_code) {
+    var selector = 'td:contains("' + product_code + '")';
+    jQuery(selector).parents('tr').remove();
+}
+
+function waitFor(product_code) {
+    jQuery('#product_code').val('');
+    row_html = "<tr class='new response'> <td class='line_number'></td> <td class='upc'>" + product_code + "</td> <td class='details'> <div class='td_details'> <strong>Getting the Abunda Value for your item</strong><br /><em></em></div> <div class='td_image'> <img src='" + abundacalc.url + "/images/spinner.gif" + "' alt='waiting' /> </div> </td> <td class='quantity'></td> <td class='item'><div class='item'></td> <td class='values'></td> <td class='delete'></tr>";
+    jQuery('#abundaCalcTbl').prepend(row_html);
 }
 
 /* 
@@ -242,28 +278,36 @@ function lookup_item(obj) {
         //
         if (jQuery('#product_code').val().length > 5) {
             please_wait(true);
+
+            serial = jQuery("#abundaInput").serialize();
+
+            item = jQuery('#product_code').val();
+            //Remove_Item(item);
+
+            waitFor(item);
+
             var request = jQuery.ajax(
                 {
                     type: 'GET',
                     url: 'http://' + abundacalc.server + '/trade/process/request.php',
-                    data: jQuery("#abundaInput").serialize(),
+                    data: serial,
                     dataType: 'jsonp'
                 });
 
-                request.done(function (data) {
-                    var selector = 'td:contains("' + data.product_code + '")';
-                    jQuery(selector).parents('tr').remove();
-                    console.log(data);
-                    build_row(data);
-                    jQuery('#abundaCalcTbl').prepend(data.row_html);
-                    jQuery('td:contains("' + part.product_code + '")').parent()
+            request.done(function (data) {
+                Remove_Item(item);
+                data.row = jQuery.parseJSON(data.row);
+                build_row(data);
+                lastItem = data;
+                jQuery('#abundaCalcTbl').prepend(data.row_html);
+                jQuery('td:contains("' + data.product_code + '")').parent()
                     .find('td')
                     .wrapInner('<div style="display: none;" />')
                     .parent()
                     .find('td > div')
                     .slideDown("slow", function () { var $set = jQuery(this); $set.replaceWith($set.contents()); })
-                    display_totals(data);
-                });
+                display_totals(data);
+            });
 
             request.fail(function (jqXHR, textStatus, errorThrown) {
                 alert("Request failed: " + textStatus + " - " + errorThrown);
@@ -301,7 +345,7 @@ function please_wait(UILocked) {
         // Go,Go,Go...
         //
     } else {
-        
+
     }
 }
 
@@ -399,7 +443,7 @@ function submit_the_list(obj) {
                             jQuery.prompt.close();
                         }
                     },
-                    html:'How did you hear about us?<div class="field">' +
+                    html: 'How did you hear about us?<div class="field">' +
                     '<select id="referrals" name="ddlReferrals">' +
                     '<option value="-1" selected>Please select one.</option>' +
                     '<option value="0">Abundatrade Email</option>' +
@@ -582,14 +626,56 @@ jQuery(document).ready(function () {
     jQuery('#delete_all_bottom').on('click', function () { clear_session(this); });
 });
 
+function build_unknown(code, quantity, id) {
+    return "<tr class='new response'> <td class='line_number'>" + (number_item) + "</td> <td class='upc'>" + code + "</td> <td class='details'> <div class='td_details'> <strong>Unknown Item</strong><br /><em>Item not found. You may send for valuation</em></div> <div class='td_image'> <img src='http://g-ecx.images-amazon.com/images/G/01/x-site/icons/no-img-sm._V192198896_.gif' alt='Unkown item' /> </div> </td> <td class='quantity'>" + quantity + "</td> <td class='item'><div class='item'>$0.00</td> <td class='values'>$0.00</td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + id + "'>Delete</a></tr>";
+}
+
 function build_row(data) {
-    if (data.product_code != null) {
-        data.price = new Number(data.price).toFixed(2);
-        data.total = new Number(data.price * data.quantity).toFixed(2);
-        data.row_html = "<tr class='new response'> <td class='line_number'>" + (number_item) + "</td> <td class='upc'>" + data.product_code + "</td> <td class='details'> <div class='td_details'> <strong>" + data.title + "</strong>" + /*put artist and type here */"</div> <div class='td_image'> <img src='" + data.image + "' alt='" + data.title + "' /> </div> </td> <td class='quantity'>" + data.quantity + "</td> <td class='item'><div class='item'>" + data.price + "</div></td> <td class='values'>" + data.total  + "</td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_878037000429'>Delete</a></tr>";
-        number_item++;
+    data.row_html = "";
+    console.log("Building row");
+    console.log(data);
+
+    if (jQuery.isArray(data.row)) {
+        for (var i = 0; i < data.row.length; i++) {
+            row = data.row[i];
+            if (row.title == "Unknown") {
+                data.row_html = build_unknown(row.product_code, row.quantity, row.item_id);
+            }
+            else {
+                row_price = new Number(row.price_per / 100).toFixed(2);
+                row_total = new Number(row.total_price / 100).toFixed(2);
+                data.row_html += "<tr class='new response'> <td class='line_number'>" + (number_item) + "</td> <td class='upc'>" + row.product_code + "</td> <td class='details'> <div class='td_details'> <strong>" + row.title + "</strong><br /><em>" + (row.author == null ? '' : row.author) + "</em></div> <div class='td_image'> <img src='" + row.images + "' alt='" + row.title + "' /> </div> </td> <td class='quantity'>" + row.quantity + "</td> <td class='item'><div class='item'>" + data.currency_for_total + row_price + "</td> <td class='values'>" + data.currency_for_total + row_total + "</td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + row.item_id + "'>Delete</a></tr>";
+            }
+        }
     }
     else {
-        data.row_html = "";
+        row = data.row;
+        if (row.title == "Unknown") {
+            data.row_html = build_unknown(row.product_code, row.quantity, row.item_id);
+        }
+        else {
+            row_price = new Number(row.price_per / 100).toFixed(2);
+            row_total = new Number(row.total_price / 100).toFixed(2);
+            data.row_html += "<tr class='new response'> <td class='line_number'>" + (number_item) + "</td> <td class='upc'>" + row.product_code + "</td> <td class='details'> <div class='td_details'> <strong>" + row.title + "</strong><br /><em>" + (row.author == null ? '' : row.author) + "</em></div> <div class='td_image'> <img src='" + row.images + "' alt='" + row.title + "' /> </div> </td> <td class='quantity'>" + row.quantity + "</td> <td class='item'><div class='item'>" + data.currency_for_total + row_price + "</td> <td class='values'>" + data.currency_for_total + row_total + "</td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + row.item_id + "'>Delete</a></tr>";
+        }
     }
+
+    return data;
+}
+
+/******************************
+New Stuff
+*******************************/
+function queueForDisposal(productcode) {
+    var selector = 'td:contains("' + productcode + '")';
+
+    itemsToDispose.push(selector);
+}
+
+function disposeQueued() {
+    for (var i = 0; i < itemsToDispose.length; i++) {
+        jQuery(itemsToDispose[i]).parents('tr').remove();
+    }
+
+    itemsToDispose = [];
 }
