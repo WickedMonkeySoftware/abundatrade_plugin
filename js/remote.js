@@ -159,7 +159,7 @@ function display_totals(data) {
     // Set the delete button
     //
     jQuery('.delete_this_row').attr('onclick', 'delete_the_row(this); return false;');
-
+    jQuery('#product_qty').val('1');
     jQuery('#product_code').focus();
 }
 
@@ -303,13 +303,13 @@ function lookup_item(obj) {
                     dataType: 'jsonp'
                 });
 
-            request.done(function (data) {
-                Remove_Item(item);
-                data.row = jQuery.parseJSON(data.row);
-                build_row(data);
-                lastItem = data;
-                jQuery('#abundaCalcTbl').prepend(data.row_html);
-                jQuery('td:contains("' + data.product_code + '")').parent()
+                request.done(function (data) {
+                    Remove_Item(item);
+                    data.row = jQuery.parseJSON(data.row);
+                    build_row(data);
+                    lastItem = data;
+                    jQuery('#abundaCalcTbl').prepend(data.row_html);
+                    jQuery('td:contains("' + data.product_code + '")').parent()
                     .find('td')
                     .wrapInner('<div style="display: none;" />')
                     .parent()
