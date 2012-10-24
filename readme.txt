@@ -1,7 +1,7 @@
 === Abundatrade Plugin ===
 Plugin Name: Abundatrade Plugin
 Contributors: withinboredom
-Donate Link: 
+Donate Link: http://withinboredom.info/?product=donate
 Tags: plugin,post,page,abundatrade,affiliate,books,cds,dvds,used,cash
 Requires at least: 3.3
 Tested up to: 3.4.2
