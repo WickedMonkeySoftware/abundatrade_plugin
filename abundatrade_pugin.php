@@ -38,6 +38,7 @@ class abundatrade_withinboredom {
         $config['tabs'] = array(
             0 => array( 'Settings', 'tabs__settings_withinboredom'),
             1 => array('About', 'tabs__about_withinboredom'),
+            2 => array('Support', 'tabs__support_withinboredom'),
             );
         $config['help'] = array(
             'settings' => array(
@@ -155,7 +156,7 @@ class abundatrade_withinboredom {
         wp_enqueue_style("abundatrade_classic");
         wp_enqueue_script("abundatrade_remote");
         wp_enqueue_script("abundatrade_impromptu");
-        wp_localize_script('abundatrade_remote','abundacalc',array('server' => 'dev.abundatrade.com', 'url' => $this->folders['PluginUrl'])); 
+        wp_localize_script('abundatrade_remote','abundacalc',array('server' => 'dev.abundatrade.com', 'url' => $this->folders['PluginUrl'], 'thanks' => $this->settings->thankyou_page)); 
     }
     
     /**

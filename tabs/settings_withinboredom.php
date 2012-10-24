@@ -52,6 +52,12 @@ class tabs__settings_withinboredom
                     'name'  => 'Affiliate ID',
                     'id'    => 'Affiliate_ID',
                     'value' => $settings->Affiliate_ID
+                ),
+            'Thank you Page' => array(
+                    'type'  => 'text',
+                    'name'  => 'Thank you page',
+                    'id'    => 'thankyou_page',
+                    'value' => $settings->thankyou_page
                 )
             ));
         ?>

@@ -24,9 +24,15 @@ class skel__settings
     public $version;
     
     /**
+     * The url to send the user to for a thanks!
+     * @var string $thankyou_page The url to send the user to on submit
+     */
+    public $thankyou_page;
+    
+    /**
      * The version of this code
      */
-    private $coded_version = "1.0";
+    private $coded_version = "0.2";
     
     /**
      * Loads default options or gets them from the db if they already exist
@@ -36,7 +42,8 @@ class skel__settings
     function options($default) {
         $default = array_merge($default, array(
                     "version" => "0.0",
-                    "Affiliate_ID" => "1"
+                    "Affiliate_ID" => "ABU-1338563844",
+                    "thankyou_page" => "http://abundatrade.com/trade/thank-you.php?a=abundatrade"
                 ));
         
         if (get_option("skel_abundatrade_options", false) === false) {
@@ -73,7 +80,22 @@ class skel__settings
      * @var string $coded_version The version that is currently running (or to update to)
      */
     function update($version, $coded_version) {
-        //do update stuff here
+        switch ($version)
+        {
+        	case "0.0":
+                // a fresh install
+                break;
+            case "0.1":
+                // from the very first version
+                break;
+            case "0.2":
+                // from this version ... slightly confused
+                break;
+            default:
+                // from an unknown version ... 
+                break;
+        }
+        
     }
     
     /**
