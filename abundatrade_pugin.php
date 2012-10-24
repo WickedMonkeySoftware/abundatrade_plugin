@@ -6,10 +6,10 @@
  */
 /*
 Plugin Name: Abundatrade Plugin
-Plugin URI: 
+Plugin URI: http://wordpress.org/extend/plugins/abundatrade-plugin/
 Description: Earn extra income for your site via the Abundatrade affiliate program!
 Author: withinboredom
-Version: 0.1
+Version: 0.2
 Author URI: http://withinboredom.info
  */
 

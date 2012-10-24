@@ -1,11 +1,11 @@
 === Abundatrade Plugin ===
 Plugin Name: Abundatrade Plugin
 Contributors: withinboredom
-Donate Link: http://www.cybersprocket.com/products/moneypress-abundatrade-edition/
+Donate Link: 
 Tags: plugin,post,page,abundatrade,affiliate,books,cds,dvds,used,cash
 Requires at least: 3.3
 Tested up to: 3.4.2
-Stable tag: 0.1
+Stable tag: 0.2
 
 Earn extra income for your site via the Abundatrade affiliate program.  The shortcode puts the calculator on your website that shows visitors how much cash they will get for their used CDs, DVDs, and books.
 
@@ -55,7 +55,7 @@ Please use the forums on the plugin pages
 * Find on internet the free program POEDIT, and learn how it works.
 * Use the .pot file located in the languages directory of this plugin to create or update the .po and .mo files.
 * Place these file in the languages subdirectory.
-* If everything is ok, email the files to lobbyjones@cybersprocket.com and we will add them to the next release.
+* If everything is ok, email the files to landers.robert@gmail.com and we will add them to the next release.
 * For more information on POT files, domains, gettext and i18n have a look at the I18n for WordPress developers Codex page and more specifically at the section about themes and plugins.
 
 == Screenshots ==
@@ -65,3 +65,7 @@ Please use the forums on the plugin pages
 = v0.1 (October 23, 2012) =
 
 * Initial Release
+
+= v0.2 (October 24, 2012) =
+
+* Changed some meta data and removed some debug code

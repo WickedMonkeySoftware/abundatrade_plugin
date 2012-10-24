@@ -94,7 +94,6 @@ function clear_session(obj) {
                             data.currency_for_total = "$";
                             data.total = "0.00";
                             display_totals(data);
-                            console.log(data);
                         });
 
                         request.fail(function (jqXHR, textStatus, errorThrown) {
@@ -218,7 +217,6 @@ function load_previous_session() {
             part = data[i];
             part.row = jQuery.parseJSON(part.row);
             part = build_row(part);
-            console.log(part);
             jQuery('#abundaCalcTbl').prepend(part.row_html);
             jQuery('td:contains("' + part.product_code + '")').parent()
                 .find('td')
@@ -635,8 +633,6 @@ function build_unknown(code, quantity, id) {
 
 function build_row(data) {
     data.row_html = "";
-    console.log("Building row");
-    console.log(data);
 
     if (jQuery.isArray(data.row)) {
         for (var i = 0; i < data.row.length; i++) {
