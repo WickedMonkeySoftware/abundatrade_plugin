@@ -272,7 +272,7 @@ function Remove_Item(product_code) {
 
 function waitFor(product_code) {
     jQuery('#product_code').val('');
-    row_html = "<tr class='new response'> <td class='line_number'></td> <td class='upc'>" + product_code + "</td> <td class='details'> <div class='td_details'> <strong>Getting the Abunda Value for your item</strong><br /><em></em></div> <div class='td_image'> <img src='" + abundacalc.url + "/images/spinner.gif" + "' alt='waiting' /> </div> </td> <td class='quantity'></td> <td class='item'><div class='item'></td> <td class='values'></td> <td class='delete'></tr>";
+    row_html = "<tr class='new response'> <td class='line_number'></td> <td class='upc'>" + product_code + "</td> <td class='details'> <div class='td_details'> <strong>Getting the realtime values for your item</strong><br /><em></em></div> <div class='td_image'> <img src='" + abundacalc.url + "/images/spinner.gif" + "' alt='waiting' /> </div> </td> <td class='quantity'></td> <td class='item'><div class='item'></td> <td class='values'></td> <td class='delete'></tr>";
     jQuery('#abundaCalcTbl').prepend(row_html);
 }
 
