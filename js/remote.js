@@ -239,7 +239,6 @@ function bulk_submit_items() {
                 str += encodeURI(byline[i] + "\n");
             }
         }
-        if (!waitforfinish) control += 1;
 
         var request = jQuery.ajax(
         {
@@ -263,6 +262,8 @@ function bulk_submit_items() {
                 return;
             }
             else if (data[0].type == 'complete') {
+                if (!waitforfinish) control += 1;
+
                 percent = ((control - 1) * 10) / byline.length * 100;
                 percent = Math.round(percent);
 
