@@ -235,22 +235,59 @@
 
 .td_image
 {
-    clear: none;
     float: left;
-    width:auto;
-	
+    width:38%;
+	height:98%;
 }
 
 .td_details {
 	float:right;
-}
-
-.details {
-	
+	width:60%;
+	height:98%;
 }
 
 #abundaCalcTbl tbody {
 	max-height:400px;
+}
+
+#abundaCalcTbl tbody td {
+	border-right: 1px solid silver;
+	border-bottom: 1px solid silver;
+	padding: 3px 2px 2px 3px;
+	color:Black;
+	font-size:14px;
+	text-align:center;
+	vertical-align: top;
+}
+
+#abundaCalcTbl tbody td.upc {
+	width:90px;
+}
+
+#abundaCalcTbl tbody td.quantity {
+	width: 30px;
+}
+
+#abundaCalcTbl tbody td.item {
+	width: 80px;
+}
+
+#abundaCalcTbl tbody td.item div {
+}
+
+#abundaCalcTbl tbody td.values {
+	width:80px;
+	text-align: right;
+}
+
+#abundaCalcTbl tbody td.delete {
+	width: 90px;
+}
+
+.blatent {
+	color:Red;
+	font-weight: bold;
+	text-align:center;
 }
 
 #abundaCalcTbl tfoot th 
