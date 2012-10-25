@@ -1,4 +1,31 @@
-﻿.calc_content_wrap
+﻿#bar_wrap {
+  border: 1px solid #1C1C1C;
+  background-color: #313131;
+  -webkit-box-shadow: 0 0 1px #666, inset 0 1px 1px #222;
+  -moz-box-shadow: 0 0 1px #666, inset 0 1px 1px #222;
+  -o-box-shadow: 0 0 1px #666, inset 0 1px 1px #222;
+  box-shadow: 0 0 1px #666, inset 0 1px 1px #222;
+  background-image: -webkit-linear-gradient(#323232, #2E2E2E 50%, #323232);
+  background-image: -moz-linear-gradient(#323232, #2E2E2E 50%, #323232);
+  background-image: -o-linear-gradient(#323232, #2E2E2E 50%, #323232);
+}
+.bar {
+   
+}
+.captions {
+  color: #FDFDFD;
+  padding: 5px 2px 0;
+  font: 11px/14px sans-serif;
+  text-shadow: 0 1px 0 #000;
+}
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+
+.calc_content_wrap
 {
     width: 100%;
     margin: 0 auto;
@@ -129,6 +156,7 @@
 
 #bulk_upload {
 	width: 80%;
+	line-height: 20px;
 }
 
 #second_content

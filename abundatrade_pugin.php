@@ -84,7 +84,7 @@ class abundatrade_withinboredom {
     <div class="submit_holder">
       <input class="submit" value="" type="submit"/>
     </div>';
-        $bulk_button = '<div id="bulk_button" class="green_bg"><span class="abunda_text">Have a lot of bulk items:<span><div onclick="bulk_open();" id="bulk_likea_button">Bulk Upload</div></div>';
+        $bulk_button = '<div id="bulk_button" class="green_bg"><span class="abunda_text">Have a lot of items:<span><div onclick="bulk_open();" id="bulk_likea_button">Bulk Upload</div></div>';
         $bulk = "<div id=\"bulk\" class=\"orange_bg\"><div id=\"bulk_help\" class='abunda_text'>Enter items in the format UPC Quanity, one per line. Like <pre>804147123529 2\n024543525998 1</pre></div><textarea cols=20 rows=10 id=\"bulk_upload\" name=\"bulk_upload\"></textarea><br/><div id='bulk_close' onclick='bulk_close_window();'>Go back</div><div id='bulk_submit' onclick='bulk_submit_items();'>Submit List</div></div>";
         $second = '<div id="second_content" class="calc_content_wrap green_bg">
                       <div class="second_content_sec1">

@@ -174,11 +174,139 @@ function bulk_open() {
 }
 
 function bulk_close_window() {
+    
     jQuery("#bulk").slideUp(500);
     jQuery("#top_input_section").fadeIn(500);
     jQuery("#second_content").slideDown(500);
     jQuery("#abundaCalcTbl").delay(100).fadeIn(400);
     jQuery("#bulk_button").slideDown(1000);
+    load_previous_session(false);
+}
+
+function rows() {
+    var lines;
+    var TA = jQuery("#bulk_upload").val();
+    if (document.all) { // IE
+        lines = TA.split("\r\n");
+    }
+    else { //Mozilla
+        lines = TA.split("\n");
+    }
+
+    return lines;
+}
+
+function bulk_submit_items() {
+    var taLineHeight = 20; // This should match the line-height in the CSS
+    var taHeight = jQuery("#bulk_upload").get(0).scrollHeight; // Get the scroll height of the textarea
+    jQuery("#bulk_upload").get(0).style.height = taHeight; // This line is optional, I included it so you can more easily count the lines in an expanded textarea
+    var numberOfLines = Math.floor(taHeight / taLineHeight);
+    byline = rows();
+
+    if (numberOfLines <= 1 && byline[0] == '') return;
+
+    if (numberOfLines > 250) {
+        submit_modal(submit_bulk);
+        return;
+    }
+
+    jQuery.prompt({
+        state: {
+            html: "<div style=''>Processing your upload<br/><div id='bar_wrap' style='border: 1px solid #1C1C1C;    background-color: #313131;    -webkit-box-shadow: 0 0 1px #666, inset 0 1px 1px #222;    -moz-box-shadow: 0 0 1px #666, inset 0 1px 1px #222;    -o-box-shadow: 0 0 1px #666, inset 0 1px 1px #222;    box-shadow: 0 0 1px #666, inset 0 1px 1px #222;    background-image: -webkit-linear-gradient(#323232, #2E2E2E 50%, #323232);    background-image: -moz-linear-gradient(#323232, #2E2E2E 50%, #323232);    background-image: -o-linear-gradient(#323232, #2E2E2E 50%, #323232);'><div id='bar' class='bar' style='height: 30px;background-color: #5387BA; border-right: 1px solid #282828;-webkit-box-shadow: inset 0 0 1px #ddd; -moz-box-shadow: inset 0 0 1px #ddd; -o-box-shadow: inset 0 0 1px #ddd; box-shadow: inset 0 0 1px #ddd; background-image: -webkit-linear-gradient(#66A3E2, #5387BA 50%, #4B79AF 51%, #385D87); background-image: -moz-linear-gradient(#66A3E2, #5387BA 50%, #4B79AF 51%, #385D87); background-image: -o-linear-gradient(#66A3E2, #5387BA 50%, #4B79AF 51%, #385D87); -webkit-transition: all 1s ease; -moz-transition: all 1s ease; -o-transition: all 1s ease;'></div></div><div class='captions' style='padding: 5px 2px 0;'><div class='left' id='progress'></div><div class='right' id='percent'>0%</div></div></div>",
+            buttons: {}
+        }
+    });
+
+    // Handle smaller line sets
+    control = 0;
+    waitforfinish = false;
+
+    jQuery("#bar").css('width', "0%")
+    jQuery("#progress").get(0).innerHTML = "0/" + byline.length;
+    jQuery("#percent").get(0).innerHTML = "0%";
+
+    var stop = setInterval(function () {
+        send = [];
+        str = "";
+        str += 'control=' + control + '&bulkinput='
+        for (i = control * 10; i < (control * 10) + 10; i++) {
+            if (i >= byline.length) {
+                waitforfinish = true;
+            }
+            else {
+                console.log("Processing line(" + control + "): " + i + ": " + byline[i]);
+
+                str += encodeURI(byline[i] + "\n");
+            }
+        }
+        if (!waitforfinish) control += 1;
+
+        var request = jQuery.ajax(
+        {
+            type: 'POST',
+            url: 'http://' + abundacalc.server + '/trade/process/bulk_copy.php',
+            data: str,
+            dataType: 'jsonp'
+        });
+
+        request.success(function (data) {
+            console.log(data);
+            var percent = 0;
+            if (waitforfinish && data[0].type == 'complete') {
+                console.log("told to stop");
+                jQuery("#bar").css('width', "100%")
+                jQuery("#progress").get(0).innerHTML = byline.length + "/" + byline.length;
+                jQuery("#percent").get(0).innerHTML = "100%";
+                jQuery.prompt.close();
+                bulk_close_window();
+                clearInterval(stop);
+                return;
+            }
+            else if (data[0].type == 'complete') {
+                percent = ((control - 1) * 10) / byline.length * 100;
+                percent = Math.round(percent);
+
+                jQuery("#bar").css('width', percent + "%")
+                jQuery("#progress").get(0).innerHTML = ((control - 1) * 10) + "/" + byline.length;
+                jQuery("#percent").get(0).innerHTML = percent + "%";
+            }
+            else if (data[0].type != 'complete') {
+                console.log("" + data[0].status + " of " + byline.length);
+                percent = data[0].status / byline.length * 100;
+                percent = Math.round(percent);
+
+                jQuery("#bar").css('width', percent + "%")
+                jQuery("#progress").get(0).innerHTML = data[0].status + "/" + byline.length;
+                jQuery("#percent").get(0).innerHTML = percent + "%";
+            }
+
+
+        });
+    }, 1000);
+}
+
+function submit_bulk(val) {
+    
+
+    str = "";
+
+    jQuery.each(val, function (i, obj) {
+        str += '&' + i + '=' + obj;
+    });
+
+    str += '&bulkinput='+encodeURI(jQuery("#bulk_upload").val());
+
+    var request = jQuery.ajax(
+        {
+            type: 'POST',
+            url: 'http://' + abundacalc.server + '/trade/process/bulk_copy.php',
+            data: str,
+            dataType: 'jsonp'
+        });
+
+    request.success(function (data) {
+        display_totals(data);
+    });
 }
 
 /*
@@ -225,7 +353,7 @@ function delete_the_row(obj) {
 * load up the table based on the results.
 *
 */
-function load_previous_session() {
+function load_previous_session(pretty) {
     var request = jQuery.ajax(
         {
             type: 'GET',
@@ -240,12 +368,14 @@ function load_previous_session() {
             part.row = jQuery.parseJSON(part.row);
             part = build_row(part);
             jQuery('#abundaCalcTbl').prepend(part.row_html);
-            jQuery('td:contains("' + part.product_code + '")').parent()
-                .find('td')
-                .wrapInner('<div style="display: none;" />')
-                .parent()
-                .find('td > div')
-                .slideDown("slow", function () { var $set = jQuery(this); $set.replaceWith($set.contents()); })
+            if (pretty) {
+                jQuery('td:contains("' + part.product_code + '")').parent()
+                    .find('td')
+                    .wrapInner('<div style="display: none;" />')
+                    .parent()
+                    .find('td > div')
+                    .slideDown("slow", function () { var $set = jQuery(this); $set.replaceWith($set.contents()); })
+            }
 
             display_totals(part);
         }
@@ -376,20 +506,10 @@ function please_wait(UILocked) {
     }
 }
 
-/*
-* function: submit_the_list()
-*
-* Submit The List via AJAX request.
-*
-*/
-function submit_the_list(obj) {
-    if (!jQuery(obj).hasClass('disabled') && (jQuery('#total_item_count').text() > 0)) {
+function submit_modal(callback_to_submit) {
+    var state = 0;
 
-
-
-        var state = 0;
-
-        var states =
+    var states =
             {
                 state0: {
                     html: '<label for="first_name">First Name:</label><br/><input type="text" id="name_first" name="first_name" value=""/><br/>' +
@@ -528,7 +648,7 @@ function submit_the_list(obj) {
                     submit: function (ev, but, message, val) {
                         if (but == "submit") {
                             jQuery.prompt.goToState('finish');
-                            submit_my_list(val);
+                            callback_to_submit(val);
                             return false;
                         }
 
@@ -573,17 +693,31 @@ function submit_the_list(obj) {
                     buttons: {}
                 }
             };
-        var str = '';
-        jQuery.prompt(states, {
-            callback: function (ev, v, m, f) {
+            var str = '';
 
-                if (v) {
+    jQuery.prompt(states, {
+        callback: function (ev, v, m, f) {
 
-                } else {
-                    please_wait(false);
-                }
+            if (v) {
+
+            } else {
+                please_wait(false);
             }
-        });
+        }
+    });
+}
+
+/*
+* function: submit_the_list()
+*
+* Submit The List via AJAX request.
+*
+*/
+function submit_the_list(obj) {
+    if (!jQuery(obj).hasClass('disabled') && (jQuery('#total_item_count').text() > 0)) {
+
+        submit_modal(submit_my_list);
+        
     }
 }
 
@@ -633,7 +767,7 @@ jQuery(document).ready(function () {
     * Load previous session data from backend.
     *
     */
-    load_previous_session();
+    load_previous_session(false);
 
     /* Form Submit
     *
