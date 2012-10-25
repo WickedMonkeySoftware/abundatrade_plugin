@@ -21,6 +21,116 @@
     background: #0b5294;
 }
 
+#bulk_button {
+	float:left;
+	width:99%;
+	margin-bottom: 5px;
+	text-align: center;
+	-moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -khtml-border-radius: 20px;
+    border-radius: 20px;
+    vertical-align:middle;
+}
+
+.abunda_text {
+	color:White;
+	width:100%;
+	margin-left:auto;
+	margin-right:auto;
+	font-size: medium;
+	font-weight: bold;
+	clear:none;
+	float:left;
+	margin:5px;
+	vertical-align:middle;
+}
+
+#bulk_likea_button 
+{
+    clear:none;
+    color:White;
+    font-size:medium;
+    font-weight:bold;
+    margin-left:auto;
+    margin-right: auto;
+    width:33%;
+    background: green;
+    padding:4px;
+    
+    border:1px solid black;
+    cursor:pointer;
+    vertical-align:middle;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    border-radius: 10px;
+}
+
+#bulk_close
+{
+    clear:none;
+    color:White;
+    font-size:medium;
+    font-weight:bold;
+    width:auto;
+    background: #0b5294;
+    padding:4px;
+    float:left;
+    border:1px solid black;
+    cursor:pointer;
+    float:left;
+    margin:10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    border-radius: 10px;
+}
+
+#bulk_submit
+{
+    clear:none;
+    color:White;
+    font-size:medium;
+    font-weight:bold;
+    width:auto;
+    background: #0b5294;
+    padding:4px;
+    float:left;
+    border:1px solid black;
+    cursor:pointer;
+    float:right;
+    margin:10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    border-radius: 10px;
+}
+
+#bulk {
+	float:left;
+	width:99%;
+	margin-bottom: 5px;
+	text-align: center;
+	-moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -khtml-border-radius: 20px;
+    border-radius: 20px;
+    vertical-align:middle;
+    display:none;
+}
+
+#bulk pre {
+	color:Black;
+	width:33%;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#bulk_upload {
+	width: 80%;
+}
+
 #second_content
 {
     margin: 5px 0 0 0;
