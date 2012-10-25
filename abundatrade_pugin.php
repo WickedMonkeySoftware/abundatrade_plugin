@@ -192,7 +192,7 @@ class abundatrade_withinboredom {
         if (file_exists($folders['PluginDir'] . $file . ".php"))
             include_once($folders['PluginDir'] . $file . ".php");
         //else
-            //echo "<pre>file no exists: " . $folders['PluginDir'] . $file . ".php\n</pre>";
+        //echo "<pre>file no exists: " . $folders['PluginDir'] . $file . ".php\n</pre>";
     }
     
     /**
