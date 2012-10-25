@@ -234,7 +234,7 @@ function bulk_submit_items() {
                 waitforfinish = true;
             }
             else {
-                console.log("Processing line(" + control + "): " + i + ": " + byline[i]);
+                
 
                 str += encodeURI(byline[i] + "\n");
             }
@@ -249,10 +249,10 @@ function bulk_submit_items() {
         });
 
         request.success(function (data) {
-            console.log(data);
+            
             var percent = 0;
             if (waitforfinish && data[0].type == 'complete') {
-                console.log("told to stop");
+                
                 jQuery("#bar").css('width', "100%")
                 jQuery("#progress").get(0).innerHTML = byline.length + "/" + byline.length;
                 jQuery("#percent").get(0).innerHTML = "100%";
@@ -272,7 +272,7 @@ function bulk_submit_items() {
                 jQuery("#percent").get(0).innerHTML = percent + "%";
             }
             else if (data[0].type != 'complete') {
-                console.log("" + data[0].status + " of " + byline.length);
+                
                 percent = data[0].status / byline.length * 100;
                 percent = Math.round(percent);
 
