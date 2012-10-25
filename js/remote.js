@@ -272,7 +272,7 @@ function Remove_Item(product_code) {
 
 function waitFor(product_code) {
     jQuery('#product_code').val('');
-    row_html = "<tr class='new response'> <td class='line_number'></td> <td class='upc'>" + product_code + "</td> <td class='details'> <div class='td_details'> <strong>Getting the realtime values for your item</strong><br /><em></em></div> <div class='td_image'> <img src='" + abundacalc.url + "/images/spinner.gif" + "' alt='waiting' /> </div> </td> <td class='quantity'></td> <td class='item'><div class='item'></td> <td class='values'></td> <td class='delete'></tr>";
+    row_html = "<tr class='new response'> <td class='upc'>" + product_code + "</td> <td class='details'> <div class='td_details'> <strong>Getting the realtime values for your item</strong><br /><em></em></div> <div class='td_image'> <img src='" + abundacalc.url + "/images/spinner.gif" + "' alt='waiting' /> </div> </td> <td class='quantity'></td> <td class='item'><div class='item'></td> <td class='values'></td> <td class='delete'></tr>";
     jQuery('#abundaCalcTbl').prepend(row_html);
 }
 
@@ -652,7 +652,7 @@ jQuery(document).ready(function () {
 });
 
 function build_unknown(code, quantity, id) {
-    return "<tr class='new response'> <td class='line_number'>" + (number_item) + "</td> <td class='upc'>" + code + "</td> <td class='details'> <div class='td_details'> <strong>Unknown Item</strong><br /><em>Item not found. You may send for valuation</em></div> <div class='td_image'> <img src='http://g-ecx.images-amazon.com/images/G/01/x-site/icons/no-img-sm._V192198896_.gif' alt='Unkown item' /> </div> </td> <td class='quantity'>" + quantity + "</td> <td class='item'><div class='item'>$0.00</td> <td class='values'>$0.00</td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + id + "'>Delete</a></tr>";
+    return "<tr class='new response'> <td class='upc'>" + code + "</td> <td class='details'> <div class='td_details'> <strong>Unknown Item</strong><br /><em>Item not found. You may send for valuation</em></div> <div class='td_image'> <img src='http://g-ecx.images-amazon.com/images/G/01/x-site/icons/no-img-sm._V192198896_.gif' alt='Unkown item' /> </div> </td> <td class='quantity'>" + quantity + "</td> <td class='item'><div class='item'>$0.00</td> <td class='values'>$0.00</td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + id + "'>Delete</a></tr>";
 }
 
 function build_row(data) {
@@ -668,7 +668,7 @@ function build_row(data) {
             else {
                 row_price = new Number(row.price_per / 100).toFixed(2);
                 row_total = new Number(row.total_price / 100).toFixed(2);
-                data.row_html += "<tr class='new response'> <td class='line_number'>" + (number_item) + "</td> <td class='upc'>" + row.product_code + "</td> <td class='details'> <div class='td_details'> <strong>" + row.title + "</strong><br /><em>" + (row.author == null ? '' : row.author) + "</em></div> <div class='td_image'> <img src='" + row.images + "' alt='" + row.title + "' /> </div> </div></td> <td class='quantity'>" + row.quantity + "</td> <td class='item'><div class='item'>" + data.currency_for_total + row_price + "</td> <td class='values'>" + data.currency_for_total + row_total + "</td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + row.item_id + "'>Delete</a></tr>";
+                data.row_html += write_html(data, row);
             }
             number_item++;
         }
@@ -681,13 +681,17 @@ function build_row(data) {
         else {
             row_price = new Number(row.price_per / 100).toFixed(2);
             row_total = new Number(row.total_price / 100).toFixed(2);
-            data.row_html += "<tr class='new response'> <td class='line_number'>" + (number_item) + "</td> <td class='upc'>" + row.product_code + "</td> <td class='details'> <div class='td_image'> <img src='" + row.images + "' alt='" + row.title + "' /> </div><div class='td_details'> <strong>" + row.title + "</strong><br /><em>" + (row.author == null ? '' : row.author) + "</em></div>  </div></td> <td class='quantity'>" + row.quantity + "</td> <td class='item'><div class='item'>" + data.currency_for_total + row_price + "</td> <td class='values'>" + data.currency_for_total + row_total + "</td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + row.item_id + "'>Delete</a></tr>";
+            data.row_html += write_html(data, row);
 
         }
         number_item++;
     }
 
     return data;
+}
+
+function write_html(data, row) {
+    return "<tr class='new response'> <td class='upc'>" + row.product_code + "</td> <td class='details'> <div class='td_image'> <img src='" + row.images + "' alt='" + row.title + "' /> </div><div class='td_details'> <strong>" + row.title + "</strong><br /><em>" + (row.author == null ? '' : row.author) + "</em><br/>" + (row.category == null ? "" : row.category) + "</div>  </div></td> <td class='quantity'>" + row.quantity + "</td> <td class='item'>" + (row.worthless == true ? "<p class='blatent'>No Abunda Value</p>" : "") + (row.overstocked == true ? "<span class='blatent'>Over Stocked Item</span>" : "") + "<div class='item'>" + data.currency_for_total + row_price + "</div></td> <td class='values'>" + data.currency_for_total + row_total + "</td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + row.item_id + "'>Delete</a></tr>";
 }
 
 /******************************

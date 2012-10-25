@@ -99,7 +99,6 @@ class abundatrade_withinboredom {
         $table = '<table cellspacing="0" cellpadding="0" id="abundaCalcTbl">
                   <thead>
                     <tr>
-                      <th>#</th>
                       <th>UPC</th>
                       <th>Product Details</th>
                       <th>Qty</th>
@@ -113,7 +112,7 @@ class abundatrade_withinboredom {
                   </tbody>
                   <tfoot>
                     <tr>
-                      <th colspan="2">Total Items:</th>
+                      <th >Total Items:</th>
                       <th id="item_count">0</th>
                       <th colspan="2">Pre-Valuation Total</th>
                       <th id="grand_total">$0.00</th>
