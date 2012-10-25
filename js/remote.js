@@ -89,7 +89,7 @@ function clear_session(obj) {
                         request.done(function (data) {
                             //jQuery('#abundaCalcTbl > tbody').children().remove();
                             jQuery('#abundaCalcBody_request').children().remove();
-                            
+
                             data.total_qty = "0.00";
                             data.currency_for_total = "$";
                             data.total = "0.00";
@@ -104,7 +104,7 @@ function clear_session(obj) {
             }
             );
     }
-        number_item = 1;
+    number_item = 1;
 }
 
 /*
@@ -303,20 +303,20 @@ function lookup_item(obj) {
                     dataType: 'jsonp'
                 });
 
-                request.done(function (data) {
-                    Remove_Item(item);
-                    data.row = jQuery.parseJSON(data.row);
-                    build_row(data);
-                    lastItem = data;
-                    jQuery('#abundaCalcTbl').prepend(data.row_html);
-                    jQuery('td:contains("' + data.product_code + '")').parent()
+            request.done(function (data) {
+                Remove_Item(item);
+                data.row = jQuery.parseJSON(data.row);
+                build_row(data);
+                lastItem = data;
+                jQuery('#abundaCalcTbl').prepend(data.row_html);
+                jQuery('td:contains("' + data.product_code + '")').parent()
                     .find('td')
                     .wrapInner('<div style="display: none;" />')
                     .parent()
                     .find('td > div')
                     .slideDown("slow", function () { var $set = jQuery(this); $set.replaceWith($set.contents()); })
-                    display_totals(data);
-                });
+                display_totals(data);
+            });
 
             request.fail(function (jqXHR, textStatus, errorThrown) {
                 alert("Request failed: " + textStatus + " - " + errorThrown);
@@ -368,7 +368,7 @@ function please_wait(UILocked) {
 function submit_the_list(obj) {
     if (!jQuery(obj).hasClass('disabled') && (jQuery('#total_item_count').text() > 0)) {
 
-        
+
 
         var state = 0;
 
@@ -559,9 +559,9 @@ function submit_the_list(obj) {
         var str = '';
         jQuery.prompt(states, {
             callback: function (ev, v, m, f) {
-                
+
                 if (v) {
-                    
+
                 } else {
                     please_wait(false);
                 }
@@ -585,20 +585,20 @@ function submit_my_list(f) {
                                 dataType: 'jsonp'
                             });
 
-                            request.done(function (data) {
-                                // No errors
-                                //
-                                if (data.error == '') {
-                                    jQuery('#abundaCalcTbl > tbody').children().remove();
-                                    display_totals(data);
-                                    //jQuery.prompt('Your list has been received.<br/>Thank you for submitting your list to Abundatrade.');
-                                    window.location = abundacalc.thanks;
-                                    new_session();
-                                } else {
-                                    jQuery.prompt('Your list could not be sent.<br/>' + data.error);
-                                    please_wait(false);
-                                }
-                            });
+    request.done(function (data) {
+        // No errors
+        //
+        if (data.error == '') {
+            jQuery('#abundaCalcTbl > tbody').children().remove();
+            display_totals(data);
+            //jQuery.prompt('Your list has been received.<br/>Thank you for submitting your list to Abundatrade.');
+            window.location = abundacalc.thanks;
+            new_session();
+        } else {
+            jQuery.prompt('Your list could not be sent.<br/>' + data.error);
+            please_wait(false);
+        }
+    });
 
     request.fail(function (jqXHR, textStatus, errorThrown) {
         alert("Request failed: " + textStatus + " - " + errorThrown);
