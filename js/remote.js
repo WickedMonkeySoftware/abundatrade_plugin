@@ -164,6 +164,23 @@ function display_totals(data) {
 }
 
 
+function bulk_open() {
+    //do accordian stuff
+    jQuery("#bulk_button").slideUp(1000);
+    jQuery("#abundaCalcTbl").fadeOut(400).delay(100);
+    jQuery("#second_content").slideUp(500);
+    jQuery("#top_input_section").fadeOut(500);
+    jQuery("#bulk").slideDown(500);
+}
+
+function bulk_close_window() {
+    jQuery("#bulk").slideUp(500);
+    jQuery("#top_input_section").fadeIn(500);
+    jQuery("#second_content").slideDown(500);
+    jQuery("#abundaCalcTbl").delay(100).fadeIn(400);
+    jQuery("#bulk_button").slideDown(1000);
+}
+
 /*
 * function: delete_the_row()
 *
