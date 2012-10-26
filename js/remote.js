@@ -202,7 +202,7 @@ function bulk_submit_items() {
     jQuery("#bulk_upload").get(0).style.height = taHeight; // This line is optional, I included it so you can more easily count the lines in an expanded textarea
     var numberOfLines = Math.floor(taHeight / taLineHeight);
     byline = rows();
-
+    numberOfLines = byline.length;
     if (numberOfLines <= 1 && byline[0] == '') return;
 
     if (numberOfLines > 250) {
