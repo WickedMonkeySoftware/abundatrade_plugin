@@ -252,7 +252,7 @@ function bulk_submit_items() {
             
             var percent = 0;
             if (waitforfinish && data[0].type == 'complete') {
-                
+                jQuery("#bulk_upload").val('');
                 jQuery("#bar").css('width', "100%")
                 jQuery("#progress").get(0).innerHTML = byline.length + "/" + byline.length;
                 jQuery("#percent").get(0).innerHTML = "100%";
