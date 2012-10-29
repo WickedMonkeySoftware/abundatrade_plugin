@@ -196,7 +196,14 @@ function rows() {
     return lines;
 }
 
+var bulk_final = "<div style=''>Processing your upload<br/><div id='bar_wrap' style='border: 1px solid #1C1C1C;    background-color: #313131;    -webkit-box-shadow: 0 0 1px #666, inset 0 1px 1px #222;    -moz-box-shadow: 0 0 1px #666, inset 0 1px 1px #222;    -o-box-shadow: 0 0 1px #666, inset 0 1px 1px #222;    box-shadow: 0 0 1px #666, inset 0 1px 1px #222;    background-image: -webkit-linear-gradient(#323232, #2E2E2E 50%, #323232);    background-image: -moz-linear-gradient(#323232, #2E2E2E 50%, #323232);    background-image: -o-linear-gradient(#323232, #2E2E2E 50%, #323232);'><div id='bar' class='bar' style='height: 30px;background-color: #5387BA; border-right: 1px solid #282828;-webkit-box-shadow: inset 0 0 1px #ddd; -moz-box-shadow: inset 0 0 1px #ddd; -o-box-shadow: inset 0 0 1px #ddd; box-shadow: inset 0 0 1px #ddd; background-image: -webkit-linear-gradient(#66A3E2, #5387BA 50%, #4B79AF 51%, #385D87); background-image: -moz-linear-gradient(#66A3E2, #5387BA 50%, #4B79AF 51%, #385D87); background-image: -o-linear-gradient(#66A3E2, #5387BA 50%, #4B79AF 51%, #385D87); -webkit-transition: all 1s ease; -moz-transition: all 1s ease; -o-transition: all 1s ease;'></div></div><div class='captions' style='padding: 5px 2px 0;'><div class='left' id='progress'></div><div class='right' id='percent'>0%</div></div></div>",;
+
 function bulk_submit_items() {
+
+    submit_modal(submit_bulk, bulk_final);
+
+    return; //stop execution here and delete all this and below later
+
     var taLineHeight = 20; // This should match the line-height in the CSS
     var taHeight = jQuery("#bulk_upload").get(0).scrollHeight; // Get the scroll height of the textarea
     jQuery("#bulk_upload").get(0).style.height = taHeight; // This line is optional, I included it so you can more easily count the lines in an expanded textarea
@@ -212,7 +219,7 @@ function bulk_submit_items() {
 
     jQuery.prompt({
         state: {
-            html: "<div style=''>Processing your upload<br/><div id='bar_wrap' style='border: 1px solid #1C1C1C;    background-color: #313131;    -webkit-box-shadow: 0 0 1px #666, inset 0 1px 1px #222;    -moz-box-shadow: 0 0 1px #666, inset 0 1px 1px #222;    -o-box-shadow: 0 0 1px #666, inset 0 1px 1px #222;    box-shadow: 0 0 1px #666, inset 0 1px 1px #222;    background-image: -webkit-linear-gradient(#323232, #2E2E2E 50%, #323232);    background-image: -moz-linear-gradient(#323232, #2E2E2E 50%, #323232);    background-image: -o-linear-gradient(#323232, #2E2E2E 50%, #323232);'><div id='bar' class='bar' style='height: 30px;background-color: #5387BA; border-right: 1px solid #282828;-webkit-box-shadow: inset 0 0 1px #ddd; -moz-box-shadow: inset 0 0 1px #ddd; -o-box-shadow: inset 0 0 1px #ddd; box-shadow: inset 0 0 1px #ddd; background-image: -webkit-linear-gradient(#66A3E2, #5387BA 50%, #4B79AF 51%, #385D87); background-image: -moz-linear-gradient(#66A3E2, #5387BA 50%, #4B79AF 51%, #385D87); background-image: -o-linear-gradient(#66A3E2, #5387BA 50%, #4B79AF 51%, #385D87); -webkit-transition: all 1s ease; -moz-transition: all 1s ease; -o-transition: all 1s ease;'></div></div><div class='captions' style='padding: 5px 2px 0;'><div class='left' id='progress'></div><div class='right' id='percent'>0%</div></div></div>",
+            html: 
             buttons: {}
         }
     });
@@ -507,7 +514,9 @@ function please_wait(UILocked) {
     }
 }
 
-function submit_modal(callback_to_submit) {
+var regular_display = "<center><p>Sending your trade request and locking in your quote!<br/><span style='font-size:xx-small;'>Give our pecking pigeons a second</span></p></center><center><img src='" + abundacalc.url + "/images/spinner.gif'/></center>";
+
+function submit_modal(callback_to_submit, final_display) {
     var state = 0;
 
     var states =
@@ -690,7 +699,7 @@ function submit_modal(callback_to_submit) {
                     }
                 },
                 finish: {
-                    html: "<center><p>Sending your trade request and locking in your quote!<br/><span style='font-size:xx-small;'>Give our pecking pigeons a second</span></p></center><center><img src='" + abundacalc.url + "/images/spinner.gif'/></center>",
+                    html: final_display,
                     buttons: {}
                 }
             };
@@ -717,7 +726,7 @@ function submit_modal(callback_to_submit) {
 function submit_the_list(obj) {
     if (!jQuery(obj).hasClass('disabled') && (jQuery('#total_item_count').text() > 0)) {
 
-        submit_modal(submit_my_list);
+        submit_modal(submit_my_list, regular_display);
         
     }
 }
