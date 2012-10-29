@@ -213,7 +213,6 @@ function display_bulk_upload(display_prompt, id) {
     if (id == null) id = abundacalc['upload_id'];
 
     check = 0;
-    console.log(id);
 
     var stop = setInterval(function () {
         var request = jQuery.ajax(
@@ -279,7 +278,6 @@ function submit_bulk(val) {
         request.success(function (data) {
             new_session();
             id = data[0].data;
-            console.log(data[0].data);
             display_bulk_upload(false, id);
         });
 }
@@ -739,6 +737,10 @@ function submit_my_list(f) {
 *
 */
 jQuery(document).ready(function () {
+
+    if (abundacalc.upload_id) {
+        display_bulk_upload(true);
+    }
 
     /*
     * Load previous session data from backend.
