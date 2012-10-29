@@ -62,7 +62,7 @@
 
 .abunda_text {
 	color:White;
-	width:100%;
+	width:50%;
 	margin-left:auto;
 	margin-right:auto;
 	font-size: medium;
@@ -71,6 +71,8 @@
 	float:left;
 	margin:5px;
 	vertical-align:middle;
+	text-align:right;
+	
 }
 
 #bulk_likea_button 
@@ -81,10 +83,10 @@
     font-weight:bold;
     margin-left:auto;
     margin-right: auto;
-    width:33%;
+    width:20%;
     background: green;
     padding:4px;
-    
+    text-align:center;
     border:1px solid black;
     cursor:pointer;
     vertical-align:middle;
@@ -92,6 +94,7 @@
     -webkit-border-radius: 10px;
     -khtml-border-radius: 10px;
     border-radius: 10px;
+    float:left;
 }
 
 #bulk_close
@@ -152,10 +155,18 @@
 	width:33%;
 	margin-left:auto;
 	margin-right:auto;
+	text-align:left;
+}
+
+#bulk_help 
+{
+    width:100%;
+    text-align: center;
+	
 }
 
 #bulk_upload {
-	width: 80%;
+	width: 33%;
 	line-height: 20px;
 }
 
@@ -288,7 +299,7 @@
 #top_input_section div.label
 {
     float: left;
-    margin: 5px 6px 0 0;
+    margin: 13px 6px 0 0;
     clear: none;
 }
 

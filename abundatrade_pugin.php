@@ -74,7 +74,7 @@ class abundatrade_withinboredom {
       </div>
     </div>
 
-    <div class="input_container">
+    <div class="input_container" style="width:200px;">
       <div class="label"> Quantity </div>
       <div class="qty_holder">
         <input class="center validate[\'required\',\'digit[1,20]\']" id="product_qty" name="product_qty" value="1" type="text"/>
@@ -84,8 +84,8 @@ class abundatrade_withinboredom {
     <div class="submit_holder">
       <input class="submit" value="" type="submit"/>
     </div>';
-        $bulk_button = '<div id="bulk_button" class="green_bg"><span class="abunda_text">Have a lot of items:<span><div onclick="bulk_open();" id="bulk_likea_button">Bulk Upload</div></div>';
-        $bulk = "<div id=\"bulk\" class=\"orange_bg\"><div id=\"bulk_help\" class='abunda_text'>Enter items in the format UPC Quanity, one per line. Like <pre>804147123529 2\n024543525998 1</pre></div><textarea cols=20 rows=10 id=\"bulk_upload\" name=\"bulk_upload\"></textarea><br/><div id='bulk_close' onclick='bulk_close_window();'>Go back</div><div id='bulk_submit' onclick='bulk_submit_items();'>Submit List</div></div>";
+        $bulk_button = '<div id="bulk_button" class="green_bg"><span class="abunda_text">Have a lot of items:</span><div onclick="bulk_open();" id="bulk_likea_button">Bulk Upload</div></div>';
+        $bulk = "<div id=\"bulk\" class=\"orange_bg\"><div id=\"bulk_help\" class='abunda_text'>You can cut and paste directly from popular office programs<br/> like Excel and Word. The following format is accepted: <pre>UPC/ISBN     Quantity\n804147123529 2\n024543525998 1</pre></div><textarea cols=20 rows=10 id=\"bulk_upload\" name=\"bulk_upload\"></textarea><br/><div id='bulk_close' onclick='bulk_close_window();'>Go back</div><div id='bulk_submit' onclick='bulk_submit_items();'>Submit List</div></div>";
         $second = '<div id="second_content" class="calc_content_wrap green_bg">
                       <div class="second_content_sec1">
                       <label>Total Items:</label><div id="total_item_count">0</div></div>
