@@ -226,7 +226,7 @@ function display_bulk_upload(display_prompt, id) {
         request.success(function (data) {
             if (data.error == false || data.on == 0) {
                 percent = data.on / data.total * 100;
-                
+
                 if (data.on == 1 && data.total == 1) {
                     if (check++ < 10) {
                         jQuery("#progress").get(0).innerHTML = "Processing complete -- building your email";
@@ -243,6 +243,7 @@ function display_bulk_upload(display_prompt, id) {
                         clearInterval(fin);
                         jQuery.prompt.close();
                         bulk_close_window();
+                        load_previous_session(true);
                     }, 2000);
                 }
                 else {
