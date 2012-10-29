@@ -122,7 +122,7 @@ function new_session(this_link) {
             data: 'action=new_session',
             dataType: 'jsonp'
         });
-    request.done(function (data) { });
+        request.done(function (data) { });
     request.fail(function (jqXHR, textStatus, errorThrown) {
         alert("Request failed: " + textStatus + " - " + errorThrown);
         please_wait(false);
@@ -196,100 +196,69 @@ function rows() {
     return lines;
 }
 
-var bulk_final = "<div style=''>Processing your upload<br/><div id='bar_wrap' style='border: 1px solid #1C1C1C;    background-color: #313131;    -webkit-box-shadow: 0 0 1px #666, inset 0 1px 1px #222;    -moz-box-shadow: 0 0 1px #666, inset 0 1px 1px #222;    -o-box-shadow: 0 0 1px #666, inset 0 1px 1px #222;    box-shadow: 0 0 1px #666, inset 0 1px 1px #222;    background-image: -webkit-linear-gradient(#323232, #2E2E2E 50%, #323232);    background-image: -moz-linear-gradient(#323232, #2E2E2E 50%, #323232);    background-image: -o-linear-gradient(#323232, #2E2E2E 50%, #323232);'><div id='bar' class='bar' style='height: 30px;background-color: #5387BA; border-right: 1px solid #282828;-webkit-box-shadow: inset 0 0 1px #ddd; -moz-box-shadow: inset 0 0 1px #ddd; -o-box-shadow: inset 0 0 1px #ddd; box-shadow: inset 0 0 1px #ddd; background-image: -webkit-linear-gradient(#66A3E2, #5387BA 50%, #4B79AF 51%, #385D87); background-image: -moz-linear-gradient(#66A3E2, #5387BA 50%, #4B79AF 51%, #385D87); background-image: -o-linear-gradient(#66A3E2, #5387BA 50%, #4B79AF 51%, #385D87); -webkit-transition: all 1s ease; -moz-transition: all 1s ease; -o-transition: all 1s ease;'></div></div><div class='captions' style='padding: 5px 2px 0;'><div class='left' id='progress'></div><div class='right' id='percent'>0%</div></div></div>";
+var bulk_final = "<div style=''>Processing your upload<br/><div id='bar_wrap' style='border: 1px solid #1C1C1C;    background-color: #313131;    -webkit-box-shadow: 0 0 1px #666, inset 0 1px 1px #222;    -moz-box-shadow: 0 0 1px #666, inset 0 1px 1px #222;    -o-box-shadow: 0 0 1px #666, inset 0 1px 1px #222;    box-shadow: 0 0 1px #666, inset 0 1px 1px #222;    background-image: -webkit-linear-gradient(#323232, #2E2E2E 50%, #323232);    background-image: -moz-linear-gradient(#323232, #2E2E2E 50%, #323232);    background-image: -o-linear-gradient(#323232, #2E2E2E 50%, #323232);'><div id='bar' class='bar' style='height: 30px;background-color: #5387BA; border-right: 1px solid #282828;-webkit-box-shadow: inset 0 0 1px #ddd; -moz-box-shadow: inset 0 0 1px #ddd; -o-box-shadow: inset 0 0 1px #ddd; box-shadow: inset 0 0 1px #ddd; background-image: -webkit-linear-gradient(#66A3E2, #5387BA 50%, #4B79AF 51%, #385D87); background-image: -moz-linear-gradient(#66A3E2, #5387BA 50%, #4B79AF 51%, #385D87); background-image: -o-linear-gradient(#66A3E2, #5387BA 50%, #4B79AF 51%, #385D87); -webkit-transition: all 1s ease; -moz-transition: all 1s ease; -o-transition: all 1s ease; width:0%;'></div></div><div class='captions' style='padding: 5px 2px 0;'><div class='left' id='progress'></div><div class='right' id='percent'>0%</div></div></div>";
 
 function bulk_submit_items() {
 
     submit_modal(submit_bulk, bulk_final);
 
     return; //stop execution here and delete all this and below later
+}
 
-    var taLineHeight = 20; // This should match the line-height in the CSS
-    var taHeight = jQuery("#bulk_upload").get(0).scrollHeight; // Get the scroll height of the textarea
-    jQuery("#bulk_upload").get(0).style.height = taHeight; // This line is optional, I included it so you can more easily count the lines in an expanded textarea
-    var numberOfLines = Math.floor(taHeight / taLineHeight);
-    byline = rows();
-    numberOfLines = byline.length;
-    if (numberOfLines <= 1 && byline[0] == '') return;
-
-    if (numberOfLines > 250) {
-        submit_modal(submit_bulk);
-        return;
+function display_bulk_upload(display_prompt, id) {
+    if (display_prompt) {
+        jQuery.prompt({ state: { html: bulk_final, buttons: {}} }, {});
     }
 
-    
+    if (id == null) id = abundacalc['upload_id'];
 
-    // Handle smaller line sets
-    control = 0;
-    waitforfinish = false;
-
-    jQuery("#bar").css('width', "0%")
-    jQuery("#progress").get(0).innerHTML = "0/" + byline.length;
-    jQuery("#percent").get(0).innerHTML = "0%";
+    check = 0;
+    console.log(id);
 
     var stop = setInterval(function () {
-        send = [];
-        str = "";
-        str += 'control=' + control + '&bulkinput='
-        for (i = control * 10; i < (control * 10) + 10; i++) {
-            if (i >= byline.length) {
-                waitforfinish = true;
-            }
-            else {
-                
-
-                str += encodeURI(byline[i] + "\n");
-            }
-        }
-
         var request = jQuery.ajax(
         {
             type: 'POST',
-            url: 'http://' + abundacalc.server + '/trade/process/bulk_copy.php',
-            data: str,
+            url: 'http://' + abundacalc.server + '/trade/process/request.php',
+            data: "action=get_status&id=" + id,
             dataType: 'jsonp'
         });
 
         request.success(function (data) {
-            
-            var percent = 0;
-            if (waitforfinish && data[0].type == 'complete') {
-                jQuery("#bulk_upload").val('');
-                jQuery("#bar").css('width', "100%")
-                jQuery("#progress").get(0).innerHTML = byline.length + "/" + byline.length;
-                jQuery("#percent").get(0).innerHTML = "100%";
-                jQuery.prompt.close();
-                bulk_close_window();
-                clearInterval(stop);
-                return;
-            }
-            else if (data[0].type == 'complete') {
-                if (!waitforfinish) control += 1;
-
-                percent = ((control - 1) * 10) / byline.length * 100;
-                percent = Math.round(percent);
-
-                jQuery("#bar").css('width', percent + "%")
-                jQuery("#progress").get(0).innerHTML = ((control - 1) * 10) + "/" + byline.length;
-                jQuery("#percent").get(0).innerHTML = percent + "%";
-            }
-            else if (data[0].type != 'complete') {
+            if (data.error == false || data.on == 0) {
+                percent = data.on / data.total * 100;
                 
-                percent = data[0].status / byline.length * 100;
-                percent = Math.round(percent);
+                if (data.on == 1 && data.total == 1) {
+                    if (check++ < 10) {
+                        jQuery("#progress").get(0).innerHTML = "Processing complete -- building your email";
+                        return;
+                    }
 
-                jQuery("#bar").css('width', percent + "%")
-                jQuery("#progress").get(0).innerHTML = data[0].status + "/" + byline.length;
-                jQuery("#percent").get(0).innerHTML = percent + "%";
+                    //processing complete
+                    clearInterval(stop);
+                    jQuery("#bar").css('width', percent + "%")
+                    jQuery("#progress").get(0).innerHTML = "Processing complete -- sending your valuation to you ";
+                    jQuery("#percent").get(0).innerHTML = Math.round(percent) + "%";
+
+                    fin = setInterval(function () {
+                        clearInterval(fin);
+                        jQuery.prompt.close();
+                        bulk_close_window();
+                    }, 2000);
+                }
+                else {
+                    check = 0;
+                    //display status
+                    jQuery("#bar").css('width', percent + "%")
+                    jQuery("#progress").get(0).innerHTML = data.on + " of approx. " + data.total;
+                    jQuery("#percent").get(0).innerHTML = Math.round(percent) + "%";
+                }
             }
-
-
         });
     }, 1000);
 }
 
 function submit_bulk(val) {
-    
 
     str = "";
 
@@ -307,9 +276,12 @@ function submit_bulk(val) {
             dataType: 'jsonp'
         });
 
-    request.success(function (data) {
-        display_totals(data);
-    });
+        request.success(function (data) {
+            new_session();
+            id = data[0].data;
+            console.log(data[0].data);
+            display_bulk_upload(false, id);
+        });
 }
 
 /*
