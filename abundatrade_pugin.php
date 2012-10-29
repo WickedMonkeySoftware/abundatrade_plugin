@@ -159,7 +159,11 @@ class abundatrade_withinboredom {
         wp_enqueue_style("abundatrade_classic");
         wp_enqueue_script("abundatrade_remote");
         wp_enqueue_script("abundatrade_impromptu");
-        wp_localize_script('abundatrade_remote','abundacalc',array('server' => 'dev.abundatrade.com', 'url' => $this->folders['PluginUrl'], 'thanks' => $this->settings->thankyou_page)); 
+        $abundacalc = array('server' => 'dev.abundatrade.com', 'url' => $this->folders['PluginUrl'], 'thanks' => $this->settings->thankyou_page);
+        if (isset($_REQUEST['upload_id']) && $_REQUEST['upload_id'] != '') {
+            $abundacalc['upload_id'] = $_REQUEST['upload_id'];
+        }
+        wp_localize_script('abundatrade_remote','abundacalc',$abundacalc);
     }
     
     /**
