@@ -225,7 +225,12 @@ function display_bulk_upload(display_prompt, id) {
         jQuery.prompt({ state: { html: bulk_final, buttons: {}} }, {});
     }
 
-    if (id == null) id = abundacalc['upload_id'];
+    var donot_reset = false;
+
+    if (id == null) {
+        id = abundacalc['upload_id'];
+        donot_reset = true;
+    }
 
     var stop = setInterval(function () {
         var request = jQuery.ajax(
@@ -250,12 +255,14 @@ function display_bulk_upload(display_prompt, id) {
                     jQuery("#progress").get(0).innerHTML = "Processing complete -- sending your valuation to you ";
                     jQuery("#percent").get(0).innerHTML = Math.round(percent) + "%";
 
-                    fin = setInterval(function () {
-                        clearInterval(fin);
-                        jQuery.prompt.close();
-                        bulk_close_window();
-                        load_previous_session(true);
-                    }, 2000);
+                    if (!donot_reset) {
+                        fin = setInterval(function () {
+                            clearInterval(fin);
+                            jQuery.prompt.close();
+                            bulk_close_window();
+                            load_previous_session(true);
+                        }, 2000);
+                    }
                 }
                 else {
                     //display status
