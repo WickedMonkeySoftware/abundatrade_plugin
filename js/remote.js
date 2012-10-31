@@ -284,6 +284,8 @@ function submit_bulk(val) {
 
     str += '&bulkinput=' + encodeURI(jQuery("#bulk_upload").val());
 
+    str += '&location=' + window.location.href.split('?')[0];
+
     var request = jQuery.ajax(
 {
     type: 'POST',
