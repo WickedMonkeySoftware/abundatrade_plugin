@@ -23,6 +23,11 @@ class skel__skel
     private $folders;
     
     /**
+     * @var int Plugin settings page hook id
+     */
+    private $page_hook;
+    
+    /**
      * Lays out the skel framework
      */
 	function __construct()
@@ -86,10 +91,41 @@ class skel__skel
         <?php
     }
     
+    public function add_help_tab() {
+        
+        if (!isset($_GET['tab'])) $_GET['tab'] = 0;
+        
+        $screen = get_current_screen();
+        
+        if ($screen->id != $this->page_hook) {
+            return;
+        }
+        
+        $id = 0;
+        foreach ($this->config['help'] as $tab => $help) {
+            if($tab == $_GET['tab']) {
+                foreach ($help as $menu) {
+                    echo "<pre>"; var_dump($menu); echo "</pre>";
+                    $screen->add_help_tab(array(
+                        'id' => $id ++,
+                        'title' => $menu[0],
+                        'content' => '',
+                        'callback' => array($this, 'show_content')
+                        ));
+                }
+            }
+        }
+    }
+    
+    function show_content($screen, $tab) {
+        echo "<pre>"; var_dump($tab); echo "</pre>";
+    }
+    
     /**
      * Builds the settings menu stuff
      */
     public function buildSettings() {
-        add_options_page($this->config['config']['page_title'], $this->config['config']['button_title'], 'manage_options', $this->config['config']['slug'], array($this, "display"));
+        $this->page_hook = add_options_page($this->config['config']['page_title'], $this->config['config']['button_title'], 'manage_options', $this->config['config']['slug'], array($this, "display"));
+        add_action('load-'.$this->page_hook, array($this, 'add_help_tab'));
     }
 }

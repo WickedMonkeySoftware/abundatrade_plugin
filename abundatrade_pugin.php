@@ -41,8 +41,11 @@ class abundatrade_withinboredom {
             2 => array('Support', 'tabs__support_withinboredom'),
             );
         $config['help'] = array(
-            'settings' => array(
-                    'Overview' => "Stuff here",
+            // The tab to display on
+            '0' => array(
+                    // The     title       content       of the help menu
+                    0 => array('Overview', "Basic settings for the Abundatrade Calculator."),
+                    1 => array('Help', 'Enter your affiliate id and the location of your thank you page')
                 )
             );
         $config['config'] = array(
