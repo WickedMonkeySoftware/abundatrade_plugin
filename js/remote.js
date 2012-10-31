@@ -36,11 +36,18 @@ $set.replaceWith($set.contents());
 
 */
 
+/**
+* The number of items [defunct]
+*/
 var number_item = 1;
+
+/**
+* A list of items to clean up
+*/
 var itemsToDispose = [];
 
 /*
-* function: clear_product_code()
+* function: clear_product_code() 
 *
 * Format the product code with alphanumerics only.
 *
@@ -52,7 +59,7 @@ function clean_product_code(element) {
 /*
 * function: validateEmail()
 *
-* Validates an email address
+* prevalidates an email address
 *
 */
 function validateEmail(email, confirm) {
@@ -122,7 +129,7 @@ function new_session(this_link) {
             data: 'action=new_session',
             dataType: 'jsonp'
         });
-        request.done(function (data) { });
+    request.done(function (data) { });
     request.fail(function (jqXHR, textStatus, errorThrown) {
         alert("Request failed: " + textStatus + " - " + errorThrown);
         please_wait(false);
@@ -163,7 +170,9 @@ function display_totals(data) {
     jQuery('#product_code').focus();
 }
 
-
+/**
+* Opens the bulk upload bin real pretty like
+*/
 function bulk_open() {
     //do accordian stuff
     jQuery("#bulk_button").slideUp(1000);
@@ -173,8 +182,10 @@ function bulk_open() {
     jQuery("#bulk").slideDown(500);
 }
 
+/* Closes the bulk upload bin and reloads the session
+*/
 function bulk_close_window() {
-    
+
     jQuery("#bulk").slideUp(500);
     jQuery("#top_input_section").fadeIn(500);
     jQuery("#second_content").slideDown(500);
@@ -183,6 +194,7 @@ function bulk_close_window() {
     load_previous_session(false);
 }
 
+/** Gets the rows for the bulk upload bin */
 function rows() {
     var lines;
     var TA = jQuery("#bulk_upload").val();
@@ -196,8 +208,10 @@ function rows() {
     return lines;
 }
 
+/** The bulk upload final page for submission */
 var bulk_final = "<div style=''>Processing your upload<br/><div id='bar_wrap' style='border: 1px solid #1C1C1C;    background-color: #313131;    -webkit-box-shadow: 0 0 1px #666, inset 0 1px 1px #222;    -moz-box-shadow: 0 0 1px #666, inset 0 1px 1px #222;    -o-box-shadow: 0 0 1px #666, inset 0 1px 1px #222;    box-shadow: 0 0 1px #666, inset 0 1px 1px #222;    background-image: -webkit-linear-gradient(#323232, #2E2E2E 50%, #323232);    background-image: -moz-linear-gradient(#323232, #2E2E2E 50%, #323232);    background-image: -o-linear-gradient(#323232, #2E2E2E 50%, #323232);'><div id='bar' class='bar' style='height: 30px;background-color: #5387BA; border-right: 1px solid #282828;-webkit-box-shadow: inset 0 0 1px #ddd; -moz-box-shadow: inset 0 0 1px #ddd; -o-box-shadow: inset 0 0 1px #ddd; box-shadow: inset 0 0 1px #ddd; background-image: -webkit-linear-gradient(#66A3E2, #5387BA 50%, #4B79AF 51%, #385D87); background-image: -moz-linear-gradient(#66A3E2, #5387BA 50%, #4B79AF 51%, #385D87); background-image: -o-linear-gradient(#66A3E2, #5387BA 50%, #4B79AF 51%, #385D87); -webkit-transition: all 1s ease; -moz-transition: all 1s ease; -o-transition: all 1s ease; width:0%;'></div></div><div class='captions' style='padding: 5px 2px 0;'><div class='left' id='progress'></div><div class='right' id='percent'>0%</div></div></div>";
 
+/** Submits a bulk upload */
 function bulk_submit_items() {
 
     submit_modal(submit_bulk, bulk_final);
@@ -205,6 +219,7 @@ function bulk_submit_items() {
     return; //stop execution here and delete all this and below later
 }
 
+/** Displays the bulk upload status */
 function display_bulk_upload(display_prompt, id) {
     if (display_prompt) {
         jQuery.prompt({ state: { html: bulk_final, buttons: {}} }, {});
@@ -216,12 +231,12 @@ function display_bulk_upload(display_prompt, id) {
 
     var stop = setInterval(function () {
         var request = jQuery.ajax(
-        {
-            type: 'POST',
-            url: 'http://' + abundacalc.server + '/trade/process/request.php',
-            data: "action=get_status&id=" + id,
-            dataType: 'jsonp'
-        });
+            {
+                type: 'POST',
+                url: 'http://' + abundacalc.server + '/trade/process/request.php',
+                data: "action=get_status&id=" + id,
+                dataType: 'jsonp'
+            });
 
         request.success(function (data) {
             if (data.error == false || data.on == 0) {
@@ -258,6 +273,7 @@ function display_bulk_upload(display_prompt, id) {
     }, 1000);
 }
 
+/** Submits the jsonp bulk upload list */
 function submit_bulk(val) {
 
     str = "";
@@ -266,21 +282,21 @@ function submit_bulk(val) {
         str += '&' + i + '=' + obj;
     });
 
-    str += '&bulkinput='+encodeURI(jQuery("#bulk_upload").val());
+    str += '&bulkinput=' + encodeURI(jQuery("#bulk_upload").val());
 
     var request = jQuery.ajax(
-        {
-            type: 'POST',
-            url: 'http://' + abundacalc.server + '/trade/process/bulk_copy.php',
-            data: str,
-            dataType: 'jsonp'
-        });
+{
+    type: 'POST',
+    url: 'http://' + abundacalc.server + '/trade/process/bulk_copy.php',
+    data: str,
+    dataType: 'jsonp'
+});
 
-        request.success(function (data) {
-            new_session();
-            id = data[0].data;
-            display_bulk_upload(false, id);
-        });
+    request.success(function (data) {
+        new_session();
+        id = data[0].data;
+        display_bulk_upload(false, id);
+    });
 }
 
 /*
@@ -364,6 +380,7 @@ function load_previous_session(pretty) {
     });
 }
 
+/** Compresses duplicates */
 function addDuplicatesToQuantity(inputUPC) {
     var upcs = $$('td.upc');
     var quantities = $$('td.quantity');
@@ -381,8 +398,10 @@ function addDuplicatesToQuantity(inputUPC) {
     }
 }
 
+/** The last item looked up */
 var lastItem;
 
+/** Removes an item */
 function Remove_Item(product_code) {
     var selector = 'td:contains("' + product_code + '")';
     x = jQuery(selector);
@@ -391,6 +410,7 @@ function Remove_Item(product_code) {
     jQuery(selector).parents('tr').remove();
 }
 
+/** Displays a waiting spinning thingy while we look up a product */
 function waitFor(product_code) {
     jQuery('#product_code').val('');
     row_html = "<tr class='new response'> <td class='upc'>" + product_code + "</td> <td class='details'> <div class='td_details'> <strong>Getting the realtime values for your item</strong><br /><em></em></div> <div class='td_image'> <img src='" + abundacalc.url + "/images/spinner.gif" + "' alt='waiting' /> </div> </td> <td class='quantity'></td> <td class='item'><div class='item'></td> <td class='values'></td> <td class='delete'></tr>";
@@ -480,8 +500,10 @@ function please_wait(UILocked) {
     }
 }
 
+/** A regular submission final page */
 var regular_display = "<center><p>Sending your trade request and locking in your quote!<br/><span style='font-size:xx-small;'>Give our pecking pigeons a second</span></p></center><center><img src='" + abundacalc.url + "/images/spinner.gif'/></center>";
 
+/** Submit a list */
 function submit_modal(callback_to_submit, final_display) {
     var state = 0;
 
@@ -669,7 +691,7 @@ function submit_modal(callback_to_submit, final_display) {
                     buttons: {}
                 }
             };
-            var str = '';
+    var str = '';
 
     jQuery.prompt(states, {
         callback: function (ev, v, m, f) {
@@ -693,10 +715,11 @@ function submit_the_list(obj) {
     if (!jQuery(obj).hasClass('disabled') && (jQuery('#total_item_count').text() > 0)) {
 
         submit_modal(submit_my_list, regular_display);
-        
+
     }
 }
 
+/** Submission of a list done the old fashioned way via jsonp */
 function submit_my_list(f) {
     str = "";
 
@@ -782,10 +805,12 @@ jQuery(document).ready(function () {
     jQuery('#delete_all_bottom').on('click', function () { clear_session(this); });
 });
 
+/** Builds an unknown row */
 function build_unknown(code, quantity, id) {
     return "<tr class='new response'> <td class='upc'>" + code + "</td> <td class='details'> <div class='td_details'> <strong>Unknown Item</strong><br /><em>Item not found. You may send for valuation</em></div> <div class='td_image'> <img src='http://g-ecx.images-amazon.com/images/G/01/x-site/icons/no-img-sm._V192198896_.gif' alt='Unkown item' /> </div> </td> <td class='quantity'>" + quantity + "</td> <td class='item'><div class='item'>$0.00</td> <td class='values'>$0.00</td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + id + "'>Delete</a></tr>";
 }
 
+/** Builds an item from a lookup from a json string */
 function build_row(data) {
     data.row_html = "";
 
@@ -821,6 +846,7 @@ function build_row(data) {
     return data;
 }
 
+/** Write out the html for the row */
 function write_html(data, row) {
     return "<tr class='new response'> <td class='upc'>" + row.product_code + "</td> <td class='details'> <div class='td_image'> <img src='" + row.images + "' alt='" + row.title + "' /> </div><div class='td_details'> <strong>" + row.title + "</strong><br /><em>" + (row.author == null ? '' : row.author) + "</em><br/>" + (row.category == null ? "" : row.category) + "</div>  </div></td> <td class='quantity'>" + row.quantity + "</td> <td class='item'>" + (row.worthless == true ? "<p class='blatent'>No Abunda Value</p>" : "") + (row.overstocked == true ? "<span class='blatent'>Over Stocked Item</span>" : "") + "<div class='item'>" + data.currency_for_total + row_price + "</div></td> <td class='values'>" + data.currency_for_total + row_total + "</td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + row.item_id + "'>Delete</a></tr>";
 }
