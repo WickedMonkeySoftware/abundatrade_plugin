@@ -62,6 +62,10 @@ Please use the forums on the plugin pages
 
 == Changelog ==
 
+= v0.7 (October 31, 2012) =
+
+* Properly save settings
+
 = v0.6 (October 31, 2012) =
 
 * Better bulk upload handling
