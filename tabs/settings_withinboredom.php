@@ -58,8 +58,8 @@ class tabs__settings_withinboredom
             'Thank you Page' => array(
                     'type'  => 'text',
                     'name'  => 'Thank you page',
-                    'id'    => 'thankyou_page',
-                    'value' => $settings->thankyou_page
+                    'id'    => 'Thank_you_page',
+                    'value' => $settings->Thank_you_page
                 )
             ));
         ?>

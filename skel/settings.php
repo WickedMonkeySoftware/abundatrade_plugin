@@ -32,7 +32,7 @@ class skel__settings
     /**
      * The version of this code
      */
-    private $coded_version = "0.2";
+    private $coded_version = "0.7";
     
     /**
      * Loads default options or gets them from the db if they already exist
@@ -43,7 +43,7 @@ class skel__settings
         $default = array_merge($default, array(
                     "version" => "0.0",
                     "Affiliate_ID" => "ABU-1338563844",
-                    "thankyou_page" => "http://abundatrade.com/trade/thank-you.php?a=abundatrade"
+                    "Thank_you_page" => "http://abundatrade.com/trade/thank-you.php?a=abundatrade"
                 ));
         
         if (get_option("skel_abundatrade_options", false) === false) {
