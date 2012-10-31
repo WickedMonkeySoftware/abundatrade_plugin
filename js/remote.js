@@ -227,8 +227,6 @@ function display_bulk_upload(display_prompt, id) {
 
     if (id == null) id = abundacalc['upload_id'];
 
-    check = 0;
-
     var stop = setInterval(function () {
         var request = jQuery.ajax(
             {
@@ -243,11 +241,9 @@ function display_bulk_upload(display_prompt, id) {
                 percent = data.on / data.total * 100;
 
                 if (data.on == 1 && data.total == 1) {
-                    if (check++ < 10) {
-                        jQuery("#progress").get(0).innerHTML = "Processing complete -- building your email";
-                        return;
-                    }
-
+                    jQuery("#progress").get(0).innerHTML = "Processing complete -- building your email";
+                }
+                else if (data.on == 2 && data.total == 2) {
                     //processing complete
                     clearInterval(stop);
                     jQuery("#bar").css('width', percent + "%")
@@ -262,7 +258,6 @@ function display_bulk_upload(display_prompt, id) {
                     }, 2000);
                 }
                 else {
-                    check = 0;
                     //display status
                     jQuery("#bar").css('width', percent + "%")
                     jQuery("#progress").get(0).innerHTML = data.on + " of approx. " + data.total;
@@ -284,7 +279,7 @@ function submit_bulk(val) {
 
     str += '&bulkinput=' + encodeURI(jQuery("#bulk_upload").val());
 
-    str += '&location=' + window.location.href.split('?')[0];
+    str += '&location=' + window.location.href;
 
     var request = jQuery.ajax(
 {
