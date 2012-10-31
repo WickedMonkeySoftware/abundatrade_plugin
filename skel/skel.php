@@ -68,6 +68,9 @@ class skel__skel
         if (current_user_can('manage_options')) $this->render_tabs();
     }
     
+    /**
+     * Displays the tabs at the top of the settings page
+     */
     private function render_tabs() {
         ?>
         <div id="icon-MoneyPress_Abundatrade_Edition" class="icon32"><br /></div><h2>Abundatrade Settings</h2>
@@ -91,6 +94,9 @@ class skel__skel
         <?php
     }
     
+    /**
+     * Adds a help tab to a settings tab
+     */
     public function add_help_tab() {
         
         if (!isset($_GET['tab'])) $_GET['tab'] = 0;
@@ -101,15 +107,13 @@ class skel__skel
             return;
         }
         
-        $id = 0;
         foreach ($this->config['help'] as $tab => $help) {
             if($tab == $_GET['tab']) {
                 foreach ($help as $menu) {
-                    echo "<pre>"; var_dump($menu); echo "</pre>";
                     $screen->add_help_tab(array(
-                        'id' => $id ++,
+                        'id' => $menu[0],
                         'title' => $menu[0],
-                        'content' => '',
+                        'content' => $menu[1],
                         'callback' => array($this, 'show_content')
                         ));
                 }
@@ -117,8 +121,12 @@ class skel__skel
         }
     }
     
+    /**
+     * Call back for custom scenarios on the help tab
+     * @param WP_Screen $screen The screen object for the current page
+     * @param array $tab An array containing the current help tab selected
+     */
     function show_content($screen, $tab) {
-        echo "<pre>"; var_dump($tab); echo "</pre>";
     }
     
     /**
