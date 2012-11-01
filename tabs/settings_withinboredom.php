@@ -28,7 +28,6 @@ class tabs__settings_withinboredom
         
         ?>
         
-        <H1> BETA -- Do not use on a production site </H1>
         <form method="post" action="">
         <div id="poststuff" class="metabox-holder">
         <div class="meta-box-sortables">

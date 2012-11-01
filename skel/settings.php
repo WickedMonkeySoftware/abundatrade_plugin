@@ -27,7 +27,7 @@ class skel__settings
      * The url to send the user to for a thanks!
      * @var string $thankyou_page The url to send the user to on submit
      */
-    public $thankyou_page;
+    public $Thank_you_page;
     
     /**
      * The version of this code
