@@ -131,7 +131,7 @@ function new_session(this_link) {
         });
     request.done(function (data) { });
     request.fail(function (jqXHR, textStatus, errorThrown) {
-        alert("Request failed: " + textStatus + " - " + errorThrown);
+        //alert("Request failed: " + textStatus + " - " + errorThrown);
         please_wait(false);
     });
 }
