@@ -566,7 +566,7 @@ function submit_modal(callback_to_submit, final_display) {
 
                             lname = message.children('#referrals');
 
-                            if (val['ddlReferrals'] == '-1') {
+                            if (val['hvReferral'] == '-1') {
                                 jQuery('#referrals').css("border", "solid #ff0000 2px");
                                 return false;
                             }
@@ -593,7 +593,7 @@ function submit_modal(callback_to_submit, final_display) {
                         }
                     },
                     html: 'How did you hear about us?<div class="field">' +
-                    '<select id="referrals" name="ddlReferrals">' +
+                    '<select id="referrals" name="hvReferral">' +
                     '<option value="-1" selected>Please select one.</option>' +
                     '<option value="0">Abundatrade Email</option>' +
                     '<option value="1">Amazon or other marketplace</option>' +
@@ -610,7 +610,7 @@ function submit_modal(callback_to_submit, final_display) {
                     '<option value="12">Blog</option>' +
                     '<option value="13">Youtube Video</option>' +
                     '<option value="14">Other</option></select></div>' +
-                    '<div id="other" style="display: none"><label for="Other">Please tell us where you heard about us:</label><br/><div class="field"><input type="text" name="Other" value="" placeholder="How you found out about us"/></div></div>' +
+                    '<div id="other" style="display: none"><label for="Other">Please tell us where you heard about us:</label><br/><div class="field"><input type="text" name="txtOther" value="" /></div></div>' +
                     '<script type="text/javascript">jQuery("#referrals").change(function() { if(jQuery("#referrals").val() == 14) { jQuery("#other").slideDown("slow"); } else { jQuery("#other").slideUp("slow"); } } );</script>' +
                     '<label for="promo_code">Promo Code</label><input type="text" name="promo_code" value=""/><br/><br/>' +
                     '<label for="phone_request">Would you like a scanning app for your smart phone?</label><br/>' +
