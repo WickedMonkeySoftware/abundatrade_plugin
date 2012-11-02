@@ -62,7 +62,7 @@ Please use the forums on the plugin pages
 
 == Changelog ==
 
-= v1.02 (November 2, 2012) =
+= v1.0.2 (November 2, 2012) =
 
 * Fixed a javascript error on list submission
 * Fixed a referral issue
