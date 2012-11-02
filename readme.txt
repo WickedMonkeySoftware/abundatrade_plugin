@@ -62,6 +62,11 @@ Please use the forums on the plugin pages
 
 == Changelog ==
 
+= v1.02 (November 2, 2012) =
+
+* Fixed a javascript error on list submission
+* Fixed a referral issue
+
 = v1.0 (November 1, 2012) =
 
 * Welcome out of beta!
