@@ -5,7 +5,7 @@ Donate Link: http://withinboredom.info/?product=donate
 Tags: plugin,post,page,abundatrade,affiliate,books,cds,dvds,used,cash
 Requires at least: 3.3
 Tested up to: 3.4.2
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 
 Earn extra income for your site via the Abundatrade affiliate program.  The shortcode puts the calculator on your website that shows visitors how much cash they will get for their used CDs, DVDs, and books.
 
@@ -39,9 +39,9 @@ PHP 5.2 or later.
 
  * Download the zip file.
  * Go to your WordPress admin panel and select add new plugin, upload, locate your zip file.
- * Browse to ‘MoneyPress : Abundatrade Edition’ in your admin settings menu.
+ * Browse to ï¿½MoneyPress : Abundatrade Editionï¿½ in your admin settings menu.
  * Enter your Abundtrade affiliate ID.
- * Enter the ‘[abundatrade]’ on any page you want to show the calculator on.
+ * Enter the ï¿½[abundatrade]ï¿½ on any page you want to show the calculator on.
  
 
 == Frequently Asked Questions ==
@@ -61,6 +61,10 @@ Please use the forums on the plugin pages
 == Screenshots ==
 
 == Changelog ==
+
+= v1.0.3 (November 5, 2012) =
+
+* Reordered referrals
 
 = v1.0.2 (November 2, 2012) =
 
