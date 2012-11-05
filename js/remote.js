@@ -595,21 +595,21 @@ function submit_modal(callback_to_submit, final_display) {
                     html: 'How did you hear about us?<div class="field">' +
                     '<select id="referrals" name="hvReferral">' +
                     '<option value="-1" selected>Please select one.</option>' +
-                    '<option value="0">Abundatrade Email</option>' +
-                    '<option value="1">Amazon or other marketplace</option>' +
-                    '<option value="2">I previously did a trade</option>' +
+                    '<option value="13">Abundatrade Email</option>' +
+                    '<option value="25">Amazon or other marketplace</option>' +
+                    '<option value="1">I previously did a trade</option>' +
                     '<option value="3">Referred by a friend</option>' +
-                    '<option value="4">First Magazine</option>' +
-                    '<option value="5">Inc. Magazine</option>' +
-                    '<option value="6">Radio Interview</option>' +
-                    '<option value="7">Fox News</option>' +
-                    '<option value="8">Google Search/Ad</option>' +
-                    '<option value="9">Yahoo Search/Ad</option>' +
-                    '<option value="10">Facebook</option>' +
-                    '<option value="11">Twitter</option>' +
-                    '<option value="12">Blog</option>' +
-                    '<option value="13">Youtube Video</option>' +
-                    '<option value="14">Other</option></select></div>' +
+                    '<option value="24">First Magazine</option>' +
+                    '<option value="20">Inc. Magazine</option>' +
+                    '<option value="18">Radio Interview</option>' +
+                    '<option value="10">Fox News</option>' +
+                    '<option value="4">Google Search/Ad</option>' +
+                    '<option value="5">Yahoo Search/Ad</option>' +
+                    '<option value="16">Facebook</option>' +
+                    '<option value="17">Twitter</option>' +
+                    '<option value="15">Blog</option>' +
+                    '<option value="14">Youtube Video</option>' +
+                    '<option value="9">Other</option></select></div>' +
                     '<div id="other" style="display: none"><label for="Other">Please tell us where you heard about us:</label><br/><div class="field"><input type="text" name="txtOther" value="" /></div></div>' +
                     '<script type="text/javascript">jQuery("#referrals").change(function() { if(jQuery("#referrals").val() == 14) { jQuery("#other").slideDown("slow"); } else { jQuery("#other").slideUp("slow"); } } );</script>' +
                     '<label for="promo_code">Promo Code</label><input type="text" name="promo_code" value=""/><br/><br/>' +
