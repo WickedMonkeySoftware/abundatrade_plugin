@@ -236,8 +236,7 @@ function display_bulk_upload(display_prompt, id) {
         var request = jQuery.ajax(
             {
                 type: 'POST',
-                url: 'http://' + abundacalc.server + '/trade/process/request.php',
-                data: "action=get_status&id=" + id,
+                url: 'http://' + abundacalc.server + '/trade/process/request.php?action=get_status&id='+id,
                 dataType: 'jsonp'
             });
 
