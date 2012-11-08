@@ -435,10 +435,10 @@ function lookup_item(obj) {
 
             serial = jQuery("#abundaInput").serialize();
 
-            item = jQuery('#product_code').val();
+            item_code = jQuery('#product_code').val();
             //Remove_Item(item);
 
-            waitFor(item);
+            waitFor(item_code);
 
             var request = jQuery.ajax(
                 {
@@ -449,7 +449,7 @@ function lookup_item(obj) {
                 });
 
             request.done(function (data) {
-                Remove_Item(item);
+                Remove_Item(item_code);
                 data.row = jQuery.parseJSON(data.row);
                 build_row(data);
                 lastItem = data;
