@@ -155,7 +155,7 @@ class abundatrade_withinboredom {
     }
     
     public function addScripts() {
-        wp_register_style("abundatrade_classic", $this->folders['PluginUrl'] . '/themes/classic.css');
+        wp_register_style("abundatrade_classic", $this->folders['PluginUrl'] . '/themes/' . $this->settings->Theme . '.css');
         wp_register_script("abundatrade_remote", $this->folders['PluginUrl'] . '/js/remote.js', array('jquery'));
         wp_register_script("abundatrade_impromptu", $this->folders['PluginUrl'] . '/js/jquery-impromptu.4.0.min.js', array('jquery'));
         
