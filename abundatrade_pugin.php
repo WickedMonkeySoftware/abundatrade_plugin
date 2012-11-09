@@ -210,6 +210,7 @@ class abundatrade_withinboredom {
     
     /**
      * Builds a list of folders for later distribution so we can find ourselves
+     * call with apply_filters("abundatrade(getFolders", array());
      */
     private function BuildFolderList() {
         $config = $this->applyConfig(array());

@@ -30,9 +30,15 @@ class skel__settings
     public $Thank_you_page;
     
     /**
+     * The Theme to load
+     * @var string $Theme The theme to load for the calcualator
+     */
+    public $Theme;
+    
+    /**
      * The version of this code
      */
-    private $coded_version = "0.7";
+    private $coded_version = "1.1";
     
     /**
      * Loads default options or gets them from the db if they already exist
@@ -43,7 +49,8 @@ class skel__settings
         $default = array_merge($default, array(
                     "version" => "0.0",
                     "Affiliate_ID" => "ABU-1338563844",
-                    "Thank_you_page" => "http://abundatrade.com/trade/thank-you.php?a=abundatrade"
+                    "Thank_you_page" => "http://abundatrade.com/trade/thank-you.php?a=abundatrade",
+                    "Theme" => "classic"
                 ));
         
         if (get_option("skel_abundatrade_options", false) === false) {
@@ -91,6 +98,8 @@ class skel__settings
             case "0.2":
                 // from this version ... slightly confused
                 break;
+            case "0.6":
+                // from before the theme
             default:
                 // from an unknown version ... 
                 break;
@@ -128,11 +137,37 @@ class skel__settings
         if (is_array($inputs)) {
             foreach($inputs as $input) {
                 echo "<p>" . $input['name'] . ": ";
-                echo "<input ";
-                foreach ($input as $part => $value) {
-                    echo $part . "=\"" . $value . "\"";
+                $type = $input['type'];
+                
+                switch ($type) {
+                    case 'select':
+                        $options = $input['options'];
+                        unset($input['options']);
+                        
+                        $selected = $input['value'];
+                        unset($input['value']);
+                        
+                        echo "<select ";
+                        foreach ($input as $part => $value) {
+                            echo $part . "=\"" . $value . "\" ";
+                        }
+                        echo ">";
+                        
+                        foreach ($options as $option) {
+                            echo "<option value=\"$option\" " . ($option == $selected ? "selected" : "") . ">$option</option>";
+                        }
+                        
+                        echo "</select>";
+                        
+                        break;
+                    default:
+                        echo "<input ";
+                        foreach ($input as $part => $value) {
+                            echo $part . "=\"" . $value . "\"";
+                        }
+                        echo " /></p>";
+                        break;
                 }
-                echo " /></p>";
             }
         }
         ?>

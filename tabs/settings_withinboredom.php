@@ -59,6 +59,13 @@ class tabs__settings_withinboredom
                     'name'  => 'Thank you page',
                     'id'    => 'Thank_you_page',
                     'value' => $settings->Thank_you_page
+                ),
+            'Theme' => array(
+                    'type'  => 'select',
+                    'name'  => 'Theme',
+                    'id'    => 'Theme',
+                    'value' => $settings->Theme,
+                    'options' => $this->getFileList('themes', '.css', true)
                 )
             ));
         ?>
@@ -67,5 +74,30 @@ class tabs__settings_withinboredom
         <input type="submit" class="button-primary" value="Save Changes" />
         </form>
         <?php
+    }
+    
+    /**
+     * Returns a list of files with a given extension
+     * @param string $dir The subdirectory to search 
+     * @param string $ext The extension to search for
+     * @param boolean $remove_ext Whether to remove the extension
+     */
+    function getFileList($dir, $ext, $remove_ext) {
+        $folders = apply_filters("abundatrade(getFolders)", array());
+        $files = scandir($folders['PluginDir'] . '/' . $dir);
+        $ret = array();
+        foreach ($files as $file) {
+            $pos = strpos($file, $ext);
+            if ($pos !== false) {
+                if ($remove_ext) {
+                    $ret[] = substr($file, $start, $pos);
+                }
+                else {
+                    $ret[] = $file;
+                }
+            }
+        }
+        
+        return $ret;
     }
 }
