@@ -194,6 +194,10 @@ function bulk_close_window() {
     load_previous_session(false);
 }
 
+function login(user, pass) {
+    
+}
+
 /** Gets the rows for the bulk upload bin */
 function rows() {
     var lines;
