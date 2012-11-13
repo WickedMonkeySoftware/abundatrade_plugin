@@ -102,7 +102,9 @@ function get_login_status() {
     request.done(function(data) {
         if (data.status) {
             jQuery('#login_status_abundatrade').get(0).innerHTML = "Hello " + data.first_name + " " + data.last_name + " <em><a onclick=\"abundatrade_logout()\">logout</a></em>";
-            loggedIn = true;
+            if (data.first_name == 'Super Cow')
+                loggedIn = false;
+            else loggedIn = true;
         }
         else {
             jQuery('#login_status_abundatrade').get(0).innerHTML = "<em><a onclick=\"abundatrade_login()\">Login/Register</a></em>";
