@@ -168,7 +168,7 @@ class abundatrade_withinboredom {
         wp_enqueue_script("abundatrade_md5");
         wp_enqueue_script("abundatrade_remote");
         wp_enqueue_script("abundatrade_impromptu");
-        $abundacalc = array('server' => 'dev.abundatrade.com', 
+        $abundacalc = array('server' => 'abundatrade.com', 
             'url' => $this->folders['PluginUrl'], 
             'thanks' => $this->settings->Thank_you_page);
         if (isset($_REQUEST['upload_id']) && $_REQUEST['upload_id'] != '') {
