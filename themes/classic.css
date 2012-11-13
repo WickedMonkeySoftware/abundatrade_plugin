@@ -52,6 +52,8 @@
 	float:left;
 	width:99%;
 	margin-bottom: 5px;
+    margin-top: 5px;
+    padding: 3px;
 	text-align: center;
 	-moz-border-radius: 20px;
     -webkit-border-radius: 20px;
@@ -95,6 +97,13 @@
     -khtml-border-radius: 10px;
     border-radius: 10px;
     float:left;
+}
+
+.abundatrade_error {
+    
+    color: red;
+    font-weight: bold;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
 }
 
 #bulk_close
