@@ -70,6 +70,47 @@ function validateEmail(email, confirm) {
     else return 'nomatch';
 }
 
+function abundatrade_logout() {
+    var request = jQuery.ajax({
+        type: 'POST',
+        url: 'http://' + abundacalc.server + '/trade/process/user/logout/',
+        dataType: 'jsonp'
+    });
+    request.done(function(data) {
+        get_login_status();
+    });
+}
+
+var just_logging_in = false;
+
+function abundatrade_login() {
+    just_logging_in = true;
+    submit_modal(null, null);
+}
+
+var loggedIn = false;
+
+function get_login_status() {
+    jQuery("#login_status_abundatrade").get(0).innerHTML = "<img src='" + abundacalc.url + "/images/spinner.gif'>";
+    var request = jQuery.ajax(
+        {
+            type: 'POST',
+            url: 'http://' + abundacalc.server + '/trade/process/user/status/',
+            dataType: 'jsonp'
+        }
+    );
+    request.done(function(data) {
+        if (data.status) {
+            jQuery('#login_status_abundatrade').get(0).innerHTML = "Hello " + data.first_name + " " + data.last_name + " <em><a onclick=\"abundatrade_logout()\">logout</a></em>";
+            loggedIn = true;
+        }
+        else {
+            jQuery('#login_status_abundatrade').get(0).innerHTML = "<em><a onclick=\"abundatrade_login()\">Login/Register</a></em>";
+            loggedIn = false;
+        }
+    })
+}
+
 /*
 * function: clear_session()
 *
@@ -192,10 +233,6 @@ function bulk_close_window() {
     jQuery("#abundaCalcTbl").delay(100).fadeIn(400);
     jQuery("#bulk_button").slideDown(1000);
     load_previous_session(false);
-}
-
-function login(user, pass) {
-    
 }
 
 /** Gets the rows for the bulk upload bin */
@@ -511,25 +548,147 @@ function please_wait(UILocked) {
 /** A regular submission final page */
 var regular_display = "<center><p>Sending your trade request and locking in your quote!<br/><span style='font-size:xx-small;'>Give our pecking pigeons a second</span></p></center><center><img src='" + abundacalc.url + "/images/spinner.gif'/></center>";
 
+function displayLogin() {
+    if (!loggedIn) {
+        return '<label for="user">Email Address:</label><br/><input type="text" id="abundatrade_user" name="abundatrade_user" value="" /><br/>'+
+            '<label for="password">Password:</label><br/><input type="password" name="abundatrade_password" id="abundatrade_password" value=""/><br/>'+
+            '<div style="display:none" id="logging_on"><img src="'+abundacalc.url+'/images/spinner.gif">Logging in -- please wait</div><span id="login_error" class="abundatrade_error" style="display:none;">Invalid Password/Email</span><br/>'+
+            '<label for="remember">Remember me?</label><input type="checkbox" name="remember" id="remember"/>';
+    }
+    return '<p>Welcome back!</p>';
+}
+
+function displayLoginButtons() {
+    if (loggedIn) {
+        return {Cancel: 0, 'Ready to submit': 1};
+    }
+    else {
+        return {Cancel: 0, Login: -1, Register: 1};
+    }
+}
+
+function checkpass() {
+    orig = jQuery("#password").val();
+    conf = jQuery("#confirmPass").val();
+    if (orig.length < 8) {
+        jQuery("#shortpass").show();
+        return;
+    }
+    else {
+        jQuery("#shortpass").hide();
+    }
+    
+    if (conf.length == 0) {
+        return;
+    }
+    else if (orig != conf){
+        jQuery("#badpass").show();
+        jQuery("#goodpass").hide();
+    }
+    else {
+        jQuery("#goodpass").show().delay(2000).fadeOut();
+        jQuery("#badpass").hide();
+    }
+}
+
+function checkemail() {
+    jQuery("#researching").fadeIn();
+    request = jQuery.ajax({
+       url: "http://" + abundacalc.server + "/trade/process/user/create/",
+       dataType: "jsonp",
+       data: "email="+jQuery("#email_abundatrade").val()
+    });
+    request.done(function(data) {
+       jQuery("#researching").hide();
+       if (data.error != "invalid request") {
+           jQuery("#bademail").show();
+       }
+       else {
+           jQuery("#bademail").hide();
+       }
+    });
+}
+
+function processLogin(ev, but, message, val) {
+    if (loggedIn) {
+        if (but == 0) {
+            return 0;
+        }
+        if (but == 1) {
+            jQuery.prompt.goToState('state5');
+            return false;
+        }
+    }
+    else {
+        if (but == 0)
+            return 0;
+        if (but == 1) {
+            jQuery.prompt.goToState('state1');
+        }
+        if (but == -1) {
+            jQuery("#logging_on").fadeIn();
+            request = jQuery.ajax({
+                url: 'http://' + abundacalc.server + '/trade/process/user/login/',
+                dataType: 'jsonp',
+                data: 'user='+jQuery('#abundatrade_user').val()+'&password='+jQuery("#abundatrade_password").val()+"&remember="+jQuery("#remember").is(":checked")
+            });
+            request.done(function(data) {
+                if (data.error) {
+                    jQuery("#logging_on").fadeOut();
+                    jQuery("#login_error").delay(800).show();
+                }
+                else {
+                    jQuery("#login_error").hide();
+                    if (just_logging_in) {
+                        get_login_status();
+                        just_logging_in = false;
+                        jQuery.prompt.close();
+                    } else {
+                        jQuery.prompt.goToState('state5');
+                    }
+                }
+            });
+        }
+        
+        return false;
+    }
+}
+
 /** Submit a list */
 function submit_modal(callback_to_submit, final_display) {
-    var state = 0;
+    var state = 1;
 
     var states =
             {
                 state0: {
-                    html: '<label for="first_name">First Name:</label><br/><input type="text" id="name_first" name="first_name" value=""/><br/>' +
-                    '<label for="last_name">Last Name:</label><br/><input type="text" id="name_last" name="last_name" value=""/><br/>' +
-                    '<label for="email">Email:</label><br/><input name="email" value="" type="text" /><br/>' +
-                    '<label for="confirm_email">Confirm Email:</label><br/><input name="confirm_email" type="text" value=""/>' +
-                    '<input type="hidden" name="a" value="' + jQuery('#a').val() + '"/>',
+                    html: displayLogin(),
+                    buttons: displayLoginButtons(),
+                    focus: 1,
+                    submit: processLogin
+                },
+                state1: {
+                    html: '<select id="sex" name="sex">' +
+                        '<option value="-1" selected>Please select one.</option>' +
+                        '<option value="Mr.">Mr.</option>'+
+                        '<option value="Mrs.">Mrs.</option>'+
+                        '<option value="Ms.">Ms.</option></select><br/>'+
+                        '<label for="first_name">First Name:</label><br/><input type="text" id="name_first" name="first_name" value=""/><br/>' +
+                        '<label for="last_name">Last Name:</label><br/><input type="text" id="name_last" name="last_name" value=""/><br/>' +
+                        '<label for="email_abundatrade">Email:</label><br/><input onchange="checkemail()" id="email_abundatrade" name="email" value="" type="text" /><img id="researching" src="'+abundacalc.url+'/images/spinner.gif" style="display:none"><span style="display:none" id="bademail">This email is already registered</span><br/>' +
+                        '<label for="confirm_email">Confirm Email:</label><br/><input name="confirm_email" type="text" value=""/>' +
+                        '<input type="hidden" name="a" value="' + jQuery('#a').val() + '"/>',
                     buttons: { Cancel: 0, Next: 1 },
                     focus: 1,
                     submit: function (ev, but, message, val) {
                         fname = message.children('#name_first');
                         lname = message.children('#name_last');
+                        sexm = message.children('#sex');
 
                         if (but != 0) {
+                            if (val['sex'] == -1) {
+                                sexm.css("border", "solid #ff0000 2px");
+                                return false;
+                            }
                             if (val['first_name'] == '') {
                                 fname.css("border", "solid #ff0000 2px");
                                 return false;
@@ -562,7 +721,56 @@ function submit_modal(callback_to_submit, final_display) {
                         }
                     }
                 },
-                state1: {
+                state2: {
+                    html: '<label for="password">Password:</label><br/><input type="password" id="password" name="password" /><span style="display:none" id="shortpass">Must be at least 8 characters</span><br/>'+
+                        '<label for="confirmPass">Confirm Password:</label><br/><input type="password" id="confirmPass" name="confirmPass"/><span id="goodpass" style="display:none" >Matches!</span><span id="badpass" style="display:none" >Does not match!</span></br>' +
+                        '<label for="address_street">Street Address:</label><br/><input type="text" id="address_street" name="address_street" /><br/>'+
+                        '<label for="address_city">City:</label><br/><input type="text" id="address_city" name="address_city"/><br/>'+
+                        '<label for="address_state">State:</label><br/><input type="text" id="address_state" name="address_state"/><br/>'+
+                        '<label for="address_zip">Zip:</label><br/><input type="text" id="address_zip" name="address_zip"/><br/>'+
+                        '<script type="text/javascript">jQuery("#password").keyup(checkpass); jQuery("#confirmPass").keyup(checkpass);</script>',
+                    buttons: {Back: -1,Cancel:0, Next: 1},
+                    submit: function (ev, but, message, val) {
+                        if (but != 0) {
+                            pass = message.children('password');
+                            conf = message.children('confirmPass');
+                            if (val['password'] != val['confirmPass']) {
+                                jQuery('#password').css("border", "solid #ff0000 2px");
+                                jQuery('#confirmPass').css("border", "solid #ff0000 2px");
+                                jQuery('#badpass').show();
+                                return false;
+                            }
+                            if (val['password'].length < 8) {
+                                jQuery("#password").css("border", "solid #ff0000 2px");
+                                jQuery("#shortpass").show();
+                                return false;
+                            }
+                            if (val['address_zip'] == '') {
+                                jQuery("#address_zip").css("border", "solid #ff0000 2px");
+                                return false;
+                            }
+                            if (val['address_state'] == '') {
+                                jQuery("#address_state").css("border", "solid #ff0000 2px");
+                                return false;
+                            }
+                            if (val['address_city'] == '') {
+                                jQuery("#address_city").css("border", "solid #ff0000 2px");
+                                return false;
+                            }
+                            if (val['address_street'] == '') {
+                                jQuery("#address_street").css("border", "solid #ff0000 2px");
+                                return false;
+                            }
+                            
+                            state+= but;
+                            jQuery.prompt.goToState('state' + state);
+                            return false;
+                        }
+                        
+                        jQuery.prompt.close();
+                    }
+                },
+                state3: {
                     buttons: { Back: -1, Cancel: 0, Next: 1 },
                     focus: 2,
                     submit: function (ev, but, message, val) {
@@ -589,7 +797,29 @@ function submit_modal(callback_to_submit, final_display) {
                                     state += but;
                                 }
                             }
-                            jQuery.prompt.goToState('state' + state);
+                            if (state == 5 && just_logging_in) {
+                                jQuery.each(val, function (i, obj) {
+                                    str += '&' + i + '=' + obj;
+                                });
+
+                                request = jQuery.ajax(
+                                                        {
+                                                            type: 'POST',
+                                                            url: 'http://' + abundacalc.server + '/trade/process/user/create/',
+                                                            data: '?action=create_user' + str,
+                                                            dataType: 'jsonp'
+                                                        });
+                                request.done(function(data) {
+                                        get_login_status();
+                                        just_logging_in = false;
+                                        jQuery.prompt.close();
+                                        
+                                });
+
+                            }
+                            else {
+                                jQuery.prompt.goToState('state' + state);
+                            }
                             return false;
                         }
                         else {
@@ -614,15 +844,27 @@ function submit_modal(callback_to_submit, final_display) {
                     '<option value="15">Blog</option>' +
                     '<option value="14">Youtube Video</option>' +
                     '<option value="9">Other</option></select></div>' +
+                    '<div id="friend" style="display: none"><label for="referred">Enter the email address of your friend</label><br/><input type="text" name="referred" id="referred"/></div>'+
                     '<div id="other" style="display: none"><label for="Other">Please tell us where you heard about us:</label><br/><div class="field"><input type="text" name="txtOther" value="" /></div></div>' +
-                    '<script type="text/javascript">jQuery("#referrals").change(function() { if(jQuery("#referrals").val() == 14) { jQuery("#other").slideDown("slow"); } else { jQuery("#other").slideUp("slow"); } } );</script>' +
+                    '<script type="text/javascript">jQuery("#referrals").change(function() { \n\
+                        if(jQuery("#referrals").val() == 9) {\n\
+                         jQuery("#other").slideDown("slow"); \n\
+                         jQuery("#friend").slideUp("slow");\n\
+                        } else if (jQuery("#referrals").val() == 3) {\n\
+                         jQuery("#friend").slideDown("slow");\n\
+                         jQuery("#other").slideUp("slow");\n\
+                        } else { \n\
+                         jQuery("#other").slideUp("slow"); \n\
+                         jQuery("#friend").slideUp("slow");\n\
+                        } \n\
+                    } );</script>' +
                     '<label for="promo_code">Promo Code</label><input type="text" name="promo_code" value=""/><br/><br/>' +
                     '<label for="phone_request">Would you like a scanning app for your smart phone?</label><br/>' +
                     '<label for="scanner_yes">Yes Please: </label> <input checked="true" type="checkbox" name="phone_request"/><br/><br/>' +
                     '<label for="newsletter">Would you like to get the newsletter?</label><br/>' +
                     '<label for="newsletter_yes">Yes Please: </label><input checked="true" type="checkbox" name="newsletter"/><br/>'
                 },
-                state2: {
+                state4: {
                     html: '<label for="phone_type">What kind of phone do you have?</label><input type="text" name="phone_type" id="phone_type" value=""/>',
                     buttons: { Back: -1, Cancel: 0, Next: 1 },
                     focus: 2,
@@ -639,7 +881,30 @@ function submit_modal(callback_to_submit, final_display) {
                             }
 
                             state += but;
-                            jQuery.prompt.goToState('state' + state);
+                            if (state == 5 && just_logging_in) {
+                                jQuery.each(val, function (i, obj) {
+                                    str += '&' + i + '=' + obj;
+                                });
+
+                                request = jQuery.ajax(
+                                                        {
+                                                            type: 'POST',
+                                                            url: 'http://' + abundacalc.server + '/trade/process/user/create/',
+                                                            data: '?action=create_user' + str,
+                                                            dataType: 'jsonp'
+                                                        });
+                                request.done(function(data) {
+                                        get_login_status();
+                                        just_logging_in = false;
+                                        jQuery.prompt.close();
+                                        
+                                });
+
+                            }
+                            else {
+                                jQuery.prompt.goToState('state' + state);
+                            }
+                            
                             return false;
                         }
                         else {
@@ -647,7 +912,7 @@ function submit_modal(callback_to_submit, final_display) {
                         }
                     }
                 },
-                state3: {
+                state5: {
                     html: '<h2>Please Note</h2><p>The values shown on the calculator are a pre-valuation.</p><p>Item quality needs to be verified for final valuation.</p><p>This valuation is not a commitment.</p><p>All data is kept private.</p>',
                     buttons: [{ title: 'Back', value: -1 }, { title: 'Cancel', value: 0 }, { title: 'Agree and Submit', value: 'submit'}],
                     focus: 2,
@@ -681,7 +946,7 @@ function submit_modal(callback_to_submit, final_display) {
                     buttons: { OK: true },
                     focus: 0,
                     submit: function (v, m, f) {
-                        jQuery.prompt.goToState('state0');
+                        jQuery.prompt.goToState('state1');
                         return false;
                     }
                 },
@@ -690,7 +955,7 @@ function submit_modal(callback_to_submit, final_display) {
                     buttons: { OK: true },
                     focus: 0,
                     submit: function (v, m, f) {
-                        jQuery.prompt.goToState('state0');
+                        jQuery.prompt.goToState('state1');
                         return false;
                     }
                 },
@@ -773,6 +1038,8 @@ jQuery(document).ready(function () {
     if (abundacalc.upload_id) {
         display_bulk_upload(true);
     }
+    
+    get_login_status();
 
     /*
     * Load previous session data from backend.
