@@ -644,6 +644,8 @@ function processLogin(ev, but, message, val) {
                         just_logging_in = false;
                         jQuery.prompt.close();
                     } else {
+                        get_login_status();
+                        loggedIn = true;
                         jQuery.prompt.goToState('state5');
                     }
                 }
@@ -654,9 +656,56 @@ function processLogin(ev, but, message, val) {
     }
 }
 
+function display_promo() {
+    if (loggedIn) {
+        return '<label for="promo_code">Promo Code</label><input type="text" name="promo_code" value=""/><br/><br/>';
+    } else {
+        return 'How did you hear about us?<div class="field">' +
+        '<select id="referrals" name="hvReferral">' +
+        '<option value="-1" selected>Please select one.</option>' +
+        '<option value="13">Abundatrade Email</option>' +
+        '<option value="25">Amazon or other marketplace</option>' +
+        '<option value="1">I previously did a trade</option>' +
+        '<option value="3">Referred by a friend</option>' +
+        '<option value="24">First Magazine</option>' +
+        '<option value="20">Inc. Magazine</option>' +
+        '<option value="18">Radio Interview</option>' +
+        '<option value="10">Fox News</option>' +
+        '<option value="4">Google Search/Ad</option>' +
+        '<option value="5">Yahoo Search/Ad</option>' +
+        '<option value="16">Facebook</option>' +
+        '<option value="17">Twitter</option>' +
+        '<option value="15">Blog</option>' +
+        '<option value="14">Youtube Video</option>' +
+        '<option value="9">Other</option></select></div>' +
+        '<div id="friend" style="display: none"><label for="referred">Enter the email address of your friend</label><br/><input type="text" name="referred" id="referred"/></div>'+
+        '<div id="other" style="display: none"><label for="Other">Please tell us where you heard about us:</label><br/><div class="field"><input type="text" name="txtOther" value="" /></div></div>' +
+        '<script type="text/javascript">'+
+            'jQuery("#referrals").change(function() { '+
+            'if(jQuery("#referrals").val() == 9) {'+
+             'jQuery("#other").slideDown("slow");'+
+             'jQuery("#friend").slideUp("slow");'+
+            '} else if (jQuery("#referrals").val() == 3) {'+
+             'jQuery("#friend").slideDown("slow");'+
+             'jQuery("#other").slideUp("slow");'+
+            '} else { '+
+             'jQuery("#other").slideUp("slow"); '+
+             'jQuery("#friend").slideUp("slow");'+
+            '} '+
+        '} );</script>' +
+        '<label for="promo_code">Promo Code</label><input type="text" name="promo_code" value=""/><br/><br/>' +
+        '<label for="phone_request">Would you like a scanning app for your smart phone?</label><br/>' +
+        '<label for="scanner_yes">Yes Please: </label> <input checked="true" type="checkbox" name="phone_request"/><br/><br/>' +
+        '<label for="newsletter">Would you like to get the newsletter?</label><br/>' +
+        '<label for="newsletter_yes">Yes Please: </label><input checked="true" type="checkbox" name="newsletter"/><br/>';
+    }
+}
+
 /** Submit a list */
 function submit_modal(callback_to_submit, final_display) {
     var state = 1;
+    
+    if (loggedIn) state = 5;
 
     var states =
             {
@@ -826,43 +875,7 @@ function submit_modal(callback_to_submit, final_display) {
                             jQuery.prompt.close();
                         }
                     },
-                    html: 'How did you hear about us?<div class="field">' +
-                    '<select id="referrals" name="hvReferral">' +
-                    '<option value="-1" selected>Please select one.</option>' +
-                    '<option value="13">Abundatrade Email</option>' +
-                    '<option value="25">Amazon or other marketplace</option>' +
-                    '<option value="1">I previously did a trade</option>' +
-                    '<option value="3">Referred by a friend</option>' +
-                    '<option value="24">First Magazine</option>' +
-                    '<option value="20">Inc. Magazine</option>' +
-                    '<option value="18">Radio Interview</option>' +
-                    '<option value="10">Fox News</option>' +
-                    '<option value="4">Google Search/Ad</option>' +
-                    '<option value="5">Yahoo Search/Ad</option>' +
-                    '<option value="16">Facebook</option>' +
-                    '<option value="17">Twitter</option>' +
-                    '<option value="15">Blog</option>' +
-                    '<option value="14">Youtube Video</option>' +
-                    '<option value="9">Other</option></select></div>' +
-                    '<div id="friend" style="display: none"><label for="referred">Enter the email address of your friend</label><br/><input type="text" name="referred" id="referred"/></div>'+
-                    '<div id="other" style="display: none"><label for="Other">Please tell us where you heard about us:</label><br/><div class="field"><input type="text" name="txtOther" value="" /></div></div>' +
-                    '<script type="text/javascript">jQuery("#referrals").change(function() { \n\
-                        if(jQuery("#referrals").val() == 9) {\n\
-                         jQuery("#other").slideDown("slow"); \n\
-                         jQuery("#friend").slideUp("slow");\n\
-                        } else if (jQuery("#referrals").val() == 3) {\n\
-                         jQuery("#friend").slideDown("slow");\n\
-                         jQuery("#other").slideUp("slow");\n\
-                        } else { \n\
-                         jQuery("#other").slideUp("slow"); \n\
-                         jQuery("#friend").slideUp("slow");\n\
-                        } \n\
-                    } );</script>' +
-                    '<label for="promo_code">Promo Code</label><input type="text" name="promo_code" value=""/><br/><br/>' +
-                    '<label for="phone_request">Would you like a scanning app for your smart phone?</label><br/>' +
-                    '<label for="scanner_yes">Yes Please: </label> <input checked="true" type="checkbox" name="phone_request"/><br/><br/>' +
-                    '<label for="newsletter">Would you like to get the newsletter?</label><br/>' +
-                    '<label for="newsletter_yes">Yes Please: </label><input checked="true" type="checkbox" name="newsletter"/><br/>'
+                    html: display_promo()
                 },
                 state4: {
                     html: '<label for="phone_type">What kind of phone do you have?</label><input type="text" name="phone_type" id="phone_type" value=""/>',
@@ -913,7 +926,7 @@ function submit_modal(callback_to_submit, final_display) {
                     }
                 },
                 state5: {
-                    html: '<h2>Please Note</h2><p>The values shown on the calculator are a pre-valuation.</p><p>Item quality needs to be verified for final valuation.</p><p>This valuation is not a commitment.</p><p>All data is kept private.</p>',
+                    html: '<h2>Please Note</h2><p>The values shown on the calculator are a pre-valuation.</p><p>Item quality needs to be verified for final valuation.</p><p>This valuation is not a commitment.</p><p>All data is kept private.</p><label for="promo_code">Promo Code</label><input type="text" name="promo_code" value=""/>',
                     buttons: [{ title: 'Back', value: -1 }, { title: 'Cancel', value: 0 }, { title: 'Agree and Submit', value: 'submit'}],
                     focus: 2,
                     submit: function (ev, but, message, val) {

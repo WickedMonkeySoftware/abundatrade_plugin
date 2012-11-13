@@ -5,7 +5,7 @@ Donate Link: http://withinboredom.info/?product=donate
 Tags: plugin,post,page,abundatrade,affiliate,books,cds,dvds,used,cash
 Requires at least: 3.3
 Tested up to: 3.4.2
-Stable tag: 1.1.1
+Stable tag: 1.2
 
 Earn extra income for your site via the Abundatrade affiliate program.  The shortcode puts the calculator on your website that shows visitors how much cash they will get for their used CDs, DVDs, and books.
 
@@ -61,6 +61,11 @@ Please use the forums on the plugin pages
 == Screenshots ==
 
 == Changelog ==
+
+= v1.2 (November 13, 2012) =
+
+* Changed the layout of the bulk submission
+* Added user support for login/registration and remember me info
 
 = v1.1.1 (November 10, 2012) =
 
