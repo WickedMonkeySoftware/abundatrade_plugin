@@ -557,7 +557,7 @@ function displayLogin() {
         return '<label for="user">Email Address:</label><br/><input type="text" id="abundatrade_user" name="abundatrade_user" value="" /><br/>'+
             '<label for="password">Password:</label><br/><input type="password" name="abundatrade_password" id="abundatrade_password" value=""/><br/>'+
             '<div style="display:none" id="logging_on"><img src="'+abundacalc.url+'/images/spinner.gif">Logging in -- please wait</div><span id="login_error" class="abundatrade_error" style="display:none;">Invalid Password/Email</span><br/>'+
-            '<label for="remember">Remember me?</label><input type="checkbox" name="remember" id="remember"/>'+
+            '<label for="remember">Remember me?</label><input type="checkbox" name="remember" id="remember"/><br/>'+
             '<a href="http://abundatrade.com/trade/user/reset/">Forgot your password?</a>';
     }
     return '<p>Welcome back!</p>';
@@ -568,7 +568,10 @@ function displayLoginButtons() {
         return {Cancel: 0, 'Ready to submit': 1};
     }
     else {
-        return {Cancel: 0, Login: -1, Register: 1};
+        if (just_logging_in) {
+            return {Cancel: 0, Login: -1, Register: 1};
+        }
+        return {Cancel: 0, Login: -1, Register: 1, 'Continue as Guest': 2};
     }
 }
 
@@ -597,21 +600,34 @@ function checkpass() {
 }
 
 function checkemail() {
-    jQuery("#researching").fadeIn();
-    request = jQuery.ajax({
-       url: "http://" + abundacalc.server + "/trade/process/user/create/",
-       dataType: "jsonp",
-       data: "email="+jQuery("#email_abundatrade").val()
-    });
-    request.done(function(data) {
-       jQuery("#researching").hide();
-       if (data.error != "invalid request") {
-           jQuery("#bademail").show();
-       }
-       else {
-           jQuery("#bademail").hide();
-       }
-    });
+    if (!isguest) {
+        jQuery("#researching").fadeIn();
+        request = jQuery.ajax({
+           url: "http://" + abundacalc.server + "/trade/process/user/create/",
+           dataType: "jsonp",
+           data: "email="+jQuery("#email_abundatrade").val()
+        });
+        request.done(function(data) {
+           jQuery("#researching").hide();
+           if (data.error != "invalid request") {
+               jQuery("#bademail").show();
+           }
+           else {
+               jQuery("#bademail").hide();
+           }
+        });
+    }
+}
+
+isguest = false;
+
+function hide_for_guest() {
+    isguest = true;
+    //jQuery("").hide();
+    jQuery("#confirmPass").hide();
+    jQuery("#label_confirm").hide();
+    jQuery("#label_pass").hide();
+    jQuery("#password").hide();
 }
 
 function processLogin(ev, but, message, val) {
@@ -628,6 +644,10 @@ function processLogin(ev, but, message, val) {
         if (but == 0)
             return 0;
         if (but == 1) {
+            jQuery.prompt.goToState('state1');
+        }
+        if (but == 2) {
+            hide_for_guest();
             jQuery.prompt.goToState('state1');
         }
         if (but == -1) {
@@ -650,6 +670,7 @@ function processLogin(ev, but, message, val) {
                         jQuery.prompt.close();
                     } else {
                         get_login_status();
+                        just_logging_in = false;
                         loggedIn = true;
                         jQuery.prompt.goToState('state5');
                     }
@@ -698,7 +719,7 @@ function display_promo() {
              'jQuery("#friend").slideUp("slow");'+
             '} '+
         '} );</script>' +
-        '<label for="promo_code">Promo Code</label><input type="text" name="promo_code" value=""/><br/><br/>' +
+        '' +
         '<label for="phone_request">Would you like a scanning app for your smart phone?</label><br/>' +
         '<label for="scanner_yes">Yes Please: </label> <input checked="true" type="checkbox" name="phone_request"/><br/><br/>' +
         '<label for="newsletter">Would you like to get the newsletter?</label><br/>' +
@@ -776,8 +797,8 @@ function submit_modal(callback_to_submit, final_display) {
                     }
                 },
                 state2: {
-                    html: '<label for="password">Password:</label><br/><input type="password" id="password" name="password" /><span style="display:none" id="shortpass">Must be at least 8 characters</span><br/>'+
-                        '<label for="confirmPass">Confirm Password:</label><br/><input type="password" id="confirmPass" name="confirmPass"/><span id="goodpass" style="display:none" >Matches!</span><span id="badpass" style="display:none" >Does not match!</span></br>' +
+                    html: '<label id="label_pass" for="password">Password:</label><br/><input type="password" id="password" name="password" /><span style="display:none" id="shortpass">Must be at least 8 characters</span><br/>'+
+                        '<label id="label_confirm" for="confirmPass">Confirm Password:</label><br/><input type="password" id="confirmPass" name="confirmPass"/><span id="goodpass" style="display:none" >Matches!</span><span id="badpass" style="display:none" >Does not match!</span></br>' +
                         '<label for="address_street">Street Address:</label><br/><input type="text" id="address_street" name="address_street" /><br/>'+
                         '<label for="address_city">City:</label><br/><input type="text" id="address_city" name="address_city"/><br/>'+
                         '<label for="address_state">State:</label><br/><input type="text" id="address_state" name="address_state"/><br/>'+
@@ -786,18 +807,20 @@ function submit_modal(callback_to_submit, final_display) {
                     buttons: {Back: -1,Cancel:0, Next: 1},
                     submit: function (ev, but, message, val) {
                         if (but != 0) {
-                            pass = message.children('password');
-                            conf = message.children('confirmPass');
-                            if (val['password'] != val['confirmPass']) {
-                                jQuery('#password').css("border", "solid #ff0000 2px");
-                                jQuery('#confirmPass').css("border", "solid #ff0000 2px");
-                                jQuery('#badpass').show();
-                                return false;
-                            }
-                            if (val['password'].length < 8) {
-                                jQuery("#password").css("border", "solid #ff0000 2px");
-                                jQuery("#shortpass").show();
-                                return false;
+                            if (!isguest) {
+                                pass = message.children('password');
+                                conf = message.children('confirmPass');
+                                if (val['password'] != val['confirmPass']) {
+                                    jQuery('#password').css("border", "solid #ff0000 2px");
+                                    jQuery('#confirmPass').css("border", "solid #ff0000 2px");
+                                    jQuery('#badpass').show();
+                                    return false;
+                                }
+                                if (val['password'].length < 8) {
+                                    jQuery("#password").css("border", "solid #ff0000 2px");
+                                    jQuery("#shortpass").show();
+                                    return false;
+                                }
                             }
                             if (val['address_zip'] == '') {
                                 jQuery("#address_zip").css("border", "solid #ff0000 2px");
@@ -957,6 +980,8 @@ function submit_modal(callback_to_submit, final_display) {
                         else {
                             jQuery.prompt.close();
                         }
+                        
+                        isguest = false;
                     }
                 },
                 invalid: {
@@ -1017,6 +1042,10 @@ function submit_my_list(f) {
     jQuery.each(f, function (i, obj) {
         str += '&' + i + '=' + obj;
     });
+    
+    if (isguest) {
+        str += '&guest=true';
+    }
 
     var request = jQuery.ajax(
                             {
