@@ -1051,50 +1051,51 @@ function submit_my_list(f) {
 *
 */
 jQuery(document).ready(function () {
+    if (jQuery("#login_status_abundatrade").val() != null) {
+        if (abundacalc.upload_id) {
+            display_bulk_upload(true);
+        }
 
-    if (abundacalc.upload_id) {
-        display_bulk_upload(true);
+        get_login_status();
+
+        /*
+        * Load previous session data from backend.
+        *
+        */
+        load_previous_session(false);
+
+        /* Form Submit
+        *
+        * Capture the form submit, and just use it to lookup items.
+        *
+        */
+        jQuery('#abundaInput').submit(function () { lookup_item(jQuery('#lookupItem').text()); return false; });
+
+        /* Lookup Item.click()
+        * 
+        * uses Ajax to talk to Abundatrade server.
+        * must use JSONP to allow for cross-site calls and processing
+        * of return data without error.
+        */
+        //jQuery('#lookupItem').on('click', function () { lookup_item(this); return false; });
+
+        /* Submit List.click()
+        * 
+        * uses Ajax to talk to Abundatrade server.
+        * must use JSONP to allow for cross-site calls and processing
+        * of return data without error.
+        */
+        //jQuery('#submitList').on('click', function () { submit_the_list(this); });
+
+
+        /* Delete All.click()
+        * 
+        * uses Ajax to talk to Abundatrade server.
+        * and send the delete all action.
+        */
+        jQuery('#delete_all_top').on('click', function () { clear_session(this); });
+        jQuery('#delete_all_bottom').on('click', function () { clear_session(this); });
     }
-    
-    get_login_status();
-
-    /*
-    * Load previous session data from backend.
-    *
-    */
-    load_previous_session(false);
-
-    /* Form Submit
-    *
-    * Capture the form submit, and just use it to lookup items.
-    *
-    */
-    jQuery('#abundaInput').submit(function () { lookup_item(jQuery('#lookupItem').text()); return false; });
-
-    /* Lookup Item.click()
-    * 
-    * uses Ajax to talk to Abundatrade server.
-    * must use JSONP to allow for cross-site calls and processing
-    * of return data without error.
-    */
-    //jQuery('#lookupItem').on('click', function () { lookup_item(this); return false; });
-
-    /* Submit List.click()
-    * 
-    * uses Ajax to talk to Abundatrade server.
-    * must use JSONP to allow for cross-site calls and processing
-    * of return data without error.
-    */
-    //jQuery('#submitList').on('click', function () { submit_the_list(this); });
-
-
-    /* Delete All.click()
-    * 
-    * uses Ajax to talk to Abundatrade server.
-    * and send the delete all action.
-    */
-    jQuery('#delete_all_top').on('click', function () { clear_session(this); });
-    jQuery('#delete_all_bottom').on('click', function () { clear_session(this); });
 });
 
 /** Builds an unknown row */
