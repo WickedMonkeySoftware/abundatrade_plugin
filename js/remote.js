@@ -557,7 +557,8 @@ function displayLogin() {
         return '<label for="user">Email Address:</label><br/><input type="text" id="abundatrade_user" name="abundatrade_user" value="" /><br/>'+
             '<label for="password">Password:</label><br/><input type="password" name="abundatrade_password" id="abundatrade_password" value=""/><br/>'+
             '<div style="display:none" id="logging_on"><img src="'+abundacalc.url+'/images/spinner.gif">Logging in -- please wait</div><span id="login_error" class="abundatrade_error" style="display:none;">Invalid Password/Email</span><br/>'+
-            '<label for="remember">Remember me?</label><input type="checkbox" name="remember" id="remember"/>';
+            '<label for="remember">Remember me?</label><input type="checkbox" name="remember" id="remember"/>'+
+            '<a href="http://abundatrade.com/trade/user/reset/">Forgot your password?</a>';
     }
     return '<p>Welcome back!</p>';
 }
