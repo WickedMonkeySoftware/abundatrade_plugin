@@ -1,4 +1,9 @@
-﻿/*****************************************************************
+// ==ClosureCompiler==
+// @compilation_level SIMPLE_OPTIMIZATIONS
+// @output_file_name remote.js
+// ==/ClosureCompiler==
+
+/*****************************************************************
 * file: remote.js
 *
 * Abundatrade calculator communication and processing scripts.
@@ -531,22 +536,6 @@ function lookup_item(obj) {
 */
 function please_wait(UILocked) {
 
-    // Wait Mode
-    //
-    if (UILocked) {
-        //jQuery.prompt({ state: { html: "<p>Getting information ...</p>", buttons: {}} });
-        /*jQuery('#abunda_please_wait').show();
-        jQuery('#lookupItem').addClass('disabled');
-        jQuery('#submitList').addClass('disabled');
-        jQuery('#delete_all_top').addClass('disabled');
-        jQuery('#delete_all_bottom').addClass('disabled');
-        jQuery('.delete_this_row').addClass('disabled');*/
-
-        // Go,Go,Go...
-        //
-    } else {
-        //jQuery.prompt.close();
-    }
 }
 
 /** A regular submission final page */
