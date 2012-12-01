@@ -73,7 +73,7 @@ class skel__skel
      */
     private function render_tabs() {
         ?>
-        <div id="icon-MoneyPress_Abundatrade_Edition" class="icon32"><br /></div><h2>Abundatrade Settings</h2>
+        <div id="icon-slp-widget" class="icon32"><br /></div><h2>Store Locator Plus: Widget Pack Settings</h2>
         <div id="navcontainer">
             <ul id="navlist">
                 <?php

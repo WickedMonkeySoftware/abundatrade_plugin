@@ -633,7 +633,7 @@ function processLogin(ev, but, message, val) {
         if (but == 0)
             return 0;
         if (but == 1) {
-            jQuery.prompt.goToState('state1');
+            Register(register_pass(),regular_finish, submit_my_list);
         }
         if (but == 2) {
             hide_for_guest();
@@ -728,7 +728,59 @@ function submit_modal(callback_to_submit, final_display) {
                     html: displayLogin(),
                     buttons: displayLoginButtons(),
                     focus: 1,
-                    submit: processLogin
+                    submit: function (ev, but, message, val) {
+                        if (loggedIn) {
+            if (but == 0) {
+                return 0;
+            }
+            if (but == 1) {
+                jQuery.prompt.goToState('state5');
+                return false;
+            }
+        }
+        else {
+            if (but == 0)
+                return 0;
+            if (but == 1) {
+                
+                Register(register_pass(),final_display, callback_to_submit);
+            }
+            if (but == 2) {
+                Register(register_guest(), final_display, callback_to_submit)
+                
+            }
+            if (but == -1) {
+                jQuery("#logging_on").fadeIn();
+                request = jQuery.ajax({
+                    url: 'http://' + abundacalc.server + '/trade/process/user/login/',
+                    dataType: 'jsonp',
+                    data: 'user='+jQuery('#abundatrade_user').val()+'&password='+jQuery("#abundatrade_password").val()+"&remember="+jQuery("#remember").is(":checked")
+                });
+                request.done(function(data) {
+                    if (data.error) {
+                        jQuery("#logging_on").fadeOut();
+                        jQuery("#login_error").delay(800).show();
+                    }
+                    else {
+                        jQuery("#login_error").hide();
+                        if (just_logging_in) {
+                            get_login_status();
+                            just_logging_in = false;
+                            jQuery.prompt.close();
+                        } else {
+                            get_login_status();
+                            just_logging_in = false;
+                            loggedIn = true;
+                            jQuery.prompt.goToState('state5');
+                        }
+                    }
+                });
+            }
+
+            return false;
+    
+                    }
+                    }
                 },
                 state1: {
                     html: '<select id="sex" name="sex">' +

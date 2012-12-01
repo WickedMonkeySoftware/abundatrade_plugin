@@ -161,13 +161,15 @@ class abundatrade_withinboredom {
     public function addScripts() {
         wp_register_style("abundatrade_classic", $this->folders['PluginUrl'] . '/themes/' . $this->settings->Theme . '.css');
         wp_register_script("abundatrade_md5", $this->folders['PluginUrl'] . '/js/MD5.js');
-        wp_register_script("abundatrade_remote", $this->folders['PluginUrl'] . '/js/remote.min.js', array('jquery','abundatrade_md5'));
+        wp_register_script("abundatrade_remote", $this->folders['PluginUrl'] . '/js/remote.js', array('jquery','abundatrade_md5'));
         wp_register_script("abundatrade_impromptu", $this->folders['PluginUrl'] . '/js/jquery-impromptu.4.0.min.js', array('jquery'));
+        wp_register_script("abundatrade_register", $this->folders['PluginUrl'] . '/js/register.js', array('jquery', 'abundatrade_remote'));
         
         wp_enqueue_style("abundatrade_classic");
         wp_enqueue_script("abundatrade_md5");
         wp_enqueue_script("abundatrade_remote");
         wp_enqueue_script("abundatrade_impromptu");
+        wp_enqueue_script("abundatrade_register");
         $abundacalc = array('server' => 'abundatrade.com', 
             'url' => $this->folders['PluginUrl'], 
             'thanks' => $this->settings->Thank_you_page);
