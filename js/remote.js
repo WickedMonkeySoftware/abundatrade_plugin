@@ -1,6 +1,6 @@
 // ==ClosureCompiler==
 // @compilation_level SIMPLE_OPTIMIZATIONS
-// @output_file_name remote.js
+// @output_file_name remote.min.js
 // ==/ClosureCompiler==
 
 /*****************************************************************
