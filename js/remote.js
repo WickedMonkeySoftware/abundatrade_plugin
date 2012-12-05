@@ -435,7 +435,7 @@ function load_previous_session(pretty) {
 }
 
 /** Compresses duplicates */
-function addDuplicatesToQuantity(inputUPC) {
+function addDuplicatesToQuantity(inputUPC, newupc) {
     var upcs = $$('td.upc');
     var quantities = $$('td.quantity');
     var duplicateQuantity = 0;
@@ -501,6 +501,7 @@ function lookup_item(obj) {
             request.done(function (data) {
                 Remove_Item(item_code);
                 data.row = jQuery.parseJSON(data.row);
+                Remove_Item(data.product_code);
                 build_row(data);
                 lastItem = data;
                 jQuery('#abundaCalcTbl').prepend(data.row_html);
