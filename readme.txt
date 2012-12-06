@@ -62,6 +62,12 @@ Please use the forums on the plugin pages
 
 == Changelog ==
 
+= v1.5 (December 6, 2012) =
+
+* Fixed registration so to be a better user experience
+* Better recognition of products that are the same but using different codes
+* Minified javascript for faster load times
+
 = v1.3 (November 14, 2012) =
 
 * Added guest submissions
