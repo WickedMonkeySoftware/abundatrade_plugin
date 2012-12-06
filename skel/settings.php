@@ -38,7 +38,7 @@ class skel__settings
     /**
      * The version of this code
      */
-    private $coded_version = "1.1";
+    private $coded_version = "1.5";
     
     /**
      * Loads default options or gets them from the db if they already exist
