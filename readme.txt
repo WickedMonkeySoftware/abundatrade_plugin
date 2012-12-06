@@ -67,6 +67,7 @@ Please use the forums on the plugin pages
 * Fixed registration so to be a better user experience
 * Better recognition of products that are the same but using different codes
 * Minified javascript for faster load times
+* Added new themes
 
 = v1.3 (November 14, 2012) =
 
