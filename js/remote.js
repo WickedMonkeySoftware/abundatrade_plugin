@@ -1125,7 +1125,7 @@ function submitGiftCard() {
     var request = jQuery.ajax(
                             {
                                 type: 'GET',
-                                url: 'http://' + abundacalc.server + '/trade/process/createGiftCard.php',
+                                url: 'http://dev.' + abundacalc.server + '/trade/process/createGiftCard.php',
                                 data: 'email=' + email + "&key=" + key,
                                 dataType: 'jsonp'
                             });
