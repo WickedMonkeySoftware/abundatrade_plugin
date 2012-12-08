@@ -1118,6 +1118,33 @@ function submit_my_list(f) {
     });
 }
 
+function submitGiftCard() {
+    jQuery('input[name=Submit]').attr("disabled", "disabled");
+    var email = getParameterByName('email');
+    var key = getParameterByName('key');
+    var request = jQuery.ajax(
+                            {
+                                type: 'GET',
+                                url: 'http://' + abundacalc.server + '/trade/process/createGiftCard.php',
+                                data: 'email=' + email + "&key=" + key,
+                                dataType: 'jsonp'
+                            });
+
+    request.done(function (data) {
+        if (data.success == true) {
+            alert("A $5.00 gift certificate is enroute to you!");
+            return false;
+        }
+        else {
+            return true;
+        }
+    });
+
+    request.fail(function (jqXHR, textStatus, errorThrown) {
+        return true;
+    });
+}
+
 /* 
 * When the document has been loaded...
 *
@@ -1125,6 +1152,7 @@ function submit_my_list(f) {
 jQuery(document).ready(function () {
     if (getParameterByName('act') == 'gift') {
         jQuery('input[name=fields_email]').val(getParameterByName('email'));
+        jQuery('input[name=Submit]').attr('onclick','return submitGiftCard();');
     }
     
     if (jQuery("#login_status_abundatrade").val() != null) {
