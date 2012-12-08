@@ -1123,6 +1123,10 @@ function submit_my_list(f) {
 *
 */
 jQuery(document).ready(function () {
+    if (getParameterByName('act') == 'gift') {
+        jQuery('input[name=fields_email]').val(getParameterByName('email'));
+    }
+    
     if (jQuery("#login_status_abundatrade").val() != null) {
         if (abundacalc.upload_id) {
             display_bulk_upload(true);
@@ -1169,6 +1173,18 @@ jQuery(document).ready(function () {
         jQuery('#delete_all_bottom').on('click', function () { clear_session(this); });
     }
 });
+
+function getParameterByName(name)
+{
+  name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+  var regexS = "[\\?&]" + name + "=([^&#]*)";
+  var regex = new RegExp(regexS);
+  var results = regex.exec(window.location.search);
+  if(results == null)
+    return "";
+  else
+    return decodeURIComponent(results[1].replace(/\+/g, " "));
+}
 
 /** Builds an unknown row */
 function build_unknown(code, quantity, id) {
