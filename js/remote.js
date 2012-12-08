@@ -1118,11 +1118,43 @@ function submit_my_list(f) {
     });
 }
 
+function submitGiftCard() {
+    jQuery('input[name=Submit]').attr("disabled", "disabled");
+    var email = getParameterByName('email');
+    var key = getParameterByName('key');
+    var request = jQuery.ajax(
+                            {
+                                type: 'GET',
+                                url: 'http://' + abundacalc.server + '/trade/process/createGiftCard.php',
+                                data: 'email=' + email + "&key=" + key,
+                                dataType: 'jsonp'
+                            });
+
+    request.done(function (data) {
+        if (data.success == true) {
+            alert("A $5.00 gift certificate is enroute to you!");
+            return false;
+        }
+        else {
+            return true;
+        }
+    });
+
+    request.fail(function (jqXHR, textStatus, errorThrown) {
+        return true;
+    });
+}
+
 /* 
 * When the document has been loaded...
 *
 */
 jQuery(document).ready(function () {
+    if (getParameterByName('act') == 'gift') {
+        jQuery('input[name=fields_email]').val(getParameterByName('email'));
+        jQuery('input[name=Submit]').attr('onclick','return submitGiftCard();');
+    }
+    
     if (jQuery("#login_status_abundatrade").val() != null) {
         if (abundacalc.upload_id) {
             display_bulk_upload(true);
@@ -1169,6 +1201,18 @@ jQuery(document).ready(function () {
         jQuery('#delete_all_bottom').on('click', function () { clear_session(this); });
     }
 });
+
+function getParameterByName(name)
+{
+  name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+  var regexS = "[\\?&]" + name + "=([^&#]*)";
+  var regex = new RegExp(regexS);
+  var results = regex.exec(window.location.search);
+  if(results == null)
+    return "";
+  else
+    return decodeURIComponent(results[1].replace(/\+/g, " "));
+}
 
 /** Builds an unknown row */
 function build_unknown(code, quantity, id) {

@@ -17,8 +17,16 @@ if (!defined("WP_CONTENT_DIR")) exit();
 
 class abundatrade_withinboredom {
     
+    /**
+     *
+     * @var array The active folders
+     */
     private $folders;
     
+    /**
+     *
+     * @var array The settings
+     */
     public $settings;
     
     /**
