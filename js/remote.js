@@ -1123,14 +1123,14 @@ function submitGiftCard() {
     jQuery('input[name=Submit]').attr("value", "Creating your giftcard ... please wait")
     jQuery('input[name="specialid:9573"]').remove();
     jQuery('input[name=listid]').val('48277');
-    jQuery('input[name="specialid:48277"]').val('IE9I');
+    jQuery('form[name=icpsignup] div div div').get(0).innerHTML += "<input type='hidden' name='specialid:48277' value ='IE9I'>"
     jQuery('input[name=formid]').val('3389');
     jQuery('input[name=reallistid]').val('1');
     jQuery('input[name=doubleopt]').val('0');
     var email = getParameterByName('email');
     var key = getParameterByName('key');
     if (jQuery(this).data('submit-me')) {
-        //return true;
+        return true;
     }
     var request = jQuery.ajax(
                             {
