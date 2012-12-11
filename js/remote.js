@@ -1125,7 +1125,7 @@ function submitGiftCard() {
     var key = getParameterByName('key');
     if (jQuery(this).data('submit-me')) {
         console.log("Moving on");
-        return true;
+        return false;
     }
     var request = jQuery.ajax(
                             {
@@ -1136,6 +1136,7 @@ function submitGiftCard() {
                                 context: this,
                                 success: function(data) {
                                     console.log("Got response - resubmitting");
+                                    console.log(data);
                                         jQuery(this).data('submit-me', true).submit();
                                 }
                             });
