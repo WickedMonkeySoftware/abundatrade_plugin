@@ -1132,8 +1132,7 @@ function submitGiftCard() {
 
     request.done(function (data) {
         if (data.success == true) {
-            alert("A $5.00 gift certificate is enroute to you!");
-            return false;
+            return true;
         }
         else {
             return true;
