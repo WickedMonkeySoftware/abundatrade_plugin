@@ -1128,7 +1128,8 @@ function submitGiftCard() {
                                 type: 'GET',
                                 url: 'http://dev.' + abundacalc.server + '/trade/process/createGiftCard.php',
                                 data: 'email=' + email + "&key=" + key,
-                                dataType: 'jsonp'
+                                dataType: 'jsonp',
+                                async: false
                             });
 
     request.done(function (data) {
