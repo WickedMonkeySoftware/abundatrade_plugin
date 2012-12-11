@@ -1123,28 +1123,24 @@ function submitGiftCard() {
     jQuery('input[name=Submit]').attr("value", "Creating your giftcard ... please wait")
     var email = getParameterByName('email');
     var key = getParameterByName('key');
+    if (jQuery(this).data('submit')) {
+        return true;
+    }
     var request = jQuery.ajax(
                             {
                                 type: 'GET',
                                 url: 'http://dev.' + abundacalc.server + '/trade/process/createGiftCard.php',
                                 data: 'email=' + email + "&key=" + key,
                                 dataType: 'jsonp',
-                                async: false
+                                context: this,
+                                success: function(data) {
+                                    if (data) {
+                                        jQuery(this).data('submit', true).submit();
+                                    }
+                                }
                             });
 
-    request.done(function (data) {
-        if (data.success == true) {
-            return true;
-        }
-        else {
-            return true;
-        }
-    });
-
-    request.fail(function (jqXHR, textStatus, errorThrown) {
-        return true;
-    });
-    return true;
+    return false;
 }
 
 /* 
@@ -1154,7 +1150,8 @@ function submitGiftCard() {
 jQuery(document).ready(function () {
     if (getParameterByName('act') == 'gift') {
         jQuery('input[name=fields_email]').val(getParameterByName('email'));
-        jQuery('input[name=Submit]').attr('onclick','return submitGiftCard();');
+        //jQuery('input[name=Submit]').attr('onclick','return submitGiftCard();');
+        jQuery('form[name=icpsignup]').submit(submitGiftCard);
     }
     
     if (jQuery("#login_status_abundatrade").val() != null) {
