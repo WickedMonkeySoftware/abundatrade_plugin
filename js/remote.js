@@ -1125,7 +1125,7 @@ function submitGiftCard() {
     var key = getParameterByName('key');
     if (jQuery(this).data('submit-me')) {
         console.log("Moving on");
-        return false;
+        return true;
     }
     var request = jQuery.ajax(
                             {
