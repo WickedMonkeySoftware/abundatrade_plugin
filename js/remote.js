@@ -1123,7 +1123,8 @@ function submitGiftCard() {
     jQuery('input[name=Submit]').attr("value", "Creating your giftcard ... please wait")
     var email = getParameterByName('email');
     var key = getParameterByName('key');
-    if (jQuery(this).data('submit')) {
+    if (jQuery(this).data('submit-me')) {
+        console.log("Moving on");
         return true;
     }
     var request = jQuery.ajax(
@@ -1134,10 +1135,12 @@ function submitGiftCard() {
                                 dataType: 'jsonp',
                                 context: this,
                                 success: function(data) {
-                                        jQuery(this).data('submit', true).submit();
+                                    console.log("Got response - resubmitting");
+                                        jQuery(this).data('submit-me', true).submit();
                                 }
                             });
 
+    console.log("Waiting...");
     return false;
 }
 
