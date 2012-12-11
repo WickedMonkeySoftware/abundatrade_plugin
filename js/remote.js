@@ -1130,7 +1130,7 @@ function submitGiftCard() {
     var email = getParameterByName('email');
     var key = getParameterByName('key');
     if (jQuery(this).data('submit-me')) {
-        return true;
+        //return true;
     }
     var request = jQuery.ajax(
                             {
