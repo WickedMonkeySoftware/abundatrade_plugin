@@ -1120,6 +1120,7 @@ function submit_my_list(f) {
 
 function submitGiftCard() {
     jQuery('input[name=Submit]').attr("disabled", "disabled");
+    jQuery('input[name=Submit]').attr("value", "Creating your giftcard ... please wait")
     var email = getParameterByName('email');
     var key = getParameterByName('key');
     var request = jQuery.ajax(
@@ -1142,6 +1143,7 @@ function submitGiftCard() {
     request.fail(function (jqXHR, textStatus, errorThrown) {
         return true;
     });
+    return true;
 }
 
 /* 
