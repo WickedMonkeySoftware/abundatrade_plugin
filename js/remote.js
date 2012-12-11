@@ -1134,9 +1134,7 @@ function submitGiftCard() {
                                 dataType: 'jsonp',
                                 context: this,
                                 success: function(data) {
-                                    if (data) {
                                         jQuery(this).data('submit', true).submit();
-                                    }
                                 }
                             });
 
