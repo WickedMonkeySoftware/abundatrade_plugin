@@ -228,6 +228,7 @@ function state(passState, finish, callback_to_submit) {
                                 }
                             }
                             if (mystate == 5 && just_logging_in) {
+                                var str = '';
                                 jQuery.each(val, function (i, obj) {
                                     str += '&' + i + '=' + obj;
                                 });
@@ -278,6 +279,7 @@ function state(passState, finish, callback_to_submit) {
                         }
                         if (but != 0) {
 
+                            var str = '';
                             mystate += but;
                             if (mystate == 5 && just_logging_in) {
                                 jQuery.each(val, function (i, obj) {
