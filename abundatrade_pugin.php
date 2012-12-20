@@ -72,7 +72,7 @@ class abundatrade_withinboredom {
                 $display = '<div id="abundatrade">';
          $top = '<div id="top_input_section" class="calc_content_wrap calc_color1 calcbg1">
 
-  <form id="abundaInput" class="abundaInput" style="margin-top: -22px;" onsubmit="return false;" method="post" >
+  <form id="abundaInput" class="abundaInput" style="margin-top: 6px;" onsubmit="return false;" method="post" >
     <input id="item_num" value="1" name="item_num" type="hidden"/>
     <input id="a" value="' . $this->settings->Affiliate_ID . '" type="hidden"/>
     <div class="input_container">
