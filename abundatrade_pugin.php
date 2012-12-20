@@ -95,8 +95,8 @@ class abundatrade_withinboredom {
     <div class="submit_holder">
       <input class="btn1 right btn_link1 btnbg1" value="+ Add Item" type="submit"/>
     </div>';
-        $bulk_button = '<div id="bulk_button" class="calcbg1"><p class="abunda_text calc_color1">Have a lot of items? <a href="#" onclick="bulk_open();" class="calc_linkS1">Bulk Upload</a></p></div>';
-        $bulk = "<div id=\"bulk\" class=\"calcbg1\"><div id=\"bulk_help\" class='abunda_text calc_color1'>You can cut and paste directly from popular office programs<br/> like Excel and Word.</div><textarea placeholder=\"02454352525998\" cols=20 rows=10 id=\"bulk_upload\" name=\"bulk_upload\"></textarea></p><p><a href='#' class=\"btn1 btnbg1 btn_link1 marleft\" onclick='bulk_close_window();'>Go back</a><a href='#' class=\"btn1 btnbg1 btn_link1 marright\" onclick='bulk_submit_items();'>Submit List</a></p>
+        $bulk_button = '<div id="bulk_button" class="calcbg1"><p class="abunda_text calc_color1">Have a lot of items? <a href="#" onclick="return bulk_open();" class="calc_linkS1">Bulk Upload</a></p></div>';
+        $bulk = "<div id=\"bulk\" class=\"calcbg1\"><div id=\"bulk_help\" class='abunda_text calc_color1'>You can cut and paste directly from popular office programs<br/> like Excel and Word.</div><textarea placeholder=\"02454352525998\" cols=20 rows=10 id=\"bulk_upload\" name=\"bulk_upload\"></textarea></p><p><a href='#' class=\"btn1 btnbg1 btn_link1 marleft\" onclick='return bulk_close_window();'>Go back</a><a href='#' class=\"btn1 btnbg1 btn_link1 marright\" onclick='bulk_submit_items();'>Submit List</a></p>
 	<p class=\"calcbg1 bottomcurve\">&nbsp;</p>
     </div>";
 	$second = '<div id="second_content" class="calc_content_wrap calcbg2 calc_color2">
