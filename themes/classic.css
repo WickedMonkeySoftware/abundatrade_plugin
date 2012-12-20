@@ -1,29 +1,27 @@
-﻿#bar_wrap {
-  border: 1px solid #1C1C1C;
-  background-color: #313131;
-  -webkit-box-shadow: 0 0 1px #666, inset 0 1px 1px #222;
-  -moz-box-shadow: 0 0 1px #666, inset 0 1px 1px #222;
-  -o-box-shadow: 0 0 1px #666, inset 0 1px 1px #222;
-  box-shadow: 0 0 1px #666, inset 0 1px 1px #222;
-  background-image: -webkit-linear-gradient(#323232, #2E2E2E 50%, #323232);
-  background-image: -moz-linear-gradient(#323232, #2E2E2E 50%, #323232);
-  background-image: -o-linear-gradient(#323232, #2E2E2E 50%, #323232);
+/*Default Style for Abundatrade Calculator plugin 12-11-12*/
+
+
+#abundatrade
+{
+    position: relative;
+    display: block;
+    width: 90%;
+    height: auto;
+    margin: auto;
 }
-.bar {
-   
-}
-.captions {
-  color: #FDFDFD;
-  padding: 5px 2px 0;
-  font: 11px/14px sans-serif;
-  text-shadow: 0 1px 0 #000;
-}
+
+
 .left {
   float: left;
 }
+
 .right {
   float: right;
 }
+
+
+#abundatrade a{color: #10A3E8; cursor:pointer;}
+#abundatrade a:hover{text-decoration: underline;}
 
 .calc_content_wrap
 {
@@ -31,136 +29,211 @@
     margin: 0 auto;
     padding: 4px;
     z-index: 1;
-    color: #ffffff;
+    /*color: #ffffff;*/
     text-align: left;
     font-weight: bold;
     font-size: 18px;
     clear: none;
 }
 
+.center{text-align: center !important;}
 
-.orange_bg
-{
-    background: #257A01;
+.txtright{text-align: right !important; padding-right: 8px !important;}
+
+.bottomcurve{
+	clear:both;
+	height:15px;
+	width:100%;
+	-moz-border-radius-bottomright: 10px;	
+	-moz-border-radius-bottomleft: 10px;
+	border-bottom-right-radius: 10px;	
+	border-bottom-left-radius: 10px;
+	-webkit-border-bottom-left-radius:10px; 
+	-webkit-border-bottom-right-radius:10px;
+   	-khtml-border-radius-bottomright: 10px;
+	-khtml-border-radius-bottomleft: 10px;
+        margin-bottom: 0 !important;
 }
-.green_bg
+
+/*********** SECTION 1 **********/
+
+#top_input_section
 {
-    background: #0b5294;
+    margin: 0;
+    float: left;
+    width: 99%;
+    clear: none;
+    -moz-border-radius-topright: 15px;	
+    -moz-border-radius-topleft: 15px;
+    border-top-right-radius: 15px;	
+    border-top-left-radius: 15px;
+    -webkit-border-top-left-radius:15px; 
+    -webkit-border-top-right-radius:15px;
+    -khtml-border-radius-topright: 15px;
+    -khtml-border-radius-topleft: 15px;
+    height: auto;
+    margin-bottom: -15px;
+    padding: 0 4px;
 }
+
+#top_input_section div.input_container
+{
+    clear: none;
+    float: left;
+    height: auto/*45px*/;
+    margin: 0px 5px 0 20px;
+    padding-top: 0px;
+    width: auto;
+}
+
+#top_input_section div.label
+{
+    float: left;
+    margin: 13px 6px 0 0;
+    clear: none;
+}
+
+#top_input_section div.input_container div.product_holder
+{
+    width: 175px;
+    height: 45px;
+    float: left;
+    margin-right: 12px;
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+    display: block;
+    clear: none;
+}
+
+#top_input_section div.product_holder #product_code
+{
+    background: white;
+    border: medium none;
+    height: 30px;
+    margin-left: 16px;
+    margin-top: 4px;
+    width: 150px;
+    z-index: 1;
+    clear: none;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -khtml-border-radius: 50px;
+    border-radius: 50px;
+}
+
+
+#top_input_section div.input_container div.qty_holder
+{
+    width: 80px;
+    height: 45px;
+    float: left;
+    top: 5px;
+    margin-left: 4px;
+    z-index: 1;
+    clear: none;
+}
+
+#top_input_section div.qty_holder #product_qty
+{
+    background: white;
+    border: none;
+    width: 60px;
+    height: 30px;
+    margin-top: 4px;
+    margin-left: 10px;
+    clear: none;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -khtml-border-radius: 50px;
+    border-radius: 50px;
+}
+
+
+#top_input_section div.submit_holder
+{
+    float: right;
+    width: 140px;
+    height: 40px;
+    margin: 0px 10px 15px 5px;
+    padding-top: 5px;
+    clear: none;
+}
+
+
+.btn1{
+	clear: none;
+	font-size: 17px !important;
+	font-weight: bold;
+	margin-left: auto;
+	margin-right: auto;
+	min-width:  130px;/**/
+	padding: 4px 16px;
+	text-align: center;
+	border: 2px solid #fff;
+	cursor: pointer;
+	vertical-align: middle;
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
+	-khtml-border-radius: 20px;
+	border-radius: 20px;
+}
+.btn1:hover {background: transparent; text-decoration: none;}
+
+/*SECTION 1 for Bulk Items*/
 
 #bulk_button {
 	float:left;
 	width:99%;
-	margin-bottom: 5px;
-    margin-top: 5px;
-    padding: 3px;
-	text-align: center;
-	-moz-border-radius: 20px;
-    -webkit-border-radius: 20px;
-    -khtml-border-radius: 20px;
-    border-radius: 20px;
-    vertical-align:middle;
+	margin-bottom: 6px;
+        margin-top: 0px;
+        padding: 0px 4px 8px 4px;
+	text-align: left;
+        -moz-border-radius-bottomright: 10px;	
+	-moz-border-radius-bottomleft: 10px;
+	border-bottom-right-radius: 10px;	
+	border-bottom-left-radius: 10px;
+	-webkit-border-bottom-left-radius:10px; 
+	-webkit-border-bottom-right-radius:10px;
+         vertical-align:middle;
+        height:25px;/**/
 }
 
 .abunda_text {
-	color:White;
-	width:50%;
-	margin-left:auto;
-	margin-right:auto;
-	font-size: medium;
+	width:80%;
+	margin-left:20px;
+	font-size: 15px;
 	font-weight: bold;
 	clear:none;
-	float:left;
-	margin:5px;
 	vertical-align:middle;
-	text-align:right;
-	
+	text-align:left;
 }
 
-#bulk_likea_button 
-{
-    clear:none;
-    color:White;
-    font-size:medium;
-    font-weight:bold;
-    margin-left:auto;
-    margin-right: auto;
-    width:20%;
-    background: green;
-    padding:4px;
-    text-align:center;
-    border:1px solid black;
-    cursor:pointer;
-    vertical-align:middle;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -khtml-border-radius: 10px;
-    border-radius: 10px;
-    float:left;
-}
+.abunda_text a{text-decoration: underline;}
 
 .abundatrade_error {
-    
     color: red;
     font-weight: bold;
     font-family: Verdana,Arial,Helvetica,sans-serif;
 }
 
-#bulk_close
-{
-    clear:none;
-    color:White;
-    font-size:medium;
-    font-weight:bold;
-    width:auto;
-    background: #0b5294;
-    padding:4px;
-    float:left;
-    border:1px solid black;
-    cursor:pointer;
-    float:left;
-    margin:10px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -khtml-border-radius: 10px;
-    border-radius: 10px;
-}
-
-#bulk_submit
-{
-    clear:none;
-    color:White;
-    font-size:medium;
-    font-weight:bold;
-    width:auto;
-    background: #0b5294;
-    padding:4px;
-    float:left;
-    border:1px solid black;
-    cursor:pointer;
-    float:right;
-    margin:10px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -khtml-border-radius: 10px;
-    border-radius: 10px;
-}
 
 #bulk {
 	float:left;
 	width:99%;
-	margin-bottom: 5px;
+	margin-bottom: -20px;
 	text-align: center;
-	-moz-border-radius: 20px;
-    -webkit-border-radius: 20px;
-    -khtml-border-radius: 20px;
-    border-radius: 20px;
-    vertical-align:middle;
-    display:none;
+	-moz-border-radius: 15px;	
+	border-radius: 15px;
+	-webkit-border-radius:15px;
+        -khtml-border-radius: 15px;
+        vertical-align:middle;
+        display:none;
+        padding: 15px 5px;
 }
 
 #bulk pre {
-	color:Black;
+        color: black;
 	width:33%;
 	margin-left:auto;
 	margin-right:auto;
@@ -169,7 +242,7 @@
 
 #bulk_help 
 {
-    width:100%;
+    width:91%;
     text-align: center;
 	
 }
@@ -179,18 +252,30 @@
 	line-height: 20px;
 }
 
+.marleft{float: left; margin: 15px 0 0 15px !important;}
+.marright{float: right; margin: 15px 15px 0 0px !important;}
+
+/*********** SECTION 2 **********/
+
 #second_content
 {
-    margin: 5px 0 0 0;
+    margin: 0px 0 0 0;
     float: left;
     width: 99%;
-    -moz-border-radius: 20px;
-    -webkit-border-radius: 20px;
-    -khtml-border-radius: 20px;
-    border-radius: 20px;
+    -moz-border-radius-topright: 15px;	
+    -moz-border-radius-topleft: 15px;
+    border-top-right-radius: 15px;	
+    border-top-left-radius: 15px;
+    -webkit-border-top-left-radius:15px; 
+    -webkit-border-top-right-radius:15px;
+    -khtml-border-radius-topright: 15px;
+    -khtml-border-radius-topleft: 15px;
+    padding: 0 4px 0 5px;
 }
 
-.second_content_sec1
+#second_content label{font-size:18px;}/*new*/
+
+#second_content .second_content_sec1
 {
     width: 200px;
     margin: 10px 0 0 12px;
@@ -198,10 +283,10 @@
     float: left;
     clear: none;
     font-size: 18px;
-    color: White;
+    display:inline;/*new*/
 }
 
-.second_content_sec2
+#second_content .second_content_sec2
 {
     width: 280px;
     margin-top: 10px;
@@ -209,10 +294,11 @@
     float: left;
     clear: none;
     font-size: 18px;
-    color: White;
+    display:inline;/*new*/
+    
 }
 
-.second_content_sec3
+#second_content .second_content_sec3
 {
     width: 188px;
     margin: 3px 18px 0 0;
@@ -226,13 +312,33 @@
 
 #submitList
 {
-    margin-left: 25px;
-    clear: none;
+   clear: none;
+   font-size: 17px;
+   font-size: 1.0em;
+   font-weight: normal;
+   margin-left: auto;
+   margin-right: auto;
+   padding: 5px 8px;
+   text-align: center;
+   border: 2px solid #fff;
+   cursor: pointer;
+   vertical-align: middle;
+   -moz-border-radius: 20px;
+   -webkit-border-radius: 20px;
+   -khtml-border-radius: 20px;
+   border-radius: 20px;
+   float:right;
 }
+
+#submitList:hover
+{
+	background: transparent !important; text-decoration: none;
+}
+
 
 .second_content_sec1 label
 {
-    width: 120px;
+    width: 110px;
     float: left;
     clear: none;
     margin: 0;
@@ -270,143 +376,67 @@
 
 #abundaInput
 {
-    margin: 0;
-    clear: none;
+   /* margin: 0;
+    clear: none;*/
 }
 
-#top_input_section
-{
-    margin: 0;
-    float: left;
-    width: 99%;
-    clear: none;
-    -moz-border-radius: 20px;
-    -webkit-border-radius: 20px;
-    -khtml-border-radius: 20px;
-    border-radius: 20px;
-}
+/*
+------------------------------
+SECTION 3 & 4 - Table 
+------------------------------
+*/
 
-#top_input_section div.input_container
-{
-    height: 40px;
-    margin: 5px 5px 15px 15px;
-    float: left;
-    padding-top: 11px;
-    clear: none;
-    width: auto;
-}
-
-#abundatrade
-{
-    position: relative;
-    display: block;
-    width: 90%;
-    height: auto;
-    margin: auto;
-}
-
-#top_input_section div.label
-{
-    float: left;
-    margin: 13px 6px 0 0;
-    clear: none;
-}
-
-#top_input_section div.input_container div.product_holder
-{
-    width: 162px;
-    height: 32px;
-    float: left;
-    margin-right: 12px;
-    z-index: 1;
-    margin: 0;
-    padding: 0;
-    display: block;
-    clear: none;
-}
-
-#top_input_section div.product_holder #product_code
-{
-    background: white;
-    border: medium none;
-    height: 32px;
-    margin-left: 16px;
-    margin-top: 7px;
-    width: 140px;
-    z-index: 1;
-    clear: none;
-    -moz-border-radius: 100px;
-    -webkit-border-radius: 100px;
-    -khtml-border-radius: 100px;
-    border-radius: 100px;
-}
-
-
-#top_input_section div.input_container div.qty_holder
-{
-    width: 66px;
-    height: 32px;
-    float: left;
-    top: 5px;
-    margin-left: 6px;
-    z-index: 1;
-    clear: none;
-}
-
-#top_input_section div.qty_holder #product_qty
-{
-    background: white;
-    border: none;
-    width: 60px;
-    height: 32px;
-    margin-top: 7px;
-    margin-left: 10px;
-    clear: none;
-    -moz-border-radius: 100px;
-    -webkit-border-radius: 100px;
-    -khtml-border-radius: 100px;
-    border-radius: 100px;
-}
-
-
-#top_input_section div.submit_holder
-{
-    float: right;
-    width: 140px;
-    height: 40px;
-    margin: 5px 15px 15px 5px;
-    padding-top: 11px;
-    clear: none;
-}
-
-#top_input_section .submit
-{
-    border: none;
-    background: url("../images/additem.jpg") no-repeat;
-    width: 123px;
-    height: 37px;
-    cursor: pointer;
-    margin: 0 12px 0 0;
-    padding: 0;
-    float: right;
-    clear: none;
-}
-
-#top_input_section .submit:hover
-{
-    background: url("../images/additem1.jpg") no-repeat;
-    clear: none;
+#content table {
+    border: 0px solid #E7E7E7;
+    margin: 0 0px 0px 0;
+    text-align: left;
+    width: 100%;
 }
 
 #abundaCalcTbl
 {
     width: 100%;
-    margin-bottom: 18px;
+    /*margin-bottom: 18px;*/
     margin-top: 8px;
     margin-left: 3px;
     clear: none;
     float: left;
 }
+
+/* ---------SECTION 3 - Table Header------------*/
+
+#abundaCalcTbl thead th
+{   
+    height: 35px;    
+    border: 1px solid silver;/**/
+    padding: 6px 3px 2px 3px;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    vertical-align: middle
+}
+
+#abundaCalcTbl thead th.delete
+{
+    text-align: center;
+   border-right:0;
+}
+
+#abundaCalcTbl thead th a:hover
+{
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#abundaCalcTbl thead th a
+{
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* -------Table Body---------- */
 
 #abundaCalcTbl tbody tr
 {
@@ -416,46 +446,49 @@
 .td_image
 {
     float: left;
-    width: 38%;
+    width: 25%;
     height: 98%;
 }
 
 .td_details
 {
-    float: right;
-    width: 60%;
+    float: left;
+    width: 73%;
     height: 98%;
+text-align: left;
 }
 
 #abundaCalcTbl tbody
 {
     max-height: 400px;
+border-left: 1px #CCC solid;
+
 }
 
 #abundaCalcTbl tbody td
 {
     border-right: 1px solid silver;
     border-bottom: 1px solid silver;
-    padding: 3px 2px 2px 3px;
-    color: Black;
+    padding: 3px 8px 2px 6px;
+    color: #333;
     font-size: 14px;
     text-align: center;
-    vertical-align: top;
+    vertical-align: middle;
 }
 
 #abundaCalcTbl tbody td.upc
 {
-    width: 90px;
+    width: 95px;
 }
 
 #abundaCalcTbl tbody td.quantity
 {
-    width: 30px;
+    width: 40px;
 }
 
 #abundaCalcTbl tbody td.item
 {
-    width: 80px;
+    width: 95px;text-align: right;
 }
 
 #abundaCalcTbl tbody td.item div
@@ -470,7 +503,7 @@
 
 #abundaCalcTbl tbody td.delete
 {
-    width: 90px;
+    width: 70px;
 }
 
 .blatent
@@ -480,24 +513,29 @@
     text-align: center;
 }
 
+/* --------- SECTION 4 - Table Footer ---------- */
+
+#abundaCalcTbl tfoot{height:45px;}
+
+
 #abundaCalcTbl tfoot th
-{
-    background: #0b5294;
+{   
     border-left: 0;
     border-right: 0;
-    border-bottom: 1px solid silver;
-    height: 24px;
-    padding: 4px 5px 4px 5px;
-    color: white;
+    border-bottom: 0px solid silver;
+    height: 0px;
+    padding: 18px 5px 4px 5px;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 15px;
     text-align: left;
+
 }
+
+#abundaCalcTbl tfoot th.thxpad{padding-left: 23px !important;}
 
 #abundaCalcTbl tfoot th a
 {
     text-decoration: none;
-    color: #fcf802;
     font-size: 16px;
     font-weight: bold;
 }
@@ -505,46 +543,42 @@
 #abundaCalcTbl tfoot th a:hover
 {
     text-decoration: none;
-    color: Aqua;
     font-size: 16px;
     font-weight: bold;
 }
 
-#abundaCalcTbl thead th
-{
-    background: #0b5294;
-    height: 35px;
-    border-bottom: 1px solid silver;
-    border-right: 0;
-    border-left: 0;
-    padding: 6px 5px 2px 5px;
-    color: White;
-    font-weight: bold;
-    font-size: 16px;
-    text-align: center;
-}
 
-#abundaCalcTbl thead th.delete
-{
-    text-align: right;
-    color: #030;
-}
+/*
+------------------------------------------
+       CSS for Style Customization
+------------------------------------------
+*/
 
-#abundaCalcTbl thead th a:hover
-{
-    text-decoration: none;
-    color: Aqua;
-    font-size: 16px;
-    font-weight: bold;
-}
+ /* ---SECTION 1--- */
 
-#abundaCalcTbl thead th a
-{
-    text-decoration: none;
-    color: #fcf802;
-    font-size: 16px;
-    font-weight: bold;
-}
+.calcbg1{background: #A5A5A5;}
+#abundatrade .calc_color1{color: #fff;}
+.btnbg1{background: #efefef;}
+#abundatrade .btn_link1{color: #444; text-decoration:none !important;}
+#abundatrade .calc_linkS1{color: #555; text-decoration: underline;}
+#abundatrade .calc_linkS1:hover{text-decoration: none;}
+
+ /* ---SECTION 2 & 4--- */
+
+.calcbg2{background: #067296; }
+#abundatrade .calc_color2{color: #fff;}
+.btnbg2{background: #FCFC05;}
+#abundatrade .btn_link2{color: #111; text-decoration:none !important;}
+#abundatrade .calc_linkS4{color: yellow; text-decoration: none;}
+#abundatrade .calc_linkS4:hover{color: yellow; text-decoration: underline; cursor:pointer;}
+
+ /* ---SECTION 3--- */
+
+.calcbg3{background: #ddd;} 
+#abundatrade .calc_color3{color: #000;} 
+#abundatrade .calc_linkS3{color: blue; text-decoration: none;}
+#abundatrade .calc_linkS3:hover{text-decoration: underline; cursor:pointer;}
+
 
 /*
 ------------------------------
@@ -715,4 +749,3 @@ div.jqi button.jqidefaultbutton
     bottom: 10px;
     border-left-color: #ffffff;
 }
-
