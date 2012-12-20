@@ -121,6 +121,7 @@ class abundatrade_withinboredom {
                     </tr>
                   </thead>
                   <tbody id="abundaCalcBody_request">
+                    
                   </tbody>
                    <tfoot>
                      <tr>
@@ -132,11 +133,10 @@ class abundatrade_withinboredom {
                      </tr>
                   </tfoot>
                   <tbody id="abundaCalcBody_process">
-		  <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+		  <tr><td colspan="6" class="center" id="ready2go">Enter an item UPC, ISBN, or EAN to see its value here</td></tr>
 		</tbody>
 		<tbody >
 			<tr class="response">
-			  </tr>
 		</tbody>
 		</table>
 

@@ -1225,6 +1225,9 @@ function build_unknown(code, quantity, id) {
 function build_row(data) {
     data.row_html = "";
 
+    if (jQuery("#ready2go").length > 0) {
+        jQuery("#ready2go").remove();
+    }
 
     if (jQuery.isArray(data.row)) {
         for (var i = 0; i < data.row.length; i++) {
