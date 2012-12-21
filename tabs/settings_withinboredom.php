@@ -85,6 +85,7 @@ class tabs__settings_withinboredom
     function getFileList($dir, $ext, $remove_ext) {
         $folders = apply_filters("abundatrade(getFolders)", array());
         $files = scandir($folders['PluginDir'] . '/' . $dir);
+        $files = array_merge($files, scandir($folders['UploadsDir']['basedir'] . '/abundatrade/' . $dir));
         $ret = array();
         foreach ($files as $file) {
             $pos = strpos($file, $ext);

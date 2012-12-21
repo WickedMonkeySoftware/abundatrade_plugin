@@ -38,7 +38,7 @@ class skel__settings
     /**
      * The version of this code
      */
-    private $coded_version = "1.5";
+    private $coded_version = "010601";
     
     /**
      * Loads default options or gets them from the db if they already exist
@@ -47,7 +47,7 @@ class skel__settings
      */
     function options($default) {
         $default = array_merge($default, array(
-                    "version" => "0.0",
+                    "version" => "000000",
                     "Affiliate_ID" => "ABU-1338563844",
                     "Thank_you_page" => "http://abundatrade.com/trade/thank-you.php?a=abundatrade",
                     "Theme" => "classic"
@@ -104,7 +104,10 @@ class skel__settings
                 // from an unknown version ... 
                 break;
         }
-        
+        if ($coded_version >= 010601) {
+            $dir = wp_upload_dir();
+            mkdir($dir['basedir'] . '/abundatrade/themes/', 0770, true);
+        }
     }
     
     /**

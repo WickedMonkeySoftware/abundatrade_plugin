@@ -169,7 +169,15 @@ class abundatrade_withinboredom {
     }
     
     public function addScripts() {
-        wp_register_style("abundatrade_classic", $this->folders['PluginUrl'] . '/themes/' . $this->settings->Theme . '.css');
+        if (file_exists($this->folders['UploadsDir']['basedir'] . '/abundatrade/themes/' . $this->settings->Theme . '.css')) {
+            wp_register_style("abundatrade_classic", $this->folders['UploadsDir']['baseurl'] . '/abundatrade/themes/' . $this->settings->Theme . '.css');
+        }
+        else if (file_exists($this->folders['PluginDir'] . '/themes/' . $this->settings->Theme . '.css')) {
+            wp_register_style("abundatrade_classic", $this->folders['PluginUrl'] . '/themes/' . $this->settings->Theme . '.css');
+        }
+        else {
+            wp_register_style("abundatrade_classic", $this->folders['PluginUrl'] . '/themes/classic.css');
+        }
         wp_register_script("abundatrade_md5", $this->folders['PluginUrl'] . '/js/MD5.js');
         wp_register_script("abundatrade_remote", $this->folders['PluginUrl'] . '/js/remote.js', array('jquery','abundatrade_md5'));
         wp_register_script("abundatrade_impromptu", $this->folders['PluginUrl'] . '/js/jquery-impromptu.4.0.min.js', array('jquery'));
@@ -233,6 +241,7 @@ class abundatrade_withinboredom {
     private function BuildFolderList() {
         $config = $this->applyConfig(array());
         $this->folders = array();
+        $this->folders['UploadsDir'] = wp_upload_dir();
         $this->folders['PluginDir'] = plugin_dir_path(__FILE__);
         $this->folders['PluginUrl'] = plugins_url('', __FILE__);
         $this->folders['PluginAdmin'] = admin_url() . 'options-general.php?page=' . $config['config']['slug'];
