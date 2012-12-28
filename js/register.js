@@ -27,6 +27,7 @@ function register_guest() {
                         '<label for="address_city">City:</label><br/><input type="text" id="address_city" name="address_city"/><br/>'+
                         '<label for="address_state">State:</label><br/><input type="text" id="address_state" name="address_state"/><br/>'+
                         '<label for="address_zip">Zip:</label><br/><input type="text" id="address_zip" name="address_zip"/><br/>'+
+                        '<input type="hidden" id="guest" name="guest" value="true"/>'+
                         '<script type="text/javascript">jQuery("#password").keyup(checkpass); jQuery("#confirmPass").keyup(checkpass);</script>';
 }
 
