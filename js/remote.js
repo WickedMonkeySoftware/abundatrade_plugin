@@ -1215,6 +1215,7 @@ function addGadget(ean) {
         // No errors
         //
         if (data != '') {
+            display_totals(data);
             jQuery.prompt("would you like to add any books, cds, DVDs, or BluRays to your list?", {
                 title: "Your submission is ready,",
                 buttons: { "Yes!": true, "No thank you": false },
@@ -1228,7 +1229,7 @@ function addGadget(ean) {
                         else {
                             submit_the_list(null);
                         }
-                    }, 800);
+                    }, 1000);
                 }
             });
         }
