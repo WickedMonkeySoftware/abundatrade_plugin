@@ -1226,7 +1226,7 @@ function addGadget(ean) {
                         else {
                             submit_the_list(null);
                         }
-                    }, 500);
+                    }, 800);
                 }
             });
         }
