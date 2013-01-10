@@ -176,10 +176,8 @@ class abundatrade_withinboredom {
         
         $gadget_begin = '<div id="gadget_abundatrade" style="'.$gadget_state.'" class="calc_content_wrap calc_color1 calcbg1 bottomcurve">';
 
-        if (isset($atts["manufacturer"])) {
-            $gadget_manufacturer = '<input type="hidden" value="'.$atts["manufacturer"] . '" id="gadget_manufacturer"/>';
-            $gadget_category = '<input type="hidden" value="' . $atts["category"] . '" id="gadget_category"/>';
-        }
+        $gadget_manufacturer = '<input type="hidden" value="'. isset($atts["manufacturer"]) ? $atts["manufacturer"] : '' . '" id="gadget_manufacturer"/>';
+        $gadget_category = '<input type="hidden" value="' . isset($atts["category"]) ? $atts["category"] : '' . '" id="gadget_category"/>';
         
         $gadget_selector = 
             '<form id="abundaGadgetInput" class="abundaInput" style="margin-top: 6px;" onsubmit="return false;" method="post" >

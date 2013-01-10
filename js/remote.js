@@ -167,12 +167,14 @@ function clear_session(obj) {
 function report_error(error_function, response) {
     jQuery.prompt("Please send us an error report or select OK to just continue", {
         title: "There was some kind of error!!", buttons: { "Submit Error Report": true, "OK": false }, submit: function (e, v, m, f) {
-            var request = jQuery.ajax({
-                type: 'POST',
-                url: 'http://' + abundacalc.server + '/trade/process/error.php',
-                data: 'error=' + error_function + '&response=' + response.responseText + '&app=' + navigator.appVersion,
-                dataType: 'jsonp'
-            });
+            if (v) {
+                var request = jQuery.ajax({
+                    type: 'POST',
+                    url: 'http://' + abundacalc.server + '/trade/process/error.php',
+                    data: 'error=' + error_function + '&response=' + response.responseText + '&app=' + navigator.appVersion,
+                    dataType: 'jsonp'
+                });
+            }
         }
     });
 }
