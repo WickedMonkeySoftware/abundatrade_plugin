@@ -91,7 +91,8 @@ class tabs__settings_withinboredom
             $pos = strpos($file, $ext);
             if ($pos !== false) {
                 if ($remove_ext) {
-                    $ret[] = substr($file, $start, $pos);
+                    if (strpos($file, '-prompt') === false) 
+                        $ret[] = substr($file, $start, $pos);
                 }
                 else {
                     $ret[] = $file;

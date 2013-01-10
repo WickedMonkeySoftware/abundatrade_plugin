@@ -133,7 +133,7 @@ function clear_session(obj) {
             'Are you sure you want to delete the entire listing?',
             {
                 buttons: { Delete: true, Cancel: false },
-                callback: function (v, m, f) {
+                submit: function (e, v, m, f) {
                     if (v) {
                         var request = jQuery.ajax(
                             {
@@ -153,8 +153,8 @@ function clear_session(obj) {
                             display_totals(data);
                         });
 
-                        request.fail(function (jqXHR, textStatus, errorThrown) {
-                            alert("Request failed: " + textStatus + " - " + errorThrown);
+                        request.fail(function (data, textStatus, errorThrown) {
+                            report_error("clear_session", data);
                         });
                     }
                 }
@@ -162,6 +162,19 @@ function clear_session(obj) {
             );
     }
     number_item = 1;
+}
+
+function report_error(error_function, response) {
+    jQuery.prompt("Please send us an error report or select OK to just continue", {
+        title: "There was some kind of error!!", buttons: { "Submit Error Report": true, "OK": false }, submit: function (e, v, m, f) {
+            var request = jQuery.ajax({
+                type: 'POST',
+                url: 'http://' + abundacalc.server + '/trade/process/error.php',
+                data: 'error=' + error_function + '&response=' + response.responseText + '&app=' + navigator.appVersion,
+                dataType: 'jsonp'
+            });
+        }
+    });
 }
 
 /*
@@ -409,6 +422,12 @@ function load_previous_session(pretty) {
         });
 
     request.success(function (data) {
+        jQuery('#abundaCalcBody_request').children().remove();
+
+        data.total_qty = "0.00";
+        data.currency_for_total = "$";
+        data.total = "0.00";
+
         for (i = 0; i < data.length; i++) {
             part = data[i];
             part.row = jQuery.parseJSON(part.row);
@@ -432,7 +451,7 @@ function load_previous_session(pretty) {
     });
 
     request.fail(function (jqXHR, textStatus, errorThrown) {
-        alert("Request failed: " + textStatus + " - " + errorThrown);
+        report_error('load_previous_session', jqXHR);
     });
 }
 
@@ -517,7 +536,7 @@ function lookup_item(obj) {
             });
 
             request.fail(function (jqXHR, textStatus, errorThrown) {
-                alert("Request failed: " + textStatus + " - " + errorThrown);
+                report_error('lookup_item', jqXHR);
                 please_wait(false);
             });
 
@@ -544,7 +563,12 @@ function please_wait(UILocked) {
 /** A regular submission final page */
 var regular_display = "<center><p>Sending your trade request and locking in your quote!<br/><span style='font-size:xx-small;'>Give our pecking pigeons a second</span></p></center><center><img src='" + abundacalc.url + "/images/spinner.gif'/></center>";
 
-function displayLogin() {
+function displayLogin(custom_message) {
+
+    if (custom_message) {
+        return custom_message;
+    }
+
     if (!loggedIn) {
         return '<label for="user">Email Address:</label><br/><input type="text" id="abundatrade_user" name="abundatrade_user" value="" /><br/>'+
             '<label for="password">Password:</label><br/><input type="password" name="abundatrade_password" id="abundatrade_password" value=""/><br/>'+
@@ -622,57 +646,6 @@ function hide_for_guest() {
     jQuery("#password").hide();
 }
 
-function processLogin(ev, but, message, val) {
-    if (loggedIn) {
-        if (but == 0) {
-            return 0;
-        }
-        if (but == 1) {
-            jQuery.prompt.goToState('state5');
-            return false;
-        }
-    }
-    else {
-        if (but == 0)
-            return 0;
-        if (but == 1) {
-            Register(register_pass(),regular_finish, submit_my_list);
-        }
-        if (but == 2) {
-            hide_for_guest();
-            jQuery.prompt.goToState('state1');
-        }
-        if (but == -1) {
-            jQuery("#logging_on").fadeIn();
-            request = jQuery.ajax({
-                url: 'http://' + abundacalc.server + '/trade/process/user/login/',
-                dataType: 'jsonp',
-                data: 'user='+jQuery('#abundatrade_user').val()+'&password='+jQuery("#abundatrade_password").val()+"&remember="+jQuery("#remember").is(":checked")
-            });
-            request.done(function(data) {
-                if (data.error) {
-                    jQuery("#logging_on").fadeOut();
-                    jQuery("#login_error").delay(800).show();
-                }
-                else {
-                    jQuery("#login_error").hide();
-                    if (just_logging_in) {
-                        get_login_status();
-                        just_logging_in = false;
-                        jQuery.prompt.close();
-                    } else {
-                        get_login_status();
-                        just_logging_in = false;
-                        loggedIn = true;
-                        jQuery.prompt.goToState('state5');
-                    }
-                }
-            });
-        }
-        
-        return false;
-    }
-}
 
 function display_promo() {
     if (loggedIn) {
@@ -720,7 +693,7 @@ function display_promo() {
 }
 
 /** Submit a list */
-function submit_modal(callback_to_submit, final_display) {
+function submit_modal(callback_to_submit, final_display, custom_message) {
     var state = 1;
     
     if (loggedIn) state = 5;
@@ -728,7 +701,7 @@ function submit_modal(callback_to_submit, final_display) {
     var states =
             {
                 state0: {
-                    html: displayLogin(),
+                    html: displayLogin(custom_message),
                     buttons: displayLoginButtons(),
                     focus: 1,
                     submit: function (ev, but, message, val) {
@@ -1072,7 +1045,7 @@ function submit_modal(callback_to_submit, final_display) {
 *
 */
 function submit_the_list(obj) {
-    if (!jQuery(obj).hasClass('disabled') && (jQuery('#total_item_count').text() > 0)) {
+    if ((jQuery('#total_item_count').text() > 0)) {
 
         submit_modal(submit_my_list, regular_display);
 
@@ -1115,7 +1088,7 @@ function submit_my_list(f) {
     });
 
     request.fail(function (jqXHR, textStatus, errorThrown) {
-        alert("Request failed: " + textStatus + " - " + errorThrown);
+        report_error('submit_my_list', jqXHR);
         please_wait(false);
     });
 }
@@ -1203,8 +1176,104 @@ jQuery(document).ready(function () {
         */
         jQuery('#delete_all_top').on('click', function () { clear_session(this); });
         jQuery('#delete_all_bottom').on('click', function () { clear_session(this); });
+
+        /*
+        load gadgets
+        */
+        if (jQuery('#abundaGadgetInput').length > 0 && jQuery('#gadget_abundatrade').css('display') == 'block') {
+            loadActiveGadgets();
+
+            jQuery('#abundaGadgetInput').submit(function () { addGadget(jQuery('#gadget_code').val()); });
+        }
     }
 });
+
+function transform_into_full_calc() {
+    jQuery("#gadget_abundatrade").fadeOut();
+    jQuery("#bulk").slideUp(500);
+    jQuery("#top_input_section").fadeIn(500);
+    jQuery("#second_content").slideDown(500);
+    jQuery("#abundaCalcTbl").delay(100).fadeIn(400);
+    jQuery("#bulk_button").slideDown(1000);
+    jQuery("#very_bottom").slideDown(500);
+    load_previous_session(false);
+    return false;
+}
+
+function addGadget(ean) {
+    var request = jQuery.ajax(
+                            {
+                                type: 'GET',
+                                url: 'http://' + abundacalc.server + '/trade/process/request.php',
+                                data: 'action=add_gadget&product_qty=1&product_code=' + ean,
+                                dataType: 'jsonp'
+                            });
+
+    request.done(function (data) {
+        // No errors
+        //
+        if (data != '') {
+            jQuery.prompt("would you like to add any books, cds, DVDs, or BluRays to your list?", {
+                title: "Your submission is ready,",
+                buttons: { "Yes!": true, "No thank you": false },
+                submit: function (e, v, m, f) {
+                    jQuery.prompt.close();
+                    wait = setInterval(function () {
+                        clearInterval(wait);
+                        if (v) {
+                            transform_into_full_calc();
+                        }
+                        else {
+                            submit_the_list(null);
+                        }
+                    }, 500);
+                }
+            });
+        }
+        else {
+            alert("Unable to add this gadget, please try again later");
+        }
+    });
+
+    request.fail(function (jqXHR, textStatus, errorThrown) {
+        report_error('addGadget', jqXHR);
+        please_wait(false);
+    });
+}
+
+function loadActiveGadgets() {
+
+    var request = jQuery.ajax(
+                            {
+                                type: 'GET',
+                                url: 'http://' + abundacalc.server + '/trade/process/request.php',
+                                data: 'action=gadget_list&gadget_category=' + jQuery('#gadget_category').val() + '&gadget_manufacturer=' + jQuery('#gadget_manufacturer').val(),
+                                dataType: 'jsonp'
+                            });
+
+    request.done(function (data) {
+        // No errors
+        //
+        if (data != '') {
+            str = "";
+
+            for (i = 0; i < data.length; i++) {
+                str += "<option value = '" + data[i].ean + "'>" + data[i].title + "</option>";
+            }
+
+            jQuery('#gadget_code').get(0).innerHTML = str;
+        }
+        else {
+            alert("Unable to retrieve gadgets, please try reloading the page later");
+        }
+    });
+
+    request.fail(function (jqXHR, textStatus, errorThrown) {
+        report_error('loadActiveGadgets', jqXHR);
+        please_wait(false);
+    });
+
+}
 
 function getParameterByName(name)
 {

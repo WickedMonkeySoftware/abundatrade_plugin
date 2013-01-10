@@ -69,46 +69,77 @@ class abundatrade_withinboredom {
     }
     
     public function shortcode($atts) {
+        
+        if (!isset($atts['gadget_only'])) $atts['gadget_only'] = false;
+        
+        if ($atts['gadget_only']) {
+            $hide = ' display: none;';
+            $gadget_state = ' ';
+        }
+        else {
+            $hide = ' ';
+            $gadget_state = ' display: none;';
+        }
+        
                 $display = '<div id="abundatrade">';
-         $top = '<div id="top_input_section" class="calc_content_wrap calc_color1 calcbg1">
+         $top = '
+         <div id="top_input_section" class="calc_content_wrap calc_color1 calcbg1" style="'.$hide.'">
 
-  <form id="abundaInput" class="abundaInput" style="margin-top: 6px;" onsubmit="return false;" method="post" >
-    <input id="item_num" value="1" name="item_num" type="hidden"/>
-    <input id="a" value="' . $this->settings->Affiliate_ID . '" type="hidden"/>
-    <div class="input_container">
+            <form id="abundaInput" class="abundaInput" style="margin-top: 6px;" onsubmit="return false;" method="post" >
+                <input id="item_num" value="1" name="item_num" type="hidden"/>
+                <input id="a" value="' . $this->settings->Affiliate_ID . '" type="hidden"/>
+                <div class="input_container">
+                </div>
+
+                <div class="input_container">
+                    <div class="label">UPC or ISBN</div>
+                    <div class="product_holder">
+                        <input class="center validate[\'required\',\'length[3,25]\']" id="product_code" name="product_code" onblur="clean_product_code(this)" type="text"/>
+                    </div>
+                </div>
+
+                <div class="input_container" style="width:200px;">
+                    <div class="label"> Quantity </div>
+                    <div class="qty_holder">
+                        <input class="center validate[\'required\',\'digit[1,20]\']" id="product_qty" name="product_qty" value="1" type="text"/>
+                    </div>
+                </div>
+
+                <div class="submit_holder">
+                    <input class="btn1 right btn_link1 btnbg1" value="+ Add Item" type="submit"/>
+                </div>';
+         
+        $bulk_button = '
+            <div id="bulk_button" class="calcbg1" style="'.$hide.'">
+                <p class="abunda_text calc_color1">Have a lot of items? <a href="#" onclick="return bulk_open();" class="calc_linkS1">Bulk Upload</a></p>
+            </div>';
+        
+        $bulk = '
+            <div id="bulk" class="calcbg1">
+                <div id="bulk_help" class="abunda_text calc_color1">You can cut and paste directly from popular office programs<br/> like Excel and Word.</div>
+                <textarea placeholder="02454352525998" cols=20 rows=10 id="bulk_upload" name="bulk_upload">
+                </textarea><p>
+                <a href="#" class="btn1 btnbg1 btn_link1 marleft" onclick="return bulk_close_window();">Go back</a>
+                <a href="#" class="btn1 btnbg1 btn_link1 marright" onclick="bulk_submit_items();">Submit List</a></p>
+	            <p class="calcbg1 bottomcurve">&nbsp;</p>
+            </div>';
+	    $second = '
+            <div id="second_content" class="calc_content_wrap calcbg2 calc_color2" style="'.$hide.'">
+                <div class="second_content_sec1">
+                    <label class="calc_color2">Total Items:</label>
+                    <div id="total_item_count">0</div>
+                </div>
+                <div class="second_content_sec2">
+                <label class="calc_color2">Pre-Valuation Total:</label>
+                <div id="total_prevaluation">$0.00</div>
             </div>
-
-    <div class="input_container">
-      <div class="label">UPC or ISBN</div>
-      <div class="product_holder">
-        <input class="center validate[\'required\',\'length[3,25]\']" id="product_code" name="product_code" onblur="clean_product_code(this)" type="text"/>
-      </div>
-    </div>
-
-    <div class="input_container" style="width:200px;">
-      <div class="label"> Quantity </div>
-      <div class="qty_holder">
-        <input class="center validate[\'required\',\'digit[1,20]\']" id="product_qty" name="product_qty" value="1" type="text"/>
-      </div>
-    </div>
-
-    <div class="submit_holder">
-      <input class="btn1 right btn_link1 btnbg1" value="+ Add Item" type="submit"/>
-    </div>';
-        $bulk_button = '<div id="bulk_button" class="calcbg1"><p class="abunda_text calc_color1">Have a lot of items? <a href="#" onclick="return bulk_open();" class="calc_linkS1">Bulk Upload</a></p></div>';
-        $bulk = "<div id=\"bulk\" class=\"calcbg1\"><div id=\"bulk_help\" class='abunda_text calc_color1'>You can cut and paste directly from popular office programs<br/> like Excel and Word.</div><textarea placeholder=\"02454352525998\" cols=20 rows=10 id=\"bulk_upload\" name=\"bulk_upload\"></textarea></p><p><a href='#' class=\"btn1 btnbg1 btn_link1 marleft\" onclick='return bulk_close_window();'>Go back</a><a href='#' class=\"btn1 btnbg1 btn_link1 marright\" onclick='bulk_submit_items();'>Submit List</a></p>
-	<p class=\"calcbg1 bottomcurve\">&nbsp;</p>
-    </div>";
-	$second = '<div id="second_content" class="calc_content_wrap calcbg2 calc_color2">
-                       <div class="second_content_sec1">
-                      <label class="calc_color2">Total Items:</label><div id="total_item_count">0</div></div>
-                      <div class="second_content_sec2"><label class="calc_color2">Pre-Valuation Total:</label><div id="total_prevaluation">$0.00</div>
-                      </div>
-                      <div class="second_content_sec3"><a id="submitList" class="btnbg2 btn_link2" onclick="submit_the_list(this);">Send list to Abunda</a></div>
-                      </div>';
+            <div class="second_content_sec3">
+                <a id="submitList" class="btnbg2 btn_link2" onclick="submit_the_list(this);">Send list to Abunda</a>
+            </div>
+        </div>';
         $endform = "</form></div>";
         $endtop = "</div>";
-        $table = '<table cellspacing="0" cellpadding="0" id="abundaCalcTbl">
+        $table = '<table cellspacing="0" cellpadding="0" id="abundaCalcTbl" style="'.$hide.'">
                   <thead>
                     <tr>
                       <th class="calcbg3 calc_color3">UPC</th>
@@ -138,21 +169,56 @@ class abundatrade_withinboredom {
 		<tbody >
 			<tr class="response">
 		</tbody>
-		</table>
+		</table>';
 
-		<p class="calcbg2 bottomcurve">&nbsp;</p>';
+        $very_bottom = '
+		<p id="very_bottom" style="'.$hide.'" class="calcbg2 bottomcurve">&nbsp;</p>';
+        
+        $gadget_begin = '<div id="gadget_abundatrade" style="'.$gadget_state.'" class="calc_content_wrap calc_color1 calcbg1 bottomcurve">';
+
+        if (isset($atts["manufacturer"])) {
+            $gadget_manufacturer = '<input type="hidden" value="'.$atts["manufacturer"] . '" id="gadget_manufacturer"/>';
+            $gadget_category = '<input type="hidden" value="' . $atts["category"] . '" id="gadget_category"/>';
+        }
+        
+        $gadget_selector = 
+            '<form id="abundaGadgetInput" class="abundaInput" style="margin-top: 6px;" onsubmit="return false;" method="post" >
+            
+            <div class="input_container">'
+            . $gadget_category . $gadget_manufacturer .
+           '</div>
+            
+            <div class="input_container">
+              <div class="label">Select your gadget</div>
+              <div class="product_holder">
+                <select class="center" id="gadget_code" name="gadget_code" onblur="" id="gadget_code">
+                  <option value="-1">Loading Gadgets...</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="submit_holder">
+              <input class="btn1 right btn_link1 btnbg1" value="+ Add Gadget" type="submit"/>
+            </div>
+            
+            </form>';
 
         $status = "<div id=\"login_status_abundatrade\"></div>";
 
         $display .= $status;
         $display .= $bulk;
+        $display .= $gadget_begin;
+        $display .= $gadget_selector;
+        $display .= $endtop;
         $display .= $top;
         $display .= $endform;
         $display .= $bulk_button;
         $display .= $second;
 
         $display .= $table;
+        $display .= $very_bottom;
         $display .= $endtop;
+            
         return $display;
     }
     
@@ -178,17 +244,29 @@ class abundatrade_withinboredom {
         else {
             wp_register_style("abundatrade_classic", $this->folders['PluginUrl'] . '/themes/classic.css');
         }
+        
+        if (file_exists($this->folders['UploadsDir']['basedir'] . '/abundatrade/themes/' . $this->settings->Theme . '-prompt.css')) {
+            wp_register_style("abundatrade_prompt_classic", $this->folders['UploadsDir']['baseurl'] . '/abundatrade/themes/' . $this->settings->Theme . '-prompt.css');
+        }
+        else if (file_exists($this->folders['PluginDir'] . '/themes/' . $this->settings->Theme . '-prompt.css')) {
+            wp_register_style("abundatrade_prompt_classic", $this->folders['PluginUrl'] . '/themes/' . $this->settings->Theme . '-prompt.css');
+        }
+        else {
+            wp_register_style("abundatrade_prompt_classic", $this->folders['PluginUrl'] . '/themes/classic-prompt.css');
+        }
+        
         wp_register_script("abundatrade_md5", $this->folders['PluginUrl'] . '/js/MD5.js');
         wp_register_script("abundatrade_remote", $this->folders['PluginUrl'] . '/js/remote.js', array('jquery','abundatrade_md5'));
         wp_register_script("abundatrade_impromptu", $this->folders['PluginUrl'] . '/js/jquery-impromptu.4.0.min.js', array('jquery'));
         wp_register_script("abundatrade_register", $this->folders['PluginUrl'] . '/js/register.js', array('jquery', 'abundatrade_remote'));
         
         wp_enqueue_style("abundatrade_classic");
+        wp_enqueue_style("abundatrade_prompt_classic");
         wp_enqueue_script("abundatrade_md5");
         wp_enqueue_script("abundatrade_remote");
         wp_enqueue_script("abundatrade_impromptu");
         wp_enqueue_script("abundatrade_register");
-        $abundacalc = array('server' => 'abundatrade.com', 
+        $abundacalc = array('server' => 'tiny.abundatrade.com', 
             'url' => $this->folders['PluginUrl'], 
             'thanks' => $this->settings->Thank_you_page);
         if (isset($_REQUEST['upload_id']) && $_REQUEST['upload_id'] != '') {

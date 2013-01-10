@@ -76,6 +76,74 @@
     padding: 0 4px;
 }
 
+#gadget_abundatrade {
+    margin: 0;
+    float:left;
+    width: 99%;
+    clear: none;
+    -moz-border-radius-topright: 15px;	
+    -moz-border-radius-topleft: 15px;
+    border-top-right-radius: 15px;	
+    border-top-left-radius: 15px;
+    -webkit-border-top-left-radius:15px; 
+    -webkit-border-top-right-radius:15px;
+    -khtml-border-radius-topright: 15px;
+    -khtml-border-radius-topleft: 15px;
+    height: auto;
+    margin-bottom: -15px;
+    padding: 0 4px;
+}
+
+#gadget_abundatrade div.input_container {
+    clear: none;
+    float: left;
+    height: auto/*45px*/;
+    margin: 0px 5px 0 20px;
+    padding-top: 0px;
+    width: auto;
+}
+
+#gadget_abundatrade div.label {
+    float: left;
+    margin: 13px 6px 0 0;
+    clear: none;
+}
+
+#gadget_abundatrade div.input_container div.product_holder
+{
+    width: 175px;
+    height: 45px;
+    float: left;
+    margin-right: 12px;
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+    display: block;
+    clear: none;
+}
+
+#gadget_abundatrade div.product_holder #gadget_code
+{
+    background: white;
+    border: medium none;
+    height: 30px;
+    margin-left: 16px;
+    margin-top: 4px;
+    width: 150px;
+    z-index: 1;
+    clear: none;
+}
+
+#gadget_abundatrade div.submit_holder
+{
+    float: right;
+    width: 140px;
+    height: 40px;
+    margin: 0px 10px 15px 5px;
+    padding-top: 5px;
+    clear: none;
+}
+
 #top_input_section div.input_container
 {
     clear: none;
@@ -578,174 +646,3 @@ border-left: 1px #CCC solid;
 #abundatrade .calc_color3{color: #000;} 
 #abundatrade .calc_linkS3{color: blue; text-decoration: none;}
 #abundatrade .calc_linkS3:hover{text-decoration: underline; cursor:pointer;}
-
-
-/*
-------------------------------
-	Impromptu
-------------------------------
-*/
-.jqifade
-{
-    position: absolute;
-    background-color: #777777;
-}
-div.jqi
-{
-    width: 400px;
-    font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
-    position: absolute;
-    background-color: #ffffff;
-    font-size: 11px;
-    text-align: left;
-    border: solid 1px #eeeeee;
-    border-radius: 10px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    padding: 7px;
-}
-div.jqi .jqicontainer
-{
-}
-div.jqi .jqiclose
-{
-    position: absolute;
-    top: 4px;
-    right: -2px;
-    width: 18px;
-    cursor: default;
-    color: #bbbbbb;
-    font-weight: bold;
-}
-div.jqi .jqititle
-{
-    padding: 5px 10px;
-    font-size: 16px;
-    line-height: 20px;
-    border-bottom: solid 1px #eeeeee;
-}
-div.jqi .jqimessage
-{
-    padding: 10px;
-    line-height: 20px;
-    color: #444444;
-}
-div.jqi .jqibuttons
-{
-    text-align: right;
-    padding: 5px 0 5px 0;
-    border: solid 1px #eeeeee;
-    background-color: #f4f4f4;
-}
-div.jqi button
-{
-    padding: 3px 10px;
-    margin: 0 10px;
-    background-color: #2F6073;
-    border: solid 1px #f4f4f4;
-    color: #ffffff;
-    font-weight: bold;
-    font-size: 12px;
-}
-div.jqi button:hover
-{
-    background-color: #728A8C;
-}
-div.jqi button.jqidefaultbutton
-{
-    background-color: #BF5E26;
-}
-.jqiwarning .jqi .jqibuttons
-{
-    background-color: #BF5E26;
-}
-
-.jqi .jqiarrow
-{
-    position: absolute;
-    height: 0;
-    width: 0;
-    line-height: 0;
-    font-size: 0;
-    border: solid 10px transparent;
-}
-
-.jqi .jqiarrowtl
-{
-    left: 10px;
-    top: -20px;
-    border-bottom-color: #ffffff;
-}
-.jqi .jqiarrowtc
-{
-    left: 50%;
-    top: -20px;
-    border-bottom-color: #ffffff;
-    margin-left: -10px;
-}
-.jqi .jqiarrowtr
-{
-    right: 10px;
-    top: -20px;
-    border-bottom-color: #ffffff;
-}
-
-.jqi .jqiarrowbl
-{
-    left: 10px;
-    bottom: -20px;
-    border-top-color: #ffffff;
-}
-.jqi .jqiarrowbc
-{
-    left: 50%;
-    bottom: -20px;
-    border-top-color: #ffffff;
-    margin-left: -10px;
-}
-.jqi .jqiarrowbr
-{
-    right: 10px;
-    bottom: -20px;
-    border-top-color: #ffffff;
-}
-
-.jqi .jqiarrowlt
-{
-    left: -20px;
-    top: 10px;
-    border-right-color: #ffffff;
-}
-.jqi .jqiarrowlm
-{
-    left: -20px;
-    top: 50%;
-    border-right-color: #ffffff;
-    margin-top: -10px;
-}
-.jqi .jqiarrowlb
-{
-    left: -20px;
-    bottom: 10px;
-    border-right-color: #ffffff;
-}
-
-.jqi .jqiarrowrt
-{
-    right: -20px;
-    top: 10px;
-    border-left-color: #ffffff;
-}
-.jqi .jqiarrowrm
-{
-    right: -20px;
-    top: 50%;
-    border-left-color: #ffffff;
-    margin-top: -10px;
-}
-.jqi .jqiarrowrb
-{
-    right: -20px;
-    bottom: 10px;
-    border-left-color: #ffffff;
-}
