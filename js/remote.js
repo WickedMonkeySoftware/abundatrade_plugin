@@ -96,6 +96,9 @@ function abundatrade_login() {
 var loggedIn = false;
 
 function get_login_status() {
+
+    tour = "<span style='float:right;'><a href='#' onclick='jQuery.prompt(tourstates); return false;'>Take a tour</a></span>";
+
     if (jQuery("#login_status_abundatrade").val() != null) {
         jQuery("#login_status_abundatrade").get(0).innerHTML = "<img src='" + abundacalc.url + "/images/spinner.gif'>";
         var request = jQuery.ajax(
@@ -107,13 +110,13 @@ function get_login_status() {
         );
         request.done(function(data) {
             if (data.status) {
-                jQuery('#login_status_abundatrade').get(0).innerHTML = "Hello " + data.first_name + " " + data.last_name + " <em><a onclick=\"abundatrade_logout()\">logout</a></em>";
+                jQuery('#login_status_abundatrade').get(0).innerHTML = "Hello " + data.first_name + " " + data.last_name + " <em><a onclick=\"abundatrade_logout()\">logout</a></em>" + tour;
                 if (data.first_name == 'Super Cow')
                     loggedIn = false;
                 else loggedIn = true;
             }
             else {
-                jQuery('#login_status_abundatrade').get(0).innerHTML = "<em><a onclick=\"abundatrade_login()\">Login/Register</a></em>";
+                jQuery('#login_status_abundatrade').get(0).innerHTML = "<em><a onclick=\"abundatrade_login()\">Login/Register</a></em>" + tour;
                 loggedIn = false;
             }
         });
@@ -1185,7 +1188,7 @@ jQuery(document).ready(function () {
         if (jQuery('#abundaGadgetInput').length > 0 && jQuery('#gadget_abundatrade').css('display') == 'block') {
             loadActiveGadgets();
 
-            jQuery('#abundaGadgetInput').submit(function () { addGadget(jQuery('#gadget_code').val()); });
+            jQuery('#abundaGadgetInput').submit(function () { addGadget(jQuery('#gadget_code').val(), jQuery('#header_condition').val()); });
         }
     }
 });
@@ -1202,7 +1205,93 @@ function transform_into_full_calc() {
     return false;
 }
 
-function addGadget(ean) {
+function tour_func(e, v, m, f) {
+    if (v == -1) {
+        jQuery.prompt.prevState();
+        return false;
+    }
+    else if (v == 1) {
+        jQuery.prompt.nextState();
+        return false;
+    }
+}
+
+var tourstates = [
+    {
+        title: 'Welcome',
+        html: 'Ready to take a tour of the AbundaTrade Calculator?',
+        buttons: { Next: 1 },
+        focus: 1,
+        position: { container: '#abundatrade', x: 0, y: 0, width: 200, arrow: 'tl' },
+        submit: tour_func
+    },
+    {
+        title: 'Getting Started',
+        html: 'Enter any barcode and just about any ISBN here. <br>You can also use a scanner to speed things along.',
+        buttons: { Back: -1, Next: 1 },
+        focus: 1,
+        position: { container: '#product_code', x: 200, y: 0, width: 250, arrow: 'lt' },
+        submit: tour_func
+    },
+    {
+        title: 'How Many',
+        html: 'Enter how many you\'d like to trade in for cash',
+        buttons: { Back: -1, Next: 1 },
+        focus: 1,
+        position: { container: '#product_qty', x: 50, y: 0, width: 200, arrow: 'lt' },
+        submit: tour_func
+    },
+    {
+        title: 'Look it up',
+        html: 'Press add item to add it on to your list',
+        buttons: { Back: -1, Next: 1 },
+        focus: 1,
+        position: { container: '[value=\'+ Add Item\']', x: -50, y: -150, width: 200, arrow: 'bc' },
+        submit: tour_func
+    },
+    {
+        title: 'Look it up',
+        html: 'Your item will appear here, along with how much cash we\'ll give you for it',
+        buttons: { Back: -1, Next: 1 },
+        focus: 1,
+        position: { container: '#ready2go', x: 200, y: 25, width: 200, arrow: 'tc' },
+        submit: tour_func
+    },
+    {
+        title: 'Look it up',
+        html: 'Our technology gets the realtime value of your item in the online marketplace, since we know most things depreciate we lock in this value for you for 2 weeks to get you the most cash.',
+        buttons: { Back: -1, Next: 1 },
+        focus: 1,
+        position: { container: '#ready2go', x: 200, y: 25, width: 400, arrow: 'tc' },
+        submit: tour_func
+    },
+    {
+        title: 'Submit',
+        html: 'Once you\'re done building your list how you want it; login, sign up, or submit the list as a guest; print out your shipping information, and send it in. We will keep you up to date while it goes through the receiving process and get you your cash.',
+        buttons: { Back: -1, Next: 1 },
+        focus: 1,
+        position: { container: '#submitList', x: 200, y: 0, width: 400, arrow: 'lt tl' },
+        submit: tour_func
+    },
+    {
+        title: 'Bulk Upload',
+        html: 'If you have items already in ISBN/UPC form, you can copy and paste your items with quantity directly into the bulk uploader and receieve a quote instantly.',
+        buttons: { Back: -1, Done: 2 },
+        focus: 1,
+        position: { container: '#bulk_button', x: 200, y: 25, width: 300, arrow: 'tl' },
+        submit: tour_func
+    }
+];
+
+function addGadget(ean, condition) {
+
+    if (condition == 'Other') {
+        jQuery.prompt('It is recommended to submit a custom quote for Cracked Screens and Other Conditions, click <a href="http://abundatrade.com/recommerce/custom-quote-top-cash-gadgets">here</a> to do that now.', {
+            'title': 'Submit a Custom Quote'
+        });
+        return;
+    }
+
     var request = jQuery.ajax(
                             {
                                 type: 'GET',

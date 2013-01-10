@@ -187,7 +187,7 @@ class abundatrade_withinboredom {
            '</div>
             
             <div class="input_container">
-              <div class="label">Select your gadget</div>
+              <div class="label">Gadget</div>
               <div class="product_holder">
                 <select class="center" id="gadget_code" name="gadget_code" onblur="" id="gadget_code">
                   <option value="-1">Loading Gadgets...</option>
@@ -195,8 +195,19 @@ class abundatrade_withinboredom {
               </div>
             </div>
             
+            <div class="input_container">
+              <div class="label">Condition</div>
+              <div class="product_holder">
+                <select class="center" id="header_condition" name="header_condition" onblur="" id="header_condition">
+                  <option value="Like New">Like New</option>
+                  <option value="Good">Good</option>
+                  <option value="Other">All Others</option>
+                </select>
+              </div>
+            </div>
+            
             <div class="submit_holder">
-              <input class="btn1 right btn_link1 btnbg1" value="+ Add Gadget" type="submit"/>
+              <input class="btn1 right btn_link1 btnbg1" value="+ Add" type="submit"/>
             </div>
             
             </form>';

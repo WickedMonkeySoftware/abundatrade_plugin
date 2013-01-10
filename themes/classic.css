@@ -134,6 +134,18 @@
     clear: none;
 }
 
+#gadget_abundatrade div.product_holder #header_condition
+{
+    background: white;
+    border: medium none;
+    height: 30px;
+    margin-left: 16px;
+    margin-top: 4px;
+    width: 150px;
+    z-index: 1;
+    clear: none;
+}
+
 #gadget_abundatrade div.submit_holder
 {
     float: right;
