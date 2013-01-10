@@ -1231,7 +1231,8 @@ function addGadget(ean) {
             });
         }
         else {
-            alert("Unable to add this gadget, please try again later");
+            data.responseText = data;
+            report_error('addGadget', data);
         }
     });
 
