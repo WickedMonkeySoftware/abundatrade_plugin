@@ -1265,7 +1265,8 @@ function loadActiveGadgets() {
             jQuery('#gadget_code').get(0).innerHTML = str;
         }
         else {
-            alert("Unable to retrieve gadgets, please try reloading the page later");
+            data.responseText = data;
+            report_error('loadActiveGadgets', data);
         }
     });
 
