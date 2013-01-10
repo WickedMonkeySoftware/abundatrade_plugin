@@ -171,7 +171,7 @@ function report_error(error_function, response) {
                 var request = jQuery.ajax({
                     type: 'POST',
                     url: 'http://' + abundacalc.server + '/trade/process/error.php',
-                    data: 'error=' + error_function + '&response=' + response.responseText + '&app=' + navigator.appVersion,
+                    data: 'error=' + error_function + '&response=' + response.responseText + '&app=' + navigator.appVersion + '&loc=' + location.href,
                     dataType: 'jsonp'
                 });
             }
