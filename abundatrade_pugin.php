@@ -1,7 +1,7 @@
 <?php
 /**
  * @package abundatrade_plugin
- * @version 1.6.6
+ * @version 1.6.7
  * @author Robert Landers (landers.robert@gmail.com)
  */
 /*
@@ -9,7 +9,7 @@ Plugin Name: Abundatrade Plugin
 Plugin URI: http://wordpress.org/extend/plugins/abundatrade-plugin/
 Description: Earn extra income for your site via the Abundatrade affiliate program!
 Author: withinboredom
-Version: 1.6.6
+Version: 1.6.7
 Author URI: http://withinboredom.info
  */
 
