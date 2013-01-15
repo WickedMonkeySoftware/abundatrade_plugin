@@ -95,9 +95,28 @@ function abundatrade_login() {
 
 var loggedIn = false;
 
+function do_tour() {
+    if (jQuery('#abundaGadgetInput').length > 0 && jQuery('#gadget_abundatrade').css('display') == 'block') {
+        // for gadget side
+    }
+    else {
+        // for regular calculator
+        jQuery.prompt(tourstates);
+    }
+}
+
+function calc_state() {
+    if (jQuery('#abundaGadgetInput').length > 0 && jQuery('#gadget_abundatrade').css('display') == 'block') {
+        return 'gadget';
+    }
+    else {
+        return 'normal';
+    }
+}
+
 function get_login_status() {
 
-    tour = "<span style='float:right;'><a href='#' onclick='jQuery.prompt(tourstates); return false;'>Take a tour</a></span>";
+    tour = "<span style='float:right;'><a href='#' onclick='do_tour(); return false;'>Take a tour</a></span>";
 
     if (jQuery("#login_status_abundatrade").val() != null) {
         jQuery("#login_status_abundatrade").get(0).innerHTML = "<img src='" + abundacalc.url + "/images/spinner.gif'>";
@@ -174,7 +193,7 @@ function report_error(error_function, response) {
                 var request = jQuery.ajax({
                     type: 'POST',
                     url: 'http://' + abundacalc.server + '/trade/process/error.php',
-                    data: 'error=' + error_function + '&response=' + response.responseText + '&app=' + navigator.appVersion + '&loc=' + location.href,
+                    data: 'error=' + error_function + '&response=' + escape(response.responseText) + '&app=' + navigator.appVersion + '&loc=' + escape(location.href),
                     dataType: 'jsonp'
                 });
             }
@@ -1292,11 +1311,15 @@ function addGadget(ean, condition) {
         return;
     }
 
+    if (condition == null) {
+        condition = 'like_new';
+    }
+
     var request = jQuery.ajax(
                             {
                                 type: 'GET',
                                 url: 'http://' + abundacalc.server + '/trade/process/request.php',
-                                data: 'action=add_gadget&product_qty=1&product_code=' + ean,
+                                data: 'action=add_gadget&product_qty=1&product_code=' + ean + '&header_condition=' + condition,
                                 dataType: 'jsonp'
                             });
 

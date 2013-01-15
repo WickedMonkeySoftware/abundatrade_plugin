@@ -195,16 +195,16 @@ class abundatrade_withinboredom {
               </div>
             </div>
             
-            <div class="input_container">
+            <!-- <div class="input_container">
               <div class="label">Condition</div>
               <div class="product_holder">
                 <select class="center" id="header_condition" name="header_condition" onblur="" id="header_condition">
-                  <option value="Like New">Like New</option>
-                  <option value="Good">Good</option>
+                  <option value="like_new">Like New</option>
+                  <option value="good">Good</option>
                   <option value="Other">All Others</option>
                 </select>
               </div>
-            </div>
+            </div> -->
             
             <div class="submit_holder">
               <input class="btn1 right btn_link1 btnbg1" value="+ Add" type="submit"/>
@@ -275,7 +275,7 @@ class abundatrade_withinboredom {
         wp_enqueue_script("abundatrade_remote");
         wp_enqueue_script("abundatrade_impromptu");
         wp_enqueue_script("abundatrade_register");
-        $abundacalc = array('server' => 'abundatrade.com', 
+        $abundacalc = array('server' => 'tiny.abundatrade.com', 
             'url' => $this->folders['PluginUrl'], 
             'thanks' => $this->settings->Thank_you_page);
         if (isset($_REQUEST['upload_id']) && $_REQUEST['upload_id'] != '') {
