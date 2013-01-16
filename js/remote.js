@@ -716,6 +716,15 @@ function display_promo() {
     }
 }
 
+/** Live Lookups */
+function check_for_new() {
+    var stop = setInterval(function () {
+        if (loggedIn) {
+            load_previous_session(false);
+        }
+    }, 2000);
+}
+
 /** Submit a list */
 function submit_modal(callback_to_submit, final_display, custom_message) {
     var state = 1;
@@ -1209,6 +1218,8 @@ jQuery(document).ready(function () {
 
             jQuery('#abundaGadgetInput').submit(function () { addGadget(jQuery('#gadget_code').val(), jQuery('#header_condition').val()); });
         }
+
+        check_for_new();
     }
 });
 
