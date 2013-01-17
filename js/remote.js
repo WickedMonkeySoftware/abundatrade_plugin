@@ -436,7 +436,7 @@ function delete_the_row(obj) {
 * load up the table based on the results.
 *
 */
-function load_previous_session(pretty) {
+function load_previous_session(pretty, ignore_errors) {
     var request = jQuery.ajax(
         {
             type: 'GET',
@@ -475,7 +475,9 @@ function load_previous_session(pretty) {
     });
 
     request.fail(function (jqXHR, textStatus, errorThrown) {
-        report_error('load_previous_session', jqXHR);
+        if (!ignore_errors) {
+            report_error('load_previous_session', jqXHR);
+        }
     });
 }
 
@@ -720,7 +722,7 @@ function display_promo() {
 function check_for_new() {
     var stop = setInterval(function () {
         if (loggedIn) {
-            load_previous_session(false);
+            load_previous_session(false, true);
         }
     }, 2000);
 }
