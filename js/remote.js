@@ -1258,7 +1258,7 @@ var tourstates = [
         html: 'Register and edit your past submissions, get paid, and mark them as heading our way',
         buttons: { Next: 1 },
         focus: 1,
-        position: { container: '#login_status_abundatrade', x: 0, y: 0, width: 200, arrow: 'tl' },
+        position: { container: '#login_status_abundatrade', x: 0, y: 50, width: 200, arrow: 'tl' },
         submit: tour_func
     },
     {
