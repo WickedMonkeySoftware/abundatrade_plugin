@@ -1255,10 +1255,10 @@ function tour_func(e, v, m, f) {
 var tourstates = [
     {
         title: 'Welcome',
-        html: 'Ready to take a tour of the AbundaTrade Calculator?',
+        html: 'Register and edit your past submissions, get paid, and mark them as heading our way',
         buttons: { Next: 1 },
         focus: 1,
-        position: { container: '#abundatrade', x: 0, y: 0, width: 200, arrow: 'tl' },
+        position: { container: '#login_status_abundatrade', x: 0, y: 0, width: 200, arrow: 'tl' },
         submit: tour_func
     },
     {
