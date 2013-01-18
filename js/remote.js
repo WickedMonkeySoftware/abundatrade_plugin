@@ -229,8 +229,10 @@ function new_session(this_link) {
 * Render the header/footer totals from JSONP data.
 *
 */
-function display_totals(data) {
-    jQuery('#product_code').val('');
+function display_totals(data, no_reset) {
+    if (!no_reset) {
+        jQuery('#product_code').val('');
+    }
     jQuery('#item_count').html(data.total_qty);
     jQuery('#total_item_count').html(data.total_qty);
     jQuery('#grand_total').html(data.currency_for_total + data.total);
@@ -253,8 +255,10 @@ function display_totals(data) {
     // Set the delete button
     //
     jQuery('.delete_this_row').attr('onclick', 'delete_the_row(this); return false;');
-    jQuery('#product_qty').val('1');
-    jQuery('#product_code').focus();
+    if (!no_reset) {
+        jQuery('#product_qty').val('1');
+        jQuery('#product_code').focus();
+    }
 }
 
 /**
@@ -466,7 +470,7 @@ function load_previous_session(pretty, ignore_errors) {
                     .slideDown("slow", function () { var $set = jQuery(this); $set.replaceWith($set.contents()); })
             }
 
-            display_totals(part);
+            display_totals(part, ignore_errors);
         }
         //build_row(data);
         //jQuery('#abundaCalcTbl > tbody').prepend(data.row_html);
