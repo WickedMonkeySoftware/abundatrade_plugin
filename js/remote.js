@@ -361,7 +361,7 @@ function display_bulk_upload(display_prompt, id) {
                     //display status
                     jQuery("#bar").css('width', percent + "%")
                     jQuery("#progress").get(0).innerHTML = data.on + " of approx. " + data.total;
-                    jQuery("#percent").get(0).innerHTML = Math.round(percent) + "%";
+                    jQuery("#percent").get(0).innerHTML = Math.round(percent) + "% <br>Edit after uploading from your <a href='http://abundatrade.com/trade/user/profile/'>profile</a>";
                 }
             }
         });
