@@ -129,7 +129,7 @@ function get_login_status() {
         );
         request.done(function(data) {
             if (data.status) {
-                jQuery('#login_status_abundatrade').get(0).innerHTML = "Hello " + data.first_name + " " + data.last_name + " <em><a onclick=\"abundatrade_logout()\">logout</a></em>" + tour;
+                jQuery('#login_status_abundatrade').get(0).innerHTML = "Hello " + data.first_name + " " + data.last_name + " <em><a onclick=\"abundatrade_logout()\">logout</a></em> <em>View your <a href='http://abundatrade.com/trade/user/profile/' title='View your information, and edit past valuations!'>profile</a></em>" + tour;
                 if (data.first_name == 'Super Cow')
                     loggedIn = false;
                 else loggedIn = true;
