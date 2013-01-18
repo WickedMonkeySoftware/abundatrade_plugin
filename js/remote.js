@@ -339,13 +339,13 @@ function display_bulk_upload(display_prompt, id) {
                 percent = data.on / data.total * 100;
 
                 if (data.on == 1 && data.total == 1) {
-                    jQuery("#progress").get(0).innerHTML = "Processing complete -- building your email";
+                    jQuery("#progress").get(0).innerHTML = "Processing complete -- building your email<br>Edit after uploading from your <a href='http://abundatrade.com/trade/user/profile/'>profile</a>";
                 }
                 else if (data.on == 2 && data.total == 2) {
                     //processing complete
                     clearInterval(stop);
                     jQuery("#bar").css('width', percent + "%")
-                    jQuery("#progress").get(0).innerHTML = "Processing complete -- sending your valuation to you ";
+                    jQuery("#progress").get(0).innerHTML = "Processing complete -- sending your valuation to you<br>Edit after uploading from your <a href='http://abundatrade.com/trade/user/profile/'>profile</a>";
                     jQuery("#percent").get(0).innerHTML = Math.round(percent) + "%";
 
                     if (!donot_reset) {
