@@ -1431,7 +1431,7 @@ function build_row(data) {
     data.row_html = "";
 
     if (jQuery("#ready2go").length > 0) {
-        jQuery("#ready2go").remove();
+        //jQuery("#ready2go").remove();
     }
 
     if (jQuery.isArray(data.row)) {

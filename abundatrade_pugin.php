@@ -164,7 +164,7 @@ class abundatrade_withinboredom {
                      </tr>
                   </tfoot>-->
                   <tbody id="abundaCalcBody_process">
-		  <tr><td colspan="6" class="center">&nbsp;</td></tr>
+		  <tr><td colspan="6" id="ready2go" class="center">&nbsp;</td></tr>
 		</tbody>
 		<tbody >
 			<tr class="response">
