@@ -98,6 +98,7 @@ var loggedIn = false;
 function do_tour() {
     if (jQuery('#abundaGadgetInput').length > 0 && jQuery('#gadget_abundatrade').css('display') == 'block') {
         // for gadget side
+        jQuery.prompt(gadgetstates);
     }
     else {
         // for regular calculator
@@ -600,7 +601,8 @@ function displayLogin(custom_message) {
     }
 
     if (!loggedIn) {
-        return '<label for="user">Email Address:</label><br/><input type="text" id="abundatrade_user" name="abundatrade_user" value="" /><br/>'+
+        return '<p>If you have an account, please login</p>' +
+            '<label for="user">Email Address:</label><br/><input type="text" id="abundatrade_user" name="abundatrade_user" value="" /><br/>' +
             '<label for="password">Password:</label><br/><input type="password" name="abundatrade_password" id="abundatrade_password" value=""/><br/>'+
             '<div style="display:none" id="logging_on"><img src="'+abundacalc.url+'/images/spinner.gif">Logging in -- please wait</div><span id="login_error" class="abundatrade_error" style="display:none;">Invalid Password/Email</span><br/>'+
             '<label for="remember">Remember me?</label><input type="checkbox" name="remember" id="remember"/><br/>'+
@@ -1229,15 +1231,27 @@ jQuery(document).ready(function () {
     }
 });
 
-function transform_into_full_calc() {
-    jQuery("#gadget_abundatrade").fadeOut();
-    jQuery("#bulk").slideUp(500);
-    jQuery("#top_input_section").fadeIn(500);
-    jQuery("#second_content").slideDown(500);
-    jQuery("#abundaCalcTbl").delay(100).fadeIn(400);
-    jQuery("#bulk_button").slideDown(1000);
-    jQuery("#very_bottom").slideDown(500);
-    load_previous_session(false);
+function transform_into_full_calc(mode) {
+    if (mode == 'gadget') {
+        jQuery("#gadget_abundatrade").fadeIn();
+        jQuery("#bulk").slideUp(500);
+        //jQuery("#top_input_section").fadeIn(500);
+        jQuery("#second_content").slideDown(500);
+        jQuery("#abundaCalcTbl").delay(100).fadeIn(400);
+        //jQuery("#bulk_button").slideDown(1000);
+        jQuery("#very_bottom").slideDown(500);
+        load_previous_session(false);
+    }
+    else {
+        jQuery("#gadget_abundatrade").fadeOut();
+        jQuery("#bulk").slideUp(500);
+        jQuery("#top_input_section").fadeIn(500);
+        jQuery("#second_content").slideDown(500);
+        jQuery("#abundaCalcTbl").delay(100).fadeIn(400);
+        jQuery("#bulk_button").slideDown(1000);
+        jQuery("#very_bottom").slideDown(500);
+        load_previous_session(false);
+    }
     return false;
 }
 
@@ -1251,6 +1265,33 @@ function tour_func(e, v, m, f) {
         return false;
     }
 }
+
+var gadgetstates = [
+    {
+        title: 'Welcome',
+        html: 'Register and edit your past submissions, get paid and mark them as heading our way',
+        buttons: { Next: 1 },
+        focus: 1,
+        position: { container: '#login_status_abundatrade', x: 0, y: 50, width: 200, arrow: 'tl' },
+        submit: tour_func
+    },
+    {
+        title: 'Getting Started',
+        html: 'Choose your gadget you want to sell to us from here.',
+        buttons: { Back: -1, Next: 1 },
+        focus: 1,
+        position: { container: '#gadget_code', x: 0, y: 50, width: 200, arrow: 'tl' },
+        submit: tour_func
+    },
+    {
+        title: 'Add it',
+        html: 'Add your item to your working trade list, you can signin, signup, or submit as a guest for an instant quote.',
+        buttons: { Done: 2 },
+        focus: 1,
+        position: { container: '#abundaGadgetInput .submit_holder', x: 0, y: 50, width: 200, arrow: 'tl' },
+        submit: tour_func
+    },
+];
 
 var tourstates = [
     {
@@ -1341,8 +1382,9 @@ function addGadget(ean, condition) {
                             });
 
     request.done(function (data) {
+        transform_into_full_calc('gadget');
         // No errors
-        //
+        /*
         if (data != '') {
             display_totals(data);
             jQuery.prompt("would you like to add any books, cds, DVDs, or BluRays to your list?", {
@@ -1365,7 +1407,7 @@ function addGadget(ean, condition) {
         else {
             data.responseText = data;
             report_error('addGadget', data);
-        }
+        }*/
     });
 
     request.fail(function (jqXHR, textStatus, errorThrown) {
@@ -1467,6 +1509,9 @@ function build_row(data) {
 
 /** Write out the html for the row */
 function write_html(data, row) {
+    if (row.category == 'Gadget') {
+        row.title += ' (Like New)';
+    }
     return "<tr class='new response'> <td class='upc'>" + row.product_code + "</td> <td class='details'> <div class='td_image'> <img src='" + row.images + "' alt='" + row.title + "' /> </div><div class='td_details'> <strong>" + row.title + "</strong><br /><em>" + (row.author == null ? '' : row.author) + "</em><br/>" + (row.category == null ? "" : row.category) + "</div>  </div></td> <td class='quantity'>" + row.quantity + "</td> <td class='item'>" + (row.worthless == true ? "<p class='blatent'>No Abunda Value</p>" : "") + (row.overstocked == true ? "<span class='blatent'>Over Stocked Item</span>" : "") + "<div class='item'>" + data.currency_for_total + row_price + "</div></td> <td class='values'>" + data.currency_for_total + row_total + "</td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + row.item_id + "'>Delete</a></tr>";
 }
 
