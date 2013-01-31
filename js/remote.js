@@ -771,7 +771,7 @@ function submit_modal(callback_to_submit, final_display, custom_message) {
                 request = jQuery.ajax({
                     url: 'http://' + abundacalc.server + '/trade/process/user/login/',
                     dataType: 'jsonp',
-                    data: 'user='+jQuery('#abundatrade_user').val()+'&password='+jQuery("#abundatrade_password").val()+"&remember="+jQuery("#remember").is(":checked")
+                    data: 'user='+jQuery('#abundatrade_user').val()+'&password='+md5(jQuery("#abundatrade_password").val())+"&remember="+jQuery("#remember").is(":checked")
                 });
                 request.done(function(data) {
                     if (data.error) {
