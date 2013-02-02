@@ -20,7 +20,7 @@
 }
 
 
-#abundatrade a{color: #10A3E8; cursor:pointer;}
+#abundatrade a{color: #10A3E8; cursor:pointer; font-size:16px;}
 #abundatrade a:hover{text-decoration: underline;}
 
 .calc_content_wrap
@@ -400,7 +400,7 @@
    margin-right: auto;
    padding: 5px 8px;
    text-align: center;
-   border: 2px solid #fff;
+   border: 2px solid #9c9;
    cursor: pointer;
    vertical-align: middle;
    -moz-border-radius: 20px;
@@ -636,18 +636,18 @@ border-left: 1px #CCC solid;
  /* ---SECTION 1--- */
 
 .calcbg1{background: #A5A5A5;}
-#abundatrade .calc_color1{color: #fff;}
+#abundatrade .calc_color1{color: #000;}
 .btnbg1{background: #efefef;}
 #abundatrade .btn_link1{color: #444; text-decoration:none !important;}
-#abundatrade .calc_linkS1{color: #555; text-decoration: underline;}
+#abundatrade .calc_linkS1{color: #000; text-decoration: underline;}
 #abundatrade .calc_linkS1:hover{text-decoration: none;}
 
  /* ---SECTION 2 & 4--- */
 
-.calcbg2{background: #067296; }
+.calcbg2{background: #004A7A; }
 #abundatrade .calc_color2{color: #fff;}
-.btnbg2{background: #FCFC05;}
-#abundatrade .btn_link2{color: #111; text-decoration:none !important;}
+.btnbg2{background: #537b35;}
+#abundatrade .btn_link2{color: #fff; font-weight: bold; text-decoration:none !important;}
 #abundatrade .calc_linkS4{color: yellow; text-decoration: none;}
 #abundatrade .calc_linkS4:hover{color: yellow; text-decoration: underline; cursor:pointer;}
 
@@ -655,5 +655,5 @@ border-left: 1px #CCC solid;
 
 .calcbg3{background: #ddd;} 
 #abundatrade .calc_color3{color: #000;} 
-#abundatrade .calc_linkS3{color: blue; text-decoration: none;}
+#abundatrade .calc_linkS3{color: #660000; text-decoration: none;}
 #abundatrade .calc_linkS3:hover{text-decoration: underline; cursor:pointer;}
