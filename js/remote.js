@@ -81,7 +81,7 @@ function abundatrade_logout() {
         url: 'http://' + abundacalc.server + '/trade/process/user/logout/',
         dataType: 'jsonp'
     });
-    request.done(function(data) {
+    request.done(function (data) {
         get_login_status();
     });
 }
@@ -128,7 +128,7 @@ function get_login_status() {
                 dataType: 'jsonp'
             }
         );
-        request.done(function(data) {
+        request.done(function (data) {
             if (data.status) {
                 jQuery('#login_status_abundatrade').get(0).innerHTML = "Hello " + data.first_name + " " + data.last_name + ", <em>view your <a href='http://abundatrade.com/trade/user/profile/' title='View your information, and edit past valuations!'>profile</a></em> <em>(<a onclick=\"abundatrade_logout()\">logout</a>)</em>" + tour;
                 if (data.first_name == 'Super Cow')
@@ -316,7 +316,7 @@ function bulk_submit_items() {
 /** Displays the bulk upload status */
 function display_bulk_upload(display_prompt, id) {
     if (display_prompt) {
-        jQuery.prompt({ state: { html: bulk_final, buttons: {}} }, {});
+        jQuery.prompt({ state: { html: bulk_final, buttons: {} } }, {});
     }
 
     var donot_reset = false;
@@ -603,9 +603,9 @@ function displayLogin(custom_message) {
     if (!loggedIn) {
         return '<p>If you have an account, please login</p>' +
             '<label for="user">Email Address:</label><br/><input type="text" id="abundatrade_user" name="abundatrade_user" value="" /><br/>' +
-            '<label for="password">Password:</label><br/><input type="password" name="abundatrade_password" id="abundatrade_password" value=""/><br/>'+
-            '<div style="display:none" id="logging_on"><img src="'+abundacalc.url+'/images/spinner.gif">Logging in -- please wait</div><span id="login_error" class="abundatrade_error" style="display:none;">Invalid Password/Email</span><br/>'+
-            '<label for="remember">Remember me?</label><input type="checkbox" name="remember" id="remember"/><br/>'+
+            '<label for="password">Password:</label><br/><input type="password" name="abundatrade_password" id="abundatrade_password" value=""/><br/>' +
+            '<div style="display:none" id="logging_on"><img src="' + abundacalc.url + '/images/spinner.gif">Logging in -- please wait</div><span id="login_error" class="abundatrade_error" style="display:none;">Invalid Password/Email</span><br/>' +
+            '<label for="remember">Remember me?</label><input type="checkbox" name="remember" id="remember"/><br/>' +
             '<a href="http://abundatrade.com/trade/user/reset/">Forgot your password?</a>';
     }
     return '<p>Welcome back!</p>';
@@ -613,13 +613,13 @@ function displayLogin(custom_message) {
 
 function displayLoginButtons() {
     if (loggedIn) {
-        return {Cancel: 0, 'Ready to submit': 1};
+        return { Cancel: 0, 'Ready to submit': 1 };
     }
     else {
         if (just_logging_in) {
-            return {Cancel: 0, Login: -1, Register: 1};
+            return { Cancel: 0, Login: -1, Register: 1 };
         }
-        return {Cancel: 0, Login: -1, Register: 1, 'Continue as Guest': 2};
+        return { Cancel: 0, Login: -1, Register: 1, 'Continue as Guest': 2 };
     }
 }
 
@@ -633,11 +633,11 @@ function checkpass() {
     else {
         jQuery("#shortpass").hide();
     }
-    
+
     if (conf.length == 0) {
         return;
     }
-    else if (orig != conf){
+    else if (orig != conf) {
         jQuery("#badpass").show();
         jQuery("#goodpass").hide();
     }
@@ -651,18 +651,18 @@ function checkemail() {
     if (!isguest) {
         jQuery("#researching").fadeIn();
         request = jQuery.ajax({
-           url: "http://" + abundacalc.server + "/trade/process/user/create/",
-           dataType: "jsonp",
-           data: "email="+jQuery("#email_abundatrade").val()
+            url: "http://" + abundacalc.server + "/trade/process/user/create/",
+            dataType: "jsonp",
+            data: "email=" + jQuery("#email_abundatrade").val()
         });
-        request.done(function(data) {
-           jQuery("#researching").hide();
-           if (data.error != "invalid request") {
-               jQuery("#bademail").show();
-           }
-           else {
-               jQuery("#bademail").hide();
-           }
+        request.done(function (data) {
+            jQuery("#researching").hide();
+            if (data.error != "invalid request") {
+                jQuery("#bademail").show();
+            }
+            else {
+                jQuery("#bademail").hide();
+            }
         });
     }
 }
@@ -701,20 +701,20 @@ function display_promo() {
         '<option value="15">Blog</option>' +
         '<option value="14">Youtube Video</option>' +
         '<option value="9">Other</option></select></div>' +
-        '<div id="friend" style="display: none"><label for="referred">Enter the email address of your friend</label><br/><input type="text" name="referred" id="referred"/></div>'+
+        '<div id="friend" style="display: none"><label for="referred">Enter the email address of your friend</label><br/><input type="text" name="referred" id="referred"/></div>' +
         '<div id="other" style="display: none"><label for="Other">Please tell us where you heard about us:</label><br/><div class="field"><input type="text" name="txtOther" value="" /></div></div>' +
-        '<script type="text/javascript">'+
-            'jQuery("#referrals").change(function() { '+
-            'if(jQuery("#referrals").val() == 9) {'+
-             'jQuery("#other").slideDown("slow");'+
-             'jQuery("#friend").slideUp("slow");'+
-            '} else if (jQuery("#referrals").val() == 3) {'+
-             'jQuery("#friend").slideDown("slow");'+
-             'jQuery("#other").slideUp("slow");'+
-            '} else { '+
-             'jQuery("#other").slideUp("slow"); '+
-             'jQuery("#friend").slideUp("slow");'+
-            '} '+
+        '<script type="text/javascript">' +
+            'jQuery("#referrals").change(function() { ' +
+            'if(jQuery("#referrals").val() == 9) {' +
+             'jQuery("#other").slideDown("slow");' +
+             'jQuery("#friend").slideUp("slow");' +
+            '} else if (jQuery("#referrals").val() == 3) {' +
+             'jQuery("#friend").slideDown("slow");' +
+             'jQuery("#other").slideUp("slow");' +
+            '} else { ' +
+             'jQuery("#other").slideUp("slow"); ' +
+             'jQuery("#friend").slideUp("slow");' +
+            '} ' +
         '} );</script>' +
         '' +
         '<label for="phone_request">Would you like a scanning app for your smart phone?</label><br/>' +
@@ -736,7 +736,7 @@ function check_for_new() {
 /** Submit a list */
 function submit_modal(callback_to_submit, final_display, custom_message) {
     var state = 1;
-    
+
     if (loggedIn) state = 5;
 
     var states =
@@ -747,67 +747,67 @@ function submit_modal(callback_to_submit, final_display, custom_message) {
                     focus: 1,
                     submit: function (ev, but, message, val) {
                         if (loggedIn) {
-            if (but == 0) {
-                return 0;
-            }
-            if (but == 1) {
-                jQuery.prompt.goToState('state5');
-                return false;
-            }
-        }
-        else {
-            if (but == 0)
-                return 0;
-            if (but == 1) {
-                
-                Register(register_pass(),final_display, callback_to_submit);
-            }
-            if (but == 2) {
-                Register(register_guest(), final_display, callback_to_submit)
-                
-            }
-            if (but == -1) {
-                jQuery("#logging_on").fadeIn();
-                request = jQuery.ajax({
-                    url: 'http://' + abundacalc.server + '/trade/process/user/login/',
-                    dataType: 'jsonp',
-                    data: 'user='+jQuery('#abundatrade_user').val()+'&password='+md5(jQuery("#abundatrade_password").val())+"&remember="+jQuery("#remember").is(":checked")
-                });
-                request.done(function(data) {
-                    if (data.error) {
-                        jQuery("#logging_on").fadeOut();
-                        jQuery("#login_error").delay(800).show();
-                    }
-                    else {
-                        jQuery("#login_error").hide();
-                        if (just_logging_in) {
-                            get_login_status();
-                            just_logging_in = false;
-                            jQuery.prompt.close();
-                        } else {
-                            get_login_status();
-                            just_logging_in = false;
-                            loggedIn = true;
-                            jQuery.prompt.goToState('state5');
+                            if (but == 0) {
+                                return 0;
+                            }
+                            if (but == 1) {
+                                jQuery.prompt.goToState('state5');
+                                return false;
+                            }
                         }
-                    }
-                });
-            }
+                        else {
+                            if (but == 0)
+                                return 0;
+                            if (but == 1) {
 
-            return false;
-    
-                    }
+                                Register(register_pass(), final_display, callback_to_submit);
+                            }
+                            if (but == 2) {
+                                Register(register_guest(), final_display, callback_to_submit)
+
+                            }
+                            if (but == -1) {
+                                jQuery("#logging_on").fadeIn();
+                                request = jQuery.ajax({
+                                    url: 'http://' + abundacalc.server + '/trade/process/user/login/',
+                                    dataType: 'jsonp',
+                                    data: 'user=' + jQuery('#abundatrade_user').val() + '&password=' + md5(jQuery("#abundatrade_password").val()) + "&remember=" + jQuery("#remember").is(":checked")
+                                });
+                                request.done(function (data) {
+                                    if (data.error) {
+                                        jQuery("#logging_on").fadeOut();
+                                        jQuery("#login_error").delay(800).show();
+                                    }
+                                    else {
+                                        jQuery("#login_error").hide();
+                                        if (just_logging_in) {
+                                            get_login_status();
+                                            just_logging_in = false;
+                                            jQuery.prompt.close();
+                                        } else {
+                                            get_login_status();
+                                            just_logging_in = false;
+                                            loggedIn = true;
+                                            jQuery.prompt.goToState('state5');
+                                        }
+                                    }
+                                });
+                            }
+
+                            return false;
+
+                        }
                     }
                 },
                 state1: {
                     html: '<select id="sex" name="sex">' +
                         '<option value="-1" selected>Please select one.</option>' +
-                        '<option value="Mr.">Mr.</option>'+
-                        '<option value="Mrs.">Mrs.</option>'+
-                        '<option value="Ms.">Ms.</option></select><br/>'+
+                        '<option value="Mr.">Mr.</option>' +
+                        '<option value="Mrs.">Mrs.</option>' +
+                        '<option value="Ms.">Ms.</option></select><br/>' +
                         '<label for="first_name">First Name:</label><br/><input type="text" id="name_first" name="first_name" value=""/><br/>' +
                         '<label for="last_name">Last Name:</label><br/><input type="text" id="name_last" name="last_name" value=""/><br/>' +
-                        '<label for="email_abundatrade">Email:</label><br/><input onchange="checkemail()" id="email_abundatrade" name="email" value="" type="text" /><img id="researching" src="'+abundacalc.url+'/images/spinner.gif" style="display:none"><span style="display:none" id="bademail">This email is already registered</span><br/>' +
+                        '<label for="email_abundatrade">Email:</label><br/><input onchange="checkemail()" id="email_abundatrade" name="email" value="" type="text" /><img id="researching" src="' + abundacalc.url + '/images/spinner.gif" style="display:none"><span style="display:none" id="bademail">This email is already registered</span><br/>' +
                         '<label for="confirm_email">Confirm Email:</label><br/><input name="confirm_email" type="text" value=""/>' +
                         '<input type="hidden" name="a" value="' + jQuery('#a').val() + '"/>',
                     buttons: { Cancel: 0, Next: 1 },
@@ -855,14 +855,14 @@ function submit_modal(callback_to_submit, final_display, custom_message) {
                     }
                 },
                 state2: {
-                    html: '<label id="label_pass" for="password">Password:</label><br/><input type="password" id="password" name="password" /><span style="display:none" id="shortpass">Must be at least 8 characters</span><br/>'+
+                    html: '<label id="label_pass" for="password">Password:</label><br/><input type="password" id="password" name="password" /><span style="display:none" id="shortpass">Must be at least 8 characters</span><br/>' +
                         '<label id="label_confirm" for="confirmPass">Confirm Password:</label><br/><input type="password" id="confirmPass" name="confirmPass"/><span id="goodpass" style="display:none" >Matches!</span><span id="badpass" style="display:none" >Does not match!</span></br>' +
-                        '<label for="address_street">Street Address:</label><br/><input type="text" id="address_street" name="address_street" /><br/>'+
-                        '<label for="address_city">City:</label><br/><input type="text" id="address_city" name="address_city"/><br/>'+
-                        '<label for="address_state">State:</label><br/><input type="text" id="address_state" name="address_state"/><br/>'+
-                        '<label for="address_zip">Zip:</label><br/><input type="text" id="address_zip" name="address_zip"/><br/>'+
+                        '<label for="address_street">Street Address:</label><br/><input type="text" id="address_street" name="address_street" /><br/>' +
+                        '<label for="address_city">City:</label><br/><input type="text" id="address_city" name="address_city"/><br/>' +
+                        '<label for="address_state">State:</label><br/><input type="text" id="address_state" name="address_state"/><br/>' +
+                        '<label for="address_zip">Zip:</label><br/><input type="text" id="address_zip" name="address_zip"/><br/>' +
                         '<script type="text/javascript">jQuery("#password").keyup(checkpass); jQuery("#confirmPass").keyup(checkpass);</script>',
-                    buttons: {Back: -1,Cancel:0, Next: 1},
+                    buttons: { Back: -1, Cancel: 0, Next: 1 },
                     submit: function (ev, but, message, val) {
                         if (but != 0) {
                             if (!isguest) {
@@ -896,12 +896,12 @@ function submit_modal(callback_to_submit, final_display, custom_message) {
                                 jQuery("#address_street").css("border", "solid #ff0000 2px");
                                 return false;
                             }
-                            
-                            state+= but;
+
+                            state += but;
                             jQuery.prompt.goToState('state' + state);
                             return false;
                         }
-                        
+
                         jQuery.prompt.close();
                     }
                 },
@@ -944,11 +944,11 @@ function submit_modal(callback_to_submit, final_display, custom_message) {
                                                             data: '?action=create_user' + str,
                                                             dataType: 'jsonp'
                                                         });
-                                request.done(function(data) {
-                                        get_login_status();
-                                        just_logging_in = false;
-                                        jQuery.prompt.close();
-                                        
+                                request.done(function (data) {
+                                    get_login_status();
+                                    just_logging_in = false;
+                                    jQuery.prompt.close();
+
                                 });
 
                             }
@@ -992,18 +992,18 @@ function submit_modal(callback_to_submit, final_display, custom_message) {
                                                             data: '?action=create_user' + str,
                                                             dataType: 'jsonp'
                                                         });
-                                request.done(function(data) {
-                                        get_login_status();
-                                        just_logging_in = false;
-                                        jQuery.prompt.close();
-                                        
+                                request.done(function (data) {
+                                    get_login_status();
+                                    just_logging_in = false;
+                                    jQuery.prompt.close();
+
                                 });
 
                             }
                             else {
                                 jQuery.prompt.goToState('state' + state);
                             }
-                            
+
                             return false;
                         }
                         else {
@@ -1013,7 +1013,7 @@ function submit_modal(callback_to_submit, final_display, custom_message) {
                 },
                 state5: {
                     html: '<h2>Please Note</h2><p>The values shown on the calculator are a pre-valuation.</p><p>Item quality needs to be verified for final valuation.</p><p>This valuation is not a commitment.</p><p>All data is kept private.</p><label for="promo_code">Promo Code</label><input type="text" name="promo_code" value=""/>',
-                    buttons: [{ title: 'Back', value: -1 }, { title: 'Cancel', value: 0 }, { title: 'Agree and Submit', value: 'submit'}],
+                    buttons: [{ title: 'Back', value: -1 }, { title: 'Cancel', value: 0 }, { title: 'Agree and Submit', value: 'submit' }],
                     focus: 2,
                     submit: function (ev, but, message, val) {
                         if (but == "submit") {
@@ -1038,7 +1038,7 @@ function submit_modal(callback_to_submit, final_display, custom_message) {
                         else {
                             jQuery.prompt.close();
                         }
-                        
+
                         isguest = false;
                     }
                 },
@@ -1100,7 +1100,7 @@ function submit_my_list(f) {
     jQuery.each(f, function (i, obj) {
         str += '&' + i + '=' + obj;
     });
-    
+
     if (isguest) {
         str += '&guest=true';
     }
@@ -1155,8 +1155,8 @@ function submitGiftCard() {
                                 data: 'email=' + email + "&key=" + key,
                                 dataType: 'jsonp',
                                 context: this,
-                                success: function(data) {
-                                        jQuery(this).data('submit-me', true).submit();
+                                success: function (data) {
+                                    jQuery(this).data('submit-me', true).submit();
                                 }
                             });
     return false;
@@ -1172,7 +1172,7 @@ jQuery(document).ready(function () {
         //jQuery('input[name=Submit]').attr('onclick','return submitGiftCard();');
         jQuery('form[name=icpsignup]').submit(submitGiftCard);
     }
-    
+
     if (jQuery("#login_status_abundatrade").val() != null) {
         if (abundacalc.upload_id) {
             display_bulk_upload(true);
@@ -1455,16 +1455,15 @@ function loadActiveGadgets() {
 
 }
 
-function getParameterByName(name)
-{
-  name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-  var regexS = "[\\?&]" + name + "=([^&#]*)";
-  var regex = new RegExp(regexS);
-  var results = regex.exec(window.location.search);
-  if(results == null)
-    return "";
-  else
-    return decodeURIComponent(results[1].replace(/\+/g, " "));
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+    var regexS = "[\\?&]" + name + "=([^&#]*)";
+    var regex = new RegExp(regexS);
+    var results = regex.exec(window.location.search);
+    if (results == null)
+        return "";
+    else
+        return decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
 /** Builds an unknown row */
@@ -1516,7 +1515,57 @@ function write_html(data, row) {
     if (row.category == 'Gadget') {
         row.title += ' (Like New)';
     }
+
+    if (row.worthless) {
+        hide_after(1, row.item_id);
+    }
+
     return "<tr class='new response'> <td class='upc'>" + row.product_code + "</td> <td class='details'> <div class='td_image'> <img src='" + row.images + "' alt='" + row.title + "' /> </div><div class='td_details'> <strong>" + row.title + "</strong><br /><em>" + (row.author == null ? '' : row.author) + "</em><br/>" + (row.category == null ? "" : row.category) + "</div>  </div></td> <td class='quantity'>" + row.quantity + "</td> <td class='item'>" + (row.worthless == true ? "<p class='blatent'>No Abunda Value</p>" : "") + (row.overstocked == true ? "<span class='blatent'>Over Stocked Item</span>" : "") + "<div class='item'>" + data.currency_for_total + row_price + "</div></td> <td class='values'>" + data.currency_for_total + row_total + "</td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + row.item_id + "'>Delete</a></tr>";
+}
+
+var hidden = true;
+
+function toggle_show() {
+    if (hidden) {
+        show_all(false);
+        hidden = false;
+        jQuery('#super_show').get(0).innerHTML = "Hide all zero value items";
+        return false;
+    }
+
+    hide_all(false);
+    hidden = true;
+    jQuery('#super_show').get(0).innerHTML = "Show all zero value items";
+    return false;
+}
+
+function hide_after(secs, id) {
+    if (hidden) {
+        stop = setTimeout(function () {
+            jQuery('#del_' + id).parents('tr').mouseenter(function () {
+                jQuery('#del_' + id).parents('tr').stop().fadeOut();
+                jQuery('#del_' + id).parents('tr').fadeIn();
+                jQuery('#del_' + id).parents('tr').unbind('mouseenter');
+            });
+            jQuery('#del_' + id).parents('tr').fadeOut(5000);
+            jQuery('#super_show').get(0).innerHTML = "Show all zero value items";
+        }, secs * 1000);
+    }
+}
+
+function show_all() {
+    var selector = 'td:contains("No Abunda Value")';
+    jQuery(selector).parents('tr').fadeIn();
+}
+
+function hide_all(now) {
+    var selector = 'td:contains("No Abunda Value")';
+    if (now) {
+        jQuery(selector).parents('tr').hide;
+    }
+    else {
+        jQuery(selector).parents('tr').fadeOut();
+    }
 }
 
 /******************************
