@@ -1437,15 +1437,19 @@ function loadActiveGadgets() {
             }
 
             jQuery('#gadget_code').get(0).innerHTML = str;
+
+            if (getParameterByName('ean') != "") {
+                jQuery('#gadget_code').get(0).value = getParameterByName('ean');
+            }
         }
         else {
             data.responseText = data;
-            report_error('loadActiveGadgets', data);
+            report_error('loadActiveGadgetsInvalidData', data);
         }
     });
 
     request.fail(function (jqXHR, textStatus, errorThrown) {
-        report_error('loadActiveGadgets', jqXHR);
+        report_error('loadActiveGadgetsFailed', jqXHR);
         please_wait(false);
     });
 
