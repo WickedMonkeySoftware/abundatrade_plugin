@@ -139,6 +139,7 @@ var setCat = null;
 var setCar = null;
 var setDev = null;
 var setCond = null;
+var setMan = null;
 
 function changeCond() {
     var catID = jQuery("#gad_cat").val();
