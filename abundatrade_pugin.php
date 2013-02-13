@@ -68,6 +68,35 @@ class abundatrade_withinboredom {
         return $config;
     }
     
+    public function gadget($atts) {
+        $closediv = "</div>";
+        
+        $display = "<div id='abundatrade_gadget'>";
+        
+        $display .= "<div id='category_selection' class=''>";
+        $display .= "";
+        $display .= $closediv;
+        
+        $display .= "<div id='manufacturer_selection' class=''>";
+        $display .= $closediv;
+        
+        $display .= "<div id='carrier_selection' class=''>";
+        $display .= $closediv;
+        
+        $display .= "<div id='device_selection' class=''>";
+        $display .= $closediv;
+        
+        $display .= "<div id='condition_selection' class=''>";
+        $display .= $closediv;
+        
+        $display .= "<div id='quote' class=''>";
+        $display .= $closediv;
+        
+        $display .= $closediv;
+        
+        return $display;
+    }
+    
     public function shortcode($atts) {
         
         if (!isset($atts['gadget_only'])) $atts['gadget_only'] = false;
@@ -244,6 +273,11 @@ class abundatrade_withinboredom {
         return $display;
     }
     
+    public function dogadgets($atts) {
+        $display = apply_filters("abundatrade(shortcode(gadgets))", $atts);
+        return $display;
+    }
+    
     public function addScripts() {
         if (file_exists($this->folders['UploadsDir']['basedir'] . '/abundatrade/themes/' . $this->settings->Theme . '.css')) {
             wp_register_style("abundatrade_classic", $this->folders['UploadsDir']['baseurl'] . '/abundatrade/themes/' . $this->settings->Theme . '.css');
@@ -265,18 +299,23 @@ class abundatrade_withinboredom {
             wp_register_style("abundatrade_prompt_classic", $this->folders['PluginUrl'] . '/themes/classic-prompt.css');
         }
         
+        wp_register_style("abunda_gadgets", $this->folders['PluginUrl'] . '/themes/gadget.css');
+        
         wp_register_script("abundatrade_md5", $this->folders['PluginUrl'] . '/js/MD5.js');
         wp_register_script("abundatrade_remote", $this->folders['PluginUrl'] . '/js/remote.js', array('jquery','abundatrade_md5'));
         wp_register_script("abundatrade_impromptu", $this->folders['PluginUrl'] . '/js/jquery-impromptu.4.0.min.js', array('jquery'));
         wp_register_script("abundatrade_register", $this->folders['PluginUrl'] . '/js/register.js', array('jquery', 'abundatrade_remote'));
+        wp_register_script("abundatrade_gadgets", $this->folders['PluginUrl'] . '/js/abunda_gadgets_short.js', array('jquery', 'abundatrade_register'));
         
         wp_enqueue_style("abundatrade_classic");
         wp_enqueue_style("abundatrade_prompt_classic");
+        wp_enqueue_style("abunda_gadgets");
         wp_enqueue_script("abundatrade_md5");
         wp_enqueue_script("abundatrade_remote");
         wp_enqueue_script("abundatrade_impromptu");
         wp_enqueue_script("abundatrade_register");
-        $abundacalc = array('server' => 'abundatrade.com', 
+        wp_enqueue_script("abundatrade_gadgets");
+        $abundacalc = array('server' => 'tiny.abundatrade.com', 
             'url' => $this->folders['PluginUrl'], 
             'thanks' => $this->settings->Thank_you_page);
         if (isset($_REQUEST['upload_id']) && $_REQUEST['upload_id'] != '') {
@@ -294,8 +333,10 @@ class abundatrade_withinboredom {
         add_filter("abundatrade(getFolders)", array(&$this, "getFolders"), 1);
         add_filter("abundatrade(applyConfig)", array(&$this, "applyConfig"), 1);
         add_filter("abundatrade(shortcode(abundatrade))", array(&$this, "shortcode"), 1);
+        add_filter("abundatrade(shortcode(gadgets))", array(&$this, "gadget"), 1);
         
         add_shortcode("abundatrade", array($this, "doshortcode"));
+        add_shortcode("abundagadgets", array($this, "dogadgets"));
         
         add_filter("abundatrade(settings)", array($this, "getSettings"), 200, 0);
         
