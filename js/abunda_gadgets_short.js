@@ -256,4 +256,4 @@ function determineStart() {
     }
 }
 
-jQuery(window).ready(determineStart());
+jQuery(determineStart());
