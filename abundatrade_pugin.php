@@ -73,24 +73,27 @@ class abundatrade_withinboredom {
         
         $display = "<div id='abundatrade_gadget'>";
         
-        $display .= "<div id='category_selection' class=''>";
-        $display .= "";
+        $display .= "<div class='category_selector select_container'><div id='category_selection' class='selection sel_center'>";
+        $display .= $closediv . $closediv;
+        
+        $display .= "<div class='large_container'><div id='manufacturer_selection' class='selection sel_left'>";
         $display .= $closediv;
         
-        $display .= "<div id='manufacturer_selection' class=''>";
+        $display .= "<div id='carrier_selection' class='selection sel_left'>";
         $display .= $closediv;
         
-        $display .= "<div id='carrier_selection' class=''>";
+        $display .= "<div id='device_selection' class='selection sel_left'>";
         $display .= $closediv;
         
-        $display .= "<div id='device_selection' class=''>";
-        $display .= $closediv;
+        $display .= "<div id='condition_selection' class='selection sel_left'>";
+        $display .= $closediv . $closediv;
         
-        $display .= "<div id='condition_selection' class=''>";
-        $display .= $closediv;
+        $display .= "<div class='quote_display select_container'><div id='quote' class='selection sel_center'>";
+        $display .= $closediv . $closediv;
         
-        $display .= "<div id='quote' class=''>";
-        $display .= $closediv;
+        $display .= "<form><div class='description_container'><div id='description' class='selection box_center'>";
+        $display .= "<textarea name='description_entry'></textarea>";
+        $display .= $closediv . $closediv . "</form>";
         
         $display .= $closediv;
         
