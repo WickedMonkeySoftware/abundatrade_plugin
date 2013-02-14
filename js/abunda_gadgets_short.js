@@ -1,25 +1,5 @@
 ﻿// JScript File
 
-function SetGadgetPage(page) {
-    for (i = 0; i < 4; i++) {
-        console.log(jQuery(".page" + i).get(0));
-        jQuery("#abundatrade_gadget .page" + i).get(0).innerHTML = '';
-        jQuery("#abundatrade_gadget .page" + i).removeClass('gad_left');
-        jQuery("#abundatrade_gadget .page" + i).removeClass('gad_open');
-        jQuery("#abundatrade_gadget .page" + i).removeClass('gad_right');
-        if (i < page) {
-            jQuery("#abundatrade_gadget .page" + i).addClass('gad_left');
-        }
-        if (i == page) {
-            jQuery("#abundatrade_gadget .page" + i).addClass('gad_open');
-            drawPage(page);
-        }
-        if (i > page) {
-            jQuery("#abundatrade_gadget .page" + i).addClass('gad_right');
-        }
-    }
-}
-
 function drawCategoryPage(data) {
     if (data.valid) {
         jQuery("#carrier_selection").get(0).innerHTML = "";
@@ -28,10 +8,11 @@ function drawCategoryPage(data) {
         jQuery("#quote").get(0).innerHTML = "";
         jQuery("#category_selection").get(0).innerHTML = "<p>Loading</p>";
         jQuery("#manufacturer_selection").get(0).innerHTML = "<p>Select a category above</p>";
-        var output = "<p>Category:</p><select id='gad_cat' onChange='changeCat()'><option value='-1'>Choose a category</option>"
+        var output = "<p>Category:</p><select name='gad_cat' id='gad_cat' onChange='changeCat()'><option value='-1'>Choose a category</option>"
         for (i = 0; i < data.output.data.length; i++) {
             output += "<option value='" + data.output.data[i].id + "'>" + data.output.data[i].name + "</option>";
         }
+        output += "<option value='-2'>Other</option>";
         jQuery("#category_selection").get(0).innerHTML = output + "</select>";
 
         if (setCat != null) {
@@ -47,7 +28,7 @@ function drawMfgPage() {
     jQuery("#quote").get(0).innerHTML = "";
     jQuery("#manufacturer_selection").get(0).innerHTML = "<p>Loading</p>";
     jQuery("#carrier_selection").get(0).innerHTML = "<p>Select a manufacturer above</p>";
-    var output = "<p>Manufacturers:</p><select id='gad_man' onChange='changeMan()'>";
+    var output = "<p>Manufacturers:</p><select name='gad_man' id='gad_man' onChange='changeMan()'>";
     var ids = Object.keys(mans);
     if (ids.length > 1) {
         output += "<option value='-1'>Choose a manufacturer</option>";
@@ -55,6 +36,7 @@ function drawMfgPage() {
     for (i = 0; i < ids.length; i++) {
         output += "<option value='" + ids[i] + "'>" + mans[ids[i]] + "</option>";
     }
+    output += "<option value='-2'>I don't know</option>";
     jQuery("#manufacturer_selection").get(0).innerHTML = output + "</select>";
     if (ids.length == 1) {
         changeMan();
@@ -70,7 +52,7 @@ function drawCarPage() {
     jQuery("#quote").get(0).innerHTML = "";
     jQuery("#carrier_selection").get(0).innerHTML = "<p>Loading</p>";
     jQuery("#device_selection").get(0).innerHTML = "<p>Select a carrier above</p>";
-    var output = "<p>Carrier:</p><select id='gad_car' onChange='changeCar()'>";
+    var output = "<p>Carrier:</p><select name='gad_car' id='gad_car' onChange='changeCar()'>";
     var ids = Object.keys(cars);
     if (ids.length > 1) {
         output += "<option value='-1'>Choose a carrier</option>";
@@ -91,7 +73,7 @@ function drawDevPage() {
     jQuery("#quote").get(0).innerHTML = "";
     jQuery("#device_selection").get(0).innerHTML = "<p>Loading</p>";
     jQuery("#condition_selection").get(0).innerHTML = "<p>Select a device</p>";
-    var output = "<p>Select a device</p><select id='gad_dev' onChange='changeDev()'>";
+    var output = "<p>Select a device</p><select name='gad_dev' id='gad_dev' onChange='changeDev()'>";
     var ids = Object.keys(devs);
     if (ids.length > 1) {
         output += "<option value='-1'>Choose a device</option>";
@@ -99,6 +81,7 @@ function drawDevPage() {
     for (i = 0; i < ids.length; i++) {
         output += "<option value='" + ids[i] + "'>" + devs[ids[i]] + "</option>";
     }
+    output += "<option value='-2'>I Don't Know</option>";
     jQuery("#device_selection").get(0).innerHTML = output + "</select>";
     if (ids.length == 1) {
         changeDev();
@@ -112,7 +95,7 @@ function drawDevPage() {
 function drawCondPage() {
     jQuery("#condition_selection").get(0).innerHTML = "<p>Loading</p>";
     jQuery("#quote").get(0).innerHTML = "";
-    var output = "<p>Select a condition</p><select id='gad_cond' onChange='changeCond()'>";
+    var output = "<p>Select a condition</p><input type='hidden' name='quote_val' id='quote_val' value='0'><select name='gad_cond' id='gad_cond' onChange='changeCond()'>";
     var ids = conditions.prices;
     if (ids.length > 1) {
         output += "<option value='-1'>Choose a condition</option>";
@@ -120,6 +103,7 @@ function drawCondPage() {
     for (i = 0; i < ids.length; i++) {
         output += "<option value='" + i + "'>" + ids[i].condition + "</option>";
     }
+    output += "<option value='-2'>Damaged</option>";
     jQuery("#condition_selection").get(0).innerHTML = output + "</select>";
     if (ids.length == 1) {
         changeCond();
@@ -147,6 +131,15 @@ function changeCond() {
     var carID = jQuery("#gad_car").val();
     var devID = jQuery("#gad_dev").val();
     var condID = jQuery("#gad_cond").val();
+    if (condID < 0) {
+        jQuery("#quote").get(0).innerHTML = "";
+        if (condID == -2) {
+            ShowDescription("damaged");
+        }
+        return;
+    }
+    HideDescription();
+    jQuery("#quote_val").val((conditions.prices[condID].price));
     jQuery("#quote").get(0).innerHTML = "<h1>$" + (conditions.prices[condID].price) + ".00</h1>";
 }
 
@@ -155,6 +148,15 @@ function changeDev() {
     var manID = jQuery("#gad_man").val();
     var carID = jQuery("#gad_car").val();
     var devID = jQuery("#gad_dev").val();
+    if (devID < 0) {
+        jQuery("#condition_selection").get(0).innerHTML = "";
+        jQuery("#quote").get(0).innerHTML = "";
+        if (devID == -2) {
+            ShowDescription("unknown");
+        }
+        return;
+    }
+    HideDescription();
     conditions = Object();
     var request = jQuery.ajax("http://" + abundacalc.server + "/trade/process/ajax-post-public.php?action=get&object=TradePermProductData&category_id=" + catID + "&manufacturer_id=" + manID + "&carrier_id=" + carID + "&ean=" + devID, { dataType: 'jsonp' });
     request.success(function (data) {
@@ -167,6 +169,16 @@ function changeCar() {
     var catID = jQuery("#gad_cat").val();
     var manID = jQuery("#gad_man").val();
     var carID = jQuery("#gad_car").val();
+    if (carID < 0) {
+        jQuery("#device_selection").get(0).innerHTML = "";
+        jQuery("#condition_selection").get(0).innerHTML = "";
+        jQuery("#quote").get(0).innerHTML = "";
+        if (carID == -2) {
+            ShowDescription("unknown");
+        }
+        return;
+    }
+    HideDescription();
     devs = Object();
     var request = jQuery.ajax("http://" + abundacalc.server + "/trade/process/ajax-post-public.php?action=get&object=TradePermProductData&category_id=" + catID + "&manufacturer_id=" + manID + "&carrier_id=" + carID, { dataType: 'jsonp' });
     request.success(function (data) {
@@ -178,6 +190,17 @@ function changeCar() {
 function changeMan() {
     var catID = jQuery("#gad_cat").val();
     var manID = jQuery("#gad_man").val();
+    if (manID < 0) {
+        jQuery("#carrier_selection").get(0).innerHTML = "";
+        jQuery("#device_selection").get(0).innerHTML = "";
+        jQuery("#condition_selection").get(0).innerHTML = "";
+        jQuery("#quote").get(0).innerHTML = "";
+        if (manID == -2) {
+            ShowDescription("unknown");
+        }
+        return;
+    }
+    HideDescription();
     cars = Object();
     var request = jQuery.ajax("http://" + abundacalc.server + "/trade/process/ajax-post-public.php?action=get&object=TradePermProductData&category_id=" + catID + "&manufacturer_id=" + manID, { dataType: 'jsonp' });
     request.success(function (data) {
@@ -188,6 +211,18 @@ function changeMan() {
 
 function changeCat() {
     var catID = jQuery("#gad_cat").val();
+    if (catID < 0) {
+        jQuery("#manufacturer_selection").get(0).innerHTML = "";
+        jQuery("#carrier_selection").get(0).innerHTML = "";
+        jQuery("#device_selection").get(0).innerHTML = "";
+        jQuery("#condition_selection").get(0).innerHTML = "";
+        jQuery("#quote").get(0).innerHTML = "";
+        if (catID == -2) {
+            ShowDescription("other");
+        }
+        return;
+    }
+    HideDescription();
     mans = Object();
     var request = jQuery.ajax("http://" + abundacalc.server + "/trade/process/ajax-post-public.php?action=get&object=TradePermProductData&category_id=" + catID, { dataType: 'jsonp' });
     request.success(function (data) {
@@ -196,6 +231,23 @@ function changeCat() {
             drawMfgPage();
         }
     });
+}
+
+function ShowDescription(anyDevice) {
+    if (anyDevice == 'featured') {
+        jQuery("#desc_desc").get(0).innerHTML = "Tell us more about your gadget, accessories, etc";
+    }
+    else if (anyDevice == 'damaged') {
+        jQuery("#desc_desc").get(0).innerHTML = "Tell us more about your gadget's scratches or other damage";
+    }
+    else {
+        jQuery("#desc_desc").get(0).innerHTML = "Tell us more about your gadget including complete model number, make, etc";
+    }
+    jQuery(".description_container").slideDown();
+}
+
+function HideDescription() {
+    jQuery(".description_container").slideUp();
 }
 
 function buildUniqueArray(ar, name, data, to, override) {

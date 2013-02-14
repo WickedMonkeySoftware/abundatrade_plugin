@@ -71,7 +71,7 @@ class abundatrade_withinboredom {
     public function gadget($atts) {
         $closediv = "</div>";
         
-        $display = "<div id='abundatrade_gadget'>";
+        $display = "<form><div id='abundatrade_gadget'>";
         
         $display .= "<div class='category_selector select_container'><div id='category_selection' class='selection sel_center'>";
         $display .= $closediv . $closediv;
@@ -91,9 +91,35 @@ class abundatrade_withinboredom {
         $display .= "<div class='quote_display select_container'><div id='quote' class='selection sel_center'>";
         $display .= $closediv . $closediv;
         
-        $display .= "<form><div class='description_container'><div id='description' class='selection box_center'>";
+        $display .= "<div class='description_container'><div id='description' class='box_center'>";
+        $display .= "<p id='desc_desc'>Tell us more about your gadget including complete model #, make, etc...</p>";
         $display .= "<textarea name='description_entry'></textarea>";
-        $display .= $closediv . $closediv . "</form>";
+        $display .= $closediv . $closediv;
+        $display .= "<div class='contact_form_container'><div class='contact_form_thirds'>";
+        $display .= "<input type='text' placeholder='Your name*' name='name' class='' /><span class='required'>*</span>";
+        $display .= $closediv;
+        $display .= "<div class='contact_form_thirds'>";
+        $display .= "<input type='text' placeholder='Your email*' name='email'/><span class='required'>*</span>";
+        $display .= $closediv;
+        $display .= "<div class='contact_form_thirds'>";
+        $display .= "<input type='text' placeholder='Your phone #' name='phone'/>";
+        $display .= $closediv . $closediv;
+        $display .= "<div class='contact_form_container'><div class='contact_form_thirds'></div><div class='contact_form_thirds'>";
+        $display .= "<input type='text' placeholder='Address*' name='address_street'/><span class='required'>*</span>"; 
+        $display .= $closediv . $closediv;
+        $display .= "<div class='contact_form_container'><div class='contact_form_thirds'>";
+        $display .= "<input type='text' placeholder='City*' name='address_city'/><span class='required'>*</span>";
+        $display .= $closediv;
+        $display .= "<div class='contact_form_thirds'>";
+        $display .= "<input type='text' placeholder='State*' name='address_state'/><span class='required'>*</span>";
+        $display .= $closediv;
+        $display .= "<div class='contact_form_thirds'>";
+        $display .= "<input type='text' placeholder='Zip Code*' name='address_zip'/><span class='required'>*</span>";
+        $display .= $closediv . $closediv;
+        $display .= "<div class='contact_form_container'><div class='contact_form_thirds'></div><div class='contact_form_thirds'>";
+        $display .= "<input type='submit' value='Make Some Cash'/>";
+        $display .= $closediv . $closediv;
+        $display .= "</form>";
         
         $display .= $closediv;
         
@@ -308,7 +334,7 @@ class abundatrade_withinboredom {
         wp_register_script("abundatrade_remote", $this->folders['PluginUrl'] . '/js/remote.js', array('jquery','abundatrade_md5'));
         wp_register_script("abundatrade_impromptu", $this->folders['PluginUrl'] . '/js/jquery-impromptu.4.0.min.js', array('jquery'));
         wp_register_script("abundatrade_register", $this->folders['PluginUrl'] . '/js/register.js', array('jquery', 'abundatrade_remote'));
-        wp_register_script("abundatrade_gadgets", $this->folders['PluginUrl'] . '/js/abunda_gadgets_short.js', array('jquery', 'abundatrade_register'));
+        wp_register_script("abundatrade_gadgets", $this->folders['PluginUrl'] . '/js/abunda_gadgets_short.js', array('jquery'));
         
         wp_enqueue_style("abundatrade_classic");
         wp_enqueue_style("abundatrade_prompt_classic");
