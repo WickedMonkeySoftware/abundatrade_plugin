@@ -123,7 +123,10 @@ class abundatrade_withinboredom {
         
         $display .= $closediv;
         
-        return $display;
+        if ($_GET['gadget'] == true) {
+            return $display;
+        }
+        else return "";
     }
     
     public function shortcode($atts) {
