@@ -7,8 +7,8 @@ function drawCategoryPage(data) {
         jQuery("#condition_selection").get(0).innerHTML = "";
         jQuery("#quote").get(0).innerHTML = "";
         jQuery("#category_selection").get(0).innerHTML = "<p>Loading</p>";
-        jQuery("#manufacturer_selection").get(0).innerHTML = "<p>Select a category above</p>";
-        var output = "<p>Category:</p><select name='gad_cat' id='gad_cat' onChange='changeCat()'><option value='-1'>Choose a category</option>"
+        jQuery("#manufacturer_selection").get(0).innerHTML = "<p>Select a gadget above</p>";
+        var output = "<p>Select My Gadget:</p><select name='gad_cat' id='gad_cat' onChange='changeCat()'><option value='-1'>Gadgets</option>"
         for (i = 0; i < data.output.data.length; i++) {
             output += "<option value='" + data.output.data[i].id + "'>" + data.output.data[i].name + "</option>";
         }
@@ -27,11 +27,11 @@ function drawMfgPage() {
     jQuery("#condition_selection").get(0).innerHTML = "";
     jQuery("#quote").get(0).innerHTML = "";
     jQuery("#manufacturer_selection").get(0).innerHTML = "<p>Loading</p>";
-    jQuery("#carrier_selection").get(0).innerHTML = "<p>Select a manufacturer above</p>";
-    var output = "<p>Manufacturers:</p><select name='gad_man' id='gad_man' onChange='changeMan()'>";
+    jQuery("#carrier_selection").get(0).innerHTML = "";
+    var output = "<p>Manufacturer:</p><select name='gad_man' id='gad_man' onChange='changeMan()'>";
     var ids = Object.keys(mans);
     if (ids.length > 1) {
-        output += "<option value='-1'>Choose a manufacturer</option>";
+        output += "<option value='-1'>Choose a Manufacturer</option>";
     }
     for (i = 0; i < ids.length; i++) {
         output += "<option value='" + ids[i] + "'>" + mans[ids[i]] + "</option>";
@@ -51,7 +51,7 @@ function drawCarPage() {
     jQuery("#condition_selection").get(0).innerHTML = "";
     jQuery("#quote").get(0).innerHTML = "";
     jQuery("#carrier_selection").get(0).innerHTML = "<p>Loading</p>";
-    jQuery("#device_selection").get(0).innerHTML = "<p>Select a carrier above</p>";
+    jQuery("#device_selection").get(0).innerHTML = "";
     var output = "<p>Carrier:</p><select name='gad_car' id='gad_car' onChange='changeCar()'>";
     var ids = Object.keys(cars);
     if (ids.length > 1) {
@@ -72,7 +72,7 @@ function drawCarPage() {
 function drawDevPage() {
     jQuery("#quote").get(0).innerHTML = "";
     jQuery("#device_selection").get(0).innerHTML = "<p>Loading</p>";
-    jQuery("#condition_selection").get(0).innerHTML = "<p>Select a device</p>";
+    jQuery("#condition_selection").get(0).innerHTML = "";
     var output = "<p>Select a device</p><select name='gad_dev' id='gad_dev' onChange='changeDev()'>";
     var ids = Object.keys(devs);
     if (ids.length > 1) {
@@ -139,8 +139,9 @@ function changeCond() {
         return;
     }
     HideDescription();
+    ShowDescription("featured");
     jQuery("#quote_val").val((conditions.prices[condID].price));
-    jQuery("#quote").get(0).innerHTML = "<h1>$" + (conditions.prices[condID].price) + ".00</h1>";
+    jQuery("#quote").get(0).innerHTML = "<h1>$" + (conditions.prices[condID].price) + ".00</h1><span class='text-small'>This is an estimated quote based on the accuracy of the information entered by the seller.</span>";
 }
 
 function changeDev() {
@@ -235,13 +236,13 @@ function changeCat() {
 
 function ShowDescription(anyDevice) {
     if (anyDevice == 'featured') {
-        jQuery("#desc_desc").get(0).innerHTML = "Tell us more about your gadget, accessories, etc";
+        jQuery("#desc_desc").get(0).innerHTML = "Please add any additional information such as detailed condition description and accessories included or not included.";
     }
     else if (anyDevice == 'damaged') {
-        jQuery("#desc_desc").get(0).innerHTML = "Tell us more about your gadget's scratches or other damage";
+        jQuery("#desc_desc").get(0).innerHTML = "Please add any additional information such as detailed condition description and accessories included or not included.";
     }
     else {
-        jQuery("#desc_desc").get(0).innerHTML = "Tell us more about your gadget including complete model number, make, etc";
+        jQuery("#desc_desc").get(0).innerHTML = "Please tell us about your gadget including complete model information, detailed condition description, and accessories included or not included.";
     }
     jQuery(".description_container").slideDown();
 }

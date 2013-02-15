@@ -8,6 +8,12 @@
     border-color:red;
 }
 
+.text-small {
+    font-size:x-small;
+    text-align:center;
+    margin-bottom:10px;
+}
+
 .select_container {
     width:100%;
     float:left;
@@ -30,6 +36,22 @@
 .sel_left {
     float:left;
 }
+
+.quote_display {
+    margin-bottom:5px;
+}
+
+.quote_center {
+    margin:auto;
+    width:70%;
+    position:relative;
+    height:100%
+}
+
+    .quote_center h1 {
+        text-align:center;
+        margin-bottom:10px;
+    }
 
 .sel_center {
     margin:auto;

@@ -88,7 +88,7 @@ class abundatrade_withinboredom {
         $display .= "<div id='condition_selection' class='selection sel_left'>";
         $display .= $closediv . $closediv;
         
-        $display .= "<div class='quote_display select_container'><div id='quote' class='selection sel_center'>";
+        $display .= "<div class='quote_display select_container'><div id='quote' class='quote_center'>";
         $display .= $closediv . $closediv;
         
         $display .= "<div class='description_container'><div id='description' class='box_center'>";
@@ -117,7 +117,7 @@ class abundatrade_withinboredom {
         $display .= "<input type='text' placeholder='Zip Code*' name='address_zip'/><span class='required'>*</span>";
         $display .= $closediv . $closediv;
         $display .= "<div class='contact_form_container'><div class='contact_form_thirds'></div><div class='contact_form_thirds'>";
-        $display .= "<input type='submit' value='Make Some Cash'/>";
+        $display .= "<input type='submit' value='Submit to Make Your Cash'/>";
         $display .= $closediv . $closediv;
         $display .= "</form>";
         
