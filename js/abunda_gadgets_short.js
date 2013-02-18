@@ -324,8 +324,37 @@ function findMessage(data) {
     return 4;
 }
 
+function finalize_quote() {
+    var request = jQuery.ajax("http://" + abundacalc.server + "/trade/process/finalize_quote.php", {
+        dataType: 'jsonp',
+        data: {
+            ean: getParameterByName('gad_dev'),
+            val: getParameterByName('quote_val'),
+            cond: getParameterByName('gad_cond'),
+            description: getParameterByName('description_entry'),
+            name: getParameterByName('my_name'),
+            email: getParameterByName('email'),
+            phone: getParameterByName('phone'),
+            street: getParameterByName('address_street'),
+            city: getParameterByName('address_city'),
+            state: getParameterByName('address_state'),
+            zip: getParameterByName('address_zip')
+        }
+    });
+    
+    request.success(function (data) {
+        window.location.href = "http://abundatrade.com/free-cd-dvd-with-gadget-trade.php";
+    });
+}
+
 function determineStart() {
     if (getParameterByName("gadget") == 'true') {
+
+        if (jQuery("#finalize").is(":visible")) {
+            finalize_quote();
+            return;
+        }
+
         if (getParameterByName("gad_cat") != "") {
             setCat = getParameterByName("gad_cat");
         }
