@@ -142,8 +142,8 @@ class abundatrade_withinboredom {
         $dvd = array(
             '-1' => 'Select a DVD or CD for free',
             '-2' => 'No Thank You',
-            '-1' => '-- DVDs --',
-            'Austin_Powers_in_Goldmember' => 'Austin Powers in Goldmember',
+            '-3' => '— DVDs —',
+            'Austin Powers in Goldmember' => 'Austin Powers in Goldmember',
             'Barbershop 2: Back in Business (Special Edition)' => 'Barbershop 2: Back in Business (Special Edition)',
             'Batman Begins (Single-Disc Widescreen Edition)' => 'Batman Begins (Single-Disc Widescreen Edition)',
             'Superman Returns (Widescreen Edition)' => 'Superman Returns (Widescreen Edition)',
@@ -153,7 +153,7 @@ class abundatrade_withinboredom {
             'The Lord of the Rings: The Fellowship of the Ring (Two-Disc Widescreen Theatrical Edition)' => 'The Lord of the Rings: The Fellowship of the Ring (Two-Disc Widescreen Theatrical Edition)',
             'The Matrix Reloaded (Full Screen Edition)' => 'The Matrix Reloaded (Full Screen Edition)',
             'Welcome to Nanalan - Favorites' => 'Welcome to Nanalan - Favorites',
-            '-1' => '-- CDs --',
+            '-4' => '— CDs —',
             'Christina Aguilera — Christina Aguilera' => 'Christina Aguilera — Christina Aguilera',
             'Our Time in Eden — 10,000 Maniacs' => 'Our Time in Eden — 10,000 Maniacs',
             'Backstreet Boys — Backstreet Boys' => 'Backstreet Boys — Backstreet Boys',
@@ -236,7 +236,7 @@ class abundatrade_withinboredom {
             $display .= "<div class='contact_form_container'><div class=''>";
             $display .= "<select name='dvd' id='choose_dvd' onChange='changeFree()'>";
             foreach ($dvd as $value => $text) {
-                $display .= "<option value='" . htmlentities($value) . "'>" . $text . "</option>";
+                $display .= "<option value='" . htmlentities($value) . "'>" . htmlentities($text) . "</option>";
             }
             $display .= "</select>";
             $display .= $closediv . $closediv;
