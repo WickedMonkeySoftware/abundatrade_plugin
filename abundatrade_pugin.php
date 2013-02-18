@@ -78,7 +78,7 @@ class abundatrade_withinboredom {
         }
         else {
             
-            $display = "<form method='get' action='#'><div id='abundatrade_gadget'>";
+            $display = "<form method='get' action='#'><input type='hidden' name='gadget' value='true'/><div id='abundatrade_gadget'>";
             
             $display .= "<div class='category_selector select_container'><div id='category_selection' class='selection sel_center'>";
             $display .= $closediv . $closediv;
