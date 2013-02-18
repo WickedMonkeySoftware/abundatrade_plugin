@@ -274,6 +274,7 @@ function ShowForm() {
     if (!jQuery("#master_container_contact").is(":visible")) {
         jQuery("#master_container_contact").slideDown();
     }
+    changeFree();
 }
 
 function HideQuote() {
@@ -366,10 +367,6 @@ function finalize_quote() {
 
 function determineStart() {
     if (getParameterByName("gadget") == 'true') {
-
-        if (getParameterByName("dvd") != "") {
-            changeFree();
-        }
 
         if (getParameterByName("gad_cat") != "") {
             setCat = getParameterByName("gad_cat");
