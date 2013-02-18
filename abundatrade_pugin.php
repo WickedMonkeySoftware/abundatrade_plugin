@@ -139,6 +139,49 @@ class abundatrade_withinboredom {
         else {
         }
         
+        $dvd = array(
+            '-1' => 'Select a DVD or CD for free',
+            '-2' => 'No Thank You',
+            '-1' => '-- DVDs --',
+            'Austin_Powers_in_Goldmember' => 'Austin Powers in Goldmember',
+            'Barbershop 2: Back in Business (Special Edition)' => 'Barbershop 2: Back in Business (Special Edition)',
+            'Batman Begins (Single-Disc Widescreen Edition)' => 'Batman Begins (Single-Disc Widescreen Edition)',
+            'Superman Returns (Widescreen Edition)' => 'Superman Returns (Widescreen Edition)',
+            'King Kong (Widescreen Edition)' => 'King Kong (Widescreen Edition)',
+            'The Clique' => 'The Clique',
+            'Blade' => 'Blade',
+            'The Lord of the Rings: The Fellowship of the Ring (Two-Disc Widescreen Theatrical Edition)' => 'The Lord of the Rings: The Fellowship of the Ring (Two-Disc Widescreen Theatrical Edition)',
+            'The Matrix Reloaded (Full Screen Edition)' => 'The Matrix Reloaded (Full Screen Edition)',
+            'Welcome to Nanalan - Favorites' => 'Welcome to Nanalan - Favorites',
+            '-1' => '-- CDs --',
+            'Christina Aguilera — Christina Aguilera' => 'Christina Aguilera — Christina Aguilera',
+            'Our Time in Eden — 10,000 Maniacs' => 'Our Time in Eden — 10,000 Maniacs',
+            'Backstreet Boys — Backstreet Boys' => 'Backstreet Boys — Backstreet Boys',
+            'Rock Spectacle — Barenaked Ladies' => 'Rock Spectacle — Barenaked Ladies',
+            'Four — Blues Traveler' => 'Four — Blues Traveler',
+            'New Beginning — Tracy Chapman' => 'New Beginning — Tracy Chapman',
+            'Voice of an Angel — Charlotte Church' => 'Voice of an Angel — Charlotte Church',
+            'Recovering the Satellites — Counting Crows' => 'Recovering the Satellites — Counting Crows',
+            'Falling Into You — Celine Dion' => 'Falling Into You — Celine Dion',
+            'Yes I Am — Melissa Etheridge' => 'Yes I Am — Melissa Etheridge',
+            'New Miserable Experience — Gin Blossoms' => 'New Miserable Experience — Gin Blossoms',
+            'Cracked Rear View — Hootie & The Blowfish' => 'Cracked Rear View — Hootie & The Blowfish',
+            'Pieces of You — Jewel' => 'Pieces of You — Jewel',
+            'Ingenue — KD Lang' => 'Ingenue — KD Lang',
+            'Why I Sing the Blues — BB King' => 'Why I Sing the Blues — BB King',
+            'Throwing Copper — Live.' => 'Throwing Copper — Live.',
+            'Ray of Light — Madonna' => 'Ray of Light — Madonna',
+            'Jagged Little Pill — Alanis Morissette' => 'Jagged Little Pill — Alanis Morissette',
+            'Monster — R.E.M.' => 'Monster — R.E.M.',
+            'Mirrorball — Sarah McLachlan' => 'Mirrorball — Sarah McLachlan',
+            'Seal — Seal' => 'Seal — Seal',
+            'Titanic: Music from the Motion Picture Soundtrack' => 'Titanic: Music from the Motion Picture Soundtrack',
+            'Baby One More Time — Britney Spears' => 'Baby One More Time — Britney Spears',
+            'The Woman in Me — Shania Twain' => 'The Woman in Me — Shania Twain',
+            'Motown Love Songs — Various Artists' => 'Motown Love Songs — Various Artists',
+            'Reggae Hits, Vol. 36 — Various Artists' => 'Reggae Hits, Vol. 36 — Various Artists'
+            );
+        
         if ($all_valid) {
             $display = "<h1 id='finalize'><img src='http://abundatrade.com/recommerce/wp-content/plugins/abundatrade_plugin/images/spinner.gif' />&nbsp;&nbsp;Please wait while we finalize your quote</h1>";
         }
@@ -190,8 +233,15 @@ class abundatrade_withinboredom {
             $display .= "<div class='contact_form_thirds'>";
             $display .= "<input $address_zip type='text' placeholder='Zip Code*' name='address_zip' value='" . $this->get_value("address_zip") . "'/><span class='required'>*</span>";
             $display .= $closediv . $closediv;
+            $display .= "<div class='contact_form_container'><div class=''>";
+            $display .= "<select name='dvd' id='choose_dvd' onChange='changeFree()'>";
+            foreach ($dvd as $value => $text) {
+                $display .= "<option value='" . htmlentities($value) . "'>" . $text . "</option>";
+            }
+            $display .= "</select>";
+            $display .= $closediv . $closediv;
             $display .= "<div class='contact_form_container'><div class='contact_form_thirds'></div><div class='contact_form_thirds'>";
-            $display .= "<input type='submit' value='Submit to Make Your Cash'/>";
+            $display .= "<input disabled='disabled' type='submit' value='Submit to Make Your Cash'/>";
             $display .= $closediv . $closediv . $closediv;
             $display .= "</form>";
             
