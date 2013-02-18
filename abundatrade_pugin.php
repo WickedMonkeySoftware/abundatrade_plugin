@@ -68,20 +68,37 @@ class abundatrade_withinboredom {
         return $config;
     }
     
+    public function validate_required($name) {
+        if(isset($_REQUEST[$name]) && $_REQUEST[$name] == "") {
+            return false;
+        }
+        return true;
+    }
+    
     public function gadget($atts) {
         $closediv = "</div>";
         
         $gad_cat = '';
-        $red = '';
+        $red = "style='boder: 1px solid red'";
+        $all_valid = false;
         
         if(isset($_REQUEST['gad_cat'])) {
-            if ($_REQUEST['gad_cat'] == -1)
+            if ($_REQUEST['gad_cat'] == -1) {
                 $gad_cat = $red;
+            }
+            $all_valid = true;
+        }
+        
+        if(!$this->validate_required('name')) {
+            $name = $red;
+        }
+        else {
+            $all_valid = false;
         }
         
         $display = "<form method='get' action='#'><input type='hidden' name='gadget' value='true'/><div id='abundatrade_gadget'>";
         
-        $display .= "<div class='category_selector select_container'><div id='category_selection' class='selection sel_center'>Javascript required to use this page";
+        $display .= "<div class='category_selector select_container'><div id='category_selection' $gad_cat class='selection sel_center'>Javascript required to use this page";
         $display .= $closediv . $closediv;
         
         $display .= "<div class='large_container' style='display:none' id='large_container_div'><div id='manufacturer_selection' class='selection sel_left'>";
@@ -105,7 +122,7 @@ class abundatrade_withinboredom {
         $display .= $closediv . $closediv;
         $display .= "<div id='master_container_contact' style='display:none'>";
         $display .= "<div class='contact_form_container'><div class='contact_form_thirds'>";
-        $display .= "<input type='text' placeholder='Your name*' name='name' class='' /><span class='required'>*</span>";
+        $display .= "<input $name type='text' placeholder='Your name*' name='name' class='' /><span class='required'>*</span>";
         $display .= $closediv;
         $display .= "<div class='contact_form_thirds'>";
         $display .= "<input type='text' placeholder='Your email*' name='email'/><span class='required'>*</span>";
