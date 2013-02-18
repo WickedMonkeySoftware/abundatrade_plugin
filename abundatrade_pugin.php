@@ -98,7 +98,7 @@ class abundatrade_withinboredom {
             $show_all = "";
         }
         
-        if(!$this->validate_required('name')) {
+        if(!$this->validate_required('my_name')) {
             $name = $red;
         }
         else {
@@ -173,7 +173,7 @@ class abundatrade_withinboredom {
         $display .= $closediv . $closediv;
         $display .= "<div id='master_container_contact' $show_all>";
         $display .= "<div class='contact_form_container'><div class='contact_form_thirds'>";
-        $display .= "<input $name type='text' placeholder='Your name*' name='name' value='" . $this->get_value("name") . "' /><span class='required'>*</span>";
+        $display .= "<input $name type='text' placeholder='Your name*' name='my_name' value='" . $this->get_value("my_name") . "' /><span class='required'>*</span>";
         $display .= $closediv;
         $display .= "<div class='contact_form_thirds'>";
         $display .= "<input $email type='text' placeholder='Your email*' name='email'/><span class='required'>*</span>";
