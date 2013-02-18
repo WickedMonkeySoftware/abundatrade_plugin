@@ -71,65 +71,65 @@ class abundatrade_withinboredom {
     public function gadget($atts) {
         $closediv = "</div>";
         
+        $gad_cat = '';
+        $red = '';
+        
         if(isset($_REQUEST['gad_cat'])) {
-            $display = "<div>";
-            $display .= "<h1>Hello</h1>";
-            $display .= $closediv;
+            if ($_REQUEST['gad_cat'] == -1)
+                $gad_cat = $red;
         }
-        else {
-            
-            $display = "<form method='get' action='#'><input type='hidden' name='gadget' value='true'/><div id='abundatrade_gadget'>";
-            
-            $display .= "<div class='category_selector select_container'><div id='category_selection' class='selection sel_center'>";
-            $display .= $closediv . $closediv;
-            
-            $display .= "<div class='large_container'><div id='manufacturer_selection' class='selection sel_left'>";
-            $display .= $closediv;
-            
-            $display .= "<div id='carrier_selection' class='selection sel_left'>";
-            $display .= $closediv;
-            
-            $display .= "<div id='device_selection' class='selection sel_left'>";
-            $display .= $closediv;
-            
-            $display .= "<div id='condition_selection' class='selection sel_left'>";
-            $display .= $closediv . $closediv;
-            
-            $display .= "<div class='quote_display select_container'><div id='quote' class='quote_center'>";
-            $display .= $closediv . $closediv;
-            
-            $display .= "<div class='description_container'><div id='description' class='box_center'>";
-            $display .= "<p id='desc_desc'>Tell us more about your gadget including complete model #, make, etc...</p>";
-            $display .= "<textarea name='description_entry'></textarea>";
-            $display .= $closediv . $closediv;
-            $display .= "<div class='contact_form_container'><div class='contact_form_thirds'>";
-            $display .= "<input type='text' placeholder='Your name*' name='name' class='' /><span class='required'>*</span>";
-            $display .= $closediv;
-            $display .= "<div class='contact_form_thirds'>";
-            $display .= "<input type='text' placeholder='Your email*' name='email'/><span class='required'>*</span>";
-            $display .= $closediv;
-            $display .= "<div class='contact_form_thirds'>";
-            $display .= "<input type='text' placeholder='Your phone #' name='phone'/>";
-            $display .= $closediv . $closediv;
-            $display .= "<div class='contact_form_container'><div class='contact_form_thirds'></div><div class='contact_form_thirds'>";
-            $display .= "<input type='text' placeholder='Address*' name='address_street'/><span class='required'>*</span>"; 
-            $display .= $closediv . $closediv;
-            $display .= "<div class='contact_form_container'><div class='contact_form_thirds'>";
-            $display .= "<input type='text' placeholder='City*' name='address_city'/><span class='required'>*</span>";
-            $display .= $closediv;
-            $display .= "<div class='contact_form_thirds'>";
-            $display .= "<input type='text' placeholder='State*' name='address_state'/><span class='required'>*</span>";
-            $display .= $closediv;
-            $display .= "<div class='contact_form_thirds'>";
-            $display .= "<input type='text' placeholder='Zip Code*' name='address_zip'/><span class='required'>*</span>";
-            $display .= $closediv . $closediv;
-            $display .= "<div class='contact_form_container'><div class='contact_form_thirds'></div><div class='contact_form_thirds'>";
-            $display .= "<input type='submit' value='Submit to Make Your Cash'/>";
-            $display .= $closediv . $closediv;
-            $display .= "</form>";
-            
-            $display .= $closediv;
-        }
+        
+        $display = "<form method='get' action='#'><input type='hidden' name='gadget' value='true'/><div id='abundatrade_gadget'>";
+        
+        $display .= "<div class='category_selector select_container'><div id='category_selection' class='selection sel_center'>";
+        $display .= $closediv . $closediv;
+        
+        $display .= "<div class='large_container' style='display:none' id='large_container_div'><div id='manufacturer_selection' class='selection sel_left'>";
+        $display .= $closediv;
+        
+        $display .= "<div id='carrier_selection' class='selection sel_left'>";
+        $display .= $closediv;
+        
+        $display .= "<div id='device_selection' class='selection sel_left'>";
+        $display .= $closediv;
+        
+        $display .= "<div id='condition_selection' class='selection sel_left'>";
+        $display .= $closediv . $closediv;
+        
+        $display .= "<div class='quote_display select_container' id='quote_container_div' style='display:none'><div id='quote' class='quote_center'>";
+        $display .= $closediv . $closediv;
+        
+        $display .= "<div class='description_container'><div id='description' class='box_center'>";
+        $display .= "<p id='desc_desc'>Tell us more about your gadget including complete model #, make, etc...</p>";
+        $display .= "<textarea name='description_entry'></textarea>";
+        $display .= $closediv . $closediv;
+        $display .= "<div class='contact_form_container'><div class='contact_form_thirds'>";
+        $display .= "<input type='text' placeholder='Your name*' name='name' class='' /><span class='required'>*</span>";
+        $display .= $closediv;
+        $display .= "<div class='contact_form_thirds'>";
+        $display .= "<input type='text' placeholder='Your email*' name='email'/><span class='required'>*</span>";
+        $display .= $closediv;
+        $display .= "<div class='contact_form_thirds'>";
+        $display .= "<input type='text' placeholder='Your phone #' name='phone'/>";
+        $display .= $closediv . $closediv;
+        $display .= "<div class='contact_form_container'><div class='contact_form_thirds'></div><div class='contact_form_thirds'>";
+        $display .= "<input type='text' placeholder='Address*' name='address_street'/><span class='required'>*</span>"; 
+        $display .= $closediv . $closediv;
+        $display .= "<div class='contact_form_container'><div class='contact_form_thirds'>";
+        $display .= "<input type='text' placeholder='City*' name='address_city'/><span class='required'>*</span>";
+        $display .= $closediv;
+        $display .= "<div class='contact_form_thirds'>";
+        $display .= "<input type='text' placeholder='State*' name='address_state'/><span class='required'>*</span>";
+        $display .= $closediv;
+        $display .= "<div class='contact_form_thirds'>";
+        $display .= "<input type='text' placeholder='Zip Code*' name='address_zip'/><span class='required'>*</span>";
+        $display .= $closediv . $closediv;
+        $display .= "<div class='contact_form_container'><div class='contact_form_thirds'></div><div class='contact_form_thirds'>";
+        $display .= "<input type='submit' value='Submit to Make Your Cash'/>";
+        $display .= $closediv . $closediv;
+        $display .= "</form>";
+        
+        $display .= $closediv;
         
         if ($_GET['gadget'] == true) {
             return $display;
@@ -150,8 +150,8 @@ class abundatrade_withinboredom {
             $gadget_state = ' display: none;';
         }
         
-                $display = '<div id="abundatrade">';
-         $top = '
+        $display = '<div id="abundatrade">';
+        $top = '
          <div id="top_input_section" class="calc_content_wrap calc_color1 calcbg1" style="'.$hide.'">
 
             <form id="abundaInput" class="abundaInput" style="margin-top: 6px;" onsubmit="return false;" method="post" >
@@ -177,7 +177,7 @@ class abundatrade_withinboredom {
                 <div class="submit_holder">
                     <input class="btn1 right btn_link1 btnbg1" value="+ Add Item" type="submit"/>
                 </div>';
-         
+        
         $bulk_button = '
             <div id="bulk_button" class="calcbg1" style="'.$hide.'">
                 <p class="abunda_text calc_color1">Have a lot of items? <a href="#" onclick="return bulk_open();" class="calc_linkS1">Bulk Upload</a></p>
@@ -297,7 +297,7 @@ class abundatrade_withinboredom {
         $display .= $table;
         $display .= $very_bottom;
         $display .= $endAll;
-            
+        
         return $display;
     }
     

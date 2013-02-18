@@ -136,8 +136,10 @@ function changeCond() {
         if (condID == -2) {
             ShowDescription("damaged");
         }
+        jQuery("#quote_container_div").slideUp();
         return;
     }
+    jQuery("#quote_container_div").slideDown();
     HideDescription();
     ShowDescription("featured");
     jQuery("#quote_val").val((conditions.prices[condID].price));
@@ -221,8 +223,10 @@ function changeCat() {
         if (catID == -2) {
             ShowDescription("other");
         }
+        jQuery("#large_container_div").slideUp();
         return;
     }
+    jQuery("#large_container").slideDown();
     HideDescription();
     mans = Object();
     var request = jQuery.ajax("http://" + abundacalc.server + "/trade/process/ajax-post-public.php?action=get&object=TradePermProductData&category_id=" + catID, { dataType: 'jsonp' });
