@@ -76,7 +76,6 @@ class abundatrade_withinboredom {
     }
     
     public function get_value($name) {
-        var_dump($_REQUEST[$name]);
         if(isset($_REQUEST[$name])) {
             return $_REQUEST[$name];
         }
