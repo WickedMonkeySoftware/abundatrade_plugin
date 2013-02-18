@@ -100,51 +100,44 @@ class abundatrade_withinboredom {
         
         if(!$this->validate_required('my_name')) {
             $name = $red;
+            $all_valid = false;
         }
         else {
-            $all_valid = false;
         }
         
         if(!$this->validate_required('email')) {
             $email = $red;
-        }
-        else {
             $all_valid = false;
         }
-        
-        if(!$this->validate_required('phone')) {
-            $phone = $red;
-        }
         else {
-            $all_valid = false;
         }
-        
+                
         if(!$this->validate_required('address_street')) {
             $address_street = $red;
+            $all_valid = false;
         }
         else {
-            $all_valid = false;
         }
         
         if(!$this->validate_required('address_city')) {
             $address_city = $red;
+            $all_valid = false;
         }
         else {
-            $all_valid = false;
         }
         
         if(!$this->validate_required('address_state')) {
             $address_state = $red;
+            $all_valid = false;
         }
         else {
-            $all_valid = false;
         }
         
         if(!$this->validate_required('address_zip')) {
             $address_zip = $red;
+            $all_valid = false;
         }
         else {
-            $all_valid = false;
         }
         
         if ($all_valid) {
