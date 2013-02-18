@@ -136,10 +136,14 @@ function changeCond() {
         if (condID == -2) {
             ShowDescription("damaged");
         }
-        jQuery("#quote_container_div").slideUp();
+        if (jQuery("#quote_container_div").is(":visible")) {
+            jQuery("#quote_container_div").slideUp();
+        }
         return;
     }
-    jQuery("#quote_container_div").slideDown();
+    if (!jQuery("#quote_container_div").is(":visible")) {
+        jQuery("#quote_container_div").slideDown();
+    }
     HideDescription();
     ShowDescription("featured");
     jQuery("#quote_val").val((conditions.prices[condID].price));
@@ -223,10 +227,14 @@ function changeCat() {
         if (catID == -2) {
             ShowDescription("other");
         }
-        jQuery("#large_container_div").slideUp();
+        if (jQuery("#large_container_div").is(":visible")) {
+            jQuery("#large_container_div").slideUp();
+        }
         return;
     }
-    jQuery("#large_container").slideDown();
+    if (!jQuery("#large_container_div").is(":visible")) {
+        jQuery("#large_container_div").slideDown();
+    }
     HideDescription();
     mans = Object();
     var request = jQuery.ajax("http://" + abundacalc.server + "/trade/process/ajax-post-public.php?action=get&object=TradePermProductData&category_id=" + catID, { dataType: 'jsonp' });
@@ -248,11 +256,15 @@ function ShowDescription(anyDevice) {
     else {
         jQuery("#desc_desc").get(0).innerHTML = "Please tell us about your gadget including complete model information, detailed condition description, and accessories included or not included.";
     }
-    jQuery(".description_container").slideDown();
+    if (!jQuery(".description_container").is(":visible")) {
+        jQuery(".description_container").slideDown();
+    }
 }
 
 function HideDescription() {
-    jQuery(".description_container").slideUp();
+    if (jQuery(".description_container").is(":visible") {
+        jQuery(".description_container").slideUp();
+    }
 }
 
 function buildUniqueArray(ar, name, data, to, override) {
