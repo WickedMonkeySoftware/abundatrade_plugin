@@ -232,6 +232,7 @@ function changeCat() {
         else {
             HideDescription();
         }
+        HideQuote();
         if (jQuery("#large_container_div").is(":visible")) {
             jQuery("#large_container_div").slideUp();
         }
@@ -241,6 +242,7 @@ function changeCat() {
         jQuery("#large_container_div").slideDown();
     }
     HideDescription();
+    HideQuote();
     mans = Object();
     var request = jQuery.ajax("http://" + abundacalc.server + "/trade/process/ajax-post-public.php?action=get&object=TradePermProductData&category_id=" + catID, { dataType: 'jsonp' });
     request.success(function (data) {
