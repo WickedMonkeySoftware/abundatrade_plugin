@@ -252,7 +252,7 @@ function changeCat() {
 }
 
 function HideForm() {
-    if(jQuery("#master_container_contact").is(":visible") {
+    if(jQuery("#master_container_contact").is(":visible")) {
         jQuery("#master_container_contact").slideUp();
     }
 }
