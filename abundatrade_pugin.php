@@ -103,6 +103,7 @@ class abundatrade_withinboredom {
         $display .= "<p id='desc_desc'>Tell us more about your gadget including complete model #, make, etc...</p>";
         $display .= "<textarea name='description_entry'></textarea>";
         $display .= $closediv . $closediv;
+        $display .= "<div id='master_container_contact'>";
         $display .= "<div class='contact_form_container'><div class='contact_form_thirds'>";
         $display .= "<input type='text' placeholder='Your name*' name='name' class='' /><span class='required'>*</span>";
         $display .= $closediv;
@@ -126,7 +127,7 @@ class abundatrade_withinboredom {
         $display .= $closediv . $closediv;
         $display .= "<div class='contact_form_container'><div class='contact_form_thirds'></div><div class='contact_form_thirds'>";
         $display .= "<input type='submit' value='Submit to Make Your Cash'/>";
-        $display .= $closediv . $closediv;
+        $display .= $closediv . $closediv . $closediv;
         $display .= "</form>";
         
         $display .= $closediv;

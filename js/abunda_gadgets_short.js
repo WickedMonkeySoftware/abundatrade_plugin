@@ -229,6 +229,9 @@ function changeCat() {
         if (catID == -2) {
             ShowDescription("other");
         }
+        else {
+            HideDescription();
+        }
         if (jQuery("#large_container_div").is(":visible")) {
             jQuery("#large_container_div").slideUp();
         }
@@ -246,6 +249,18 @@ function changeCat() {
             drawMfgPage();
         }
     });
+}
+
+function HideForm() {
+    if(jQuery("#master_container_contact").is(":visible") {
+        jQuery("#master_container_contact").slideUp();
+    }
+}
+
+function ShowForm() {
+    if (!jQuery("#master_container_contact").is(":visible")) {
+        jQuery("#master_container_contact").slideDown();
+    }
 }
 
 function HideQuote() {
@@ -267,12 +282,14 @@ function ShowDescription(anyDevice) {
     if (!jQuery(".description_container").is(":visible")) {
         jQuery(".description_container").slideDown();
     }
+    ShowForm();
 }
 
 function HideDescription() {
     if (jQuery(".description_container").is(":visible")) {
         jQuery(".description_container").slideUp();
     }
+    HideForm();
 }
 
 function buildUniqueArray(ar, name, data, to, override) {
