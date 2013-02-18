@@ -75,11 +75,19 @@ class abundatrade_withinboredom {
         return true;
     }
     
+    public function get_value($name) {
+        var_dump($_REQUEST[$name]);
+        if(isset($_REQUEST[$name])) {
+            return $_REQUEST[$name];
+        }
+        return "";
+    }
+    
     public function gadget($atts) {
         $closediv = "</div>";
         
         $gad_cat = '';
-        $red = "style='boder: 1px solid red'";
+        $red = "style='border: 1px solid red'";
         $all_valid = false;
         $show_all = "style='display:none'";
         
@@ -93,6 +101,48 @@ class abundatrade_withinboredom {
         
         if(!$this->validate_required('name')) {
             $name = $red;
+        }
+        else {
+            $all_valid = false;
+        }
+        
+        if(!$this->validate_required('email')) {
+            $email = $red;
+        }
+        else {
+            $all_valid = false;
+        }
+        
+        if(!$this->validate_required('phone')) {
+            $phone = $red;
+        }
+        else {
+            $all_valid = false;
+        }
+        
+        if(!$this->validate_required('address_street')) {
+            $address_street = $red;
+        }
+        else {
+            $all_valid = false;
+        }
+        
+        if(!$this->validate_required('address_city')) {
+            $address_city = $red;
+        }
+        else {
+            $all_valid = false;
+        }
+        
+        if(!$this->validate_required('address_state')) {
+            $address_state = $red;
+        }
+        else {
+            $all_valid = false;
+        }
+        
+        if(!$this->validate_required('address_zip')) {
+            $address_zip = $red;
         }
         else {
             $all_valid = false;
@@ -124,25 +174,25 @@ class abundatrade_withinboredom {
         $display .= $closediv . $closediv;
         $display .= "<div id='master_container_contact' $show_all>";
         $display .= "<div class='contact_form_container'><div class='contact_form_thirds'>";
-        $display .= "<input $name type='text' placeholder='Your name*' name='name' class='' /><span class='required'>*</span>";
+        $display .= "<input $name type='text' placeholder='Your name*' name='name' value='" . $this->get_value("name") . "' /><span class='required'>*</span>";
         $display .= $closediv;
         $display .= "<div class='contact_form_thirds'>";
-        $display .= "<input type='text' placeholder='Your email*' name='email'/><span class='required'>*</span>";
+        $display .= "<input $email type='text' placeholder='Your email*' name='email'/><span class='required'>*</span>";
         $display .= $closediv;
         $display .= "<div class='contact_form_thirds'>";
-        $display .= "<input type='text' placeholder='Your phone #' name='phone'/>";
+        $display .= "<input $phone type='text' placeholder='Your phone #' name='phone'/>";
         $display .= $closediv . $closediv;
         $display .= "<div class='contact_form_container'><div class='contact_form_thirds'></div><div class='contact_form_thirds'>";
-        $display .= "<input type='text' placeholder='Address*' name='address_street'/><span class='required'>*</span>"; 
+        $display .= "<input $address_street type='text' placeholder='Address*' name='address_street'/><span class='required'>*</span>"; 
         $display .= $closediv . $closediv;
         $display .= "<div class='contact_form_container'><div class='contact_form_thirds'>";
-        $display .= "<input type='text' placeholder='City*' name='address_city'/><span class='required'>*</span>";
+        $display .= "<input $address_city type='text' placeholder='City*' name='address_city'/><span class='required'>*</span>";
         $display .= $closediv;
         $display .= "<div class='contact_form_thirds'>";
-        $display .= "<input type='text' placeholder='State*' name='address_state'/><span class='required'>*</span>";
+        $display .= "<input $address_state type='text' placeholder='State*' name='address_state'/><span class='required'>*</span>";
         $display .= $closediv;
         $display .= "<div class='contact_form_thirds'>";
-        $display .= "<input type='text' placeholder='Zip Code*' name='address_zip'/><span class='required'>*</span>";
+        $display .= "<input $address_zip type='text' placeholder='Zip Code*' name='address_zip'/><span class='required'>*</span>";
         $display .= $closediv . $closediv;
         $display .= "<div class='contact_form_container'><div class='contact_form_thirds'></div><div class='contact_form_thirds'>";
         $display .= "<input type='submit' value='Submit to Make Your Cash'/>";

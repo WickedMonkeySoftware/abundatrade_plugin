@@ -326,7 +326,6 @@ function findMessage(data) {
 
 function determineStart() {
     if (getParameterByName("gadget") == 'true') {
-        console.log("Here we go");
         if (getParameterByName("gad_cat") != "") {
             setCat = getParameterByName("gad_cat");
         }
