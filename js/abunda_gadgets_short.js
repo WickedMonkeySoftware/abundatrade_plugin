@@ -144,7 +144,6 @@ function changeCond() {
     if (!jQuery("#quote_container_div").is(":visible")) {
         jQuery("#quote_container_div").slideDown();
     }
-    HideDescription();
     ShowDescription("featured");
     jQuery("#quote_val").val((conditions.prices[condID].price));
     jQuery("#quote").get(0).innerHTML = "<span class='text-small'>This is an estimated quote based on the accuracy of the information entered.</span><h1>$" + (conditions.prices[condID].price) + ".00</h1>";
