@@ -262,7 +262,7 @@ function ShowDescription(anyDevice) {
 }
 
 function HideDescription() {
-    if (jQuery(".description_container").is(":visible") {
+    if (jQuery(".description_container").is(":visible")) {
         jQuery(".description_container").slideUp();
     }
 }
