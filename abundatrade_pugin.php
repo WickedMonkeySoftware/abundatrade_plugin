@@ -103,7 +103,7 @@ class abundatrade_withinboredom {
         $display .= "<p id='desc_desc'>Tell us more about your gadget including complete model #, make, etc...</p>";
         $display .= "<textarea name='description_entry'></textarea>";
         $display .= $closediv . $closediv;
-        $display .= "<div id='master_container_contact'>";
+        $display .= "<div id='master_container_contact' style='display:none'>";
         $display .= "<div class='contact_form_container'><div class='contact_form_thirds'>";
         $display .= "<input type='text' placeholder='Your name*' name='name' class='' /><span class='required'>*</span>";
         $display .= $closediv;
