@@ -367,6 +367,10 @@ function finalize_quote() {
 function determineStart() {
     if (getParameterByName("gadget") == 'true') {
 
+        if (getParameterByName("dvd") != "") {
+            changeFree();
+        }
+
         if (getParameterByName("gad_cat") != "") {
             setCat = getParameterByName("gad_cat");
         }
