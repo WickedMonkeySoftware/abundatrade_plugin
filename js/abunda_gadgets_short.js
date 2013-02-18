@@ -161,6 +161,7 @@ function changeDev() {
         if (devID == -2) {
             ShowDescription("unknown");
         }
+        HideQuote();
         return;
     }
     HideDescription();
@@ -183,6 +184,7 @@ function changeCar() {
         if (carID == -2) {
             ShowDescription("unknown");
         }
+        HideQuote();
         return;
     }
     HideDescription();
@@ -205,6 +207,7 @@ function changeMan() {
         if (manID == -2) {
             ShowDescription("unknown");
         }
+        HideQuote();
         return;
     }
     HideDescription();
@@ -244,6 +247,12 @@ function changeCat() {
             drawMfgPage();
         }
     });
+}
+
+function HideQuote() {
+    if (jQuery("#quote_container_div").is(":visible")) {
+        jQuery("#quote_container_div").slideUp();
+    }
 }
 
 function ShowDescription(anyDevice) {
