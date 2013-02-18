@@ -258,6 +258,7 @@ function changeFree() {
     }
     else if (jQuery("#choose_dvd").val() < 0) {
         jQuery("[type='submit']").attr("disabled", "disabled");
+        return;
     }
 
     jQuery("[type='submit']").removeAttr("disabled")
