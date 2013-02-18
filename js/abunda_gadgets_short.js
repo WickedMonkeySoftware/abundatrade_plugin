@@ -253,6 +253,16 @@ function changeCat() {
     });
 }
 
+function ChangeFree() {
+    if (jQuery("#choose_dvd").val() == '-2') {
+    }
+    else if (jQuery("#choose_dvd").val() < 0) {
+        jQuery("[type='submit']").attr("disabled", "disabled");
+    }
+
+    jQuery("[type='submit']").removeAttr("disabled")
+}
+
 function HideForm() {
     if(jQuery("#master_container_contact").is(":visible")) {
         jQuery("#master_container_contact").slideUp();
