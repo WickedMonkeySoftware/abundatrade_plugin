@@ -253,7 +253,7 @@ function changeCat() {
     });
 }
 
-function ChangeFree() {
+function changeFree() {
     if (jQuery("#choose_dvd").val() == '-2') {
     }
     else if (jQuery("#choose_dvd").val() < 0) {
