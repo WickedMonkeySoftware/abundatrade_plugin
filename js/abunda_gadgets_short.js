@@ -326,20 +326,20 @@ function findMessage(data) {
 
 function determineStart() {
     if (getParameterByName("gadget") == 'true') {
-        if (getParameterByName("cat") != "") {
-            setCat = getParameterByName("cat");
+        if (getParameterByName("gad_cat") != "") {
+            setCat = getParameterByName("gad_cat");
         }
-        if (getParameterByName("man") != "") {
-            setMan = getParameterByName("man");
+        if (getParameterByName("gad_man") != "") {
+            setMan = getParameterByName("gad_man");
         }
-        if (getParameterByName("car") != "") {
-            setCar = getParameterByName("car");
+        if (getParameterByName("gad_car") != "") {
+            setCar = getParameterByName("gad_car");
         }
-        if (getParameterByName("dev") != "") {
-            setDev = getParameterByName("dev");
+        if (getParameterByName("gad_dev") != "") {
+            setDev = getParameterByName("gad_dev");
         }
-        if (getParameterByName("cond") != "") {
-            setCond = getParameterByName("cond");
+        if (getParameterByName("gad_cond") != "") {
+            setCond = getParameterByName("gad_cond");
         }
 
         // This is our hook to capture the form data

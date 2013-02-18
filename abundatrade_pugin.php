@@ -81,12 +81,14 @@ class abundatrade_withinboredom {
         $gad_cat = '';
         $red = "style='boder: 1px solid red'";
         $all_valid = false;
+        $show_all = "style='display:none'";
         
         if(isset($_REQUEST['gad_cat'])) {
             if ($_REQUEST['gad_cat'] == -1) {
                 $gad_cat = $red;
             }
             $all_valid = true;
+            $show_all = "";
         }
         
         if(!$this->validate_required('name')) {
@@ -120,7 +122,7 @@ class abundatrade_withinboredom {
         $display .= "<p id='desc_desc'>Tell us more about your gadget including complete model #, make, etc...</p>";
         $display .= "<textarea name='description_entry'></textarea>";
         $display .= $closediv . $closediv;
-        $display .= "<div id='master_container_contact' style='display:none'>";
+        $display .= "<div id='master_container_contact' $show_all>";
         $display .= "<div class='contact_form_container'><div class='contact_form_thirds'>";
         $display .= "<input $name type='text' placeholder='Your name*' name='name' class='' /><span class='required'>*</span>";
         $display .= $closediv;
