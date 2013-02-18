@@ -141,7 +141,7 @@ function changeCond() {
     HideDescription();
     ShowDescription("featured");
     jQuery("#quote_val").val((conditions.prices[condID].price));
-    jQuery("#quote").get(0).innerHTML = "<h1>$" + (conditions.prices[condID].price) + ".00</h1><span class='text-small'>This is an estimated quote based on the accuracy of the information entered by the seller.</span>";
+    jQuery("#quote").get(0).innerHTML = "<span class='text-small'>This is an estimated quote based on the accuracy of the information entered by the seller.</span><h1>$" + (conditions.prices[condID].price) + ".00</h1>";
 }
 
 function changeDev() {
