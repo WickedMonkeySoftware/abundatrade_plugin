@@ -141,7 +141,7 @@ class abundatrade_withinboredom {
         }
         
         if ($all_valid) {
-            $display = "<h1 id='finalize'><img src='http://abundatrade.com/recommerce/wp-content/plugins/abundatrade_plugin/images/spinner.gif' />Please wait while we finalize your quote</h1>";
+            $display = "<h1 id='finalize'><img src='http://abundatrade.com/recommerce/wp-content/plugins/abundatrade_plugin/images/spinner.gif' />&nbsp;&nbsp;Please wait while we finalize your quote</h1>";
         }
         else {
             
