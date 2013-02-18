@@ -95,7 +95,6 @@ class abundatrade_withinboredom {
                 $gad_cat = $red;
             }
             $all_valid = true;
-            $show_all = "";
         }
         
         if(!$this->validate_required('my_name')) {
