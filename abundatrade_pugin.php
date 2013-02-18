@@ -233,7 +233,7 @@ class abundatrade_withinboredom {
             $display .= "<div class='contact_form_thirds'>";
             $display .= "<input $address_zip type='text' placeholder='Zip Code*' name='address_zip' value='" . $this->get_value("address_zip") . "'/><span class='required'>*</span>";
             $display .= $closediv . $closediv;
-            $display .= "<div class='contact_form_container'><div class=''>";
+            $display .= "<div style='height:auto;' class='contact_form_container'><div>";
             $display .= "<select name='dvd' id='choose_dvd' onChange='changeFree()'>";
             foreach ($dvd as $value => $text) {
                 $display .= "<option value='" . htmlentities($value) . "'>" . htmlentities($text) . "</option>";
