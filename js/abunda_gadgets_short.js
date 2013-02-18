@@ -308,7 +308,13 @@ function buildUniqueArray(ar, name, data, to, override) {
 function getCategories() {
     var request = jQuery.ajax("http://" + abundacalc.server + "/trade/process/ajax-post-public.php?action=get&object=TradeCategory", { dataType: 'jsonp' });
     request.success(function (data) {
-        drawCategoryPage(data);
+        if (jQuery("#finalize").is(":visible")) {
+            finalize_quote();
+            return;
+        }
+        else {
+            drawCategoryPage(data);
+        }
     });
 }
 
@@ -350,11 +356,6 @@ function finalize_quote() {
 function determineStart() {
     if (getParameterByName("gadget") == 'true') {
 
-        if (jQuery("#finalize").is(":visible")) {
-            finalize_quote();
-            return;
-        }
-
         if (getParameterByName("gad_cat") != "") {
             setCat = getParameterByName("gad_cat");
         }
@@ -370,12 +371,6 @@ function determineStart() {
         if (getParameterByName("gad_cond") != "") {
             setCond = getParameterByName("gad_cond");
         }
-
-        // This is our hook to capture the form data
-        jQuery("div.wpcf7 > form").bind('form-submit-validate', function (a, data, options, veto) {
-            var id = findMessage(data);
-            data[id].value += "Featured gadget: " + devs[jQuery("#gad_dev").val()] + "\n with condition: " + conditions.prices[jQuery("#gad_cond").val()].condition + "\n Quoted at: " + conditions.prices[jQuery("#gad_cond").val()].price;
-        });
 
         getCategories();
     }
