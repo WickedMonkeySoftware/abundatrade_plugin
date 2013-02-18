@@ -71,57 +71,65 @@ class abundatrade_withinboredom {
     public function gadget($atts) {
         $closediv = "</div>";
         
-        $display = "<form><div id='abundatrade_gadget'>";
-        
-        $display .= "<div class='category_selector select_container'><div id='category_selection' class='selection sel_center'>";
-        $display .= $closediv . $closediv;
-        
-        $display .= "<div class='large_container'><div id='manufacturer_selection' class='selection sel_left'>";
-        $display .= $closediv;
-        
-        $display .= "<div id='carrier_selection' class='selection sel_left'>";
-        $display .= $closediv;
-        
-        $display .= "<div id='device_selection' class='selection sel_left'>";
-        $display .= $closediv;
-        
-        $display .= "<div id='condition_selection' class='selection sel_left'>";
-        $display .= $closediv . $closediv;
-        
-        $display .= "<div class='quote_display select_container'><div id='quote' class='quote_center'>";
-        $display .= $closediv . $closediv;
-        
-        $display .= "<div class='description_container'><div id='description' class='box_center'>";
-        $display .= "<p id='desc_desc'>Tell us more about your gadget including complete model #, make, etc...</p>";
-        $display .= "<textarea name='description_entry'></textarea>";
-        $display .= $closediv . $closediv;
-        $display .= "<div class='contact_form_container'><div class='contact_form_thirds'>";
-        $display .= "<input type='text' placeholder='Your name*' name='name' class='' /><span class='required'>*</span>";
-        $display .= $closediv;
-        $display .= "<div class='contact_form_thirds'>";
-        $display .= "<input type='text' placeholder='Your email*' name='email'/><span class='required'>*</span>";
-        $display .= $closediv;
-        $display .= "<div class='contact_form_thirds'>";
-        $display .= "<input type='text' placeholder='Your phone #' name='phone'/>";
-        $display .= $closediv . $closediv;
-        $display .= "<div class='contact_form_container'><div class='contact_form_thirds'></div><div class='contact_form_thirds'>";
-        $display .= "<input type='text' placeholder='Address*' name='address_street'/><span class='required'>*</span>"; 
-        $display .= $closediv . $closediv;
-        $display .= "<div class='contact_form_container'><div class='contact_form_thirds'>";
-        $display .= "<input type='text' placeholder='City*' name='address_city'/><span class='required'>*</span>";
-        $display .= $closediv;
-        $display .= "<div class='contact_form_thirds'>";
-        $display .= "<input type='text' placeholder='State*' name='address_state'/><span class='required'>*</span>";
-        $display .= $closediv;
-        $display .= "<div class='contact_form_thirds'>";
-        $display .= "<input type='text' placeholder='Zip Code*' name='address_zip'/><span class='required'>*</span>";
-        $display .= $closediv . $closediv;
-        $display .= "<div class='contact_form_container'><div class='contact_form_thirds'></div><div class='contact_form_thirds'>";
-        $display .= "<input type='submit' value='Submit to Make Your Cash'/>";
-        $display .= $closediv . $closediv;
-        $display .= "</form>";
-        
-        $display .= $closediv;
+        if(isset($_REQUEST['gad_cat'])) {
+            $display = "<div>";
+            $display .= "<h1>Hello</h1>";
+            $display .= $closediv;
+        }
+        else {
+            
+            $display = "<form method='get' action='#'><div id='abundatrade_gadget'>";
+            
+            $display .= "<div class='category_selector select_container'><div id='category_selection' class='selection sel_center'>";
+            $display .= $closediv . $closediv;
+            
+            $display .= "<div class='large_container'><div id='manufacturer_selection' class='selection sel_left'>";
+            $display .= $closediv;
+            
+            $display .= "<div id='carrier_selection' class='selection sel_left'>";
+            $display .= $closediv;
+            
+            $display .= "<div id='device_selection' class='selection sel_left'>";
+            $display .= $closediv;
+            
+            $display .= "<div id='condition_selection' class='selection sel_left'>";
+            $display .= $closediv . $closediv;
+            
+            $display .= "<div class='quote_display select_container'><div id='quote' class='quote_center'>";
+            $display .= $closediv . $closediv;
+            
+            $display .= "<div class='description_container'><div id='description' class='box_center'>";
+            $display .= "<p id='desc_desc'>Tell us more about your gadget including complete model #, make, etc...</p>";
+            $display .= "<textarea name='description_entry'></textarea>";
+            $display .= $closediv . $closediv;
+            $display .= "<div class='contact_form_container'><div class='contact_form_thirds'>";
+            $display .= "<input type='text' placeholder='Your name*' name='name' class='' /><span class='required'>*</span>";
+            $display .= $closediv;
+            $display .= "<div class='contact_form_thirds'>";
+            $display .= "<input type='text' placeholder='Your email*' name='email'/><span class='required'>*</span>";
+            $display .= $closediv;
+            $display .= "<div class='contact_form_thirds'>";
+            $display .= "<input type='text' placeholder='Your phone #' name='phone'/>";
+            $display .= $closediv . $closediv;
+            $display .= "<div class='contact_form_container'><div class='contact_form_thirds'></div><div class='contact_form_thirds'>";
+            $display .= "<input type='text' placeholder='Address*' name='address_street'/><span class='required'>*</span>"; 
+            $display .= $closediv . $closediv;
+            $display .= "<div class='contact_form_container'><div class='contact_form_thirds'>";
+            $display .= "<input type='text' placeholder='City*' name='address_city'/><span class='required'>*</span>";
+            $display .= $closediv;
+            $display .= "<div class='contact_form_thirds'>";
+            $display .= "<input type='text' placeholder='State*' name='address_state'/><span class='required'>*</span>";
+            $display .= $closediv;
+            $display .= "<div class='contact_form_thirds'>";
+            $display .= "<input type='text' placeholder='Zip Code*' name='address_zip'/><span class='required'>*</span>";
+            $display .= $closediv . $closediv;
+            $display .= "<div class='contact_form_container'><div class='contact_form_thirds'></div><div class='contact_form_thirds'>";
+            $display .= "<input type='submit' value='Submit to Make Your Cash'/>";
+            $display .= $closediv . $closediv;
+            $display .= "</form>";
+            
+            $display .= $closediv;
+        }
         
         if ($_GET['gadget'] == true) {
             return $display;
