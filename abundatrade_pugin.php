@@ -141,12 +141,12 @@ class abundatrade_withinboredom {
         }
         
         if ($all_valid) {
-            $display = "<h1>Please wait while we build your quote</h1>";
+            $display = "<h1 id='finalize'><img src='http://abundatrade.com/recommerce/wp-content/plugins/abundatrade_plugin/images/spinner.gif' />Please wait while we finalize your quote</h1>";
         }
         else {
             
             $display = "<form method='get' action='#'><input type='hidden' name='gadget' value='true'/><div id='abundatrade_gadget'>";
-            
+            $display .= "<h1 id='finalize' style='display:none'></h1>";
             $display .= "<div class='category_selector select_container'><div id='category_selection' $gad_cat class='selection sel_center'>Javascript required to use this page";
             $display .= $closediv . $closediv;
             
