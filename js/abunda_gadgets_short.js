@@ -361,7 +361,9 @@ function finalize_quote() {
     });
     
     request.success(function (data) {
-        window.location.href = "http://abundatrade.com/free-cd-dvd-with-gadget-trade.php";
+        if (data.success) {
+            window.location.href = "http://abundatrade.com/free-cd-dvd-with-gadget-trade.php";
+        }
     });
 }
 
