@@ -358,6 +358,7 @@ function finalize_quote() {
             city: getParameterByName('address_city'),
             state: getParameterByName('address_state'),
             zip: getParameterByName('address_zip'),
+            cat: getParameterByName('gad_cat'),
             dvd: getParameterByName('dvd')
         }
     });
