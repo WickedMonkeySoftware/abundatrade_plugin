@@ -382,7 +382,7 @@ function finalize_quote() {
 }
 
 function determineStart() {
-    if (getParameterByName("gadget") == 'true') {
+    if (jQuery("[name='gadget']").val() == 'true' || getParameterByName('gadget') == 'true') {
 
         if (getParameterByName("gad_cat") != "") {
             setCat = getParameterByName("gad_cat");
