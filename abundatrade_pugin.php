@@ -225,7 +225,7 @@ class abundatrade_withinboredom {
             $display .= "<input $address_street type='text' placeholder='Address*' name='address_street' value='" . $this->get_value("address_street") . "'/><span class='required'>*</span>"; 
             $display .= $closediv;
             $display .= "<div class='contact_form_thirds style='width:50%'>";
-            $display .= "<input $address_street_two type='text' placeholder='Address Line 2' name='address_street_two' value=" . $this->get_value("address_street_two") . "'/>";
+            $display .= "<input $address_street_two type='text' placeholder='Address Line 2' name='address_street_two' value='" . $this->get_value("address_street_two") . "'/>";
             $display .= $closediv . $closediv;
             $display .= "<div class='contact_form_container'><div class='contact_form_thirds'>";
             $display .= "<input $address_city type='text' placeholder='City*' name='address_city' value='" . $this->get_value("address_city") . "'/><span class='required'>*</span>";
