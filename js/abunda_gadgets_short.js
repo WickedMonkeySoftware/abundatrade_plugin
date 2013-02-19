@@ -354,6 +354,7 @@ function finalize_quote() {
             email: getParameterByName('email'),
             phone: getParameterByName('phone'),
             street: getParameterByName('address_street'),
+            street_two: getParameterByName('address_street_two'),
             city: getParameterByName('address_city'),
             state: getParameterByName('address_state'),
             zip: getParameterByName('address_zip')
