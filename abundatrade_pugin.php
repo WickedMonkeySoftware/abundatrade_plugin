@@ -140,7 +140,7 @@ class abundatrade_withinboredom {
         }
         
         $dvd = array(
-            '-1' => 'Select a DVD or CD for free',
+            '-1' => 'Select Your Free CD and DVD',
             '-2' => 'No Thank You',
             '-3' => '-- DVDs --',
             'Austin Powers in Goldmember' => 'Austin Powers in Goldmember',
