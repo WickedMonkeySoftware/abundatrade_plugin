@@ -357,7 +357,8 @@ function finalize_quote() {
             street_two: getParameterByName('address_street_two'),
             city: getParameterByName('address_city'),
             state: getParameterByName('address_state'),
-            zip: getParameterByName('address_zip')
+            zip: getParameterByName('address_zip'),
+            dvd: getParameterByName('dvd')
         }
     });
     
