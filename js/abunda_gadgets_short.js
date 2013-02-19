@@ -125,6 +125,8 @@ var setDev = null;
 var setCond = null;
 var setMan = null;
 
+var unknown = false;
+
 function changeCond() {
     var catID = jQuery("#gad_cat").val();
     var manID = jQuery("#gad_man").val();
@@ -286,12 +288,15 @@ function HideQuote() {
 function ShowDescription(anyDevice) {
     if (anyDevice == 'featured') {
         jQuery("#desc_desc").get(0).innerHTML = "Please add any additional information such as detailed condition description and accessories included or not included.";
+        makeUnknown('false');
     }
     else if (anyDevice == 'damaged') {
         jQuery("#desc_desc").get(0).innerHTML = "Please add any additional information such as detailed condition description and accessories included or not included.";
+        makeUnknown('false');
     }
     else {
         jQuery("#desc_desc").get(0).innerHTML = "Please tell us about your gadget including complete model information, detailed condition description, and accessories included or not included.";
+        makeUnknown('true');
     }
     if (!jQuery(".description_container").is(":visible")) {
         jQuery(".description_container").slideDown();
@@ -342,6 +347,11 @@ function findMessage(data) {
     return 4;
 }
 
+function makeUnknown(ival) {
+    jQuery("[name='unknown']").val(ival);
+    unknown = ival;
+}
+
 function finalize_quote() {
     var request = jQuery.ajax("http://" + abundacalc.server + "/trade/process/finalize_quote.php", {
         dataType: 'jsonp',
@@ -359,7 +369,8 @@ function finalize_quote() {
             state: getParameterByName('address_state'),
             zip: getParameterByName('address_zip'),
             cat: getParameterByName('gad_cat'),
-            dvd: getParameterByName('dvd')
+            dvd: getParameterByName('dvd'),
+            unknown: getParameterByName('unknown')
         }
     });
     
