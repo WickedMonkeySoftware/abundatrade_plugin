@@ -221,10 +221,10 @@ class abundatrade_withinboredom {
             $display .= "<div class='contact_form_thirds'>";
             $display .= "<input $phone type='text' placeholder='Your phone #' name='phone' value = '" . $this->get_value("phone") . "'/>";
             $display .= $closediv . $closediv;
-            $display .= "<div class='contact_form_container'><div class='contact_form_thirds' style='width:45%'>";
+            $display .= "<div class='contact_form_container'><div class='contact_form_thirds' style='width:49%'>";
             $display .= "<input $address_street type='text' placeholder='Address*' name='address_street' value='" . $this->get_value("address_street") . "'/><span class='required'>*</span>"; 
             $display .= $closediv;
-            $display .= "<div class='contact_form_thirds' style='width:45%'>";
+            $display .= "<div class='contact_form_thirds' style='width:49%'>";
             $display .= "<input $address_street_two type='text' placeholder='Address Line 2' name='address_street_two' value='" . $this->get_value("address_street_two") . "'/>";
             $display .= $closediv . $closediv;
             $display .= "<div class='contact_form_container'><div class='contact_form_thirds'>";
