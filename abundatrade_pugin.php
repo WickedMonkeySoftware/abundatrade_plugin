@@ -251,7 +251,7 @@ class abundatrade_withinboredom {
             $display .= $closediv;
         }
         
-        if ($_GET['gadget'] == true) {
+        if (true) {
             return $display;
         }
         else return "";
