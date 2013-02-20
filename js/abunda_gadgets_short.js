@@ -404,4 +404,4 @@ function determineStart() {
     }
 }
 
-jQuery(determineStart());
+jQuery(determineStart);
