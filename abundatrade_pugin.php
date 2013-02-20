@@ -255,6 +255,11 @@ class abundatrade_withinboredom {
             $display .= $closediv;
         }
         
+        if (!isset($this->export)) { 
+            $this->export = array();
+        }
+        wp_localize_script('abundatrade_gadgets','abundacalc_gad',$this->export);
+        
         if (true) {
             return $display;
         }
@@ -479,7 +484,6 @@ class abundatrade_withinboredom {
         wp_enqueue_script("abundatrade_impromptu");
         wp_enqueue_script("abundatrade_register");
         wp_enqueue_script("abundatrade_gadgets");
-        if (!isset($this->export)) { $this->export = array(); }
         $abundacalc = array('server' => 'abundatrade.com', 
             'url' => $this->folders['PluginUrl'],
             'export' => $this->export,
