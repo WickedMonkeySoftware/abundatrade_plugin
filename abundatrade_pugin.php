@@ -259,8 +259,7 @@ class abundatrade_withinboredom {
             $this->export = array();
         }
         
-        $display .= "<script type='text/javascript'> /* <![CDATA[ */ var abundacalc_gad = " . json_encode($this->export) . ";/* ]]> */
-</script>"
+        $display .= "<script type='text/javascript'> /* <![CDATA[ */ var abundacalc_gad = " . json_encode($this->export) . ";/* ]]> */</script>";
         
         if (true) {
             return $display;
