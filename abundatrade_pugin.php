@@ -90,6 +90,10 @@ class abundatrade_withinboredom {
         $all_valid = false;
         $show_all = "style='display:none'";
         
+        if (isset($atts['gad_cat'])) {
+            $this->export = array('gad_cat' => $atts['gad_cat']);
+        }
+        
         if(isset($_REQUEST['gad_cat'])) {
             if ($_REQUEST['gad_cat'] == -1) {
                 $gad_cat = $red;
@@ -475,8 +479,10 @@ class abundatrade_withinboredom {
         wp_enqueue_script("abundatrade_impromptu");
         wp_enqueue_script("abundatrade_register");
         wp_enqueue_script("abundatrade_gadgets");
+        if (!isset($this->export)) { $this->export = array(); }
         $abundacalc = array('server' => 'abundatrade.com', 
-            'url' => $this->folders['PluginUrl'], 
+            'url' => $this->folders['PluginUrl'],
+            'export' => $this->export,
             'thanks' => $this->settings->Thank_you_page);
         if (isset($_REQUEST['upload_id']) && $_REQUEST['upload_id'] != '') {
             $abundacalc['upload_id'] = $_REQUEST['upload_id'];
