@@ -258,7 +258,9 @@ class abundatrade_withinboredom {
         if (!isset($this->export)) { 
             $this->export = array();
         }
-        wp_localize_script('abundatrade_gadgets','abundacalc_gad',$this->export);
+        
+        $display .= "<script type='text/javascript'> /* <![CDATA[ */ var abundacalc_gad = " . json_encode($this->export) . ";/* ]]> */
+</script>"
         
         if (true) {
             return $display;
