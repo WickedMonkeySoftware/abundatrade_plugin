@@ -384,9 +384,14 @@ function finalize_quote() {
 function determineStart() {
     if (jQuery("#is_gadget").val() == 'true' || getParameterByName('gadget') == 'true') {
 
+        if (abundacalc_gad.gad_cat) {
+            setCat = abundacalc_gad.gad_cat;
+        }
+
         if (getParameterByName("gad_cat") != "") {
             setCat = getParameterByName("gad_cat");
         }
+
         if (getParameterByName("gad_man") != "") {
             setMan = getParameterByName("gad_man");
         }
