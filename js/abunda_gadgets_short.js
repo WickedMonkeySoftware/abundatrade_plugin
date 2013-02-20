@@ -401,6 +401,9 @@ function determineStart() {
         if (getParameterByName("gad_dev") != "") {
             setDev = getParameterByName("gad_dev");
         }
+        if (getParameterByName("ean") != "") {
+            setDev = getParameterByName("ean");
+        }
         if (getParameterByName("gad_cond") != "") {
             setCond = getParameterByName("gad_cond");
         }
