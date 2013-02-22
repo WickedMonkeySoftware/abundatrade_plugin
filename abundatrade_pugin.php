@@ -90,6 +90,29 @@ class abundatrade_withinboredom {
         $all_valid = false;
         $show_all = "style='display:none'";
         
+        preg_match('/MSIE (.*?);/', $_SERVER['HTTP_USER_AGENT'], $matches);
+
+        $use_labels = false;
+        if (count($matches)>1){
+            //Then we're using IE
+            $version = $matches[1];
+
+            switch(true){
+                case ($version<=8):
+                    //IE 8 or under!
+                    $use_labels = true;
+                    break;
+
+                case ($version==9):
+                    //IE9!
+                    $use_labels = true;
+                    break;
+
+                default:
+                //You get the idea
+            }
+        }
+        
         if (isset($atts['gad_cat'])) {
             $this->export = array('gad_cat' => $atts['gad_cat']);
         }
