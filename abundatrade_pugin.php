@@ -278,11 +278,14 @@ class abundatrade_withinboredom {
             $display .= $closediv;
             $display .= "<div class='contact_form_thirds'>";
             if ($use_labels) {
-                $display .= "<label for='my_name'>Your name*</label><br>";
+                $display .= "<label for='address_state'>State*</label><br>";
             }
             $display .= "<input $address_state type='text' placeholder='State*' name='address_state' value='" . $this->get_value("address_state") . "'/><span class='required'>*</span>";
             $display .= $closediv;
             $display .= "<div class='contact_form_thirds'>";
+            if ($use_labels) {
+                $display .= "<label for='address_zip'>Zip Code*</label><br>";
+            }
             $display .= "<input $address_zip type='text' placeholder='Zip Code*' name='address_zip' value='" . $this->get_value("address_zip") . "'/><span class='required'>*</span>";
             $display .= $closediv . $closediv;
             $display .= "<div style='height:auto;' class='contact_form_container'><div class='contact_form_thirds'></div><div class='contact_form_thirds'>";
