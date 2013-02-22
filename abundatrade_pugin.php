@@ -108,7 +108,8 @@ class abundatrade_withinboredom {
                     //IE9!
                     $use_labels = true;
                     break;
-
+                case ($version == 10):
+                    $use_labels = false;
                 default:
                 //You get the idea
             }
