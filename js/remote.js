@@ -1101,6 +1101,8 @@ function submit_my_list(f) {
         str += '&' + i + '=' + obj;
     });
 
+    str += "&simple=true";
+
     if (isguest) {
         str += '&guest=true';
     }
