@@ -1093,7 +1093,7 @@ function submit_the_list(obj) {
     }
 }
 
-/** Submission of a list done the old fashioned way via jsonp */
+/** Submission of a list done the old fashioned way via jsonp ACTUAL SUBMISSION */
 function submit_my_list(f) {
     str = "";
 
