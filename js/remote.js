@@ -619,7 +619,7 @@ function displayLoginButtons() {
         if (just_logging_in) {
             return { Cancel: 0, Login: -1, Register: 1 };
         }
-        return { Cancel: 0, Login: -1, Register: 1, 'Continue as Guest': 2 };
+        return { Cancel: 0, Login: -1, Submit: 1, };
     }
 }
 
@@ -1287,7 +1287,7 @@ var gadgetstates = [
     },
     {
         title: 'Add it',
-        html: 'Add your item to your working trade list, you can signin, signup, or submit as a guest for an instant quote.',
+        html: 'Add your item to your working trade list, you can signin or submit for an instant quote.',
         buttons: { Done: 2 },
         focus: 1,
         position: { container: '#abundaGadgetInput .submit_holder', x: 0, y: 50, width: 200, arrow: 'tl' },
@@ -1346,7 +1346,7 @@ var tourstates = [
     },
     {
         title: 'Submit',
-        html: 'Once you\'re done building your list how you want it; login, sign up, or submit the list as a guest; print out your shipping information, and send it in. We will keep you up to date while it goes through the receiving process and get you your cash.',
+        html: 'Once you\'re done building your list how you want it; login or submit the list; print out your shipping information, and send it in. We will keep you up to date while it goes through the receiving process and get you your cash.',
         buttons: { Back: -1, Next: 1 },
         focus: 1,
         position: { container: '#submitList', x: 200, y: 0, width: 400, arrow: 'lt tl' },
