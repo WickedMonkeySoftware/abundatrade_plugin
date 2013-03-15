@@ -17,7 +17,7 @@ function demo() { return '<select id="sex" name="sex">' +
                         '<option value="Ms.">Ms.</option></select><br/>'+
                         '<label for="first_name">First Name:</label><br/><input type="text" id="name_first" name="first_name" value=""/><br/>' +
                         '<label for="last_name">Last Name:</label><br/><input type="text" id="name_last" name="last_name" value=""/><br/>' +
-                        '<label for="email_abundatrade">Email:</label><br/><input onchange="checkemail()" id="email_abundatrade" name="email" value="" type="text" /><img id="researching" src="'+abundacalc.url+'/images/spinner.gif" style="display:none"><span style="display:none" id="bademail">This email is already registered ... <a href="http://abundatrade.com/trade/user/reset/">Forgot your password?</a></span><br/>' +
+                        '<label for="email_abundatrade">Email:</label><br/><input id="email_abundatrade" name="email" value="" type="text" /><img id="researching" src="'+abundacalc.url+'/images/spinner.gif" style="display:none"><span style="display:none" id="bademail">This email is already registered ... <a href="http://abundatrade.com/trade/user/reset/">Forgot your password?</a></span><br/>' +
                         '<label for="confirm_email">Confirm Email:</label><br/><input name="confirm_email" type="text" value=""/>' +
                         '<input type="hidden" name="a" value="' + jQuery('#a').val() + '"/>';
 }
@@ -87,7 +87,7 @@ var nomatch_email = '<h2>Email Addresses don\'t match!</h2><br/><p>Please check 
 var regular_finish = '<h2>Email Addresses don\'t match!</h2><br/><p>Please check your email address to make sure it is correct.</p>';
 
 function state(passState, finish, callback_to_submit) {
-            return {
+    return {
                 state1: {
                     html: demo(),
                     buttons: { Cancel: 0, Next: 1 },
@@ -126,12 +126,7 @@ function state(passState, finish, callback_to_submit) {
                             if (validateEmail(val['email'], val['confirm_email']) == 'nomatch') {
                                 jQuery.prompt.goToState('nomatch');
                             } else if (validateEmail(val['email'], val['confirm_email'])) {
-                                if (!just_logging_in) {
-                                    mystate += 4;
-                                }
-                                else {
-                                    mystate += but;
-                                }
+                                mystate += 4
                                 jQuery.prompt.goToState('state' + mystate);
                             }
                             else {
@@ -208,5 +203,5 @@ function Register(pass, finish, call) {
     var stop = setInterval(function() {
         clearInterval(stop);
         jQuery.prompt(state(pass,finish, call));
-    }, 500);
+    }, 600);
 }
