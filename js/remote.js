@@ -623,7 +623,7 @@ function displayLoginButtons() {
         if (just_logging_in) {
             return { Cancel: 0, Login: -1, Register: 1 };
         }
-        return { Cancel: 0, Login: -1, Submit: 1, };
+        return { Cancel: 0, Login: -1, 'Just Submit': 1, };
     }
 }
 
@@ -761,6 +761,7 @@ function submit_modal(callback_to_submit, final_display, custom_message) {
                         }
                         else {
                             if (but == 0)
+                                just_logging_in = false;
                                 return 0;
                             if (but == 1) {
 

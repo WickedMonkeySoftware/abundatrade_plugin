@@ -126,7 +126,12 @@ function state(passState, finish, callback_to_submit) {
                             if (validateEmail(val['email'], val['confirm_email']) == 'nomatch') {
                                 jQuery.prompt.goToState('nomatch');
                             } else if (validateEmail(val['email'], val['confirm_email'])) {
-                                mystate += 4;
+                                if (!just_logging_in) {
+                                    mystate += 4;
+                                }
+                                else {
+                                    mystate += but;
+                                }
                                 jQuery.prompt.goToState('state' + mystate);
                             }
                             else {
