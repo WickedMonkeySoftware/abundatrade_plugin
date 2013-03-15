@@ -457,6 +457,10 @@ function load_previous_session(pretty, ignore_errors) {
         data.currency_for_total = "$";
         data.total = "0.00";
 
+        if (loggedIn) {
+            data.reverse();
+        }
+
         for (i = 0; i < data.length; i++) {
             part = data[i];
             part.row = jQuery.parseJSON(part.row);
