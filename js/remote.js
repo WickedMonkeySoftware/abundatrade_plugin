@@ -1479,7 +1479,7 @@ function getParameterByName(name) {
 
 /** Builds an unknown row */
 function build_unknown(code, quantity, id) {
-    return "<tr class='new response'> <td class='upc'>" + code + "</td> <td class='details'> <div class='td_details'> <strong>Unknown Item</strong><br /><em>Item not found. You may send for valuation</em></div> <div class='td_image'> <img src='http://g-ecx.images-amazon.com/images/G/01/x-site/icons/no-img-sm._V192198896_.gif' alt='Unkown item' /> </div> </td> <td class='quantity'>" + quantity + "</td> <td class='item'><div class='item'>$0.00</td> <td class='values'>$0.00</td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + id + "'>Delete</a></tr>";
+    return "<tr style='' class='new response'> <td style='display:none;' class='upc'>" + code + "</td> <td colspan='2' class='details'> <div class='td_details'> <strong>Unknown Item</strong><br /><em>Item not found. You may send for valuation</em><br><span class='upc_small'>" + code + "</span></div> <div class='td_image'> <img src='http://g-ecx.images-amazon.com/images/G/01/x-site/icons/no-img-sm._V192198896_.gif' alt='Unkown item' /> </div> </td> <td class='quantity'>" + quantity + "</td> <td class='item'><div class='item'>$0.00</td> <td class='values'>$0.00</td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + id + "'>Delete</a></tr>";
 }
 
 /** Builds an item from a lookup from a json string */
@@ -1513,13 +1513,49 @@ function build_row(data) {
             row_price = new Number(row.price_per / 100).toFixed(2);
             row_total = new Number(row.total_price / 100).toFixed(2);
             data.row_html += write_html(data, row);
-
         }
         number_item++;
     }
 
     return data;
 }
+
+function show_other_offers(data) {
+    console.log(data);
+    codes_to_offers[data.upc] = data;
+    jQuery("#comp_" + data.prod).get(0).innerHTML = display_other_offers(data);
+    console.log("#comp_" + data.prod);
+}
+
+function display_other_offers(data, row) {
+    return "<span style='font-size:11px;'>Top Comp: </span>$<span id='top_" + data.prod + "'>" + data.price + "</span>";
+}
+
+function get_other_offers(code, product, row) {
+    if (codes_to_offers[code] != null) {
+        return display_other_offers(codes_to_offers[code], row);
+    }
+    jQuery.ajax("http://" + abundacalc.server + "/trade/process/MyComp.php?action=get&prod=24414439&upc=" + code + "&prod=" + product, { dataType: 'jsonp', success: show_other_offers });
+
+    return "<img src='" + abundacalc.url + "/images/spinner.gif' width='15' height='15'>";
+}
+
+function display_match_button(prod) {
+    return "<input type='button' value='Beat!' onclick='beat(\"" + prod + "\"); return false;'>";
+}
+
+function do_show_match(code, product, row) {
+    if (codes_to_offers[code] != null) {
+        
+    }
+}
+
+function beat(prod) {
+    jQuery("#beat_" + prod).get(0).innerHTML = "<img src='" + abundacalc.url + "/images/good.png' width='35'>";
+    jQuery("#price_" + prod).get(0).innerHTML = "$" +  (parseFloat(codes_to_offers[prod].offer) * 1.5).toFixed(2);
+}
+
+var codes_to_offers = {};
 
 /** Write out the html for the row */
 function write_html(data, row) {
@@ -1531,7 +1567,24 @@ function write_html(data, row) {
         hide_after(1, row.item_id);
     }
 
-    return "<tr class='new response'> <td class='upc'>" + row.product_code + "</td> <td class='details'> <div class='td_image'> <img src='" + row.images + "' alt='" + row.title + "' /> </div><div class='td_details'> <strong>" + row.title + "</strong><br /><em>" + (row.author == null ? '' : row.author) + "</em><br/>" + (row.category == null ? "" : row.category) + "</div>  </div></td> <td class='quantity'>" + row.quantity + "</td> <td class='item'>" + (row.worthless == true ? "<p class='blatent'>No Abunda Value</p>" : "") + (row.overstocked == true ? "<span class='blatent'>Over Stocked Item</span>" : "") + "<div class='item'>" + data.currency_for_total + row_price + "</div></td> <td class='values'>" + data.currency_for_total + row_total + "</td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + row.item_id + "'>Delete</a></tr>";
+    if (row.offer == null) {
+        row.offer = "0.00";
+    }
+
+    buton = "<img src='" + abundacalc.url + "/images/good.png' width='35'>";
+    us = "style='color:green; font-size:11px;'";
+    them = "style='color:black; font-size:11px;'";
+
+    codes_to_offers[row.item_id] = row;
+
+    if (parseFloat(row.offer) > parseFloat(row_price)) {
+        buton = "<input type='button' style='margin-bottom:0;' value='Beat `Em!' onclick='beat(\"" + row.item_id + "\"); return false;'>";
+        swap = them;
+        them = us;
+        us = swap;
+    }
+
+    return "<tr class='new response'> <td style='display:none;' class='upc'>" + row.product_code + "</td> <td colspan='2' class='details'> <div class='td_image'> <img src='" + row.images + "' alt='" + row.title + "' /> </div><div class='td_details'> <strong>" + row.title + "</strong><br /><em>" + (row.author == null ? '' : row.author) + "</em><br/>" + (row.category == null ? "" : row.category) + "<br><span class='upc_small'>" + row.product_code + "</span></div>  </div></td> <td class='quantity'>" + row.quantity + "</td> <td class='item'>" + (row.worthless == true ? "<span class='blatent'>No Abunda Value</span>" : "") + (row.overstocked == true ? "<span class='blatent'>Over Stocked Item</span>" : "") + "<div class='item'><span " + us + ">Abunda: " + data.currency_for_total + "" + row_price + "</span><br/><div id='comp_" + row.item_id + "'><span " + them + ">" + (row.worthless == true || row.overstocked == true ? "" : "Top Comp: $" + row.offer) + "</span></div></div></td> <td class='values'><span id='price_" + row.item_id + "'>" + data.currency_for_total + row_total + "</span><br/><div id='beat_" + row.item_id + "'>" + (row.worthless == true || row.overstocked == true ? "" : buton) + "</div></td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + row.item_id + "'><img src='" + abundacalc.url + "/images/trashcan.png' alt='delete' width='50' height='50'></a></tr>";
 }
 
 var hidden = true;

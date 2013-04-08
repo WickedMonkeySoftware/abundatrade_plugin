@@ -391,12 +391,12 @@ class abundatrade_withinboredom {
         $table = '<table cellspacing="0" cellpadding="0" id="abundaCalcTbl" style="'.$hide.'">
                   <thead>
                     <tr>
-                      <th class="calcbg3 calc_color3">UPC</th>
-                      <th class="calcbg3 calc_color3">Product Details</th>
+                      <th style="display:none;" class="calcbg3 calc_color3">UPC</th>
+                      <th colspan="2" class="calcbg3 calc_color3">Product Details</th>
                       <th class="calcbg3 calc_color3">Qty</th>
-                      <th class="calcbg3 calc_color3 txtright">Per Item</th>
-                      <th class="calcbg3 calc_color3 txtright">Total</th>
-                      <th class="calcbg3 calc_color3"><a class="calc_linkS3" onclick="clear_session(this);">Delete All</a></th>
+                      <th class="calcbg3 calc_color3">Offers</th>
+                      <th class="calcbg3 calc_color3 txtright">Best Offer</th>
+                      <th class="calcbg3 calc_color3"><a class="calc_linkS3" onclick="clear_session(this);">Start Over</a></th>
                       <th style="display: none;">ID</th>
                     </tr>
                   </thead>
@@ -534,7 +534,7 @@ class abundatrade_withinboredom {
         wp_enqueue_script("abundatrade_impromptu");
         wp_enqueue_script("abundatrade_register");
         wp_enqueue_script("abundatrade_gadgets");
-        $abundacalc = array('server' => 'abundatrade.com', 
+        $abundacalc = array('server' => 'tiny.abundatrade.com', 
             'url' => $this->folders['PluginUrl'],
             'export' => $this->export,
             'thanks' => $this->settings->Thank_you_page);

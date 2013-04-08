@@ -1,8 +1,7 @@
 /*Default Style for Abundatrade Calculator plugin 12-11-12*/
 
 
-#abundatrade
-{
+#abundatrade {
     position: relative;
     display: block;
     width: 90%;
@@ -12,19 +11,30 @@
 
 
 .left {
-  float: left;
+      float: left;
 }
 
 .right {
-  float: right;
+      float: right;
+}
+
+.upc_small {
+    font-size: x-small;
 }
 
 
-#abundatrade a{color: #10A3E8; cursor:pointer; font-size:16px;}
-#abundatrade a:hover{text-decoration: underline;}
 
-.calc_content_wrap
-{
+#abundatrade a {
+    color: #10A3E8;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+    #abundatrade a:hover {
+        text-decoration: underline;
+    }
+
+.calc_content_wrap {
     width: 100%;
     margin: 0 auto;
     padding: 4px;
@@ -36,39 +46,43 @@
     clear: none;
 }
 
-.center{text-align: center !important;}
+.center {
+    text-align: center !important;
+}
 
-.txtright{text-align: right !important; padding-right: 8px !important;}
+.txtright {
+    text-align: right !important;
+    padding-right: 8px !important;
+}
 
-.bottomcurve{
-	clear:both;
-	height:25px;
-	width:100%;
-	-moz-border-radius-bottomright: 10px;	
-	-moz-border-radius-bottomleft: 10px;
-	border-bottom-right-radius: 10px;	
-	border-bottom-left-radius: 10px;
-	-webkit-border-bottom-left-radius:10px; 
-	-webkit-border-bottom-right-radius:10px;
-   	-khtml-border-radius-bottomright: 10px;
-	-khtml-border-radius-bottomleft: 10px;
-        margin-bottom: 0 !important;
+.bottomcurve {
+    clear: both;
+    height: 25px;
+    width: 100%;
+    -moz-border-radius-bottomright: 10px;
+    -moz-border-radius-bottomleft: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    -webkit-border-bottom-left-radius: 10px;
+    -webkit-border-bottom-right-radius: 10px;
+    -khtml-border-radius-bottomright: 10px;
+    -khtml-border-radius-bottomleft: 10px;
+    margin-bottom: 0 !important;
 }
 
 /*********** SECTION 1 **********/
 
-#top_input_section
-{
+#top_input_section {
     margin: 0;
     float: left;
     width: 99%;
     clear: none;
-    -moz-border-radius-topright: 15px;	
+    -moz-border-radius-topright: 15px;
     -moz-border-radius-topleft: 15px;
-    border-top-right-radius: 15px;	
+    border-top-right-radius: 15px;
     border-top-left-radius: 15px;
-    -webkit-border-top-left-radius:15px; 
-    -webkit-border-top-right-radius:15px;
+    -webkit-border-top-left-radius: 15px;
+    -webkit-border-top-right-radius: 15px;
     -khtml-border-radius-topright: 15px;
     -khtml-border-radius-topleft: 15px;
     height: auto;
@@ -78,15 +92,15 @@
 
 #gadget_abundatrade {
     margin: 0;
-    float:left;
+    float: left;
     width: 99%;
     clear: none;
-    -moz-border-radius-topright: 15px;	
+    -moz-border-radius-topright: 15px;
     -moz-border-radius-topleft: 15px;
-    border-top-right-radius: 15px;	
+    border-top-right-radius: 15px;
     border-top-left-radius: 15px;
-    -webkit-border-top-left-radius:15px; 
-    -webkit-border-top-right-radius:15px;
+    -webkit-border-top-left-radius: 15px;
+    -webkit-border-top-right-radius: 15px;
     -khtml-border-radius-topright: 15px;
     -khtml-border-radius-topleft: 15px;
     height: auto;
@@ -94,23 +108,80 @@
     padding: 0 4px;
 }
 
-#gadget_abundatrade div.input_container {
+    #gadget_abundatrade div.input_container {
+        clear: none;
+        float: left;
+        height: auto /*45px*/;
+        margin: 0px 5px 0 20px;
+        padding-top: 0px;
+        width: auto;
+    }
+
+    #gadget_abundatrade div.label {
+        float: left;
+        margin: 13px 6px 0 0;
+        clear: none;
+    }
+
+    #gadget_abundatrade div.input_container div.product_holder {
+        width: 175px;
+        height: 45px;
+        float: left;
+        margin-right: 12px;
+        z-index: 1;
+        margin: 0;
+        padding: 0;
+        display: block;
+        clear: none;
+    }
+
+    #gadget_abundatrade div.product_holder #gadget_code {
+        background: white;
+        border: medium none;
+        height: 30px;
+        margin-left: 16px;
+        margin-top: 4px;
+        width: 150px;
+        z-index: 1;
+        clear: none;
+    }
+
+    #gadget_abundatrade div.product_holder #header_condition {
+        background: white;
+        border: medium none;
+        height: 30px;
+        margin-left: 16px;
+        margin-top: 4px;
+        width: 150px;
+        z-index: 1;
+        clear: none;
+    }
+
+    #gadget_abundatrade div.submit_holder {
+        float: right;
+        width: 140px;
+        height: 40px;
+        margin: 0px 10px 15px 5px;
+        padding-top: 5px;
+        clear: none;
+    }
+
+#top_input_section div.input_container {
     clear: none;
     float: left;
-    height: auto/*45px*/;
+    height: auto /*45px*/;
     margin: 0px 5px 0 20px;
     padding-top: 0px;
     width: auto;
 }
 
-#gadget_abundatrade div.label {
+#top_input_section div.label {
     float: left;
     margin: 13px 6px 0 0;
     clear: none;
 }
 
-#gadget_abundatrade div.input_container div.product_holder
-{
+#top_input_section div.input_container div.product_holder {
     width: 175px;
     height: 45px;
     float: left;
@@ -122,72 +193,7 @@
     clear: none;
 }
 
-#gadget_abundatrade div.product_holder #gadget_code
-{
-    background: white;
-    border: medium none;
-    height: 30px;
-    margin-left: 16px;
-    margin-top: 4px;
-    width: 150px;
-    z-index: 1;
-    clear: none;
-}
-
-#gadget_abundatrade div.product_holder #header_condition
-{
-    background: white;
-    border: medium none;
-    height: 30px;
-    margin-left: 16px;
-    margin-top: 4px;
-    width: 150px;
-    z-index: 1;
-    clear: none;
-}
-
-#gadget_abundatrade div.submit_holder
-{
-    float: right;
-    width: 140px;
-    height: 40px;
-    margin: 0px 10px 15px 5px;
-    padding-top: 5px;
-    clear: none;
-}
-
-#top_input_section div.input_container
-{
-    clear: none;
-    float: left;
-    height: auto/*45px*/;
-    margin: 0px 5px 0 20px;
-    padding-top: 0px;
-    width: auto;
-}
-
-#top_input_section div.label
-{
-    float: left;
-    margin: 13px 6px 0 0;
-    clear: none;
-}
-
-#top_input_section div.input_container div.product_holder
-{
-    width: 175px;
-    height: 45px;
-    float: left;
-    margin-right: 12px;
-    z-index: 1;
-    margin: 0;
-    padding: 0;
-    display: block;
-    clear: none;
-}
-
-#top_input_section div.product_holder #product_code
-{
+#top_input_section div.product_holder #product_code {
     background: white;
     border: medium none;
     height: 30px;
@@ -203,8 +209,7 @@
 }
 
 
-#top_input_section div.input_container div.qty_holder
-{
+#top_input_section div.input_container div.qty_holder {
     width: 80px;
     height: 45px;
     float: left;
@@ -214,8 +219,7 @@
     clear: none;
 }
 
-#top_input_section div.qty_holder #product_qty
-{
+#top_input_section div.qty_holder #product_qty {
     background: white;
     border: none;
     width: 60px;
@@ -230,8 +234,7 @@
 }
 
 
-#top_input_section div.submit_holder
-{
+#top_input_section div.submit_holder {
     float: right;
     width: 140px;
     height: 40px;
@@ -241,55 +244,61 @@
 }
 
 
-.btn1{
-	clear: none;
-	font-size: 17px !important;
-	font-weight: bold;
-	margin-left: auto;
-	margin-right: auto;
-	min-width:  130px;/**/
-	padding: 4px 16px;
-	text-align: center;
-	border: 2px solid #fff;
-	cursor: pointer;
-	vertical-align: middle;
-	-moz-border-radius: 20px;
-	-webkit-border-radius: 20px;
-	-khtml-border-radius: 20px;
-	border-radius: 20px;
+.btn1 {
+    clear: none;
+    font-size: 17px !important;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 130px; /**/
+    padding: 4px 16px;
+    text-align: center;
+    border: 2px solid #fff;
+    cursor: pointer;
+    vertical-align: middle;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -khtml-border-radius: 20px;
+    border-radius: 20px;
 }
-.btn1:hover {background: transparent; text-decoration: none;}
+
+    .btn1:hover {
+        background: transparent;
+        text-decoration: none;
+    }
 
 /*SECTION 1 for Bulk Items*/
 
 #bulk_button {
-	float:left;
-	width:99%;
-	margin-bottom: 6px;
-        margin-top: 0px;
-        padding: 0px 4px 8px 4px;
-	text-align: left;
-        -moz-border-radius-bottomright: 10px;	
-	-moz-border-radius-bottomleft: 10px;
-	border-bottom-right-radius: 10px;	
-	border-bottom-left-radius: 10px;
-	-webkit-border-bottom-left-radius:10px; 
-	-webkit-border-bottom-right-radius:10px;
-         vertical-align:middle;
-        height:25px;/**/
+    float: left;
+    width: 99%;
+    margin-bottom: 6px;
+    margin-top: 0px;
+    padding: 0px 4px 8px 4px;
+    text-align: left;
+    -moz-border-radius-bottomright: 10px;
+    -moz-border-radius-bottomleft: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    -webkit-border-bottom-left-radius: 10px;
+    -webkit-border-bottom-right-radius: 10px;
+    vertical-align: middle;
+    height: 25px; /**/
 }
 
 .abunda_text {
-	width:80%;
-	margin-left:20px;
-	font-size: 15px;
-	font-weight: bold;
-	clear:none;
-	vertical-align:middle;
-	text-align:left;
+    width: 80%;
+    margin-left: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    clear: none;
+    vertical-align: middle;
+    text-align: left;
 }
 
-.abunda_text a{text-decoration: underline;}
+    .abunda_text a {
+        text-decoration: underline;
+    }
 
 .abundatrade_error {
     color: red;
@@ -299,125 +308,126 @@
 
 
 #bulk {
-	float:left;
-	width:99%;
-	margin-bottom: -20px;
-	text-align: center;
-	-moz-border-radius: 15px;	
-	border-radius: 15px;
-	-webkit-border-radius:15px;
-        -khtml-border-radius: 15px;
-        vertical-align:middle;
-        display:none;
-        padding: 15px 5px;
-}
-
-#bulk pre {
-        color: black;
-	width:33%;
-	margin-left:auto;
-	margin-right:auto;
-	text-align:left;
-}
-
-#bulk_help 
-{
-    width:91%;
+    float: left;
+    width: 99%;
+    margin-bottom: -20px;
     text-align: center;
-	
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -khtml-border-radius: 15px;
+    vertical-align: middle;
+    display: none;
+    padding: 15px 5px;
+}
+
+    #bulk pre {
+        color: black;
+        width: 33%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+    }
+
+#bulk_help {
+    width: 91%;
+    text-align: center;
 }
 
 #bulk_upload {
-	width: 33%;
-	line-height: 20px;
+    width: 33%;
+    line-height: 20px;
 }
 
-.marleft{float: left; margin: 15px 0 0 15px !important;}
-.marright{float: right; margin: 15px 15px 0 0px !important;}
+.marleft {
+    float: left;
+    margin: 15px 0 0 15px !important;
+}
+
+.marright {
+    float: right;
+    margin: 15px 15px 0 0px !important;
+}
 
 /*********** SECTION 2 **********/
 
-#second_content
-{
+#second_content {
     margin: 0px 0 0 0;
     float: left;
     width: 99%;
-    -moz-border-radius-topright: 15px;	
+    -moz-border-radius-topright: 15px;
     -moz-border-radius-topleft: 15px;
-    border-top-right-radius: 15px;	
+    border-top-right-radius: 15px;
     border-top-left-radius: 15px;
-    -webkit-border-top-left-radius:15px; 
-    -webkit-border-top-right-radius:15px;
+    -webkit-border-top-left-radius: 15px;
+    -webkit-border-top-right-radius: 15px;
     -khtml-border-radius-topright: 15px;
     -khtml-border-radius-topleft: 15px;
     padding: 0 4px 0 5px;
 }
 
-#second_content label{font-size:18px;}/*new*/
+    #second_content label {
+        font-size: 18px;
+    }
+    /*new*/
 
-#second_content .second_content_sec1
-{
-    width: 200px;
-    margin: 10px 0 0 12px;
-    padding: 7px;
-    float: left;
+    #second_content .second_content_sec1 {
+        width: 200px;
+        margin: 10px 0 0 12px;
+        padding: 7px;
+        float: left;
+        clear: none;
+        font-size: 18px;
+        display: inline; /*new*/
+    }
+
+    #second_content .second_content_sec2 {
+        width: 280px;
+        margin-top: 10px;
+        padding: 7px 0 7px 7px;
+        float: left;
+        clear: none;
+        font-size: 18px;
+        display: inline; /*new*/
+    }
+
+    #second_content .second_content_sec3 {
+        width: 188px;
+        margin: 3px 18px 0 0;
+        padding: 7px 0;
+        float: right;
+        clear: none;
+        font-size: 18px;
+        color: White;
+        z-index: 1;
+    }
+
+#submitList {
     clear: none;
-    font-size: 18px;
-    display:inline;/*new*/
-}
-
-#second_content .second_content_sec2
-{
-    width: 280px;
-    margin-top: 10px;
-    padding: 7px 0 7px 7px;
-    float: left;
-    clear: none;
-    font-size: 18px;
-    display:inline;/*new*/
-    
-}
-
-#second_content .second_content_sec3
-{
-    width: 188px;
-    margin: 3px 18px 0 0;
-    padding: 7px 0;
+    font-size: 17px;
+    font-size: 1.0em;
+    font-weight: normal;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px 8px;
+    text-align: center;
+    border: 2px solid #9c9;
+    cursor: pointer;
+    vertical-align: middle;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -khtml-border-radius: 20px;
+    border-radius: 20px;
     float: right;
-    clear: none;
-    font-size: 18px;
-    color: White;
-    z-index: 1;
 }
 
-#submitList
-{
-   clear: none;
-   font-size: 17px;
-   font-size: 1.0em;
-   font-weight: normal;
-   margin-left: auto;
-   margin-right: auto;
-   padding: 5px 8px;
-   text-align: center;
-   border: 2px solid #9c9;
-   cursor: pointer;
-   vertical-align: middle;
-   -moz-border-radius: 20px;
-   -webkit-border-radius: 20px;
-   -khtml-border-radius: 20px;
-   border-radius: 20px;
-   float:right;
-}
-
-#submitList:hover
-{
-	background: transparent !important; text-decoration: none;
-}
+    #submitList:hover {
+        background: transparent !important;
+        text-decoration: none;
+    }
 
 
-.second_content_sec1 label
-{
+.second_content_sec1 label {
     width: 110px;
     float: left;
     clear: none;
@@ -425,23 +435,20 @@
     padding: 0;
 }
 
-.second_content_sec2 div
-{
+.second_content_sec2 div {
     float: left;
     border: 0;
     clear: none;
 }
 
 
-.second_content_sec3 img
-{
+.second_content_sec3 img {
     float: right;
     border: 0;
     clear: none;
 }
 
-.second_content_sec2 label
-{
+.second_content_sec2 label {
     width: 200px;
     float: left;
     clear: none;
@@ -449,14 +456,12 @@
     padding: 0;
 }
 
-.second_content_sec1 div
-{
+.second_content_sec1 div {
     clear: none;
 }
 
-#abundaInput
-{
-   /* margin: 0;
+#abundaInput {
+    /* margin: 0;
     clear: none;*/
 }
 
@@ -473,8 +478,7 @@ SECTION 3 & 4 - Table
     width: 100%;
 }
 
-#abundaCalcTbl
-{
+#abundaCalcTbl {
     width: 100%;
     /*margin-bottom: 18px;*/
     margin-top: 8px;
@@ -483,110 +487,98 @@ SECTION 3 & 4 - Table
     float: left;
 }
 
-/* ---------SECTION 3 - Table Header------------*/
+    /* ---------SECTION 3 - Table Header------------*/
 
-#abundaCalcTbl thead th
-{   
-    height: 35px;    
-    border: 1px solid silver;/**/
-    padding: 6px 3px 2px 3px;
-    font-weight: bold;
-    font-size: 16px;
-    text-align: center;
-    vertical-align: middle
-}
+    #abundaCalcTbl thead th {
+        height: 35px;
+        border: 1px solid silver; /**/
+        padding: 6px 3px 2px 3px;
+        font-weight: bold;
+        font-size: 16px;
+        text-align: center;
+        vertical-align: middle;
+    }
 
-#abundaCalcTbl thead th.delete
-{
-    text-align: center;
-   border-right:0;
-}
+        #abundaCalcTbl thead th.delete {
+            text-align: center;
+            border-right: 0;
+        }
 
-#abundaCalcTbl thead th a:hover
-{
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
-}
+        #abundaCalcTbl thead th a:hover {
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+        }
 
-#abundaCalcTbl thead th a
-{
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
-}
+        #abundaCalcTbl thead th a {
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+        }
 
-/* -------Table Body---------- */
+    /* -------Table Body---------- */
 
-#abundaCalcTbl tbody tr
-{
-    background: #ffffff;
-}
+    #abundaCalcTbl tbody tr {
+        background: #ffffff;
+    }
 
-.td_image
-{
+.td_image {
     float: left;
     height: 98%;
 }
 
-.td_details
-{
+    .td_image img {
+        padding-right:10px;
+    }
+
+.td_details {
     float: left;
     width: 73%;
     height: 98%;
-text-align: left;
+    text-align: left;
 }
 
-#abundaCalcTbl tbody
-{
+#abundaCalcTbl tbody {
     max-height: 400px;
-border-left: 1px #CCC solid;
-
+    border-left: 1px #CCC solid;
 }
 
-#abundaCalcTbl tbody td
-{
-    border-right: 1px solid silver;
-    border-bottom: 1px solid silver;
-    padding: 3px 8px 2px 6px;
-    color: #333;
-    font-size: 14px;
-    text-align: center;
-    vertical-align: middle;
-}
+    #abundaCalcTbl tbody td {
+        border-right: 1px solid silver;
+        border-bottom: 1px solid silver;
+        padding: 3px 8px 2px 6px;
+        color: #333;
+        font-size: 14px;
+        text-align: center;
+        vertical-align: middle;
+    }
 
-#abundaCalcTbl tbody td.upc
-{
-    width: 95px;
-}
+        #abundaCalcTbl tbody td.upc {
+            width: 95px;
+        }
 
-#abundaCalcTbl tbody td.quantity
-{
-    width: 40px;
-}
+        #abundaCalcTbl tbody td.quantity {
+            width: 40px;
+        }
 
-#abundaCalcTbl tbody td.item
-{
-    width: 95px;text-align: right;
-}
+        #abundaCalcTbl tbody td.item {
+            width: 95px;
+            text-align: right;
+        }
 
-#abundaCalcTbl tbody td.item div
-{
-}
+            #abundaCalcTbl tbody td.item div {
+            }
 
-#abundaCalcTbl tbody td.values
-{
-    width: 80px;
-    text-align: right;
-}
+        #abundaCalcTbl tbody td.values {
+            width: 80px;
+            text-align: right;
+        }
 
-#abundaCalcTbl tbody td.delete
-{
-    width: 70px;
-}
+        #abundaCalcTbl tbody td.delete {
+            width: 70px;
+        }
 
-.blatent
-{
+.blatent {
     color: Red;
     font-weight: bold;
     text-align: center;
@@ -594,37 +586,37 @@ border-left: 1px #CCC solid;
 
 /* --------- SECTION 4 - Table Footer ---------- */
 
-#abundaCalcTbl tfoot{height:45px;}
-
-
-#abundaCalcTbl tfoot th
-{   
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 0px solid silver;
-    height: 0px;
-    padding: 18px 5px 4px 5px;
-    font-weight: bold;
-    font-size: 15px;
-    text-align: left;
-
+#abundaCalcTbl tfoot {
+    height: 45px;
 }
 
-#abundaCalcTbl tfoot th.thxpad{padding-left: 23px !important;}
 
-#abundaCalcTbl tfoot th a
-{
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
-}
+    #abundaCalcTbl tfoot th {
+        border-left: 0;
+        border-right: 0;
+        border-bottom: 0px solid silver;
+        height: 0px;
+        padding: 18px 5px 4px 5px;
+        font-weight: bold;
+        font-size: 15px;
+        text-align: left;
+    }
 
-#abundaCalcTbl tfoot th a:hover
-{
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
-}
+        #abundaCalcTbl tfoot th.thxpad {
+            padding-left: 23px !important;
+        }
+
+        #abundaCalcTbl tfoot th a {
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+            #abundaCalcTbl tfoot th a:hover {
+                text-decoration: none;
+                font-size: 16px;
+                font-weight: bold;
+            }
 
 
 /*
@@ -633,27 +625,81 @@ border-left: 1px #CCC solid;
 ------------------------------------------
 */
 
- /* ---SECTION 1--- */
+/* ---SECTION 1--- */
 
-.calcbg1{background: #A5A5A5;}
-#abundatrade .calc_color1{color: #000;}
-.btnbg1{background: #efefef;}
-#abundatrade .btn_link1{color: #444; text-decoration:none !important;}
-#abundatrade .calc_linkS1{color: #000; text-decoration: underline;}
-#abundatrade .calc_linkS1:hover{text-decoration: none;}
+.calcbg1 {
+    background: #A5A5A5;
+}
 
- /* ---SECTION 2 & 4--- */
+#abundatrade .calc_color1 {
+    color: #000;
+}
 
-.calcbg2{background: #004A7A; }
-#abundatrade .calc_color2{color: #fff;}
-.btnbg2{background: #537b35;}
-#abundatrade .btn_link2{color: #fff; font-weight: bold; text-decoration:none !important;}
-#abundatrade .calc_linkS4{color: yellow; text-decoration: none;}
-#abundatrade .calc_linkS4:hover{color: yellow; text-decoration: underline; cursor:pointer;}
+.btnbg1 {
+    background: #efefef;
+}
 
- /* ---SECTION 3--- */
+#abundatrade .btn_link1 {
+    color: #444;
+    text-decoration: none !important;
+}
 
-.calcbg3{background: #ddd;} 
-#abundatrade .calc_color3{color: #000;} 
-#abundatrade .calc_linkS3{color: #660000; text-decoration: none;}
-#abundatrade .calc_linkS3:hover{text-decoration: underline; cursor:pointer;}
+#abundatrade .calc_linkS1 {
+    color: #000;
+    text-decoration: underline;
+}
+
+    #abundatrade .calc_linkS1:hover {
+        text-decoration: none;
+    }
+
+/* ---SECTION 2 & 4--- */
+
+.calcbg2 {
+    background: #004A7A;
+}
+
+#abundatrade .calc_color2 {
+    color: #fff;
+}
+
+.btnbg2 {
+    background: #537b35;
+}
+
+#abundatrade .btn_link2 {
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none !important;
+}
+
+#abundatrade .calc_linkS4 {
+    color: yellow;
+    text-decoration: none;
+}
+
+    #abundatrade .calc_linkS4:hover {
+        color: yellow;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+/* ---SECTION 3--- */
+
+.calcbg3 {
+    background: #ddd;
+}
+
+#abundatrade .calc_color3 {
+    color: #000;
+}
+
+#abundatrade .calc_linkS3 {
+    color: #660000;
+    text-decoration: none;
+}
+
+    #abundatrade .calc_linkS3:hover {
+        text-decoration: underline;
+        cursor: pointer;
+    }
