@@ -556,8 +556,8 @@ class abundatrade_withinboredom {
         add_filter("abundatrade(shortcode(abundatrade))", array(&$this, "shortcode"), 1);
         add_filter("abundatrade(shortcode(gadgets))", array(&$this, "gadget"), 1);
         //////////////////// shortcode defs
-        add_shortcode("abundatradeTEST", array($this, "doshortcode"));
-        add_shortcode("abundagadgetsTEST", array($this, "dogadgets"));
+        add_shortcode("abundatrade", array($this, "doshortcode"));
+        add_shortcode("abundagadgets", array($this, "dogadgets"));
         
         add_filter("abundatrade(settings)", array($this, "getSettings"), 200, 0);
         
