@@ -5,7 +5,7 @@
  * @author Robert Landers (landers.robert@gmail.com)
  */
 /*
-Plugin Name: Abundatrade Plugin
+Plugin Name: Abundatrade Plugin TEST
 Plugin URI: http://wordpress.org/extend/plugins/abundatrade-plugin/
 Description: Earn extra income for your site via the Abundatrade affiliate program!
 Author: withinboredom
@@ -15,7 +15,7 @@ Author URI: http://withinboredom.info
 
 if (!defined("WP_CONTENT_DIR")) exit();
 
-class abundatrade_withinboredom {
+class abundatrade_withinboredomTEST {
     
     /**
      *
@@ -599,7 +599,7 @@ class abundatrade_withinboredom {
     }
 }
 
-$GLOBALS['abundatrade_withinboredom'] = new abundatrade_withinboredom();
+$GLOBALS['abundatrade_withinboredomTEST'] = new abundatrade_withinboredomTEST();
 
 //we don't want to autoload later on
 //spl_autoload_unregister(array($GLOBALS['TheMap_withinboredom'], 'autoload'));
