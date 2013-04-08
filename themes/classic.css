@@ -274,7 +274,7 @@
     width: 99%;
     margin-bottom: 6px;
     margin-top: 0px;
-    padding: 0px 4px 8px 4px;
+    padding: 0px 4px 15px 4px;
     text-align: left;
     -moz-border-radius-bottomright: 10px;
     -moz-border-radius-bottomleft: 10px;
@@ -296,9 +296,20 @@
     text-align: left;
 }
 
-    .abunda_text a {
-        text-decoration: underline;
-    }
+.abunda_text2 {
+    width: 99%;
+    margin-left: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    clear: none;
+    vertical-align: middle;
+    text-align: left;
+    margin-bottom:10px;
+}
+
+.abunda_text a {
+    text-decoration: underline;
+}
 
 .abundatrade_error {
     color: red;
@@ -421,10 +432,33 @@
     float: right;
 }
 
-    #submitList:hover {
-        background: transparent !important;
-        text-decoration: none;
+#BeatAll {
+    clear: none;
+    font-size: 17px !important;
+    font-size: 1.0em !important;
+    font-weight: normal;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px 8px;
+    border: 2px solid #fff799;
+    cursor: pointer !important;
+    vertical-align: middle;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -khtml-border-radius: 20px;
+    border-radius: 20px;
+    float: right;
+}
+
+    #BeatAll:hover {
+        background:#724b05 !important;
+        text-decoration:none;
     }
+
+#submitList:hover {
+    background: transparent !important;
+    text-decoration: none;
+}
 
 
 .second_content_sec1 label {
@@ -528,7 +562,7 @@ SECTION 3 & 4 - Table
 }
 
     .td_image img {
-        padding-right:10px;
+        padding-right: 10px;
     }
 
 .td_details {
@@ -642,6 +676,7 @@ SECTION 3 & 4 - Table
 #abundatrade .btn_link1 {
     color: #444;
     text-decoration: none !important;
+    float: right;
 }
 
 #abundatrade .calc_linkS1 {
@@ -672,6 +707,22 @@ SECTION 3 & 4 - Table
     font-weight: bold;
     text-decoration: none !important;
 }
+
+.btnbg3 {
+    background: #bc7c09;
+}
+
+#abundatrade .btn_link3 {
+    color: white !important;
+    font-weight: bold;
+    text-decoration: none !important;
+    margin-right:25px;
+    margin-bottom:10px;
+}
+
+    #abundatrade .btn_link3 :hover {
+        color: black !important;
+    }
 
 #abundatrade .calc_linkS4 {
     color: yellow;

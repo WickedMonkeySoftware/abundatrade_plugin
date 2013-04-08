@@ -359,7 +359,8 @@ class abundatrade_withinboredom {
         
         $bulk_button = '
             <div id="bulk_button" class="calcbg1" style="'.$hide.'">
-                <p class="abunda_text calc_color1">Have a lot of items? <a href="#" onclick="return bulk_open();" class="calc_linkS1">Bulk Upload</a></p>
+                <p class="abunda_text2 calc_color1">Have a lot of items? <a href="#" onclick="return bulk_open();" class="calc_linkS1">Bulk Upload</a>
+                <a id="BeatAll" class="btnbg3 btn_link3" onclick="">Beat The Competition</a></p>
             </div>';
         
         $bulk = '
