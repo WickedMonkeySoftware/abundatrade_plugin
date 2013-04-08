@@ -360,7 +360,7 @@ class abundatrade_withinboredom {
         $bulk_button = '
             <div id="bulk_button" class="calcbg1" style="'.$hide.'">
                 <p class="abunda_text2 calc_color1">Have a lot of items? <a href="#" onclick="return bulk_open();" class="calc_linkS1">Bulk Upload</a>
-                <a id="BeatAll" class="btnbg3 btn_link3" onclick="">Beat The Competition</a></p>
+                </p>
             </div>';
         
         $bulk = '
@@ -396,7 +396,7 @@ class abundatrade_withinboredom {
                       <th colspan="2" class="calcbg3 calc_color3">Product Details</th>
                       <th class="calcbg3 calc_color3">Qty</th>
                       <th class="calcbg3 calc_color3">Offers</th>
-                      <th class="calcbg3 calc_color3 txtright">Best Offer</th>
+                      <th id="TheBestOffer" class="calcbg3 calc_color3 txtright">Best Offer</th>
                       <th class="calcbg3 calc_color3"><a class="calc_linkS3" onclick="clear_session(this);">Start Over</a></th>
                       <th style="display: none;">ID</th>
                     </tr>
@@ -535,7 +535,7 @@ class abundatrade_withinboredom {
         wp_enqueue_script("abundatrade_impromptu");
         wp_enqueue_script("abundatrade_register");
         wp_enqueue_script("abundatrade_gadgets");
-        $abundacalc = array('server' => 'tiny.abundatrade.com', 
+        $abundacalc = array('server' => 'abundatrade.com', 
             'url' => $this->folders['PluginUrl'],
             'export' => $this->export,
             'thanks' => $this->settings->Thank_you_page);
@@ -555,9 +555,9 @@ class abundatrade_withinboredom {
         add_filter("abundatrade(applyConfig)", array(&$this, "applyConfig"), 1);
         add_filter("abundatrade(shortcode(abundatrade))", array(&$this, "shortcode"), 1);
         add_filter("abundatrade(shortcode(gadgets))", array(&$this, "gadget"), 1);
-        
-        add_shortcode("abundatrade", array($this, "doshortcode"));
-        add_shortcode("abundagadgets", array($this, "dogadgets"));
+        //////////////////// shortcode defs
+        add_shortcode("abundatradeTEST", array($this, "doshortcode"));
+        add_shortcode("abundagadgetsTEST", array($this, "dogadgets"));
         
         add_filter("abundatrade(settings)", array($this, "getSettings"), 200, 0);
         
