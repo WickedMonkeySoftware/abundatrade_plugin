@@ -1479,7 +1479,7 @@ function getParameterByName(name) {
 
 /** Builds an unknown row */
 function build_unknown(code, quantity, id) {
-    return "<tr style='' class='new response'> <td style='display:none;' class='upc'>" + code + "</td> <td colspan='2' class='details'> <div class='td_details'> <strong>Unknown Item</strong><br /><em>Item not found. You may send for valuation</em><br><span class='upc_small'>" + code + "</span></div> <div class='td_image'> <img src='http://g-ecx.images-amazon.com/images/G/01/x-site/icons/no-img-sm._V192198896_.gif' alt='Unkown item' /> </div> </td> <td class='quantity'>" + quantity + "</td> <td class='item'><div class='item'>$0.00</td> <td class='values'>$0.00</td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + id + "'>Delete</a></tr>";
+    return "<tr style='' class='new response'> <td style='display:none;' class='upc'>" + code + "</td> <td colspan='2' class='details'> <div class='td_details'> <strong>Unknown Item</strong><br /><em>Item not found. You may send for valuation</em><br><span class='upc_small'>" + code + "</span></div> <div class='td_image'> <img src='http://g-ecx.images-amazon.com/images/G/01/x-site/icons/no-img-sm._V192198896_.gif' alt='Unkown item' /> </div> </td> <td class='quantity'>" + quantity + "</td> <td class='item'><div class='item'>$0.00</td> <td class='values'>$0.00</td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + id + "'><img src='" + abundacalc.url + "/images/trashcan.png' alt='delete' width='32'></a></tr>";
 }
 
 /** Builds an item from a lookup from a json string */

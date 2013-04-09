@@ -571,10 +571,13 @@ SECTION 3 & 4 - Table
 .td_image {
     float: left;
     height: 98%;
+    min-width:90px;
 }
 
     .td_image img {
-        padding-right: 10px;
+        
+        margin-left:auto;
+        margin-right:auto;
     }
 
 .td_details {
