@@ -1634,15 +1634,15 @@ function write_html(data, row) {
 
     codes_to_offers[row.item_id] = row;
 
-    if (parseFloat(row.offer) > parseFloat(row_price) && row.offer_available == 'f') {
+    if (parseFloat(row.offer) >= parseFloat(row_price) && row.offer_available == 'f' && !row.worthless && !row.overstocked) {
         buton = "<input type='button' style='margin-bottom:0;' value='Beat `Em!' onclick='beat(\"" + row.item_id + "\"); return false;'>";
-        jQuery("#TheBestOffer").get(0).innerHTML = "<a onClick='BeatAll()'>Beat `Em</a>";
+        //jQuery("#TheBestOffer").get(0).innerHTML = "<a onClick='BeatAll()'>Beat `Em</a>";
         swap = them;
         them = us;
         us = swap;
     }
 
-    return "<tr class='new response'> <td style='display:none;' class='upc'>" + row.product_code + "</td> <td colspan='2' class='details'> <div class='td_image'> <img src='" + row.images + "' alt='" + row.title + "' /> </div><div class='td_details'> <strong>" + row.title + "</strong><br /><em>" + (row.author == null ? '' : row.author) + "</em><br/>" + (row.category == null ? "" : row.category) + "<br><span class='upc_small'>" + row.product_code + "</span></div>  </div></td> <td class='quantity'>" + row.quantity + "</td> <td class='item'>" + (row.worthless == true ? "<span class='blatent'>No Abunda Value</span>" : "") + (row.overstocked == true ? "<span class='blatent'>Over Stocked Item</span>" : "") + "<div class='item'><span " + us + ">Abunda: " + data.currency_for_total + "" + row_price + "</span><br/><div id='comp_" + row.item_id + "'><span " + them + ">" + (row.worthless == true || row.overstocked == true ? "" : "Top Comp: $" + row.offer ) + "</span></div></div></td> <td class='values'><span id='price_" + row.item_id + "'>" + data.currency_for_total + row_total + "</span><br/><div id='beat_" + row.item_id + "'>" + (row.worthless == true || row.overstocked == true ? "" : buton) + "</div></td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + row.item_id + "'><img src='" + abundacalc.url + "/images/trashcan.png' alt='delete' width='32'></a></tr>";
+    return "<tr class='new response'> <td style='display:none;' class='upc'>" + row.product_code + "</td> <td colspan='2' class='details'> <div class='td_image'> <img src='" + row.images + "' alt='" + row.title + "' /> </div><div class='td_details'> <strong>" + row.title + "</strong><br /><em>" + (row.author == null ? '' : row.author) + "</em><br/>" + (row.category == null ? "" : row.category) + "<br><span class='upc_small'>" + row.product_code + "</span></div>  </div></td> <td class='quantity'>" + row.quantity + "</td> <td class='item'>" + (row.worthless == true ? "<span class='blatent'>No Abunda Value</span>" : "") + (row.overstocked == true ? "<span class='blatent'>Over Stocked Item</span>" : "") + "<div class='item'><span " + us + ">Abunda: " + data.currency_for_total + "" + row_price + "</span><br/>" + (row.offer == '0.00' ? "" : "<div id='comp_" + row.item_id + "'><span " + them + ">" + (row.worthless == true || row.overstocked == true ? "" : "Competitor: $" + row.offer ) + "</span></div>") + "</div></td> <td class='values'><span id='price_" + row.item_id + "'>" + data.currency_for_total + row_total + "</span><br/><div id='beat_" + row.item_id + "'>" + (row.worthless == true || row.overstocked == true ? "" : buton) + "</div></td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + row.item_id + "'><img src='" + abundacalc.url + "/images/trashcan.png' alt='delete' width='32'></a></tr>";
 }
 
 var hidden = true;

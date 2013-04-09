@@ -383,7 +383,7 @@
     /*new*/
 
     #second_content .second_content_sec1 {
-        width: 200px;
+        width: 150px;
         margin: 10px 0 0 12px;
         padding: 7px;
         float: left;
@@ -403,14 +403,25 @@
     }
 
     #second_content .second_content_sec3 {
-        width: 188px;
         margin: 3px 18px 0 0;
         padding: 7px 0;
-        float: right;
+        float: none;
+        display:inline-block;
         clear: none;
         font-size: 18px;
         color: White;
         z-index: 1;
+    }
+
+    #second_content .second_content_sec4 {
+        float:right;
+        width:180px;
+        margin:3px 18px 0 0;
+        padding:3px 0;
+        display:inline-block;
+        clear:none;
+        font-size:18px;
+        color:white;
     }
 
 #submitList {
@@ -429,7 +440,6 @@
     -webkit-border-radius: 20px;
     -khtml-border-radius: 20px;
     border-radius: 20px;
-    float: right;
 }
 
 #BeatAll {
@@ -489,6 +499,8 @@
     margin: 0;
     padding: 0;
 }
+
+
 
 .second_content_sec1 div {
     clear: none;
@@ -613,7 +625,7 @@ SECTION 3 & 4 - Table
         }
 
 .blatent {
-    color: Red;
+    color: black;
     font-weight: bold;
     text-align: center;
 }
@@ -717,7 +729,7 @@ SECTION 3 & 4 - Table
     font-weight: bold;
     text-decoration: none !important;
     margin-right:25px;
-    margin-bottom:10px;
+    
 }
 
     #abundatrade .btn_link3 :hover {

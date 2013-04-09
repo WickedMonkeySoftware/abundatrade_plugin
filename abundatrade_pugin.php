@@ -382,8 +382,12 @@ class abundatrade_withinboredom {
                 <label class="calc_color2">Pre-Valuation Total:</label>
                 <div id="total_prevaluation">$0.00</div>
             </div>
+            
             <div class="second_content_sec3">
-                <a id="submitList" class="btnbg2 btn_link2" onclick="submit_the_list(this);">Send list to Abunda</a>
+                <a id="submitList" class="btnbg2 btn_link2" onclick="submit_the_list(this);">Send to Abunda</a>
+            </div>
+            <div class="second_content_sec4">
+                <a id="BeatAll" class="btnbg3 btn_link3" onClick="BeatAll()">Beat All</a>
             </div>
         </div>';
         $endform = "</form></div>";
