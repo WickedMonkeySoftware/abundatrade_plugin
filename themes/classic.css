@@ -403,7 +403,7 @@
     }
 
     #second_content .second_content_sec3 {
-        margin: 3px 18px 0 0;
+        margin: 3px 18px 0 36px;
         padding: 7px 0;
         float: none;
         display:inline-block;
@@ -415,7 +415,6 @@
 
     #second_content .second_content_sec4 {
         float:right;
-        width:180px;
         margin:3px 18px 0 0;
         padding:3px 0;
         display:inline-block;
