@@ -260,6 +260,20 @@ function display_totals(data, no_reset) {
         jQuery('#product_qty').val('1');
         jQuery('#product_code').focus();
     }
+
+    //show hover overs
+    //
+    jQuery("td div div").each(function (el) {
+        id = jQuery("td div div").get(el).id;
+        prod = id.substring(id.indexOf("_") + 1);
+        str = "";
+
+        for (j = 0; j < codes_to_offers[prod].all_offers.length; j++) {
+            str += "Competitor " + (j + 1) + ": $" + (parseFloat(codes_to_offers[prod].all_offers[j].offer / 100).toFixed(2)) + "<br>";
+        }
+
+        jQuery("#" + id).qtip({ content: "We found these top competitors:<br>" + str });
+    });
 }
 
 /**
