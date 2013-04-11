@@ -1535,10 +1535,8 @@ function build_row(data) {
 }
 
 function show_other_offers(data) {
-    console.log(data);
     codes_to_offers[data.upc] = data;
     jQuery("#comp_" + data.prod).get(0).innerHTML = display_other_offers(data);
-    console.log("#comp_" + data.prod);
 }
 
 function display_other_offers(data, row) {
