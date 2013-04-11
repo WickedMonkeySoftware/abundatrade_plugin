@@ -576,12 +576,12 @@ function lookup_item(obj) {
                 build_row(data);
                 lastItem = data;
                 jQuery('#abundaCalcTbl').prepend(data.row_html);
-                jQuery('td:contains("' + data.product_code + '")').parent()
+                /*jQuery('td:contains("' + data.product_code + '")').parent()
                     .find('td')
                     .wrapInner('<div style="display: none;" />')
                     .parent()
                     .find('td > div')
-                    .slideDown("slow", function () { var $set = jQuery(this); $set.replaceWith($set.contents()); })
+                    .slideDown("100", function () { var $set = jQuery(this); $set.replaceWith($set.contents()); })*/
                 display_totals(data);
             });
 
