@@ -544,7 +544,7 @@ class abundatrade_withinboredom {
         wp_enqueue_script("abundatrade_impromptu");
         wp_enqueue_script("abundatrade_register");
         wp_enqueue_script("abundatrade_gadgets");
-        $abundacalc = array('server' => 'tiny.abundatrade.com', 
+        $abundacalc = array('server' => 'abundatrade.com', 
             'url' => $this->folders['PluginUrl'],
             'export' => $this->export,
             'thanks' => $this->settings->Thank_you_page);
