@@ -523,6 +523,8 @@ class abundatrade_withinboredom {
             wp_register_style("abundatrade_prompt_classic", $this->folders['PluginUrl'] . '/themes/classic-prompt.css');
         }
         
+        wp_register_style("abundatrade_qtip", $this->folders['PluginUrl'] . '/css/jquery.qtip.css');
+        
         wp_register_style("abunda_gadgets", $this->folders['PluginUrl'] . '/themes/gadget.css');
         
         wp_register_script("abundatrade_md5", $this->folders['PluginUrl'] . '/js/MD5.js');
@@ -530,16 +532,19 @@ class abundatrade_withinboredom {
         wp_register_script("abundatrade_impromptu", $this->folders['PluginUrl'] . '/js/jquery-impromptu.4.0.min.js', array('jquery'));
         wp_register_script("abundatrade_register", $this->folders['PluginUrl'] . '/js/register.js', array('jquery', 'abundatrade_remote'));
         wp_register_script("abundatrade_gadgets", $this->folders['PluginUrl'] . '/js/abunda_gadgets_short.js', array('jquery'));
+        wp_register_script("abundatrade_qtip_js", $this->folders['PluginUrl'] . '/js/jquery.qtip.js', array('jquery'));
         
+        wp_enqueue_style("abundatrade_qtip");
         wp_enqueue_style("abundatrade_classic");
         wp_enqueue_style("abundatrade_prompt_classic");
         wp_enqueue_style("abunda_gadgets");
+        wp_enqueue_script("abundatrade_qtip_js");
         wp_enqueue_script("abundatrade_md5");
         wp_enqueue_script("abundatrade_remote");
         wp_enqueue_script("abundatrade_impromptu");
         wp_enqueue_script("abundatrade_register");
         wp_enqueue_script("abundatrade_gadgets");
-        $abundacalc = array('server' => 'abundatrade.com', 
+        $abundacalc = array('server' => 'tiny.abundatrade.com', 
             'url' => $this->folders['PluginUrl'],
             'export' => $this->export,
             'thanks' => $this->settings->Thank_you_page);
