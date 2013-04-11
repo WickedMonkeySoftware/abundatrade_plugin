@@ -265,9 +265,11 @@ function display_totals(data, no_reset) {
     //
     jQuery("td div div").each(function (el) {
         id = jQuery("td div div").get(el).id;
+        if (id.indexOf("_") == -1) {
+            return;
+        }
         prod = id.substring(id.indexOf("_") + 1);
         str = "";
-
         for (j = 0; j < codes_to_offers[prod].all_offers.length; j++) {
             str += "Competitor " + (j + 1) + ": $" + (parseFloat(codes_to_offers[prod].all_offers[j].offer / 100).toFixed(2)) + "<br>";
         }
@@ -463,7 +465,6 @@ function load_previous_session(pretty, ignore_errors) {
             data: 'action=load_previous_session',
             dataType: 'jsonp'
         });
-
     request.success(function (data) {
         jQuery('#abundaCalcBody_request').children().remove();
 
