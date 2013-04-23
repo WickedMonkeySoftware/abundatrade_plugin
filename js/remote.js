@@ -1756,7 +1756,7 @@ function doSearch() {
                 jQuery("#search_results_list").get(0).innerHTML = results;
             }
         });
-    }, 1500);
+    }, 500);
 }
 
 function clear_results() {
