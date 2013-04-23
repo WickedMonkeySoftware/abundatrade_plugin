@@ -411,7 +411,7 @@ function finalize_quote() {
     
     request.success(function (data) {
         if (data.success) {
-            window.location.href = "http://abundatrade.com/free-cd-dvd-with-gadget-trade.php";
+            window.location.href = "http://abundatrade.com/thank-you-gadget-trade.php";
         }
     });
 }
