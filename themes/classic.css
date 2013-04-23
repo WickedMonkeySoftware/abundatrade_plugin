@@ -304,7 +304,7 @@
     clear: none;
     vertical-align: middle;
     text-align: left;
-    margin-bottom:10px;
+    margin-bottom: 10px;
 }
 
 .abunda_text a {
@@ -406,7 +406,7 @@
         margin: 3px 18px 0 36px;
         padding: 7px 0;
         float: none;
-        display:inline-block;
+        display: inline-block;
         clear: none;
         font-size: 18px;
         color: White;
@@ -414,13 +414,13 @@
     }
 
     #second_content .second_content_sec4 {
-        float:right;
-        margin:3px 18px 0 0;
-        padding:3px 0;
-        display:inline-block;
-        clear:none;
-        font-size:18px;
-        color:white;
+        float: right;
+        margin: 3px 18px 0 0;
+        padding: 3px 0;
+        display: inline-block;
+        clear: none;
+        font-size: 18px;
+        color: white;
     }
 
 #submitList {
@@ -460,8 +460,8 @@
 }
 
     #BeatAll:hover {
-        background:#724b05 !important;
-        text-decoration:none;
+        background: #724b05 !important;
+        text-decoration: none;
     }
 
 #submitList:hover {
@@ -570,13 +570,12 @@ SECTION 3 & 4 - Table
 .td_image {
     float: left;
     height: 98%;
-    min-width:90px;
+    min-width: 90px;
 }
 
     .td_image img {
-        
-        margin-left:auto;
-        margin-right:auto;
+        margin-left: auto;
+        margin-right: auto;
     }
 
 .td_details {
@@ -730,8 +729,7 @@ SECTION 3 & 4 - Table
     color: white !important;
     font-weight: bold;
     text-decoration: none !important;
-    margin-right:25px;
-    
+    margin-right: 25px;
 }
 
     #abundatrade .btn_link3 :hover {
@@ -767,4 +765,47 @@ SECTION 3 & 4 - Table
     #abundatrade .calc_linkS3:hover {
         text-decoration: underline;
         cursor: pointer;
+    }
+
+
+#search_results_list {
+    position: absolute;
+    background: white;
+    left: 207px;
+    top: 69px;
+    width: auto;
+}
+
+.search_results_li {
+    margin-bottom: 0px !important;
+    margin-top: -1px;
+    margin-left: 0px;
+}
+
+    .search_results_li li {
+        list-style: none;
+        display: block;
+        padding: 2px;
+        font-weight: normal;
+        font-size: 15px;
+    }
+
+.search_result_row {
+    background-color: #ffffff;
+    color: #333333;
+    border-left: #cccccc 1px solid;
+    border-right: #cccccc 1px solid;
+    border-bottom: #cccccc 1px solid;
+    width:100%;
+}
+
+    .search_results_li :hover {
+        background-color:#ddd;
+        cursor:default;
+    }
+
+    .search_result_row a {
+        text-decoration: none !important;
+        color: #333 !important;
+        cursor:default !important;
     }

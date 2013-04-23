@@ -332,7 +332,7 @@ class abundatrade_withinboredom {
         $display = '<div id="abundatrade">';
         $top = '
          <div id="top_input_section" class="calc_content_wrap calc_color1 calcbg1" style="'.$hide.'">
-
+<div id="search_results_list"></div>
             <form id="abundaInput" class="abundaInput" style="margin-top: 6px;" onsubmit="return false;" method="post" >
                 <input id="item_num" value="1" name="item_num" type="hidden"/>
                 <input id="a" value="' . $this->settings->Affiliate_ID . '" type="hidden"/>
@@ -340,9 +340,9 @@ class abundatrade_withinboredom {
                 </div>
 
                 <div class="input_container">
-                    <div class="label">UPC or ISBN</div>
+                    <div class="label">UPC, ISBN or Title</div>
                     <div class="product_holder">
-                        <input class="center validate[\'required\',\'length[3,25]\']" id="product_code" name="product_code" onblur="clean_product_code(this)" type="text"/>
+                        <input class="center validate[\'required\',\'length[3,25]\']" id="product_code" name="product_code" onkeyup="doSearch();" onblur="clean_product_code(this)" type="text"/>
                     </div>
                 </div>
 

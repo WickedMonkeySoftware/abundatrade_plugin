@@ -58,7 +58,9 @@ var itemsToDispose = [];
 *
 */
 function clean_product_code(element) {
-    element.value = element.value.replace(/\W+/g, "");
+    if (!doingTextSearch) {
+        element.value = element.value.replace(/\W+/g, "");
+    }
 }
 
 /*
@@ -1724,4 +1726,35 @@ function disposeQueued() {
     }
 
     itemsToDispose = [];
+}
+
+var doingTextSearch = false;
+
+function doSearch() {
+    jQuery.ajax("http://" + abundacalc.server + "/trade/process/TextSearch.php?search=" + escape(jQuery("#product_code").val()), {
+        dataType: 'jsonp', success: function (data) {
+            results = "<ul class='search_results_li'>";
+            
+            for (i = 0; i < data.length; i++) {
+                results += "<li onclick='addCode(\"" + data[i].code + "\"); return false;' id='result_" + data[i].code + "' class='search_result_row'><a href='#' >" + data[i].display + "</a></li>"
+            }
+
+            if (data.length > 0) {
+                doingTextSearch = true;
+                results += "</ul>";
+            }
+            else {
+                doingTextSearch = false;
+                results = "";
+            }
+
+            jQuery("#search_results_list").get(0).innerHTML = results;
+        }
+    });
+}
+
+function addCode(code) {
+    jQuery("#product_code").val(code);
+    jQuery("#search_results_list").get(0).innerHTML = "";
+    lookup_item(this);
 }
