@@ -1760,6 +1760,7 @@ function doSearch() {
 }
 
 function clear_results() {
+    clearTimeout(waitforpause);
     jQuery("#search_results_list").get(0).innerHTML = "";
 }
 
