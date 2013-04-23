@@ -553,6 +553,8 @@ function waitFor(product_code) {
 function lookup_item(obj) {
     if (!jQuery(obj).hasClass('disabled')) {
 
+        clear_results();
+
         // The product code must be at least 6 digits
         //
         if (jQuery('#product_code').val().length > 5) {
@@ -1729,32 +1731,40 @@ function disposeQueued() {
 }
 
 var doingTextSearch = false;
+var waitforpause;
 
 function doSearch() {
-    jQuery.ajax("http://" + abundacalc.server + "/trade/process/TextSearch.php?search=" + escape(jQuery("#product_code").val()), {
-        dataType: 'jsonp', success: function (data) {
-            results = "<ul class='search_results_li'>";
-            
-            for (i = 0; i < data.length; i++) {
-                results += "<li onclick='addCode(\"" + data[i].code + "\"); return false;' id='result_" + data[i].code + "' class='search_result_row'><a href='#' >" + data[i].display + "</a></li>"
-            }
+    clearTimeout(waitforpause);
+    waitforpause = setTimeout(function () {
+        jQuery.ajax("http://" + abundacalc.server + "/trade/process/TextSearch.php?search=" + escape(jQuery("#product_code").val()), {
+            dataType: 'jsonp', success: function (data) {
+                results = "<ul class='search_results_li'>";
 
-            if (data.length > 0) {
-                doingTextSearch = true;
-                results += "</ul>";
-            }
-            else {
-                doingTextSearch = false;
-                results = "";
-            }
+                for (i = 0; i < data.length; i++) {
+                    results += "<li onclick='addCode(\"" + data[i].code + "\"); return false;' id='result_" + data[i].code + "' class='search_result_row'><a href='#' >" + data[i].display + "</a></li>"
+                }
 
-            jQuery("#search_results_list").get(0).innerHTML = results;
-        }
-    });
+                if (data.length > 0) {
+                    doingTextSearch = true;
+                    results += "</ul>";
+                }
+                else {
+                    doingTextSearch = false;
+                    results = "";
+                }
+
+                jQuery("#search_results_list").get(0).innerHTML = results;
+            }
+        });
+    }, 1500);
+}
+
+function clear_results() {
+    jQuery("#search_results_list").get(0).innerHTML = "";
 }
 
 function addCode(code) {
     jQuery("#product_code").val(code);
-    jQuery("#search_results_list").get(0).innerHTML = "";
+    clear_results();
     lookup_item(this);
 }
