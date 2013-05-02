@@ -644,7 +644,7 @@ function displayLoginButtons() {
         if (just_logging_in) {
             return { Cancel: 0, Login: -1, Register: 1 };
         }
-        return { Cancel: 0, Login: -1, 'Just Submit': 1, };
+        return { Cancel: 0, Login: -1, 'Just Submit': 1 };
     }
 }
 
@@ -1732,36 +1732,72 @@ function disposeQueued() {
 
 var doingTextSearch = false;
 var waitforpause;
+var doCat = "";
 
 function doSearch() {
     clearTimeout(waitforpause);
     waitforpause = setTimeout(function () {
         jQuery.ajax("http://" + abundacalc.server + "/trade/process/TextSearch.php?search=" + escape(jQuery("#product_code").val()), {
             dataType: 'jsonp', success: function (data) {
-                results = "<ul class='search_results_li'>";
-
-                for (i = 0; i < data.length; i++) {
-                    results += "<li onclick='addCode(\"" + data[i].code + "\"); return false;' id='result_" + data[i].code + "' class='search_result_row'><a href='#' >" + data[i].display + "</a></li>"
-                }
-
-                if (data.length > 0) {
-                    doingTextSearch = true;
-                    results += "</ul>";
-                }
-                else {
-                    doingTextSearch = false;
-                    results = "";
-                }
-
-                jQuery("#search_results_list").get(0).innerHTML = results;
+                drawResultsText(data);
             }
         });
     }, 500);
 }
 
+function drawResultsText(data) {
+    if (data.raw.length > 0) {
+        //jQuery("#search_results_list").height(jQuery("#abundatrade").height() - 68);
+        jQuery("#search_results_list").css("max-height", jQuery("#abundatrade").height() - 68);
+        jQuery("#search_results_list").css("overflow-y", "scroll");
+        jQuery("#search_results_list").show();
+    }
+    else {
+        //jQuery("#search_results_list").height(jQuery("#abundatrade").height() - 68);
+        jQuery("#search_results_list").css("overflow-y", "auto");
+        jQuery("#search_results_list").hide();
+    }
+    jQuery("#search_results_list").get(0).innerHTML = data.html;
+}
+
+function getMore(search, category) {
+    clearTimeout(waitforpause);
+    jQuery.ajax("http://" + abundacalc.server + "/trade/process/TextSearch.php?search=" + escape(search) + "&category=" + escape(category), {
+        dataType: 'jsonp', success: function (data) {
+            drawResultsText(data);
+        }
+    });
+}
+
+function ExpandOrClose(arrow_id, list_num, list_name) {
+    var a = document.getElementById(list_name);
+    var div = document.getElementById(list_name).getElementsByTagName("li");
+    var up = true;
+    if (a.name == 'd') {
+        a.name = 'u';
+        up = false;
+    }
+    else {
+        a.name = 'd';
+    }
+
+    for (var d = 0; d < div.length; d++) {
+        var id = "res-" + list_num + "-" + d;
+        if (up) {
+            jQuery("#" + id).slideUp();
+        }
+        else {
+            jQuery("#" + id).slideDown();
+        }
+    }
+}
+
 function clear_results() {
     clearTimeout(waitforpause);
     jQuery("#search_results_list").get(0).innerHTML = "";
+    jQuery("#search_results_list").height(jQuery("#abundatrade").height() - 68);
+    jQuery("#search_results_list").css("overflow-y", "auto");
+    jQuery("#search_results_list").hide();
 }
 
 function addCode(code) {
