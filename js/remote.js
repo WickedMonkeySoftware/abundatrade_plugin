@@ -1388,7 +1388,15 @@ var tourstates = [
     },
     {
         title: 'Getting Started',
-        html: 'Enter any barcode and just about any ISBN here. <br>You can also enter a title and/or artist.<br>Make sure you check the barcode to have the correct item.',
+        html: 'Enter any barcode and just about any ISBN here. <br>You can also enter a title and/or artist.',
+        buttons: { Back: -1, Next: 1 },
+        focus: 1,
+        position: { container: '#product_code', x: 200, y: 0, width: 250, arrow: 'lt' },
+        submit: tour_func
+    },
+    {
+        title: 'Title/Artist Search',
+        html: 'Title and Artist search is a new feature, some tips: <ul><li>Using the title AND artist gets the best results.</li><li>Add dvd, music, book, video game to narrow your results.</li></ul>',
         buttons: { Back: -1, Next: 1 },
         focus: 1,
         position: { container: '#product_code', x: 200, y: 0, width: 250, arrow: 'lt' },
