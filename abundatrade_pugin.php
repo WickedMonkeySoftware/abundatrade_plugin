@@ -82,14 +82,7 @@ class abundatrade_withinboredom {
         return "";
     }
     
-    public function gadget($atts) {
-        $closediv = "</div>";
-        
-        $gad_cat = '';
-        $red = "style='border: 1px solid red'";
-        $all_valid = false;
-        $show_all = "style='display:none'";
-        
+    public function isIE() {
         preg_match('/MSIE (.*?);/', $_SERVER['HTTP_USER_AGENT'], $matches);
 
         $use_labels = false;
@@ -114,6 +107,19 @@ class abundatrade_withinboredom {
                 //You get the idea
             }
         }
+        
+        return $use_labels;
+    }
+    
+    public function gadget($atts) {
+        $closediv = "</div>";
+        
+        $gad_cat = '';
+        $red = "style='border: 1px solid red'";
+        $all_valid = false;
+        $show_all = "style='display:none'";
+        
+        $use_labels = $this->isIE();
         
         if (isset($atts['gad_cat'])) {
             $this->export = array('gad_cat' => $atts['gad_cat']);
