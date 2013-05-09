@@ -345,10 +345,12 @@ class abundatrade_withinboredom {
                 <div class="input_container">
                 </div>
 
-                <div class="input_container">
-                    <div class="label">UPC, ISBN or Title</div>
-                    <div class="product_holder">
-                        <input class="center validate[\'required\',\'length[3,25]\']" id="product_code" name="product_code" onkeyup="doSearch();" onblur="clean_product_code(this)" type="text"/>
+                <div class="input_container">'
+                .($this->isIE() ? 
+                    '<div class="label">Barcode, Title or Artist</div>'
+                    : '').
+                    '<div'.($this->isIE() ? '' : ' style="width:400px;"').' class="product_holder">
+                        <input'.($this->isIE() ? '' : ' style="width:400px;"').' placeholder="UPC, ISBN, EAN, ASIN, Title or Artist" class="center validate[\'required\',\'length[3,25]\']" id="product_code" name="product_code" onkeyup="return; doSearch();" onblur="clean_product_code(this)" type="text"/>
                     </div>
                 </div>
 
@@ -529,17 +531,19 @@ class abundatrade_withinboredom {
             wp_register_style("abundatrade_prompt_classic", $this->folders['PluginUrl'] . '/themes/classic-prompt.css');
         }
         
+        wp_register_style("abundatrade_jsui", $this->folders['PluginUrl'] . '/css/jquery-ui-1.10.3.custom.css');
         wp_register_style("abundatrade_qtip", $this->folders['PluginUrl'] . '/css/jquery.qtip.css');
         
         wp_register_style("abunda_gadgets", $this->folders['PluginUrl'] . '/themes/gadget.css');
         
         wp_register_script("abundatrade_md5", $this->folders['PluginUrl'] . '/js/MD5.js');
-        wp_register_script("abundatrade_remote", $this->folders['PluginUrl'] . '/js/remote.js', array('jquery','abundatrade_md5'));
+        wp_register_script("abundatrade_remote", $this->folders['PluginUrl'] . '/js/remote.js', array('jquery','abundatrade_md5', 'jquery-ui-autocomplete'));
         wp_register_script("abundatrade_impromptu", $this->folders['PluginUrl'] . '/js/jquery-impromptu.4.0.min.js', array('jquery'));
         wp_register_script("abundatrade_register", $this->folders['PluginUrl'] . '/js/register.js', array('jquery', 'abundatrade_remote'));
         wp_register_script("abundatrade_gadgets", $this->folders['PluginUrl'] . '/js/abunda_gadgets_short.js', array('jquery'));
         wp_register_script("abundatrade_qtip_js", $this->folders['PluginUrl'] . '/js/jquery.qtip.js', array('jquery'));
         
+        wp_enqueue_style("abundatrade_jsui");
         wp_enqueue_style("abundatrade_qtip");
         wp_enqueue_style("abundatrade_classic");
         wp_enqueue_style("abundatrade_prompt_classic");

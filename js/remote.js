@@ -1260,6 +1260,58 @@ jQuery(document).ready(function () {
         }
 
         check_for_new();
+
+        jQuery('#product_code').catcomplete({
+            source: function (request, response) {
+                jQuery.ajax({
+                    url: "http://" + abundacalc.server + "/trade/process/TextSearch.php",
+                    dataType: "jsonp",
+                    data: {
+                        search: request.term
+                    },
+                    success: function (data) {
+                        response(jQuery.map(data.results, function (item) {
+                            return {
+                                label: item.display,
+                                value: item.code,
+                                category: item.category,
+                                code: item.code,
+                                image: item.images
+                            };
+                        }));
+                    }
+                });
+            },
+            minLength: 2,
+            select: function (event, ui) {
+            },
+            autoFocus: true,
+            open: function () {
+                jQuery(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+            },
+            close: function () {
+                jQuery(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+            }
+        });
+    }
+});
+
+jQuery.widget("custom.catcomplete", jQuery.ui.autocomplete, {
+    _renderMenu: function (ul, items) {
+        var that = this, currentCategory = "";
+
+        jQuery.each(items, function (index, item) {
+            if (item.category != currentCategory) {
+                ul.append("<li class='searchHeader ui-autocomplete-category'>" + item.category + "</li>");
+                currentCategory = item.category;
+            }
+            that._renderItemData(ul, item);
+        });
+    },
+    _renderItem: function (ul, item) {
+        return jQuery("<li></li>").data("item.autocomplete", item)
+        .append("<a><div class='inlineblock left'><img src='" + item.image + "' height='45px'></div><div class='inlineblock right'>" + item.label + "<br>Barcode: " + item.code + "</div></a>")
+        .appendTo(ul);
     }
 });
 
@@ -1336,7 +1388,7 @@ var tourstates = [
     },
     {
         title: 'Getting Started',
-        html: 'Enter any barcode and just about any ISBN here. <br>You can also use a scanner to speed things along.',
+        html: 'Enter any barcode and just about any ISBN here. <br>You can also enter a title and/or artist.<br>Make sure you check the barcode to have the correct item.',
         buttons: { Back: -1, Next: 1 },
         focus: 1,
         position: { container: '#product_code', x: 200, y: 0, width: 250, arrow: 'lt' },
@@ -1380,6 +1432,14 @@ var tourstates = [
         buttons: { Back: -1, Next: 1 },
         focus: 1,
         position: { container: '#submitList', x: 200, y: 0, width: 400, arrow: 'lt tl' },
+        submit: tour_func
+    },
+    {
+        title: 'Get The Most Money',
+        html: 'If we find any competition, we\'ll let you know and beat their price when you press this button!',
+        buttons: { Back: -1, Next: 1 },
+        focus: 1,
+        position: { container: '#BeatAll', x: 100, y: 0, width: 400, arrow: 'lt tl' },
         submit: tour_func
     },
     {
@@ -1565,7 +1625,7 @@ function display_match_button(prod) {
 
 function do_show_match(code, product, row) {
     if (codes_to_offers[code] != null) {
-        
+
     }
 }
 
@@ -1665,7 +1725,7 @@ function write_html(data, row) {
         buton = "";
     }
 
-    return "<tr class='new response'> <td style='display:none;' class='upc'>" + row.product_code + "</td> <td colspan='2' class='details'> <div class='td_image'> <img src='" + row.images + "' alt='" + row.title + "' /> </div><div class='td_details'> <strong>" + row.title + "</strong><br /><em>" + (row.author == null ? '' : row.author) + "</em><br/>" + (row.category == null ? "" : row.category) + "<br><span class='upc_small'>" + row.product_code + "</span></div>  </div></td> <td class='quantity'>" + row.quantity + "</td> <td class='item'>" + (row.worthless == true ? "<span class='blatent'>No Abunda Value</span>" : "") + (row.overstocked == true ? "<span class='blatent'>Over Stocked</span>" : "") + "<div class='item'><span " + us + ">Abunda: " + data.currency_for_total + "" + row_price + "</span><br/>" + (row.offer == '0.00' ? "" : "<div id='comp_" + row.item_id + "'><span " + them + ">" + (row.worthless == true || row.overstocked == true ? "" : "Competitor: $" + row.offer ) + "</span></div>") + "</div></td> <td class='values'><span id='price_" + row.item_id + "'>" + data.currency_for_total + row_total + "</span><br/><div id='beat_" + row.item_id + "'>" + (row.worthless == true || row.overstocked == true ? "" : buton) + "</div></td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + row.item_id + "'><img src='" + abundacalc.url + "/images/trashcan.png' alt='delete' width='32'></a></tr>";
+    return "<tr class='new response'> <td style='display:none;' class='upc'>" + row.product_code + "</td> <td colspan='2' class='details'> <div class='td_image'> <img src='" + row.images + "' alt='" + row.title + "' /> </div><div class='td_details'> <strong>" + row.title + "</strong><br /><em>" + (row.author == null ? '' : row.author) + "</em><br/>" + (row.category == null ? "" : row.category) + "<br><span class='upc_small'>" + row.product_code + "</span></div>  </div></td> <td class='quantity'>" + row.quantity + "</td> <td class='item'>" + (row.worthless == true ? "<span class='blatent'>No Abunda Value</span>" : "") + (row.overstocked == true ? "<span class='blatent'>Over Stocked</span>" : "") + "<div class='item'><span " + us + ">Abunda: " + data.currency_for_total + "" + row_price + "</span><br/>" + (row.offer == '0.00' ? "" : "<div id='comp_" + row.item_id + "'><span " + them + ">" + (row.worthless == true || row.overstocked == true ? "" : "Competitor: $" + row.offer) + "</span></div>") + "</div></td> <td class='values'><span id='price_" + row.item_id + "'>" + data.currency_for_total + row_total + "</span><br/><div id='beat_" + row.item_id + "'>" + (row.worthless == true || row.overstocked == true ? "" : buton) + "</div></td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + row.item_id + "'><img src='" + abundacalc.url + "/images/trashcan.png' alt='delete' width='32'></a></tr>";
 }
 
 var hidden = true;
