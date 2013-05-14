@@ -222,7 +222,7 @@ class abundatrade_withinboredom {
         }
         else {
             
-            $display = "<form method='post' action='#'><input type='hidden' id='is_gadget' name='gadget' value='true'/><input type='hidden' name='unknown' value='false'><div id='abundatrade_gadget'>";
+            $display = "<form method='get' action='#'><input type='hidden' id='is_gadget' name='gadget' value='true'/><input type='hidden' name='unknown' value='false'><div id='abundatrade_gadget'>";
             $display .= "<h1 id='finalize' style='display:none'></h1>";
             $display .= "<div class='category_selector select_container'><div id='category_selection' $gad_cat class='selection sel_center'>This form requires javascript. Please use a javascript enabled browser";
             $display .= $closediv . $closediv;
