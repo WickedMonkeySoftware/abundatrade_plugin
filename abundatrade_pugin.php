@@ -356,8 +356,8 @@ class abundatrade_withinboredom {
                 .($this->isIE() ? 
                     '<div class="label">Barcode, Title or Artist</div>'
                     : '').
-                    '<div'.($this->isIE() ? '' : ' style="width:400px;"').' class="product_holder">
-                        <input'.($this->isIE() ? '' : ' style="width:400px;"').' placeholder="UPC, ISBN, EAN, ASIN, Title or Artist" class="center validate[\'required\',\'length[3,25]\']" id="product_code" name="product_code" onkeyup="return; doSearch();" onblur="clean_product_code(this)" type="text"/>
+                    '<div'.($this->isIE() ? '' : ' style="min-width:150px; width:100%;"').' class="product_holder">
+                        <input'.($this->isIE() ? '' : ' style="min-width:150px; width:100%;"').' placeholder="UPC, ISBN, EAN, ASIN, Title or Artist" class="center validate[\'required\',\'length[3,25]\']" id="product_code" name="product_code" onkeyup="return; doSearch();" onblur="clean_product_code(this)" type="text"/>
                     </div>
                 </div>
 

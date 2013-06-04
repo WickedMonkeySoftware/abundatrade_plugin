@@ -172,7 +172,7 @@
     height: auto /*45px*/ !important;
     margin: 0px 5px 0 20px !important;
     padding-top: 0px !important;
-    width: auto !important;
+    width: 50%;
 }
 
 #top_input_section div.label {
