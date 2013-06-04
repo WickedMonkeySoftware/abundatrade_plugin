@@ -164,7 +164,7 @@ function clear_session(obj) {
                             {
                                 type: 'GET',
                                 url: 'http://' + abundacalc.server + '/trade/process/request.php',
-                                data: 'action=clear_session',
+                                data: 'action=clear_session&a=' + jQuery("#a").val(),
                                 dataType: 'jsonp'
                             });
 
@@ -216,7 +216,7 @@ function new_session(this_link) {
         {
             type: 'GET',
             url: 'http://' + abundacalc.server + '/trade/process/request.php',
-            data: 'action=new_session',
+            data: 'action=new_session&a=' + jQuery("#a").val(),
             dataType: 'jsonp'
         });
     request.done(function (data) { });
@@ -349,7 +349,7 @@ function display_bulk_upload(display_prompt, id) {
             {
                 type: 'POST',
                 url: 'http://' + abundacalc.server + '/trade/process/request.php',
-                data: "action=get_status&id=" + id,
+                data: "action=get_status&id=" + id + "&a=" + jQuery("#a").val(),
                 dataType: 'jsonp'
             });
 
@@ -466,7 +466,7 @@ function load_previous_session(pretty, ignore_errors) {
         {
             type: 'GET',
             url: 'http://' + abundacalc.server + '/trade/process/request.php',
-            data: 'action=load_previous_session',
+            data: 'action=load_previous_session&a=' + jQuery("#a").val(),
             dataType: 'jsonp'
         });
     request.success(function (data) {

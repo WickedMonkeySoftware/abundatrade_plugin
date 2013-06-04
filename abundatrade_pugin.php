@@ -326,6 +326,13 @@ class abundatrade_withinboredom {
         
         if (!isset($atts['gadget_only'])) $atts['gadget_only'] = false;
         
+        if (!isset($atts['a'])) {
+            $affid = $this->settings->Affiliate_ID;
+        }
+        else {
+            $affid = $atts['a'];
+        }
+        
         if ($atts['gadget_only']) {
             $hide = ' display: none;';
             $gadget_state = ' ';
@@ -341,7 +348,7 @@ class abundatrade_withinboredom {
 <div id="search_results_list"></div>
             <form id="abundaInput" class="abundaInput" style="margin-top: 6px;" onsubmit="return false;" method="post" >
                 <input id="item_num" value="1" name="item_num" type="hidden"/>
-                <input id="a" value="' . $this->settings->Affiliate_ID . '" type="hidden"/>
+                <input id="a" value="' . $affid . '" type="hidden"/>
                 <div class="input_container">
                 </div>
 
