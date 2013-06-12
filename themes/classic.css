@@ -327,7 +327,7 @@
     -webkit-border-radius: 15px !important;
     -khtml-border-radius: 15px !important;
     vertical-align: middle !important;
-    display: none !important;
+    display: none;
     padding: 15px 5px !important;
 }
 
