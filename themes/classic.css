@@ -1,5 +1,34 @@
 /*Default Style for Abundatrade Calculator plugin 12-11-12*/
 
+/* Gadget Stuff */
+
+.abundaGadget_cat {
+    display:inline-block;
+    text-align:center;
+    transition:background-color .4s ease 0;
+    cursor:default;
+    margin-right:10px;
+}
+
+.abundaGadget_cat:hover div, .abundaGadget_cat:hover p {
+    background-color:#004A7A;
+    color:white;
+    transition:color .4s ease 0;
+    transition:background-color .4s ease 0;
+}
+
+.gad_big_pict {
+    width:170px;
+    display:inline-block;
+}
+
+.gad_details {
+    width:50%;
+    display:inline-block;
+    margin-bottom:15px;
+}
+
+/* Normal Calc Stuff */
 
 #abundatrade {
     position: relative !important;
@@ -268,7 +297,7 @@
 
 /*SECTION 1 for Bulk Items*/
 
-#bulk_button {
+#bulk_button, #switch_back_button {
     float: left !important;
     width: 99% !important;
     margin-bottom: 6px !important;

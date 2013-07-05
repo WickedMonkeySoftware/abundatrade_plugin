@@ -374,8 +374,14 @@ class abundatrade_withinboredom {
         
         $bulk_button = '
             <div id="bulk_button" class="calcbg1" style="'.$hide.'">
-                <p class="abunda_text2 calc_color1">Have a lot of items? <a href="#" onclick="return bulk_open();" class="calc_linkS1">Bulk Upload</a>
+                <p class="abunda_text2 calc_color1">Have a lot of items? <a href="#" onclick="return bulk_open();" class="calc_linkS1">Bulk Upload</a><a href="#" onclick="transform_into_full_calc(\'gadget\');" class="calc_linkS1" style="float:right; margin-right:20px;">Have a gadget?</a>
                 </p>
+            </div>';
+        
+        $switch_back = '
+            <div id="switch_back_button" class="calcbg1" style="'.$gadget_state.'">
+                <p class="abunda_text2 calc_color1">Can\'t find your gadget? <a href="http://abundatrade.com/recommerce/custom-quote-top-cash-gadgets" class="calc_linkS1">Get a custom quote</a>
+                <a href="#" class="calc_linkS1" style="float:right; margin-right:20px;" onclick="transform_into_full_calc(\'main\');">Switch back to regular items</a></p>
             </div>';
         
         $bulk = '
@@ -451,32 +457,86 @@ class abundatrade_withinboredom {
         $gadget_selector = 
             '<form id="abundaGadgetInput" class="abundaInput" style="margin-top: 6px;" onsubmit="return false;" method="post" >
             
-            <div class="input_container">'
-            . $gadget_category . $gadget_manufacturer .
-           '</div>
+            <div id="new_gad_cat">
+                <div class="abundaGadget_cat" onclick="setNewCat(1);">
+                    <img src="' . $this->folders['PluginUrl'] . '/images/icons/cats/gadgets_icon01.jpg" />
+                    <p>iPhone</p>
+                </div>
+                <div class="abundaGadget_cat" onclick="setNewCat(2);">
+                    <img src="' . $this->folders['PluginUrl'] . '/images/icons/cats/gadgets_icon02.jpg" />
+                    <p>Tablet</p>
+                </div>
+                <div class="abundaGadget_cat" onclick="setNewCat(3);">
+                    <img src="' . $this->folders['PluginUrl'] . '/images/icons/cats/gadgets_icon03.jpg" />
+                    <p>iPod Classic</p>
+                </div>
+                <div class="abundaGadget_cat" onclick="setNewCat(4);">
+                    <img src="' . $this->folders['PluginUrl'] . '/images/icons/cats/gadgets_icon04.jpg" />
+                    <p>iPod Touch</p>
+                </div>
+                <div class="abundaGadget_cat" onclick="setNewCat(5);">
+                    <img src="' . $this->folders['PluginUrl'] . '/images/icons/cats/gadgets_icon05.jpg" />
+                    <p>iPod Nano</p>
+                </div>
+                <div class="abundaGadget_cat" onclick="setNewCat(6);">
+                    <img src="' . $this->folders['PluginUrl'] . '/images/icons/cats/gadgets_icon06.jpg" />
+                    <p>Blackberry</p>
+                </div>
+                <div class="abundaGadget_cat" onclick="setNewCat(7);">
+                    <img src="' . $this->folders['PluginUrl'] . '/images/icons/cats/gadgets_icon07.jpg" />
+                    <p>Android</p>
+                </div>
+                <div class="abundaGadget_cat" onclick="setNewCat(8);">
+                    <img src="' . $this->folders['PluginUrl'] . '/images/icons/cats/gadgets_icon08.jpg" />
+                    <p>eReader</p>
+                </div>
+            </div>';
+        
+        
             
-            <div class="input_container">
-              <div class="label">Gadget</div>
-              <div class="product_holder">
-                <select class="center" id="gadget_code" name="gadget_code" onblur="" id="gadget_code">
-                  <option value="-1">Loading Gadgets...</option>
-                </select>
-              </div>
+            $gadget_selector .= '<div id="new_gad_man" style="display:none;">
+                <div id="man_content" style="display:none;"></div>
+                <div id="man_loader" style="width:30%; margin:auto; background-color:white; transition:background-color 1s ease 0;">
+                    <div style="width:16px; margin:auto;">
+                        <img src="' . $this->folders['PluginUrl'] . '/images/spinner.gif" />
+                    </div>
+                    <p style="text-align:center;">Loading Manufacturers</p>
+                </div>
             </div>
             
-            <!-- <div class="input_container">
-              <div class="label">Condition</div>
-              <div class="product_holder">
-                <select class="center" id="header_condition" name="header_condition" onblur="" id="header_condition">
-                  <option value="like_new">Like New</option>
-                  <option value="good">Good</option>
-                  <option value="Other">All Others</option>
-                </select>
-              </div>
-            </div> -->
+            <div id="new_gad_dev" style="display:none;">
+                <div id="dev_content" style="display:none;"></div>
+                <div id="dev_loader" style="width:30%; margin:auto; background-color:white; transition:background-color 1s ease 0;">
+                    <div style="width:16px; margin:auto;">
+                        <img src="' . $this->folders['PluginUrl'] . '/images/spinner.gif" />
+                    </div>
+                    <p style="text-align:center;">Loading Devices</p>
+                </div>
+            </div>
             
-            <div class="submit_holder">
-              <input class="btn1 right btn_link1 btnbg1" value="+ Add" type="submit"/>
+            <div id="new_gad_car" style="display:none;">
+                <div id="car_content" style="display:none;"></div>
+                <div id="car_loader" style="width:30%; margin:auto; background-color:white; transition:background-color 1s ease 0;">
+                    <div style="width:16px; margin:auto;">
+                        <img src="' . $this->folders['PluginUrl'] . '/images/spinner.gif" />
+                    </div>
+                    <p style="text-align:center;">Loading Carriers</p>
+                </div>
+            </div>
+            
+            <div id="new_gad" style="display:none;">
+                <div class="gad_big_pict">
+                    <img src="" />
+                </div>
+                <div class="gad_details">
+                    <p>Details go here</p>
+                    <select>
+                    <option>Select your condition</option>
+                    </select>
+                </div>
+                <div id="gad_adder" style="display:inline-block" class="submit_holder">
+                    <input class="btn1 right btn_link1 btnbg1" value="+ Add" type="submit"/>
+                </div>
             </div>
             
             </form>';
@@ -491,6 +551,7 @@ class abundatrade_withinboredom {
         $display .= $top;
         $display .= $endform;
         $display .= $bulk_button;
+        $display .= $switch_back;
         $display .= $second;
 
         $display .= $table;
@@ -561,6 +622,10 @@ class abundatrade_withinboredom {
         wp_enqueue_script("abundatrade_impromptu");
         wp_enqueue_script("abundatrade_register");
         wp_enqueue_script("abundatrade_gadgets");
+        if (!isset($this->export)) {
+            $this->export = array();
+        }
+        
         $abundacalc = array('server' => 'abundatrade.com', 
             'url' => $this->folders['PluginUrl'],
             'export' => $this->export,

@@ -1322,8 +1322,11 @@ function transform_into_full_calc(mode) {
         //jQuery("#top_input_section").fadeIn(500);
         jQuery("#second_content").slideDown(500);
         jQuery("#abundaCalcTbl").delay(100).fadeIn(400);
-        //jQuery("#bulk_button").slideDown(1000);
+        jQuery("#bulk_button").slideUp();
+        jQuery("#switch_back_button").slideDown(1000);
         jQuery("#very_bottom").slideDown(500);
+        jQuery("#top_input_section").slideUp(500);
+        gad_reset();
         load_previous_session(false);
     }
     else {
@@ -1333,7 +1336,9 @@ function transform_into_full_calc(mode) {
         jQuery("#second_content").slideDown(500);
         jQuery("#abundaCalcTbl").delay(100).fadeIn(400);
         jQuery("#bulk_button").slideDown(1000);
+        jQuery("#switch_back_button").slideUp();
         jQuery("#very_bottom").slideDown(500);
+        jQuery("#top_input_section").slideDown(500);
         load_previous_session(false);
     }
     return false;
@@ -1482,7 +1487,7 @@ function addGadget(ean, condition) {
                             });
 
     request.done(function (data) {
-        transform_into_full_calc('gadget');
+        transform_into_full_calc('main');
         // No errors
         /*
         if (data != '') {
@@ -1872,4 +1877,128 @@ function addCode(code) {
     jQuery("#product_code").val(code);
     clear_results();
     lookup_item(this);
+}
+
+//new gadgets
+
+Object.keys = Object.keys || (function () {
+    var hasOwnProperty = Object.prototype.hasOwnProperty,
+        hasDontEnumBug = !{ toString: null }.propertyIsEnumerable("toString"),
+        DontEnums = [
+            'toString',
+            'toLocaleString',
+            'valueOf',
+            'hasOwnProperty',
+            'isPrototypeOf',
+            'propertyIsEnumerable',
+            'constructor'
+        ],
+        DontEnumsLength = DontEnums.length;
+
+    return function (o) {
+        if (typeof o != "object" && typeof o != "function" || o === null)
+            throw new TypeError("Object.keys called on a non-object");
+
+        var result = [];
+        for (var name in o) {
+            if (hasOwnProperty.call(o, name))
+                result.push(name);
+        }
+
+        if (hasDontEnumBug) {
+            for (var i = 0; i < DontEnumsLength; i++) {
+                if (hasOwnProperty.call(o, DontEnums[i]))
+                    result.push(DontEnums[i]);
+            }
+        }
+
+        return result;
+    };
+})();
+
+var gadgets_array = new Object();
+
+function setNewCat(cat) {
+    gadgets_array = new Object();
+    jQuery("#new_gad_cat").slideUp();
+    jQuery("#new_gad_man").delay(500).slideDown();
+    var request = jQuery.ajax("http://" + abundacalc.server + "/trade/process/ajax-post-public.php?action=get&object=TradePermProductData&category_id=" + cat, { dataType: 'jsonp' });
+    request.success(function (data) {
+        buildUniqueArray(gadgets_array, "manufacturer_id", data, "mfg_name");
+        var ids = Object.keys(gadgets_array);
+        var content = "";
+        if (ids.length == 1) {
+            setNewMan(cat, ids[0]);
+            return;
+        }
+        for (i = 0; i < ids.length; i++) {
+            content += "<div class='abundaGadget_cat' onclick='setNewMan(" + cat + "," + ids[i] + ");'><img src='" + abundacalc.url + "/images/icons/mans/" + ids[i] + ".png' /><p>" + gadgets_array[ids[i]] + "</p></div>";
+        }
+        jQuery("#man_content").get(0).innerHTML = content;
+        jQuery("#man_loader").fadeOut();
+        jQuery("#man_content").fadeIn();
+    });
+}
+
+function setNewMan(cat, man) {
+    gadgets_array = new Object();
+    jQuery("#new_gad_man").slideUp();
+    jQuery("#new_gad_car").delay(500).slideDown();
+    var request = jQuery.ajax("http://" + abundacalc.server + "/trade/process/ajax-post-public.php?action=get&object=TradePermProductData&category_id=" + cat + "&manufacturer_id=" + man, { dataType: 'jsonp' });
+    request.success(function (data) {
+        buildUniqueArray(gadgets_array, "carrier_id", data, "carrier_name");
+        var ids = Object.keys(gadgets_array);
+        var content = "";
+        if (ids.length == 1) {
+            setNewCar(cat, man, ids[0]);
+            return;
+        }
+        for (i = 0; i < ids.length; i++) {
+            content += "<div class='abundaGadget_cat' onclick='setNewCar(" + cat + "," + man + "," + ids[i] + ");'><img src='" + abundacalc.url + "/images/icons/cars/" + ids[i] + ".png' /><p>" + gadgets_array[ids[i]] + "</p></div>";
+        }
+        jQuery("#car_content").get(0).innerHTML = content;
+        jQuery("#car_loader").fadeOut();
+        jQuery("#car_content").fadeIn();
+    });
+}
+
+function setNewCar(cat, man, car) {
+    gadgets_array = new Object();
+    gadget_ids_to_ean = new Object();
+    jQuery("#new_gad_car").slideUp();
+    jQuery("#new_gad_dev").delay(500).slideDown();
+    var request = jQuery.ajax("http://" + abundacalc.server + "/trade/process/ajax-post-public.php?action=get&object=TradePermProductData&category_id=" + cat + "&manufacturer_id=" + man + "&carrier_id=" + car, { dataType: 'jsonp' });
+    request.success(function (data) {
+        buildUniqueArray(gadgets_array, 'id', data, 'title');
+        buildUniqueArray(gadget_ids_to_ean, "id", data, "ean");
+        var ids = Object.keys(gadgets_array);
+        var content = "";
+        for (i = 0; i < ids.length; i++) {
+            content += "<div class='abundaGadget_cat' onclick='setNewDev(" + ids[i] + ");'><img src='" + abundacalc.url + "/images/icons/devs/" + ids[i] + "s.png' /><p>" + gadgets_array[ids[i]] + "</p></div>";
+        }
+        jQuery("#dev_content").get(0).innerHTML = content;
+        jQuery("#dev_loader").fadeOut();
+        jQuery("#dev_content").fadeIn();
+    });
+}
+
+function setNewDev(id) {
+    jQuery("#new_gad_dev").slideUp();
+    addGadget(gadget_ids_to_ean[id]);
+}
+
+var gadget_ids_to_ean;
+
+function gad_reset() {
+    jQuery("#new_gad").hide();
+    jQuery("#new_gad_car").hide();
+    jQuery("#new_gad_dev").hide();
+    jQuery("#new_gad_man").hide();
+    jQuery("#new_gad_cat").show();
+    gadgets_array = new Object();
+}
+
+function gotoNewCat() {
+    jQuery("#new_gad_cat").slideDown();
+    jQuery("#new_gad_man").slideDown();
 }
