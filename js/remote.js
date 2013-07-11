@@ -119,7 +119,7 @@ function calc_state() {
 
 function get_login_status() {
 
-    tour = "<span style='float:right;'><a href='#' onclick='do_tour(); return false;'>Take a tour</a></span>";
+    tour = "<span style='float:right;'><a href='#' onclick='do_tour(); return false;'><strong>Take a tour</strong></a></span>";
 
     if (jQuery("#login_status_abundatrade").val() != null) {
         jQuery("#login_status_abundatrade").get(0).innerHTML = "<img src='" + abundacalc.url + "/images/spinner.gif'>";
