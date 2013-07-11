@@ -58,7 +58,9 @@ var itemsToDispose = [];
 *
 */
 function clean_product_code(element) {
-    element.value = element.value.replace(/\W+/g, "");
+    if (!doingTextSearch) {
+        element.value = element.value.replace(/\W+/g, "");
+    }
 }
 
 /*
@@ -117,7 +119,7 @@ function calc_state() {
 
 function get_login_status() {
 
-    tour = "<span style='float:right;'><a href='#' onclick='do_tour(); return false;'>Take a tour</a></span>";
+    tour = "<span style='float:right;'><a href='#' onclick='do_tour(); return false;'><strong>Take a tour</strong></a></span>";
 
     if (jQuery("#login_status_abundatrade").val() != null) {
         jQuery("#login_status_abundatrade").get(0).innerHTML = "<img src='" + abundacalc.url + "/images/spinner.gif'>";
@@ -162,7 +164,7 @@ function clear_session(obj) {
                             {
                                 type: 'GET',
                                 url: 'http://' + abundacalc.server + '/trade/process/request.php',
-                                data: 'action=clear_session',
+                                data: 'action=clear_session&a=' + jQuery("#a").val(),
                                 dataType: 'jsonp'
                             });
 
@@ -214,7 +216,7 @@ function new_session(this_link) {
         {
             type: 'GET',
             url: 'http://' + abundacalc.server + '/trade/process/request.php',
-            data: 'action=new_session',
+            data: 'action=new_session&a=' + jQuery("#a").val(),
             dataType: 'jsonp'
         });
     request.done(function (data) { });
@@ -260,6 +262,22 @@ function display_totals(data, no_reset) {
         jQuery('#product_qty').val('1');
         jQuery('#product_code').focus();
     }
+
+    //show hover overs
+    //
+    jQuery("td div div").each(function (el) {
+        id = jQuery("td div div").get(el).id;
+        if (id.indexOf("_") == -1) {
+            return;
+        }
+        prod = id.substring(id.indexOf("_") + 1);
+        str = "";
+        for (j = 0; j < codes_to_offers[prod].all_offers.length; j++) {
+            str += "Competitor " + (j + 1) + ": $" + (parseFloat(codes_to_offers[prod].all_offers[j].offer / 100).toFixed(2)) + "<br>";
+        }
+
+        jQuery("#" + id).qtip({ content: "We found these top competitors:<br>" + str });
+    });
 }
 
 /**
@@ -331,7 +349,7 @@ function display_bulk_upload(display_prompt, id) {
             {
                 type: 'POST',
                 url: 'http://' + abundacalc.server + '/trade/process/request.php',
-                data: "action=get_status&id=" + id,
+                data: "action=get_status&id=" + id + "&a=" + jQuery("#a").val(),
                 dataType: 'jsonp'
             });
 
@@ -377,6 +395,8 @@ function submit_bulk(val) {
     jQuery.each(val, function (i, obj) {
         str += '&' + i + '=' + obj;
     });
+
+    str += '&simple=true';
 
     str += '&bulkinput=' + encodeURI(jQuery("#bulk_upload").val());
 
@@ -446,10 +466,9 @@ function load_previous_session(pretty, ignore_errors) {
         {
             type: 'GET',
             url: 'http://' + abundacalc.server + '/trade/process/request.php',
-            data: 'action=load_previous_session',
+            data: 'action=load_previous_session&a=' + jQuery("#a").val(),
             dataType: 'jsonp'
         });
-
     request.success(function (data) {
         jQuery('#abundaCalcBody_request').children().remove();
 
@@ -523,7 +542,7 @@ function Remove_Item(product_code) {
 /** Displays a waiting spinning thingy while we look up a product */
 function waitFor(product_code) {
     jQuery('#product_code').val('');
-    row_html = "<tr class='new response'> <td class='upc'>" + product_code + "</td> <td class='details'> <div class='td_details'> <strong>Getting the realtime values for your item</strong><br /><em></em></div> <div class='td_image'> <img src='" + abundacalc.url + "/images/spinner.gif" + "' alt='waiting' /> </div> </td> <td class='quantity'></td> <td class='item'><div class='item'></td> <td class='values'></td> <td class='delete'></tr>";
+    row_html = "<tr class='new response'> <td style='display:none;' class='upc'>" + product_code + "</td> <td colspan='2' class='details'> <div class='td_details'> <strong>Getting the realtime values for " + product_code + "</strong><br /><em></em></div> <div class='td_image'> <img src='" + abundacalc.url + "/images/spinner.gif" + "' alt='waiting' /> </div> </td> <td class='quantity'></td> <td class='item'><div class='item'></td> <td class='values'></td> <td class='delete'></tr>";
     jQuery('#abundaCalcTbl').prepend(row_html);
 }
 
@@ -533,6 +552,8 @@ function waitFor(product_code) {
 */
 function lookup_item(obj) {
     if (!jQuery(obj).hasClass('disabled')) {
+
+        clear_results();
 
         // The product code must be at least 6 digits
         //
@@ -561,12 +582,12 @@ function lookup_item(obj) {
                 build_row(data);
                 lastItem = data;
                 jQuery('#abundaCalcTbl').prepend(data.row_html);
-                jQuery('td:contains("' + data.product_code + '")').parent()
+                /*jQuery('td:contains("' + data.product_code + '")').parent()
                     .find('td')
                     .wrapInner('<div style="display: none;" />')
                     .parent()
                     .find('td > div')
-                    .slideDown("slow", function () { var $set = jQuery(this); $set.replaceWith($set.contents()); })
+                    .slideDown("100", function () { var $set = jQuery(this); $set.replaceWith($set.contents()); })*/
                 display_totals(data);
             });
 
@@ -623,7 +644,7 @@ function displayLoginButtons() {
         if (just_logging_in) {
             return { Cancel: 0, Login: -1, Register: 1 };
         }
-        return { Cancel: 0, Login: -1, 'Just Submit': 1, };
+        return { Cancel: 0, Login: -1, 'Just Submit': 1 };
     }
 }
 
@@ -734,7 +755,7 @@ function check_for_new() {
         if (loggedIn) {
             load_previous_session(false, true);
         }
-    }, 2000);
+    }, 30000);
 }
 
 /** Submit a list */
@@ -1239,6 +1260,58 @@ jQuery(document).ready(function () {
         }
 
         check_for_new();
+
+        jQuery('#product_code').catcomplete({
+            source: function (request, response) {
+                jQuery.ajax({
+                    url: "http://" + abundacalc.server + "/trade/process/TextSearch.php",
+                    dataType: "jsonp",
+                    data: {
+                        search: request.term
+                    },
+                    success: function (data) {
+                        response(jQuery.map(data.results, function (item) {
+                            return {
+                                label: item.display,
+                                value: item.code,
+                                category: item.category,
+                                code: item.code,
+                                image: item.images
+                            };
+                        }));
+                    }
+                });
+            },
+            minLength: 2,
+            select: function (event, ui) {
+            },
+            autoFocus: true,
+            open: function () {
+                jQuery(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+            },
+            close: function () {
+                jQuery(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+            }
+        });
+    }
+});
+
+jQuery.widget("custom.catcomplete", jQuery.ui.autocomplete, {
+    _renderMenu: function (ul, items) {
+        var that = this, currentCategory = "";
+
+        jQuery.each(items, function (index, item) {
+            if (item.category != currentCategory) {
+                ul.append("<li class='searchHeader ui-autocomplete-category'>" + item.category + "</li>");
+                currentCategory = item.category;
+            }
+            that._renderItemData(ul, item);
+        });
+    },
+    _renderItem: function (ul, item) {
+        return jQuery("<li></li>").data("item.autocomplete", item)
+        .append("<a><div class='inlineblock left'><img src='" + item.image + "' height='45px'></div><div class='inlineblock right'>" + item.label + "<br>Barcode: " + item.code + "</div></a>")
+        .appendTo(ul);
     }
 });
 
@@ -1249,8 +1322,11 @@ function transform_into_full_calc(mode) {
         //jQuery("#top_input_section").fadeIn(500);
         jQuery("#second_content").slideDown(500);
         jQuery("#abundaCalcTbl").delay(100).fadeIn(400);
-        //jQuery("#bulk_button").slideDown(1000);
+        jQuery("#bulk_button").slideUp();
+        jQuery("#switch_back_button").slideDown(1000);
         jQuery("#very_bottom").slideDown(500);
+        jQuery("#top_input_section").slideUp(500);
+        gad_reset();
         load_previous_session(false);
     }
     else {
@@ -1260,7 +1336,9 @@ function transform_into_full_calc(mode) {
         jQuery("#second_content").slideDown(500);
         jQuery("#abundaCalcTbl").delay(100).fadeIn(400);
         jQuery("#bulk_button").slideDown(1000);
+        jQuery("#switch_back_button").slideUp();
         jQuery("#very_bottom").slideDown(500);
+        jQuery("#top_input_section").slideDown(500);
         load_previous_session(false);
     }
     return false;
@@ -1315,7 +1393,15 @@ var tourstates = [
     },
     {
         title: 'Getting Started',
-        html: 'Enter any barcode and just about any ISBN here. <br>You can also use a scanner to speed things along.',
+        html: 'Enter any barcode and just about any ISBN here. <br>You can also enter a title and/or artist.',
+        buttons: { Back: -1, Next: 1 },
+        focus: 1,
+        position: { container: '#product_code', x: 200, y: 0, width: 250, arrow: 'lt' },
+        submit: tour_func
+    },
+    {
+        title: 'Title/Artist Search',
+        html: 'Title and Artist search is a new feature, some tips: <ul><li>Using the title AND artist gets the best results.</li><li>Add dvd, music, book, video game to narrow your results.</li></ul>',
         buttons: { Back: -1, Next: 1 },
         focus: 1,
         position: { container: '#product_code', x: 200, y: 0, width: 250, arrow: 'lt' },
@@ -1362,6 +1448,14 @@ var tourstates = [
         submit: tour_func
     },
     {
+        title: 'Get The Most Money',
+        html: 'If we find any competition, we\'ll let you know and beat their price when you press this button!',
+        buttons: { Back: -1, Next: 1 },
+        focus: 1,
+        position: { container: '#BeatAll', x: 100, y: 0, width: 400, arrow: 'lt tl' },
+        submit: tour_func
+    },
+    {
         title: 'Bulk Upload',
         html: 'If you have items already in ISBN/UPC form, you can copy and paste your items with quantity directly into the bulk uploader and receieve a quote instantly.',
         buttons: { Back: -1, Done: 2 },
@@ -1393,7 +1487,7 @@ function addGadget(ean, condition) {
                             });
 
     request.done(function (data) {
-        transform_into_full_calc('gadget');
+        transform_into_full_calc('main');
         // No errors
         /*
         if (data != '') {
@@ -1479,7 +1573,7 @@ function getParameterByName(name) {
 
 /** Builds an unknown row */
 function build_unknown(code, quantity, id) {
-    return "<tr class='new response'> <td class='upc'>" + code + "</td> <td class='details'> <div class='td_details'> <strong>Unknown Item</strong><br /><em>Item not found. You may send for valuation</em></div> <div class='td_image'> <img src='http://g-ecx.images-amazon.com/images/G/01/x-site/icons/no-img-sm._V192198896_.gif' alt='Unkown item' /> </div> </td> <td class='quantity'>" + quantity + "</td> <td class='item'><div class='item'>$0.00</td> <td class='values'>$0.00</td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + id + "'>Delete</a></tr>";
+    return "<tr style='' class='new response'> <td style='display:none;' class='upc'>" + code + "</td> <td colspan='2' class='details'> <div class='td_details'> <strong>Unknown Item</strong><br /><em>Item not found. You may send for valuation</em><br><span class='upc_small'>" + code + "</span></div> <div class='td_image'> <img src='http://g-ecx.images-amazon.com/images/G/01/x-site/icons/no-img-sm._V192198896_.gif' alt='Unkown item' /> </div> </td> <td class='quantity'>" + quantity + "</td> <td class='item'><div class='item'>$0.00</td> <td class='values'>$0.00</td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + id + "'><img src='" + abundacalc.url + "/images/trashcan.png' alt='delete' width='32'></a></tr>";
 }
 
 /** Builds an item from a lookup from a json string */
@@ -1513,13 +1607,104 @@ function build_row(data) {
             row_price = new Number(row.price_per / 100).toFixed(2);
             row_total = new Number(row.total_price / 100).toFixed(2);
             data.row_html += write_html(data, row);
-
         }
         number_item++;
     }
 
     return data;
 }
+
+function show_other_offers(data) {
+    codes_to_offers[data.upc] = data;
+    jQuery("#comp_" + data.prod).get(0).innerHTML = display_other_offers(data);
+}
+
+function display_other_offers(data, row) {
+    return "<span style='font-size:11px;'>Top Comp: </span>$<span id='top_" + data.prod + "'>" + data.price + "</span>";
+}
+
+function get_other_offers(code, product, row) {
+    if (codes_to_offers[code] != null) {
+        return display_other_offers(codes_to_offers[code], row);
+    }
+    jQuery.ajax("http://" + abundacalc.server + "/trade/process/MyComp.php?action=get&upc=" + code + "&prod=" + product, { dataType: 'jsonp', success: show_other_offers });
+
+    return "<img src='" + abundacalc.url + "/images/spinner.gif' width='15' height='15'>";
+}
+
+function display_match_button(prod) {
+    return "<input type='button' value='Beat!' onclick='beat(\"" + prod + "\"); return false;'>";
+}
+
+function do_show_match(code, product, row) {
+    if (codes_to_offers[code] != null) {
+
+    }
+}
+
+function UpdateMovingTotal(new_total) {
+    jQuery("#total_prevaluation").get(0).innerHTML = "$" + parseFloat(new_total).toFixed(2);
+}
+
+function getNextQuarter(amount) {
+    amount = parseFloat(amount);
+    amount += .25;
+    amt = amount + .25;
+
+    nex = (Math.round(amount * 4) / 4).toFixed(2);
+
+    if (amount - nex < 25 && amount - nex > 0) {
+        return (Math.round(amt * 4) / 4).toFixed(2);
+    }
+    else {
+        return nex;
+    }
+}
+
+function beat(prod) {
+    if (codes_to_offers[prod].price_per != .25) {
+        cap = codes_to_offers[prod].price_per / 100 * 1.5;
+    }
+    else {
+        cap = 10;
+    }
+
+    var amt = getNextQuarter(codes_to_offers[prod].offer);
+    cap = getNextQuarter(cap);
+
+    if (amt > cap) {
+        amt = cap;
+    }
+
+    amt = parseFloat(amt).toFixed(2);
+
+    jQuery("#beat_" + prod).get(0).innerHTML = "<img src='" + abundacalc.url + "/images/good.png' width='35'>";
+    jQuery("#price_" + prod).get(0).innerHTML = "$" + amt;
+    jQuery.ajax("http://" + abundacalc.server + "/trade/process/MyComp.php?action=set&prod=" + prod, {
+        dataType: 'jsonp', success: function (data) {
+            if (data.result != 'false') {
+                jQuery("#price_" + prod).get(0).innerHTML = "$" + (parseFloat(data.result / 100) * codes_to_offers[prod].quantity).toFixed(2);
+                total = jQuery("#total_prevaluation").get(0).innerHTML.substring(1);
+                increase = parseFloat(data.result / 100 * codes_to_offers[prod].quantity - codes_to_offers[prod].price_per / 100 * codes_to_offers[prod].quantity).toFixed(2);
+                UpdateMovingTotal(parseFloat(total) + parseFloat(increase));
+            }
+            else {
+                report_error("beat(" + prod + ", " + (codes_to_offers[prod].offer * 1.5) + ")", data.result);
+            }
+        }
+    });
+
+    if (jQuery("[value='Beat `Em!']").length == 0) {
+        BeatAll();
+    }
+}
+
+function BeatAll() {
+    jQuery("[value='Beat `Em!']").each(function (ind) { jQuery("[value='Beat `Em!']").get(ind).click() });
+    jQuery("#TheBestOffer").get(0).innerHTML = "Best Offer";
+}
+
+var codes_to_offers = {};
 
 /** Write out the html for the row */
 function write_html(data, row) {
@@ -1531,7 +1716,29 @@ function write_html(data, row) {
         hide_after(1, row.item_id);
     }
 
-    return "<tr class='new response'> <td class='upc'>" + row.product_code + "</td> <td class='details'> <div class='td_image'> <img src='" + row.images + "' alt='" + row.title + "' /> </div><div class='td_details'> <strong>" + row.title + "</strong><br /><em>" + (row.author == null ? '' : row.author) + "</em><br/>" + (row.category == null ? "" : row.category) + "</div>  </div></td> <td class='quantity'>" + row.quantity + "</td> <td class='item'>" + (row.worthless == true ? "<p class='blatent'>No Abunda Value</p>" : "") + (row.overstocked == true ? "<span class='blatent'>Over Stocked Item</span>" : "") + "<div class='item'>" + data.currency_for_total + row_price + "</div></td> <td class='values'>" + data.currency_for_total + row_total + "</td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + row.item_id + "'>Delete</a></tr>";
+    if (row.offer == null) {
+        row.offer = "0.00";
+    }
+
+    buton = "<img src='" + abundacalc.url + "/images/good.png' width='35'>";
+    us = "style='color:green; font-size:11px;'";
+    them = "style='color:black; font-size:11px;'";
+
+    codes_to_offers[row.item_id] = row;
+
+    if (parseFloat(row.offer) >= parseFloat(row_price) && row.offer_available == 'f' && !row.worthless && !row.overstocked) {
+        buton = "<input type='button' style='margin-bottom:0;' value='Beat `Em!' onclick='beat(\"" + row.item_id + "\"); return false;'>";
+        //jQuery("#TheBestOffer").get(0).innerHTML = "<a onClick='BeatAll()'>Beat `Em</a>";
+        swap = them;
+        them = us;
+        us = swap;
+    }
+
+    if (parseFloat(row.offer) == 0) {
+        buton = "";
+    }
+
+    return "<tr class='new response'> <td style='display:none;' class='upc'>" + row.product_code + "</td> <td colspan='2' class='details'> <div class='td_image'> <img src='" + row.images + "' alt='" + row.title + "' /> </div><div class='td_details'> <strong>" + row.title + "</strong><br /><em>" + (row.author == null ? '' : row.author) + "</em><br/>" + (row.category == null ? "" : row.category) + "<br><span class='upc_small'>" + row.product_code + "</span></div>  </div></td> <td class='quantity'>" + row.quantity + "</td> <td class='item'>" + (row.worthless == true ? "<span class='blatent'>No Abunda Value</span>" : "") + (row.overstocked == true ? "<span class='blatent'>Over Stocked</span>" : "") + "<div class='item'><span " + us + ">Abunda: " + data.currency_for_total + "" + row_price + "</span><br/>" + (row.offer == '0.00' ? "" : "<div id='comp_" + row.item_id + "'><span " + them + ">" + (row.worthless == true || row.overstocked == true ? "" : "Competitor: $" + row.offer) + "</span></div>") + "</div></td> <td class='values'><span id='price_" + row.item_id + "'>" + data.currency_for_total + row_total + "</span><br/><div id='beat_" + row.item_id + "'>" + (row.worthless == true || row.overstocked == true ? "" : buton) + "</div></td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + row.item_id + "'><img src='" + abundacalc.url + "/images/trashcan.png' alt='delete' width='32'></a></tr>";
 }
 
 var hidden = true;
@@ -1594,4 +1801,204 @@ function disposeQueued() {
     }
 
     itemsToDispose = [];
+}
+
+var doingTextSearch = false;
+var waitforpause;
+var doCat = "";
+
+function doSearch() {
+    clearTimeout(waitforpause);
+    waitforpause = setTimeout(function () {
+        jQuery.ajax("http://" + abundacalc.server + "/trade/process/TextSearch.php?search=" + escape(jQuery("#product_code").val()), {
+            dataType: 'jsonp', success: function (data) {
+                drawResultsText(data);
+            }
+        });
+    }, 500);
+}
+
+function drawResultsText(data) {
+    if (data.raw.length > 0) {
+        //jQuery("#search_results_list").height(jQuery("#abundatrade").height() - 68);
+        jQuery("#search_results_list").css("max-height", jQuery("#abundatrade").height() - 68);
+        jQuery("#search_results_list").css("overflow-y", "scroll");
+        jQuery("#search_results_list").show();
+    }
+    else {
+        //jQuery("#search_results_list").height(jQuery("#abundatrade").height() - 68);
+        jQuery("#search_results_list").css("overflow-y", "auto");
+        jQuery("#search_results_list").hide();
+    }
+    jQuery("#search_results_list").get(0).innerHTML = data.html;
+}
+
+function getMore(search, category) {
+    clearTimeout(waitforpause);
+    jQuery.ajax("http://" + abundacalc.server + "/trade/process/TextSearch.php?search=" + escape(search) + "&category=" + escape(category), {
+        dataType: 'jsonp', success: function (data) {
+            drawResultsText(data);
+        }
+    });
+}
+
+function ExpandOrClose(arrow_id, list_num, list_name) {
+    var a = document.getElementById(list_name);
+    var div = document.getElementById(list_name).getElementsByTagName("li");
+    var up = true;
+    if (a.name == 'd') {
+        a.name = 'u';
+        up = false;
+    }
+    else {
+        a.name = 'd';
+    }
+
+    for (var d = 0; d < div.length; d++) {
+        var id = "res-" + list_num + "-" + d;
+        if (up) {
+            jQuery("#" + id).slideUp();
+        }
+        else {
+            jQuery("#" + id).slideDown();
+        }
+    }
+}
+
+function clear_results() {
+    clearTimeout(waitforpause);
+    jQuery("#search_results_list").get(0).innerHTML = "";
+    jQuery("#search_results_list").height(jQuery("#abundatrade").height() - 68);
+    jQuery("#search_results_list").css("overflow-y", "auto");
+    jQuery("#search_results_list").hide();
+}
+
+function addCode(code) {
+    jQuery("#product_code").val(code);
+    clear_results();
+    lookup_item(this);
+}
+
+//new gadgets
+
+Object.keys = Object.keys || (function () {
+    var hasOwnProperty = Object.prototype.hasOwnProperty,
+        hasDontEnumBug = !{ toString: null }.propertyIsEnumerable("toString"),
+        DontEnums = [
+            'toString',
+            'toLocaleString',
+            'valueOf',
+            'hasOwnProperty',
+            'isPrototypeOf',
+            'propertyIsEnumerable',
+            'constructor'
+        ],
+        DontEnumsLength = DontEnums.length;
+
+    return function (o) {
+        if (typeof o != "object" && typeof o != "function" || o === null)
+            throw new TypeError("Object.keys called on a non-object");
+
+        var result = [];
+        for (var name in o) {
+            if (hasOwnProperty.call(o, name))
+                result.push(name);
+        }
+
+        if (hasDontEnumBug) {
+            for (var i = 0; i < DontEnumsLength; i++) {
+                if (hasOwnProperty.call(o, DontEnums[i]))
+                    result.push(DontEnums[i]);
+            }
+        }
+
+        return result;
+    };
+})();
+
+var gadgets_array = new Object();
+
+function setNewCat(cat) {
+    gadgets_array = new Object();
+    jQuery("#new_gad_cat").slideUp();
+    jQuery("#new_gad_man").delay(500).slideDown();
+    var request = jQuery.ajax("http://" + abundacalc.server + "/trade/process/ajax-post-public.php?action=get&object=TradePermProductData&category_id=" + cat, { dataType: 'jsonp' });
+    request.success(function (data) {
+        buildUniqueArray(gadgets_array, "manufacturer_id", data, "mfg_name");
+        var ids = Object.keys(gadgets_array);
+        var content = "";
+        if (ids.length == 1) {
+            setNewMan(cat, ids[0]);
+            return;
+        }
+        for (i = 0; i < ids.length; i++) {
+            content += "<div class='abundaGadget_cat' onclick='setNewMan(" + cat + "," + ids[i] + ");'><img src='" + abundacalc.url + "/images/icons/mans/" + ids[i] + ".png' /><p>" + gadgets_array[ids[i]] + "</p></div>";
+        }
+        jQuery("#man_content").get(0).innerHTML = content;
+        jQuery("#man_loader").fadeOut();
+        jQuery("#man_content").fadeIn();
+    });
+}
+
+function setNewMan(cat, man) {
+    gadgets_array = new Object();
+    jQuery("#new_gad_man").slideUp();
+    jQuery("#new_gad_car").delay(500).slideDown();
+    var request = jQuery.ajax("http://" + abundacalc.server + "/trade/process/ajax-post-public.php?action=get&object=TradePermProductData&category_id=" + cat + "&manufacturer_id=" + man, { dataType: 'jsonp' });
+    request.success(function (data) {
+        buildUniqueArray(gadgets_array, "carrier_id", data, "carrier_name");
+        var ids = Object.keys(gadgets_array);
+        var content = "";
+        if (ids.length == 1) {
+            setNewCar(cat, man, ids[0]);
+            return;
+        }
+        for (i = 0; i < ids.length; i++) {
+            content += "<div class='abundaGadget_cat' onclick='setNewCar(" + cat + "," + man + "," + ids[i] + ");'><img src='" + abundacalc.url + "/images/icons/cars/" + ids[i] + ".png' /><p>" + gadgets_array[ids[i]] + "</p></div>";
+        }
+        jQuery("#car_content").get(0).innerHTML = content;
+        jQuery("#car_loader").fadeOut();
+        jQuery("#car_content").fadeIn();
+    });
+}
+
+function setNewCar(cat, man, car) {
+    gadgets_array = new Object();
+    gadget_ids_to_ean = new Object();
+    jQuery("#new_gad_car").slideUp();
+    jQuery("#new_gad_dev").delay(500).slideDown();
+    var request = jQuery.ajax("http://" + abundacalc.server + "/trade/process/ajax-post-public.php?action=get&object=TradePermProductData&category_id=" + cat + "&manufacturer_id=" + man + "&carrier_id=" + car, { dataType: 'jsonp' });
+    request.success(function (data) {
+        buildUniqueArray(gadgets_array, 'id', data, 'title');
+        buildUniqueArray(gadget_ids_to_ean, "id", data, "ean");
+        var ids = Object.keys(gadgets_array);
+        var content = "";
+        for (i = 0; i < ids.length; i++) {
+            content += "<div class='abundaGadget_cat' onclick='setNewDev(" + ids[i] + ");'><img src='" + abundacalc.url + "/images/icons/devs/" + ids[i] + "s.png' /><p>" + gadgets_array[ids[i]] + "</p></div>";
+        }
+        jQuery("#dev_content").get(0).innerHTML = content;
+        jQuery("#dev_loader").fadeOut();
+        jQuery("#dev_content").fadeIn();
+    });
+}
+
+function setNewDev(id) {
+    jQuery("#new_gad_dev").slideUp();
+    addGadget(gadget_ids_to_ean[id]);
+}
+
+var gadget_ids_to_ean;
+
+function gad_reset() {
+    jQuery("#new_gad").hide();
+    jQuery("#new_gad_car").hide();
+    jQuery("#new_gad_dev").hide();
+    jQuery("#new_gad_man").hide();
+    jQuery("#new_gad_cat").show();
+    gadgets_array = new Object();
+}
+
+function gotoNewCat() {
+    jQuery("#new_gad_cat").slideDown();
+    jQuery("#new_gad_man").slideDown();
 }

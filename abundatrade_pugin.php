@@ -82,14 +82,7 @@ class abundatrade_withinboredom {
         return "";
     }
     
-    public function gadget($atts) {
-        $closediv = "</div>";
-        
-        $gad_cat = '';
-        $red = "style='border: 1px solid red'";
-        $all_valid = false;
-        $show_all = "style='display:none'";
-        
+    public function isIE() {
         preg_match('/MSIE (.*?);/', $_SERVER['HTTP_USER_AGENT'], $matches);
 
         $use_labels = false;
@@ -114,6 +107,19 @@ class abundatrade_withinboredom {
                 //You get the idea
             }
         }
+        
+        return $use_labels;
+    }
+    
+    public function gadget($atts) {
+        $closediv = "</div>";
+        
+        $gad_cat = '';
+        $red = "style='border: 1px solid red'";
+        $all_valid = false;
+        $show_all = "style='display:none'";
+        
+        $use_labels = $this->isIE();
         
         if (isset($atts['gad_cat'])) {
             $this->export = array('gad_cat' => $atts['gad_cat']);
@@ -320,6 +326,13 @@ class abundatrade_withinboredom {
         
         if (!isset($atts['gadget_only'])) $atts['gadget_only'] = false;
         
+        if (!isset($atts['a'])) {
+            $affid = $this->settings->Affiliate_ID;
+        }
+        else {
+            $affid = $atts['a'];
+        }
+        
         if ($atts['gadget_only']) {
             $hide = ' display: none;';
             $gadget_state = ' ';
@@ -332,17 +345,19 @@ class abundatrade_withinboredom {
         $display = '<div id="abundatrade">';
         $top = '
          <div id="top_input_section" class="calc_content_wrap calc_color1 calcbg1" style="'.$hide.'">
-
+<div id="search_results_list"></div>
             <form id="abundaInput" class="abundaInput" style="margin-top: 6px;" onsubmit="return false;" method="post" >
                 <input id="item_num" value="1" name="item_num" type="hidden"/>
-                <input id="a" value="' . $this->settings->Affiliate_ID . '" type="hidden"/>
+                <input id="a" value="' . $affid . '" type="hidden"/>
                 <div class="input_container">
                 </div>
 
-                <div class="input_container">
-                    <div class="label">UPC or ISBN</div>
-                    <div class="product_holder">
-                        <input class="center validate[\'required\',\'length[3,25]\']" id="product_code" name="product_code" onblur="clean_product_code(this)" type="text"/>
+                <div class="input_container">'
+                .($this->isIE() ? 
+                    '<div class="label">Barcode, Title or Artist</div>'
+                    : '').
+                    '<div'.($this->isIE() ? '' : ' style="min-width:150px; width:100%;"').' class="product_holder">
+                        <input'.($this->isIE() ? '' : ' style="min-width:150px; width:100%;"').' placeholder="UPC, ISBN, EAN, ASIN, Title or Artist" class="center validate[\'required\',\'length[3,25]\']" id="product_code" name="product_code" onkeyup="return; doSearch();" onblur="clean_product_code(this)" type="text"/>
                     </div>
                 </div>
 
@@ -359,7 +374,14 @@ class abundatrade_withinboredom {
         
         $bulk_button = '
             <div id="bulk_button" class="calcbg1" style="'.$hide.'">
-                <p class="abunda_text calc_color1">Have a lot of items? <a href="#" onclick="return bulk_open();" class="calc_linkS1">Bulk Upload</a></p>
+                <p class="abunda_text2 calc_color1"><a href="#" onclick="transform_into_full_calc(\'gadget\');" class="calc_linkS1" >Add a gadget</a><a href="#" onclick="return bulk_open();" style="float:right; margin-right:20px;" class="calc_linkS1">Bulk Upload</a>
+                </p>
+            </div>';
+        
+        $switch_back = '
+            <div id="switch_back_button" class="calcbg1" style="'.$gadget_state.'">
+                <p class="abunda_text2 calc_color1">Can\'t find your gadget? <a href="http://abundatrade.com/recommerce/custom-quote-top-cash-gadgets" class="calc_linkS1">Get a custom quote</a>
+                <a href="#" class="calc_linkS1" style="float:right; margin-right:20px;" onclick="transform_into_full_calc(\'main\');">Switch back to regular items</a></p>
             </div>';
         
         $bulk = '
@@ -381,8 +403,12 @@ class abundatrade_withinboredom {
                 <label class="calc_color2">Pre-Valuation Total:</label>
                 <div id="total_prevaluation">$0.00</div>
             </div>
+            
             <div class="second_content_sec3">
-                <a id="submitList" class="btnbg2 btn_link2" onclick="submit_the_list(this);">Send list to Abunda</a>
+                <a id="submitList" class="btnbg2 btn_link2" onclick="submit_the_list(this);">Send to Abunda</a>
+            </div>
+            <div class="second_content_sec4">
+                <a id="BeatAll" class="btnbg3 btn_link3" onClick="BeatAll()">Beat All</a>
             </div>
         </div>';
         $endform = "</form></div>";
@@ -391,12 +417,12 @@ class abundatrade_withinboredom {
         $table = '<table cellspacing="0" cellpadding="0" id="abundaCalcTbl" style="'.$hide.'">
                   <thead>
                     <tr>
-                      <th class="calcbg3 calc_color3">UPC</th>
-                      <th class="calcbg3 calc_color3">Product Details</th>
+                      <th style="display:none;" class="calcbg3 calc_color3">UPC</th>
+                      <th colspan="2" class="calcbg3 calc_color3">Product Details</th>
                       <th class="calcbg3 calc_color3">Qty</th>
-                      <th class="calcbg3 calc_color3 txtright">Per Item</th>
-                      <th class="calcbg3 calc_color3 txtright">Total</th>
-                      <th class="calcbg3 calc_color3"><a class="calc_linkS3" onclick="clear_session(this);">Delete All</a></th>
+                      <th class="calcbg3 calc_color3">Offers</th>
+                      <th id="TheBestOffer" class="calcbg3 calc_color3 txtright">Best Offer</th>
+                      <th class="calcbg3 calc_color3"><a class="calc_linkS3" onclick="clear_session(this);">Start Over</a></th>
                       <th style="display: none;">ID</th>
                     </tr>
                   </thead>
@@ -431,32 +457,86 @@ class abundatrade_withinboredom {
         $gadget_selector = 
             '<form id="abundaGadgetInput" class="abundaInput" style="margin-top: 6px;" onsubmit="return false;" method="post" >
             
-            <div class="input_container">'
-            . $gadget_category . $gadget_manufacturer .
-           '</div>
+            <div id="new_gad_cat">
+                <div class="abundaGadget_cat" onclick="setNewCat(1);">
+                    <img src="' . $this->folders['PluginUrl'] . '/images/icons/cats/gadgets_icon01.jpg" />
+                    <p>iPhone</p>
+                </div>
+                <div class="abundaGadget_cat" onclick="setNewCat(2);">
+                    <img src="' . $this->folders['PluginUrl'] . '/images/icons/cats/gadgets_icon02.jpg" />
+                    <p>Tablet</p>
+                </div>
+                <div class="abundaGadget_cat" onclick="setNewCat(3);">
+                    <img src="' . $this->folders['PluginUrl'] . '/images/icons/cats/gadgets_icon03.jpg" />
+                    <p>iPod Classic</p>
+                </div>
+                <div class="abundaGadget_cat" onclick="setNewCat(4);">
+                    <img src="' . $this->folders['PluginUrl'] . '/images/icons/cats/gadgets_icon04.jpg" />
+                    <p>iPod Touch</p>
+                </div>
+                <div class="abundaGadget_cat" onclick="setNewCat(5);">
+                    <img src="' . $this->folders['PluginUrl'] . '/images/icons/cats/gadgets_icon05.jpg" />
+                    <p>iPod Nano</p>
+                </div>
+                <div class="abundaGadget_cat" onclick="setNewCat(6);">
+                    <img src="' . $this->folders['PluginUrl'] . '/images/icons/cats/gadgets_icon06.jpg" />
+                    <p>Blackberry</p>
+                </div>
+                <div class="abundaGadget_cat" onclick="setNewCat(7);">
+                    <img src="' . $this->folders['PluginUrl'] . '/images/icons/cats/gadgets_icon07.jpg" />
+                    <p>Android</p>
+                </div>
+                <div class="abundaGadget_cat" onclick="setNewCat(8);">
+                    <img src="' . $this->folders['PluginUrl'] . '/images/icons/cats/gadgets_icon08.jpg" />
+                    <p>eReader</p>
+                </div>
+            </div>';
+        
+        
             
-            <div class="input_container">
-              <div class="label">Gadget</div>
-              <div class="product_holder">
-                <select class="center" id="gadget_code" name="gadget_code" onblur="" id="gadget_code">
-                  <option value="-1">Loading Gadgets...</option>
-                </select>
-              </div>
+            $gadget_selector .= '<div id="new_gad_man" style="display:none;">
+                <div id="man_content" style="display:none;"></div>
+                <div id="man_loader" style="width:30%; margin:auto; background-color:white; transition:background-color 1s ease 0;">
+                    <div style="width:16px; margin:auto;">
+                        <img src="' . $this->folders['PluginUrl'] . '/images/spinner.gif" />
+                    </div>
+                    <p style="text-align:center;">Loading Manufacturers</p>
+                </div>
             </div>
             
-            <!-- <div class="input_container">
-              <div class="label">Condition</div>
-              <div class="product_holder">
-                <select class="center" id="header_condition" name="header_condition" onblur="" id="header_condition">
-                  <option value="like_new">Like New</option>
-                  <option value="good">Good</option>
-                  <option value="Other">All Others</option>
-                </select>
-              </div>
-            </div> -->
+            <div id="new_gad_dev" style="display:none;">
+                <div id="dev_content" style="display:none;"></div>
+                <div id="dev_loader" style="width:30%; margin:auto; background-color:white; transition:background-color 1s ease 0;">
+                    <div style="width:16px; margin:auto;">
+                        <img src="' . $this->folders['PluginUrl'] . '/images/spinner.gif" />
+                    </div>
+                    <p style="text-align:center;">Loading Devices</p>
+                </div>
+            </div>
             
-            <div class="submit_holder">
-              <input class="btn1 right btn_link1 btnbg1" value="+ Add" type="submit"/>
+            <div id="new_gad_car" style="display:none;">
+                <div id="car_content" style="display:none;"></div>
+                <div id="car_loader" style="width:30%; margin:auto; background-color:white; transition:background-color 1s ease 0;">
+                    <div style="width:16px; margin:auto;">
+                        <img src="' . $this->folders['PluginUrl'] . '/images/spinner.gif" />
+                    </div>
+                    <p style="text-align:center;">Loading Carriers</p>
+                </div>
+            </div>
+            
+            <div id="new_gad" style="display:none;">
+                <div class="gad_big_pict">
+                    <img src="" />
+                </div>
+                <div class="gad_details">
+                    <p>Details go here</p>
+                    <select>
+                    <option>Select your condition</option>
+                    </select>
+                </div>
+                <div id="gad_adder" style="display:inline-block" class="submit_holder">
+                    <input class="btn1 right btn_link1 btnbg1" value="+ Add" type="submit"/>
+                </div>
             </div>
             
             </form>';
@@ -471,6 +551,7 @@ class abundatrade_withinboredom {
         $display .= $top;
         $display .= $endform;
         $display .= $bulk_button;
+        $display .= $switch_back;
         $display .= $second;
 
         $display .= $table;
@@ -518,22 +599,33 @@ class abundatrade_withinboredom {
             wp_register_style("abundatrade_prompt_classic", $this->folders['PluginUrl'] . '/themes/classic-prompt.css');
         }
         
+        wp_register_style("abundatrade_jsui", $this->folders['PluginUrl'] . '/css/jquery-ui-1.10.3.custom.css');
+        wp_register_style("abundatrade_qtip", $this->folders['PluginUrl'] . '/css/jquery.qtip.css');
+        
         wp_register_style("abunda_gadgets", $this->folders['PluginUrl'] . '/themes/gadget.css');
         
         wp_register_script("abundatrade_md5", $this->folders['PluginUrl'] . '/js/MD5.js');
-        wp_register_script("abundatrade_remote", $this->folders['PluginUrl'] . '/js/remote.js', array('jquery','abundatrade_md5'));
+        wp_register_script("abundatrade_remote", $this->folders['PluginUrl'] . '/js/remote.js', array('jquery','abundatrade_md5', 'jquery-ui-autocomplete'));
         wp_register_script("abundatrade_impromptu", $this->folders['PluginUrl'] . '/js/jquery-impromptu.4.0.min.js', array('jquery'));
         wp_register_script("abundatrade_register", $this->folders['PluginUrl'] . '/js/register.js', array('jquery', 'abundatrade_remote'));
         wp_register_script("abundatrade_gadgets", $this->folders['PluginUrl'] . '/js/abunda_gadgets_short.js', array('jquery'));
+        wp_register_script("abundatrade_qtip_js", $this->folders['PluginUrl'] . '/js/jquery.qtip.js', array('jquery'));
         
+        wp_enqueue_style("abundatrade_jsui");
+        wp_enqueue_style("abundatrade_qtip");
         wp_enqueue_style("abundatrade_classic");
         wp_enqueue_style("abundatrade_prompt_classic");
         wp_enqueue_style("abunda_gadgets");
+        wp_enqueue_script("abundatrade_qtip_js");
         wp_enqueue_script("abundatrade_md5");
         wp_enqueue_script("abundatrade_remote");
         wp_enqueue_script("abundatrade_impromptu");
         wp_enqueue_script("abundatrade_register");
         wp_enqueue_script("abundatrade_gadgets");
+        if (!isset($this->export)) {
+            $this->export = array();
+        }
+        
         $abundacalc = array('server' => 'abundatrade.com', 
             'url' => $this->folders['PluginUrl'],
             'export' => $this->export,
@@ -554,7 +646,7 @@ class abundatrade_withinboredom {
         add_filter("abundatrade(applyConfig)", array(&$this, "applyConfig"), 1);
         add_filter("abundatrade(shortcode(abundatrade))", array(&$this, "shortcode"), 1);
         add_filter("abundatrade(shortcode(gadgets))", array(&$this, "gadget"), 1);
-        
+        //////////////////// shortcode defs
         add_shortcode("abundatrade", array($this, "doshortcode"));
         add_shortcode("abundagadgets", array($this, "dogadgets"));
         
