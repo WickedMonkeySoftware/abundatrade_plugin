@@ -80,7 +80,7 @@ function validateEmail(email, confirm) {
 function abundatrade_logout() {
     var request = jQuery.ajax({
         type: 'POST',
-        url: 'http://' + abundacalc.server + '/trade/process/user/logout/',
+        url: sec() + abundacalc.server + '/trade/process/user/logout/',
         dataType: 'jsonp'
     });
     request.done(function (data) {
@@ -126,7 +126,7 @@ function get_login_status() {
         var request = jQuery.ajax(
             {
                 type: 'POST',
-                url: 'http://' + abundacalc.server + '/trade/process/user/status/',
+                url: sec() + abundacalc.server + '/trade/process/user/status/',
                 dataType: 'jsonp'
             }
         );
@@ -163,7 +163,7 @@ function clear_session(obj) {
                         var request = jQuery.ajax(
                             {
                                 type: 'GET',
-                                url: 'http://' + abundacalc.server + '/trade/process/request.php',
+                                url: sec() + abundacalc.server + '/trade/process/request.php',
                                 data: 'action=clear_session&a=' + jQuery("#a").val(),
                                 dataType: 'jsonp'
                             });
@@ -195,7 +195,7 @@ function report_error(error_function, response) {
             if (v) {
                 var request = jQuery.ajax({
                     type: 'POST',
-                    url: 'http://' + abundacalc.server + '/trade/process/error.php',
+                    url: sec() + abundacalc.server + '/trade/process/error.php',
                     data: 'error=' + error_function + '&response=' + escape(response.responseText) + '&app=' + navigator.appVersion + '&loc=' + escape(location.href),
                     dataType: 'jsonp'
                 });
@@ -215,7 +215,7 @@ function new_session(this_link) {
     var request = jQuery.ajax(
         {
             type: 'GET',
-            url: 'http://' + abundacalc.server + '/trade/process/request.php',
+            url: sec() + abundacalc.server + '/trade/process/request.php',
             data: 'action=new_session&a=' + jQuery("#a").val(),
             dataType: 'jsonp'
         });
@@ -348,7 +348,7 @@ function display_bulk_upload(display_prompt, id) {
         var request = jQuery.ajax(
             {
                 type: 'POST',
-                url: 'http://' + abundacalc.server + '/trade/process/request.php',
+                url: sec() + abundacalc.server + '/trade/process/request.php',
                 data: "action=get_status&id=" + id + "&a=" + jQuery("#a").val(),
                 dataType: 'jsonp'
             });
@@ -405,7 +405,7 @@ function submit_bulk(val) {
     var request = jQuery.ajax(
 {
     type: 'POST',
-    url: 'http://' + abundacalc.server + '/trade/process/bulk_copy.php',
+    url: sec() + abundacalc.server + '/trade/process/bulk_copy.php',
     data: str,
     dataType: 'jsonp'
 });
@@ -428,7 +428,7 @@ function delete_the_row(obj) {
     var request = jQuery.ajax(
         {
             type: 'GET',
-            url: 'http://' + abundacalc.server + '/trade/process/deleteItem.php',
+            url: sec() + abundacalc.server + '/trade/process/deleteItem.php',
             data: 'product=' + product_code,
             dataType: 'jsonp'
         });
@@ -465,7 +465,7 @@ function load_previous_session(pretty, ignore_errors) {
     var request = jQuery.ajax(
         {
             type: 'GET',
-            url: 'http://' + abundacalc.server + '/trade/process/request.php',
+            url: sec() + abundacalc.server + '/trade/process/request.php',
             data: 'action=load_previous_session&a=' + jQuery("#a").val(),
             dataType: 'jsonp'
         });
@@ -570,7 +570,7 @@ function lookup_item(obj) {
             var request = jQuery.ajax(
                 {
                     type: 'GET',
-                    url: 'http://' + abundacalc.server + '/trade/process/request.php',
+                    url: sec() + abundacalc.server + '/trade/process/request.php',
                     data: serial,
                     dataType: 'jsonp'
                 });
@@ -676,7 +676,7 @@ function checkemail() {
     if (!isguest) {
         jQuery("#researching").fadeIn();
         request = jQuery.ajax({
-            url: "http://" + abundacalc.server + "/trade/process/user/create/",
+            url: sec() + abundacalc.server + "/trade/process/user/create/",
             dataType: "jsonp",
             data: "email=" + jQuery("#email_abundatrade").val()
         });
@@ -787,7 +787,7 @@ function submit_modal(callback_to_submit, final_display, custom_message) {
                             }
                             if (but == 1) {
                                 if (just_logging_in) {
-                                    window.location.href = "http://" + abundacalc.server + "/trade/user/create/";
+                                    window.location.href = sec() + abundacalc.server + "/trade/user/create/";
                                 }
                                 else {
                                     Register(register_pass(), final_display, callback_to_submit);
@@ -799,7 +799,7 @@ function submit_modal(callback_to_submit, final_display, custom_message) {
                             if (but == -1) {
                                 jQuery("#logging_on").fadeIn();
                                 request = jQuery.ajax({
-                                    url: 'http://' + abundacalc.server + '/trade/process/user/login/',
+                                    url: sec() + abundacalc.server + '/trade/process/user/login/',
                                     dataType: 'jsonp',
                                     data: 'user=' + jQuery('#abundatrade_user').val() + '&password=' + md5(jQuery("#abundatrade_password").val()) + "&remember=" + jQuery("#remember").is(":checked")
                                 });
@@ -970,7 +970,7 @@ function submit_modal(callback_to_submit, final_display, custom_message) {
                                 request = jQuery.ajax(
                                                         {
                                                             type: 'POST',
-                                                            url: 'http://' + abundacalc.server + '/trade/process/user/create/',
+                                                            url: sec() + abundacalc.server + '/trade/process/user/create/',
                                                             data: '?action=create_user' + str,
                                                             dataType: 'jsonp'
                                                         });
@@ -1018,7 +1018,7 @@ function submit_modal(callback_to_submit, final_display, custom_message) {
                                 request = jQuery.ajax(
                                                         {
                                                             type: 'POST',
-                                                            url: 'http://' + abundacalc.server + '/trade/process/user/create/',
+                                                            url: sec() + abundacalc.server + '/trade/process/user/create/',
                                                             data: '?action=create_user' + str,
                                                             dataType: 'jsonp'
                                                         });
@@ -1140,7 +1140,7 @@ function submit_my_list(f) {
     var request = jQuery.ajax(
                             {
                                 type: 'GET',
-                                url: 'http://' + abundacalc.server + '/trade/process/submit.php',
+                                url: sec() + abundacalc.server + '/trade/process/submit.php',
                                 data: 'action=submit_list' + str,
                                 dataType: 'jsonp'
                             });
@@ -1264,7 +1264,7 @@ jQuery(document).ready(function () {
         jQuery('#product_code').catcomplete({
             source: function (request, response) {
                 jQuery.ajax({
-                    url: "http://" + abundacalc.server + "/trade/process/TextSearch.php",
+                    url: sec() + abundacalc.server + "/trade/process/TextSearch.php",
                     dataType: "jsonp",
                     data: {
                         search: request.term
@@ -1465,6 +1465,14 @@ var tourstates = [
     }
 ];
 
+function sec() {
+    if (location.protocol === 'https:') {
+        return 'https://';
+    }
+
+    return 'http://';
+}
+
 function addGadget(ean, condition) {
 
     if (condition == 'Other') {
@@ -1481,7 +1489,7 @@ function addGadget(ean, condition) {
     var request = jQuery.ajax(
                             {
                                 type: 'GET',
-                                url: 'http://' + abundacalc.server + '/trade/process/request.php',
+                                url: sec() + abundacalc.server + '/trade/process/request.php',
                                 data: 'action=add_gadget&product_qty=1&product_code=' + ean + '&header_condition=' + condition,
                                 dataType: 'jsonp'
                             });
@@ -1526,7 +1534,7 @@ function loadActiveGadgets() {
     var request = jQuery.ajax(
                             {
                                 type: 'GET',
-                                url: 'http://' + abundacalc.server + '/trade/process/request.php',
+                                url: sec() + abundacalc.server + '/trade/process/request.php',
                                 data: 'action=gadget_list&gadget_category=' + jQuery('#gadget_category').val() + '&gadget_manufacturer=' + jQuery('#gadget_manufacturer').val(),
                                 dataType: 'jsonp'
                             });
@@ -1627,7 +1635,7 @@ function get_other_offers(code, product, row) {
     if (codes_to_offers[code] != null) {
         return display_other_offers(codes_to_offers[code], row);
     }
-    jQuery.ajax("http://" + abundacalc.server + "/trade/process/MyComp.php?action=get&upc=" + code + "&prod=" + product, { dataType: 'jsonp', success: show_other_offers });
+    jQuery.ajax(sec() + abundacalc.server + "/trade/process/MyComp.php?action=get&upc=" + code + "&prod=" + product, { dataType: 'jsonp', success: show_other_offers });
 
     return "<img src='" + abundacalc.url + "/images/spinner.gif' width='15' height='15'>";
 }
@@ -1680,7 +1688,7 @@ function beat(prod) {
 
     jQuery("#beat_" + prod).get(0).innerHTML = "<img src='" + abundacalc.url + "/images/good.png' width='35'>";
     jQuery("#price_" + prod).get(0).innerHTML = "$" + amt;
-    jQuery.ajax("http://" + abundacalc.server + "/trade/process/MyComp.php?action=set&prod=" + prod, {
+    jQuery.ajax(sec() + abundacalc.server + "/trade/process/MyComp.php?action=set&prod=" + prod, {
         dataType: 'jsonp', success: function (data) {
             if (data.result != 'false') {
                 jQuery("#price_" + prod).get(0).innerHTML = "$" + (parseFloat(data.result / 100) * codes_to_offers[prod].quantity).toFixed(2);
@@ -1810,7 +1818,7 @@ var doCat = "";
 function doSearch() {
     clearTimeout(waitforpause);
     waitforpause = setTimeout(function () {
-        jQuery.ajax("http://" + abundacalc.server + "/trade/process/TextSearch.php?search=" + escape(jQuery("#product_code").val()), {
+        jQuery.ajax(sec() + abundacalc.server + "/trade/process/TextSearch.php?search=" + escape(jQuery("#product_code").val()), {
             dataType: 'jsonp', success: function (data) {
                 drawResultsText(data);
             }
@@ -1835,7 +1843,7 @@ function drawResultsText(data) {
 
 function getMore(search, category) {
     clearTimeout(waitforpause);
-    jQuery.ajax("http://" + abundacalc.server + "/trade/process/TextSearch.php?search=" + escape(search) + "&category=" + escape(category), {
+    jQuery.ajax(sec() + abundacalc.server + "/trade/process/TextSearch.php?search=" + escape(search) + "&category=" + escape(category), {
         dataType: 'jsonp', success: function (data) {
             drawResultsText(data);
         }
@@ -1922,7 +1930,7 @@ function setNewCat(cat) {
     gadgets_array = new Object();
     jQuery("#new_gad_cat").slideUp();
     jQuery("#new_gad_man").delay(500).slideDown();
-    var request = jQuery.ajax("http://" + abundacalc.server + "/trade/process/ajax-post-public.php?action=get&object=TradePermProductData&category_id=" + cat, { dataType: 'jsonp' });
+    var request = jQuery.ajax(sec() + abundacalc.server + "/trade/process/ajax-post-public.php?action=get&object=TradePermProductData&category_id=" + cat, { dataType: 'jsonp' });
     request.success(function (data) {
         buildUniqueArray(gadgets_array, "manufacturer_id", data, "mfg_name");
         var ids = Object.keys(gadgets_array);
@@ -1944,7 +1952,7 @@ function setNewMan(cat, man) {
     gadgets_array = new Object();
     jQuery("#new_gad_man").slideUp();
     jQuery("#new_gad_car").delay(500).slideDown();
-    var request = jQuery.ajax("http://" + abundacalc.server + "/trade/process/ajax-post-public.php?action=get&object=TradePermProductData&category_id=" + cat + "&manufacturer_id=" + man, { dataType: 'jsonp' });
+    var request = jQuery.ajax(sec() + abundacalc.server + "/trade/process/ajax-post-public.php?action=get&object=TradePermProductData&category_id=" + cat + "&manufacturer_id=" + man, { dataType: 'jsonp' });
     request.success(function (data) {
         buildUniqueArray(gadgets_array, "carrier_id", data, "carrier_name");
         var ids = Object.keys(gadgets_array);
@@ -1967,7 +1975,7 @@ function setNewCar(cat, man, car) {
     gadget_ids_to_ean = new Object();
     jQuery("#new_gad_car").slideUp();
     jQuery("#new_gad_dev").delay(500).slideDown();
-    var request = jQuery.ajax("http://" + abundacalc.server + "/trade/process/ajax-post-public.php?action=get&object=TradePermProductData&category_id=" + cat + "&manufacturer_id=" + man + "&carrier_id=" + car, { dataType: 'jsonp' });
+    var request = jQuery.ajax(sec() + abundacalc.server + "/trade/process/ajax-post-public.php?action=get&object=TradePermProductData&category_id=" + cat + "&manufacturer_id=" + man + "&carrier_id=" + car, { dataType: 'jsonp' });
     request.success(function (data) {
         buildUniqueArray(gadgets_array, 'id', data, 'title');
         buildUniqueArray(gadget_ids_to_ean, "id", data, "ean");
