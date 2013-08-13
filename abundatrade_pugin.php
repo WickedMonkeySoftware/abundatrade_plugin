@@ -638,7 +638,7 @@ class abundatrade_withinboredom {
             $this->export = array();
         }
         
-        $abundacalc = array('server' => 'abundatrade.com', 
+        $abundacalc = array('server' => 'https://abundatrade.com', 
             'url' => $this->folders['PluginUrl'],
             'export' => $this->export,
             'thanks' => $this->settings->Thank_you_page);
