@@ -49,7 +49,7 @@ class skel__settings
         $default = array_merge($default, array(
                     "version" => "000000",
                     "Affiliate_ID" => "ABU-1338563844",
-                    "Thank_you_page" => "http://abundatrade.com/trade/thank-you.php?a=abundatrade",
+                    "Thank_you_page" => "https://abundatrade.com/trade/thank-you.php?a=abundatrade",
                     "Theme" => "classic"
                 ));
         

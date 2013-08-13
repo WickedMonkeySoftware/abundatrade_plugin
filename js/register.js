@@ -17,7 +17,7 @@ function demo() { return '<select id="sex" name="sex">' +
                         '<option value="Ms.">Ms.</option></select><br/>'+
                         '<label for="first_name">First Name:</label><br/><input type="text" id="name_first" name="first_name" value=""/><br/>' +
                         '<label for="last_name">Last Name:</label><br/><input type="text" id="name_last" name="last_name" value=""/><br/>' +
-                        '<label for="email_abundatrade">Email:</label><br/><input id="email_abundatrade" name="email" value="" type="text" /><img id="researching" src="'+abundacalc.url+'/images/spinner.gif" style="display:none"><span style="display:none" id="bademail">This email is already registered ... <a href="http://abundatrade.com/trade/user/reset/">Forgot your password?</a></span><br/>' +
+                        '<label for="email_abundatrade">Email:</label><br/><input id="email_abundatrade" name="email" value="" type="text" /><img id="researching" src="'+abundacalc.url+'/images/spinner.gif" style="display:none"><span style="display:none" id="bademail">This email is already registered ... <a href="https://abundatrade.com/trade/user/reset/">Forgot your password?</a></span><br/>' +
                         '<label for="confirm_email">Confirm Email:</label><br/><input name="confirm_email" type="text" value=""/>' +
                         '<input type="hidden" name="a" value="' + jQuery('#a').val() + '"/>';
 }

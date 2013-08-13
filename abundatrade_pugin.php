@@ -75,6 +75,14 @@ class abundatrade_withinboredom {
         return true;
     }
     
+    public function is_ssl() {
+        if(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) {
+            return 'https://';
+        }
+        
+        return 'http://';
+    }
+    
     public function get_value($name) {
         if(isset($_REQUEST[$name])) {
             return $_REQUEST[$name];
@@ -218,7 +226,7 @@ class abundatrade_withinboredom {
             );
         
         if ($all_valid) {
-            $display = "<h1 id='finalize'><img src='http://abundatrade.com/recommerce/wp-content/plugins/abundatrade_plugin/images/spinner.gif' />&nbsp;&nbsp;Please wait while we finalize your quote</h1>";
+            $display = "<h1 id='finalize'><img src='" . $this->is_ssl() . "abundatrade.com/recommerce/wp-content/plugins/abundatrade_plugin/images/spinner.gif' />&nbsp;&nbsp;Please wait while we finalize your quote</h1>";
         }
         else {
             
@@ -380,7 +388,7 @@ class abundatrade_withinboredom {
         
         $switch_back = '
             <div id="switch_back_button" class="calcbg1" style="'.$gadget_state.'">
-                <p class="abunda_text2 calc_color1">Can\'t find your gadget? <a href="http://abundatrade.com/recommerce/custom-quote-top-cash-gadgets" class="calc_linkS1">Get a custom quote</a>
+                <p class="abunda_text2 calc_color1">Can\'t find your gadget? <a href="' . $this->is_ssl() . 'abundatrade.com/recommerce/custom-quote-top-cash-gadgets" class="calc_linkS1">Get a custom quote</a>
                 <a href="#" class="calc_linkS1" style="float:right; margin-right:20px;" onclick="transform_into_full_calc(\'main\');">Switch back to regular items</a></p>
             </div>';
         

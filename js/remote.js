@@ -132,7 +132,7 @@ function get_login_status() {
         );
         request.done(function (data) {
             if (data.status) {
-                jQuery('#login_status_abundatrade').get(0).innerHTML = "Hello " + data.first_name + " " + data.last_name + ", <em>view your <a href='http://abundatrade.com/trade/user/profile/' title='View your information, and edit past valuations!'>profile</a></em> <em>(<a onclick=\"abundatrade_logout()\">logout</a>)</em>" + tour;
+                jQuery('#login_status_abundatrade').get(0).innerHTML = "Hello " + data.first_name + " " + data.last_name + ", <em>view your <a href='https://abundatrade.com/trade/user/profile/' title='View your information, and edit past valuations!'>profile</a></em> <em>(<a onclick=\"abundatrade_logout()\">logout</a>)</em>" + tour;
                 if (data.first_name == 'Super Cow')
                     loggedIn = false;
                 else loggedIn = true;
@@ -358,13 +358,13 @@ function display_bulk_upload(display_prompt, id) {
                 percent = data.on / data.total * 100;
 
                 if (data.on == 1 && data.total == 1) {
-                    jQuery("#progress").get(0).innerHTML = "Processing complete -- building your email<br>Edit after uploading from your <a href='http://abundatrade.com/trade/user/profile/'>profile</a>";
+                    jQuery("#progress").get(0).innerHTML = "Processing complete -- building your email<br>Edit after uploading from your <a href='https://abundatrade.com/trade/user/profile/'>profile</a>";
                 }
                 else if (data.on == 2 && data.total == 2) {
                     //processing complete
                     clearInterval(stop);
                     jQuery("#bar").css('width', percent + "%")
-                    jQuery("#progress").get(0).innerHTML = "Processing complete -- sending your valuation to you<br>Edit after uploading from your <a href='http://abundatrade.com/trade/user/profile/'>profile</a>";
+                    jQuery("#progress").get(0).innerHTML = "Processing complete -- sending your valuation to you<br>Edit after uploading from your <a href='https://abundatrade.com/trade/user/profile/'>profile</a>";
                     jQuery("#percent").get(0).innerHTML = Math.round(percent) + "%";
 
                     if (!donot_reset) {
@@ -380,7 +380,7 @@ function display_bulk_upload(display_prompt, id) {
                     //display status
                     jQuery("#bar").css('width', percent + "%")
                     jQuery("#progress").get(0).innerHTML = data.on + " of approx. " + data.total;
-                    jQuery("#percent").get(0).innerHTML = Math.round(percent) + "% <br>Edit after uploading from your <a href='http://abundatrade.com/trade/user/profile/'>profile</a>";
+                    jQuery("#percent").get(0).innerHTML = Math.round(percent) + "% <br>Edit after uploading from your <a href='https://abundatrade.com/trade/user/profile/'>profile</a>";
                 }
             }
         });
@@ -631,7 +631,7 @@ function displayLogin(custom_message) {
             '<label for="password">Password:</label><br/><input type="password" name="abundatrade_password" id="abundatrade_password" value=""/><br/>' +
             '<div style="display:none" id="logging_on"><img src="' + abundacalc.url + '/images/spinner.gif">Logging in -- please wait</div><span id="login_error" class="abundatrade_error" style="display:none;">Invalid Password/Email</span><br/>' +
             '<label for="remember">Remember me?</label><input type="checkbox" name="remember" id="remember"/><br/>' +
-            '<a href="http://abundatrade.com/trade/user/reset/">Forgot your password?</a>';
+            '<a href="https://abundatrade.com/trade/user/reset/">Forgot your password?</a>';
     }
     return '<p>Welcome back!</p>';
 }
@@ -1468,7 +1468,7 @@ var tourstates = [
 function addGadget(ean, condition) {
 
     if (condition == 'Other') {
-        jQuery.prompt('It is recommended to submit a custom quote for Cracked Screens and Other Conditions, click <a href="http://abundatrade.com/recommerce/custom-quote-top-cash-gadgets">here</a> to do that now.', {
+        jQuery.prompt('It is recommended to submit a custom quote for Cracked Screens and Other Conditions, click <a href="https://abundatrade.com/recommerce/custom-quote-top-cash-gadgets">here</a> to do that now.', {
             'title': 'Submit a Custom Quote'
         });
         return;
