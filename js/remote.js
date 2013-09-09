@@ -358,23 +358,23 @@ function display_bulk_upload(display_prompt, id) {
                 percent = data.on / data.total * 100;
 
                 if (data.on == 1 && data.total == 1) {
-                    jQuery("#progress").get(0).innerHTML = "Processing complete -- building your email<br>Edit after uploading from your <a href='https://abundatrade.com/trade/user/profile/'>profile</a>";
+                    jQuery("#progress").get(0).innerHTML = "Processing complete -- building your email";
                 }
                 else if (data.on == 2 && data.total == 2) {
                     //processing complete
                     clearInterval(stop);
                     jQuery("#bar").css('width', percent + "%")
-                    jQuery("#progress").get(0).innerHTML = "Processing complete -- sending your valuation to you<br>Edit after uploading from your <a href='https://abundatrade.com/trade/user/profile/'>profile</a>";
+                    jQuery("#progress").get(0).innerHTML = "Processing complete -- sending your valuation to you<br>Click <a href='https://abundatrade.com/trade/process/request.php?action=edit_list&key=" + data.key + "'>here</a> to edit your list";
                     jQuery("#percent").get(0).innerHTML = Math.round(percent) + "%";
 
-                    if (!donot_reset) {
+                    /*if (!donot_reset) {
                         fin = setInterval(function () {
                             clearInterval(fin);
                             jQuery.prompt.close();
                             bulk_close_window();
                             load_previous_session(true);
                         }, 2000);
-                    }
+                    }*/
                 }
                 else {
                     //display status
