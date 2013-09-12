@@ -755,7 +755,7 @@ function check_for_new() {
         if (loggedIn) {
             load_previous_session(false, true);
         }
-    }, 30000);
+    }, 5000);
 }
 
 /** Submit a list */
