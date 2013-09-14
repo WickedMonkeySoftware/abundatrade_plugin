@@ -117,12 +117,18 @@ function calc_state() {
     }
 }
 
-function get_login_status() {
+function get_login_status(secret) {
+
+    if (secret == null) {
+        secret = false;
+    }
 
     tour = "<span style='float:right;'><a href='#' onclick='do_tour(); return false;'><strong>Take a tour</strong></a></span>";
 
     if (jQuery("#login_status_abundatrade").val() != null) {
-        jQuery("#login_status_abundatrade").get(0).innerHTML = "<img src='" + abundacalc.url + "/images/spinner.gif'>";
+        if (!secret) {
+            jQuery("#login_status_abundatrade").get(0).innerHTML = "<img src='" + abundacalc.url + "/images/spinner.gif'>";
+        }
         var request = jQuery.ajax(
             {
                 type: 'POST',
@@ -754,6 +760,7 @@ function check_for_new() {
     var stop = setInterval(function () {
         if (loggedIn) {
             load_previous_session(false, true);
+            get_login_status(true);
         }
     }, 5000);
 }
