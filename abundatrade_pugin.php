@@ -412,12 +412,12 @@ class abundatrade_withinboredom {
                 <div id="total_prevaluation">$0.00</div>
             </div>
             
-            <div class="second_content_sec3">
+            <div class="second_content_sec4">
                 <a id="submitList" class="btnbg2 btn_link2" onclick="submit_the_list(this);">Send to Abunda</a>
             </div>
-            <div class="second_content_sec4">
+            <!--<div class="second_content_sec4">
                 <a id="BeatAll" class="btnbg3 btn_link3" onClick="BeatAll()">Beat All</a>
-            </div>
+            </div>-->
         </div>';
         $endform = "</form></div>";
         $endtop = "</div>";
@@ -428,7 +428,7 @@ class abundatrade_withinboredom {
                       <th style="display:none;" class="calcbg3 calc_color3">UPC</th>
                       <th colspan="2" class="calcbg3 calc_color3">Product Details</th>
                       <th class="calcbg3 calc_color3">Qty</th>
-                      <th class="calcbg3 calc_color3">Offers</th>
+                      <!--<th class="calcbg3 calc_color3">Offers</th>-->
                       <th id="TheBestOffer" class="calcbg3 calc_color3 txtright">Best Offer</th>
                       <th class="calcbg3 calc_color3"><a class="calc_linkS3" onclick="clear_session(this);">Start Over</a></th>
                       <th style="display: none;">ID</th>

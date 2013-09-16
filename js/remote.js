@@ -138,7 +138,7 @@ function get_login_status(secret) {
         );
         request.done(function (data) {
             if (data.status) {
-                jQuery('#login_status_abundatrade').get(0).innerHTML = "Hello " + data.first_name + " " + data.last_name + ", <em>view your <a href='https://abundatrade.com/trade/user/profile/' title='View your information, and edit past valuations!'>profile</a></em> <em>(<a onclick=\"abundatrade_logout()\">logout</a>)</em>" + tour;
+                jQuery('#login_status_abundatrade').get(0).innerHTML = "Hello " + data.first_name + " " + data.last_name + ", <em>view your <a href='https://abundatrade.com/trade/user/profile/' title='View your information, and edit past valuations!'>account</a></em> <em>(<a onclick=\"abundatrade_logout()\">logout</a>)</em>" + tour;
                 if (data.first_name == 'Super Cow')
                     loggedIn = false;
                 else loggedIn = true;
@@ -386,7 +386,7 @@ function display_bulk_upload(display_prompt, id) {
                     //display status
                     jQuery("#bar").css('width', percent + "%")
                     jQuery("#progress").get(0).innerHTML = data.on + " of approx. " + data.total;
-                    jQuery("#percent").get(0).innerHTML = Math.round(percent) + "% <br>Edit after uploading from your <a href='https://abundatrade.com/trade/user/profile/'>profile</a>";
+                    jQuery("#percent").get(0).innerHTML = Math.round(percent) + "% <br>Edit after uploading from your <a href='https://abundatrade.com/trade/user/profile/'>account</a>";
                 }
             }
         });
@@ -1753,7 +1753,7 @@ function write_html(data, row) {
         buton = "";
     }
 
-    return "<tr class='new response'> <td style='display:none;' class='upc'>" + row.product_code + "</td> <td colspan='2' class='details'> <div class='td_image'> <img src='" + row.images + "' alt='" + row.title + "' /> </div><div class='td_details'> <strong>" + row.title + "</strong><br /><em>" + (row.author == null ? '' : row.author) + "</em><br/>" + (row.category == null ? "" : row.category) + "<br><span class='upc_small'>" + row.product_code + "</span></div>  </div></td> <td class='quantity'>" + row.quantity + "</td> <td class='item'>" + (row.worthless == true ? "<span class='blatent'>No Abunda Value</span>" : "") + (row.overstocked == true ? "<span class='blatent'>Over Stocked</span>" : "") + "<div class='item'><span " + us + ">Abunda: " + data.currency_for_total + "" + row_price + "</span><br/>" + (row.offer == '0.00' ? "" : "<div id='comp_" + row.item_id + "'><span " + them + ">" + (row.worthless == true || row.overstocked == true ? "" : "Competitor Offer: $" + row.offer) + "</span></div>") + "</div></td> <td class='values'><span id='price_" + row.item_id + "'>" + data.currency_for_total + row_total + "</span><br/><div id='beat_" + row.item_id + "'>" + (row.worthless == true || row.overstocked == true ? "" : buton) + "</div></td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + row.item_id + "'><img src='" + abundacalc.url + "/images/trashcan.png' alt='delete' width='32'></a></tr>";
+    return "<tr class='new response'> <td style='display:none;' class='upc'>" + row.product_code + "</td> <td colspan='2' class='details'> <div class='td_image'> <img src='" + row.images + "' alt='" + row.title + "' /> </div><div class='td_details'> <strong>" + row.title + "</strong><br /><em>" + (row.author == null ? '' : row.author) + "</em><br/>" + (row.category == null ? "" : row.category) + "<br><span class='upc_small'>" + row.product_code + "</span></div>  </div></td> <td class='quantity'>" + row.quantity + "</td> <td class='values'><span id='price_" + row.item_id + "'>" + data.currency_for_total + row_total + "</span><br/><div id='beat_" + row.item_id + "'>" + (row.worthless == true || row.overstocked == true ? "" : buton) + "</div></td> <td class='delete'> <a href='#' alt='Delete' class='delete_this_row' id='del_" + row.item_id + "'><img src='" + abundacalc.url + "/images/trashcan.png' alt='delete' width='32'></a></tr>";
 }
 
 var hidden = true;
