@@ -435,7 +435,7 @@ class abundatrade_withinboredom {
                     </tr>
                   </thead>
                   <tbody id="abundaCalcBody_request">
-                    
+                    Did you know, you can use your smart phone, tablet or Kindle Fire as a scanner? <a href="http://abundatrade.com/abundascan-mobile-app.php" title="Click here to download the app">Click here to download the app</a>
                   </tbody>
                    <!--<tfoot>
                      <tr>
