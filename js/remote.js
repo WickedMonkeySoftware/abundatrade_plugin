@@ -1392,7 +1392,7 @@ var gadgetstates = [
 var tourstates = [
     {
         title: 'Welcome',
-        html: 'Register and edit your past submissions, get paid, and mark them as heading our way',
+        html: "When you login, your list is saved and loaded between all your computers!",
         buttons: { Next: 1 },
         focus: 1,
         position: { container: '#login_status_abundatrade', x: 0, y: 50, width: 200, arrow: 'tl' },
@@ -1400,7 +1400,7 @@ var tourstates = [
     },
     {
         title: 'Getting Started',
-        html: 'Enter any barcode and just about any ISBN here. <br>You can also enter a title and/or artist.',
+        html: 'Enter any barcode and just about any ISBN here. <br>You can also enter a title and/or artist or use our mobile app as a scanner and watch them instantly appear.',
         buttons: { Back: -1, Next: 1 },
         focus: 1,
         position: { container: '#product_code', x: 200, y: 0, width: 250, arrow: 'lt' },
