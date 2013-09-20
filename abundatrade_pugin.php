@@ -502,6 +502,10 @@ class abundatrade_withinboredom {
                     <img src="' . $this->folders['PluginUrl'] . '/images/icons/cats/gadgets_icon09.png" />
                     <p>Mac Book</p>
                 </div>
+                <div class="abundaGadget_cat" onclick="setNewCat(10);">
+                    <img src="' . $this->folders['PluginUrl'] . '/images/icons/cats/gadgets_icon10.jpg" />
+                    <p>Game Consoles</p>
+                </div>
             </div>';
         
         
