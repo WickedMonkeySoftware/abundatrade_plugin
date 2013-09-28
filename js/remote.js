@@ -355,7 +355,7 @@ function display_bulk_upload(display_prompt, id) {
             {
                 type: 'POST',
                 url: sec() + abundacalc.bulk + '/trade/process/request.php',
-                data: "action=get_status&id=" + id + "&a=" + jQuery("#a").val(),
+                data: "action=get_status&id=" + id + "&a=" + jQuery("#a").val() + "&token=" + jQuery.cookie("PHPSESSID"),
                 dataType: 'jsonp'
             });
 
@@ -407,6 +407,8 @@ function submit_bulk(val) {
     str += '&bulkinput=' + encodeURI(jQuery("#bulk_upload").val());
 
     str += '&location=' + window.location.href;
+
+    str += '&token=' + jQuery.cookie("PHPSESSID");
 
     var request = jQuery.ajax(
 {
