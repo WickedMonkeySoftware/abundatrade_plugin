@@ -405,10 +405,8 @@ function submit_bulk(val) {
     str += '&simple=true';
 
     str += '&bulkinput=' + encodeURI(jQuery("#bulk_upload").val());
-
-    str += '&location=' + window.location.href;
-
     str += '&token=' + jQuery.cookie("PHPSESSID");
+    str += '&location=' + window.location.href;
 
     var request = jQuery.ajax(
 {
