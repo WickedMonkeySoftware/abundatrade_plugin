@@ -643,6 +643,7 @@ class abundatrade_withinboredom {
         }
         
         $abundacalc = array('server' => 'abundatrade.com', 
+            'bulk' => 'stable.abundatrade.com',
             'url' => $this->folders['PluginUrl'],
             'export' => $this->export,
             'thanks' => $this->settings->Thank_you_page);

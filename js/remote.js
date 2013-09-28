@@ -354,7 +354,7 @@ function display_bulk_upload(display_prompt, id) {
         var request = jQuery.ajax(
             {
                 type: 'POST',
-                url: sec() + abundacalc.server + '/trade/process/request.php',
+                url: sec() + abundacalc.bulk + '/trade/process/request.php',
                 data: "action=get_status&id=" + id + "&a=" + jQuery("#a").val(),
                 dataType: 'jsonp'
             });
@@ -411,7 +411,7 @@ function submit_bulk(val) {
     var request = jQuery.ajax(
 {
     type: 'POST',
-    url: sec() + abundacalc.server + '/trade/process/bulk_copy.php',
+    url: sec() + abundacalc.bulk + '/trade/process/bulk_copy.php',
     data: str,
     dataType: 'jsonp'
 });
