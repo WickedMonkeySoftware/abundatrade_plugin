@@ -86,6 +86,8 @@ function abundatrade_logout() {
     request.done(function (data) {
         get_login_status();
     });
+
+    SetConfirmation(true);
 }
 
 var just_logging_in = false;
@@ -93,6 +95,7 @@ var just_logging_in = false;
 function abundatrade_login() {
     just_logging_in = true;
     submit_modal(null, null);
+    SetConfirmation(false);
 }
 
 var loggedIn = false;
@@ -557,6 +560,13 @@ function waitFor(product_code) {
 *
 */
 function lookup_item(obj) {
+    if (loggedIn) {
+        SetConfirmation(false);
+    }
+    else {
+        SetConfirmation(true);
+    }
+
     if (!jQuery(obj).hasClass('disabled')) {
 
         clear_results();
@@ -1199,6 +1209,28 @@ function submitGiftCard() {
                                 }
                             });
     return false;
+}
+
+/* Display a message when the user tries to leave the page */
+var confirmOnPageExit = function (e) {
+    e = e | window.event;
+
+    var message = "If you leave the page, your list may not be saved!";
+
+    if (e) {
+        e.returnValue = message;
+    }
+
+    return message;
+}
+
+var SetConfirmation = function (doSet) {
+    if (doSet) {
+        window.onbeforeunload = confirmOnPageExit;
+    }
+    else {
+        window.onbeforeunload = null;
+    }
 }
 
 /* 
