@@ -421,6 +421,7 @@ function submit_bulk(val) {
 
     request.success(function (data) {
         new_session();
+        load_previous_session();
         id = data[0].data;
         display_bulk_upload(false, id);
     });
@@ -1171,6 +1172,7 @@ function submit_my_list(f) {
             //jQuery.prompt('Your list has been received.<br/>Thank you for submitting your list to Abundatrade.');
             window.location = abundacalc.thanks;
             new_session();
+            load_previous_session();
         } else {
             jQuery.prompt('Your list could not be sent.<br/>' + data.error);
             please_wait(false);

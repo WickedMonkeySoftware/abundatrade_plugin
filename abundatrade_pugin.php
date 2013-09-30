@@ -430,7 +430,7 @@ class abundatrade_withinboredom {
                       <th class="calcbg3 calc_color3">Qty</th>
                       <!--<th class="calcbg3 calc_color3">Offers</th>-->
                       <th id="TheBestOffer" class="calcbg3 calc_color3 txtright">Best Offer</th>
-                      <th class="calcbg3 calc_color3"><a class="calc_linkS3" onclick="new_session(this);">Start Over</a></th>
+                      <th class="calcbg3 calc_color3"><a class="calc_linkS3" onclick="new_session(this); load_previous_session();">Start Over</a></th>
                       <th style="display: none;">ID</th>
                     </tr>
                   </thead>
