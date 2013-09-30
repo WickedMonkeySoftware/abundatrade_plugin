@@ -598,7 +598,7 @@ function lookup_item(obj) {
             });
 
             request.fail(function (jqXHR, textStatus, errorThrown) {
-                report_error('lookup_item', jqXHR);
+                report_error('lookup_item(' + item_code + ")", jqXHR);
                 please_wait(false);
             });
 
