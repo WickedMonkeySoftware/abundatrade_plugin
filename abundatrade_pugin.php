@@ -413,7 +413,7 @@ class abundatrade_withinboredom {
             </div>
             
             <div class="second_content_sec4">
-                <a id="submitList" class="btnbg2 btn_link2" onclick="submit_the_list(this);">Send to Abunda</a>
+                <a id="submitList" class="btnbg2 btn_link2" onclick="submit_the_list(this);">Get a quote</a>
             </div>
             <!--<div class="second_content_sec4">
                 <a id="BeatAll" class="btnbg3 btn_link3" onClick="BeatAll()">Beat All</a>
@@ -455,7 +455,9 @@ class abundatrade_withinboredom {
 		</table>';
 
         $very_bottom = '
-		<p id="very_bottom" style="'.$hide.'" class="calcbg2 bottomcurve">&nbsp;</p>';
+		<div id="very_bottom" style="'.$hide.'" class="calcbg2 bottomcurve"><div style="float:right; padding-top:8px; padding-right:13px;" class="second_content_sec4">
+                <a id="submitList" class="btnbg2 btn_link2" onclick="submit_the_list(this);">Get a quote</a>
+            </div></div>';
         
         $gadget_begin = '<div id="gadget_abundatrade" style="'.$gadget_state.'" class="calc_content_wrap calc_color1 calcbg1 bottomcurve">';
 
