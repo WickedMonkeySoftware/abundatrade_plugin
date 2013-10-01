@@ -409,6 +409,7 @@ function submit_bulk(val) {
 
     str += '&bulkinput=' + encodeURI(jQuery("#bulk_upload").val());
     str += '&token=' + jQuery.cookie("PHPSESSID");
+    str += '&life=jsonp';
     str += '&location=' + window.location.href;
 
     var request = jQuery.ajax(
@@ -416,7 +417,7 @@ function submit_bulk(val) {
     type: 'POST',
     url: sec() + abundacalc.bulk + '/trade/process/bulk_copy.php',
     data: str,
-    dataType: 'jsonp'
+    dataType: 'json'
 });
 
     request.success(function (data) {
