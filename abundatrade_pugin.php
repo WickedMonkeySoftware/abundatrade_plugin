@@ -351,7 +351,7 @@ class abundatrade_withinboredom {
         }
         
         $display = '<div id="abundatrade">';
-        $top = '<noscript><h1>Javascript is required for the calculator to work -- please enable it before continueing!</h1></noscript>
+        $top = '<noscript><h1>Javascript is required for the calculator to work -- please enable it before continuing!</h1></noscript>
          <div id="top_input_section" class="calc_content_wrap calc_color1 calcbg1" style="'.$hide.'">
 <div id="search_results_list"></div>
             <form id="abundaInput" class="abundaInput" style="margin-top: 6px;" onsubmit="return false;" method="post" >
