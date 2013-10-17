@@ -581,6 +581,7 @@ function lookup_item(obj) {
             serial = jQuery("#abundaInput").serialize();
 
             item_code = jQuery('#product_code').val();
+            qty = jQuery("#product_qty").get(0).value;
             //Remove_Item(item);
 
             waitFor(item_code);
@@ -610,7 +611,8 @@ function lookup_item(obj) {
             });
 
             request.fail(function (jqXHR, textStatus, errorThrown) {
-                report_error('lookup_item(' + item_code + ")", jqXHR);
+                //report_error('lookup_item(' + item_code + ")", jqXHR);
+                build_unknown(item_code, qty, item_code);
                 please_wait(false);
             });
 
