@@ -1169,6 +1169,7 @@ function submit_my_list(f) {
         //
         if (data.error == '') {
             jQuery('#abundaCalcTbl > tbody').children().remove();
+            SetConfirmation(false);
             display_totals(data);
             //jQuery.prompt('Your list has been received.<br/>Thank you for submitting your list to Abundatrade.');
             window.location = abundacalc.thanks;
