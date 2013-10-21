@@ -421,7 +421,8 @@ class abundatrade_withinboredom {
         </div>';
         $endform = "</form></div>";
         $endtop = "</div>";
-        $endAll = "<a id='super_show' href='#' onclick='toggle_show(); return false;'>Show all zero value items</a></div>";
+        $supershow = "<a id='super_show' href='#' onclick='toggle_show(); return false;'>Show all zero value items</a>";
+        $endAll = "</div>";
         $table_head = '<table cellspacing="0" cellpadding="0" id="abundaCalcTblTop" class="abundaCalcTbl" style="'.$hide.'">
                   <thead>
                     <tr>
