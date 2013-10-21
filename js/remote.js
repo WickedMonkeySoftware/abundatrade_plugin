@@ -296,6 +296,7 @@ function bulk_open() {
     //do accordian stuff
     jQuery("#bulk_button").slideUp(1000);
     jQuery("#abundaCalcTbl").fadeOut(400).delay(100);
+    jQuery("#abundaCalcTblTop").fadeOut(400).delay(100);
     jQuery("#second_content").slideUp(500);
     jQuery("#top_input_section").fadeOut(500);
     jQuery("#bulk").slideDown(500);
@@ -310,6 +311,7 @@ function bulk_close_window() {
     jQuery("#top_input_section").fadeIn(500);
     jQuery("#second_content").slideDown(500);
     jQuery("#abundaCalcTbl").delay(100).fadeIn(400);
+    jQuery("#abundaCalcTblTop").delay(100).fadeIn(400);
     jQuery("#bulk_button").slideDown(1000);
     load_previous_session(false);
     return false;
@@ -1339,6 +1341,14 @@ jQuery(document).ready(function () {
             }
         });
     }
+
+    el = jQuery("#calc_follow");
+    elpos = el.offset().top;
+    jQuery(window).scroll(function () {
+        var y = jQuery(this).scrollTop();
+        if (y < elpos) { el.stop().animate({ 'top': 0 }, 200); }
+        else { el.stop().animate({ 'top': y - elpos + 10 }, 200); }
+    });
 });
 
 jQuery.widget("custom.catcomplete", jQuery.ui.autocomplete, {
@@ -1367,6 +1377,7 @@ function transform_into_full_calc(mode) {
         //jQuery("#top_input_section").fadeIn(500);
         jQuery("#second_content").slideDown(500);
         jQuery("#abundaCalcTbl").delay(100).fadeIn(400);
+        jQuery("#abundaCalcTblTop").delay(100).fadeIn(400);
         jQuery("#bulk_button").slideUp();
         jQuery("#switch_back_button").slideDown(1000);
         jQuery("#very_bottom").slideDown(500);
@@ -1380,6 +1391,7 @@ function transform_into_full_calc(mode) {
         jQuery("#top_input_section").fadeIn(500);
         jQuery("#second_content").slideDown(500);
         jQuery("#abundaCalcTbl").delay(100).fadeIn(400);
+        jQuery("#abundaCalcTblTop").delay(100).fadeIn(400);
         jQuery("#bulk_button").slideDown(1000);
         jQuery("#switch_back_button").slideUp();
         jQuery("#very_bottom").slideDown(500);
