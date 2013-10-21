@@ -422,7 +422,7 @@ class abundatrade_withinboredom {
         $endform = "</form></div>";
         $endtop = "</div>";
         $endAll = "<a id='super_show' href='#' onclick='toggle_show(); return false;'>Show all zero value items</a></div>";
-        $table = '<table cellspacing="0" cellpadding="0" id="abundaCalcTbl" style="'.$hide.'">
+        $table_head = '<table cellspacing="0" cellpadding="0" id="abundaCalcTblTop" class="abundaCalcTbl" style="'.$hide.'">
                   <thead>
                     <tr>
                       <th style="display:none;" class="calcbg3 calc_color3">UPC</th>
@@ -434,6 +434,8 @@ class abundatrade_withinboredom {
                       <th style="display: none;">ID</th>
                     </tr>
                   </thead>
+                  ';
+        $table_body = '
                   <tbody id="abundaCalcBody_request">
                     
                   </tbody>
@@ -563,6 +565,7 @@ class abundatrade_withinboredom {
 
         $display .= $status;
         $display .= $bulk;
+        $display .= "<div id='calc_follow' style='position:relative'>";
         $display .= $gadget_begin;
         $display .= $gadget_selector;
         $display .= $endtop;
@@ -571,8 +574,9 @@ class abundatrade_withinboredom {
         $display .= $bulk_button;
         $display .= $switch_back;
         $display .= $second;
-
-        $display .= $table;
+        $display .= $table_head;
+        $display .= "</table></div><table id='abundaCalcTbl' class='abundaCalcTbl'>";
+        $display .= $table_body;
         $display .= $very_bottom;
         $display .= $endAll;
         
