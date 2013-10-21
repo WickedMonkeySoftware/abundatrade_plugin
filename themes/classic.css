@@ -551,7 +551,7 @@ SECTION 3 & 4 - Table
     width: 100% !important;
 }
 
-#abundaCalcTbl {
+.abundaCalcTbl {
     width: 100% !important;
     /*margin-bottom: 18px !important;*/
     margin-top: 8px !important;
@@ -562,7 +562,7 @@ SECTION 3 & 4 - Table
 
     /* ---------SECTION 3 - Table Header------------*/
 
-    #abundaCalcTbl thead th {
+    .abundaCalcTbl thead th {
         height: 35px !important;
         border: 1px solid silver !important; /**/
         padding: 6px 3px 2px 3px !important;
@@ -573,18 +573,18 @@ SECTION 3 & 4 - Table
         text-transform:none;
     }
 
-        #abundaCalcTbl thead th.delete {
+        .abundaCalcTbl thead th.delete {
             text-align: center !important;
             border-right: 0 !important;
         }
 
-        #abundaCalcTbl thead th a:hover {
+        .abundaCalcTbl thead th a:hover {
             text-decoration: none !important;
             font-size: 16px !important;
             font-weight: bold !important;
         }
 
-        #abundaCalcTbl thead th a {
+        .abundaCalcTbl thead th a {
             text-decoration: none !important;
             font-size: 16px !important;
             font-weight: bold !important;
@@ -592,7 +592,7 @@ SECTION 3 & 4 - Table
 
     /* -------Table Body---------- */
 
-    #abundaCalcTbl tbody tr {
+    .abundaCalcTbl tbody tr {
         background: #ffffff !important;
     }
 
@@ -614,12 +614,12 @@ SECTION 3 & 4 - Table
     text-align: left !important;
 }
 
-#abundaCalcTbl tbody {
+.abundaCalcTbl tbody {
     max-height: 400px !important;
     border-left: 1px #CCC solid !important;
 }
 
-    #abundaCalcTbl tbody td {
+    .abundaCalcTbl tbody td {
         border-right: 1px solid silver !important;
         border-bottom: 1px solid silver !important;
         padding: 3px 8px 2px 6px !important;
@@ -629,28 +629,28 @@ SECTION 3 & 4 - Table
         vertical-align: middle !important;
     }
 
-        #abundaCalcTbl tbody td.upc {
+        .abundaCalcTbl tbody td.upc {
             width: 95px !important;
         }
 
-        #abundaCalcTbl tbody td.quantity {
+        .abundaCalcTbl tbody td.quantity {
             width: 40px !important;
         }
 
-        #abundaCalcTbl tbody td.item {
+        .abundaCalcTbl tbody td.item {
             width: 95px !important;
             text-align: right !important;
         }
 
-            #abundaCalcTbl tbody td.item div {
+            .abundaCalcTbl tbody td.item div {
             }
 
-        #abundaCalcTbl tbody td.values {
+        .abundaCalcTbl tbody td.values {
             width: 80px !important;
             text-align: right !important;
         }
 
-        #abundaCalcTbl tbody td.delete {
+        .abundaCalcTbl tbody td.delete {
             width: 70px !important;
         }
 
@@ -662,12 +662,12 @@ SECTION 3 & 4 - Table
 
 /* --------- SECTION 4 - Table Footer ---------- */
 
-#abundaCalcTbl tfoot {
+.abundaCalcTbl tfoot {
     height: 45px !important;
 }
 
 
-    #abundaCalcTbl tfoot th {
+    .abundaCalcTbl tfoot th {
         border-left: 0 !important;
         border-right: 0 !important;
         border-bottom: 0px solid silver !important;
@@ -678,17 +678,17 @@ SECTION 3 & 4 - Table
         text-align: left !important;
     }
 
-        #abundaCalcTbl tfoot th.thxpad {
+        .abundaCalcTbl tfoot th.thxpad {
             padding-left: 23px !important;
         }
 
-        #abundaCalcTbl tfoot th a {
+        .abundaCalcTbl tfoot th a {
             text-decoration: none !important;
             font-size: 16px !important;
             font-weight: bold !important;
         }
 
-            #abundaCalcTbl tfoot th a:hover {
+            .abundaCalcTbl tfoot th a:hover {
                 text-decoration: none !important;
                 font-size: 16px !important;
                 font-weight: bold !important;
