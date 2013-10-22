@@ -483,9 +483,6 @@ function load_previous_session(pretty, ignore_errors) {
             dataType: 'jsonp'
         });
     request.success(function (data) {
-        var top = jQuery(window).scrollTop();
-        jQuery('#abundaCalcBody_request').children().remove();
-
         data.total_qty = "0.00";
         data.currency_for_total = "$";
         data.total = "0.00";
@@ -500,7 +497,8 @@ function load_previous_session(pretty, ignore_errors) {
                 data.reverse();
             }
         }
-
+        var top = jQuery(window).scrollTop();
+        jQuery('#abundaCalcBody_request').children().remove();
         for (i = 0; i < data.length; i++) {
             part = data[i];
             part.row = jQuery.parseJSON(part.row);
