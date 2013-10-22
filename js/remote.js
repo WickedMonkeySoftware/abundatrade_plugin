@@ -1375,8 +1375,6 @@ jQuery(document).ready(function () {
             if (y < elpos) { el.stop().animate({ 'top': 0 }, 200); }
             else if (stopos - y < distance) { el.stop().animate({ 'top': stopos - distance - elpos }, 200); }
             else { el.stop().animate({ 'top': y - elpos + 10 }, 200); }
-            console.log(y - elpos + 10);
-            console.log("y:" + y + ", elpos:" + el.offset().top + ", stopos:" + stopos + ", distance:" + distance);
         });
     }
 });
