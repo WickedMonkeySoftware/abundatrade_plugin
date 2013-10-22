@@ -489,8 +489,15 @@ function load_previous_session(pretty, ignore_errors) {
         data.currency_for_total = "$";
         data.total = "0.00";
 
-        if (!loggedIn) {
-            data.reverse();
+        if (jQuery(window).width() > 450) {
+            if (!loggedIn) {
+                data.reverse();
+            }
+        }
+        else {
+            if (loggedIn) {
+                data.reverse();
+            }
         }
 
         for (i = 0; i < data.length; i++) {
@@ -503,7 +510,7 @@ function load_previous_session(pretty, ignore_errors) {
             display_totals(part, ignore_errors);
         }
 
-        if (pretty) {
+        if (pretty && jQuery(window).width() > 450) {
             //scroll to bottom
 
             var view_height = jQuery(window).height();
@@ -617,13 +624,14 @@ function lookup_item(obj) {
                 display_totals(data);
 
                 //scroll to bottom
-                
-                var view_height = jQuery(window).height();
-                var submit_button = jQuery("#submitList").offset().top;
-                var scrollTo = submit_button - view_height + 35;
-                jQuery('html,body').animate({
-                    scrollTop: scrollTo
-                }, 1000);
+                if (jQuery(window).width() > 450) {
+                    var view_height = jQuery(window).height();
+                    var submit_button = jQuery("#submitList").offset().top;
+                    var scrollTo = submit_button - view_height + 35;
+                    jQuery('html,body').animate({
+                        scrollTop: scrollTo
+                    }, 1000);
+                }
             });
 
             request.fail(function (jqXHR, textStatus, errorThrown) {
@@ -1356,20 +1364,23 @@ jQuery(document).ready(function () {
         });
     }
 
+    // auto scroll the top of the calculator.
     el = jQuery("#calc_follow");
     stop = jQuery("#ready2go");
     elpos = el.offset().top;
     stopos = stop.offset().top;
     distance = stopos - elpos;
-    jQuery(window).scroll(function () {
-        var y = jQuery(this).scrollTop();
-        stopos = stop.offset().top;
-        if (y < elpos) { el.stop().animate({ 'top': 0 }, 200); }
-        else if (stopos - y < distance) { el.stop().animate({ 'top': stopos - distance - elpos }, 200); }
-        else { el.stop().animate({ 'top': y - elpos + 10 }, 200); }
-        console.log(y - elpos + 10);
-        console.log("y:" + y + ", elpos:" + el.offset().top + ", stopos:" + stopos + ", distance:" + distance);
-    });
+    if (jQuery(window).width() > 450) {
+        jQuery(window).scroll(function () {
+            var y = jQuery(this).scrollTop();
+            stopos = stop.offset().top;
+            if (y < elpos) { el.stop().animate({ 'top': 0 }, 200); }
+            else if (stopos - y < distance) { el.stop().animate({ 'top': stopos - distance - elpos }, 200); }
+            else { el.stop().animate({ 'top': y - elpos + 10 }, 200); }
+            console.log(y - elpos + 10);
+            console.log("y:" + y + ", elpos:" + el.offset().top + ", stopos:" + stopos + ", distance:" + distance);
+        });
+    }
 });
 
 jQuery.widget("custom.catcomplete", jQuery.ui.autocomplete, {
