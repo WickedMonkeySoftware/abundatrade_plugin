@@ -360,7 +360,7 @@ class abundatrade_withinboredom {
                 <div class="input_container">
                 </div>
 
-                <div class="input_container">'
+                <div class="input_container" id="product_container">'
                 .($this->isIE() ? 
                     '<div class="label">Barcode, Title or Artist</div>'
                     : '').
@@ -423,6 +423,7 @@ class abundatrade_withinboredom {
         $endtop = "</div>";
         $supershow = "<a id='super_show' href='#' onclick='toggle_show(); return false;'>Show all zero value items</a>";
         $endAll = "</div>";
+        $ticker = "<div id='ticker'><p>AbundaTrade.com</p></div>";
         $table_head = '<table cellspacing="0" cellpadding="0" id="abundaCalcTblTop" class="abundaCalcTbl" style="'.$hide.'">
                   <thead>
                     <tr>
@@ -565,6 +566,7 @@ class abundatrade_withinboredom {
         $status = "<div id=\"login_status_abundatrade\"></div>";
 
         $display .= $status;
+        $display .= $ticker;
         $display .= $bulk;
         $display .= "<div id='calc_follow' style='position:relative'>";
         $display .= $gadget_begin;
@@ -576,8 +578,9 @@ class abundatrade_withinboredom {
         $display .= $switch_back;
         $display .= $second;
         $display .= $table_head;
-        $display .= "</table></div><table id='abundaCalcTbl' class='abundaCalcTbl'>";
+        $display .= "</table></div><div id='calcWrapper'><table id='abundaCalcTbl' class='abundaCalcTbl'>";
         $display .= $table_body;
+        $display .= "</div>";
         $display .= $very_bottom;
         $display .= $endAll;
         

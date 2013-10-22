@@ -140,7 +140,7 @@
     #gadget_abundatrade div.input_container {
         clear: none !important;
         float: left !important;
-        height: auto /*45px*/ !important;
+        height: auto !important;
         margin: 0px 5px 0 20px !important;
         padding-top: 0px !important;
         width: auto !important;
@@ -198,8 +198,8 @@
 #top_input_section div.input_container {
     clear: none !important;
     float: left !important;
-    height: auto /*45px*/ !important;
-    margin: 0px 5px 0 20px !important;
+    height: auto !important;
+    margin: 0px 5px 0 20px;
     padding-top: 0px !important;
     width: 50%;
 }
@@ -852,3 +852,67 @@ SECTION 3 & 4 - Table
         color: #333 !important;
         cursor:default !important;
     }
+
+#ticker {
+    display:none;
+}
+
+/* Mobile CSS */
+@media only screen and (max-width: 750px) {
+    #abundatrade {
+        position:fixed !important;
+        top:0px;
+        left:0px;
+        right:0px;
+        bottom:0px;
+        width:100% !important;
+        background-color:white !important;
+    }
+
+    #login_status_abundatrade {
+        width:100% !important;
+        height:12.5%;
+        background-color:white;
+    }
+
+    #ticker {
+        display:block;
+        width:100%;
+        height:12.5%;
+        background-color:white;
+    }
+
+    #top_input_section {
+        width:100% !important;
+        height:25% !important;
+    }
+
+    #product_container {
+        width:100% !important;
+        margin:0px !important;
+    }
+
+    #bulk_button {
+        display:none;
+    }
+
+    #second_content {
+        display:none;
+    }
+
+    #abundaCalcTbl {
+        width:100% !important;
+        
+    }
+
+    #calcWrapper {
+        width:100% !important;
+        height:37.5%;
+        overflow:hidden;
+    }
+
+    #very_bottom {
+        width:100% !important;
+        height:12.5%;
+    }
+}
