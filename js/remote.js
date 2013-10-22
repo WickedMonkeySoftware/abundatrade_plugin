@@ -483,6 +483,8 @@ function load_previous_session(pretty, ignore_errors) {
             dataType: 'jsonp'
         });
     request.success(function (data) {
+        var original_qty = jQuery("#total_item_count").get(0).innerHTML;
+        var new_qty = original_qty;
         data.total_qty = "0.00";
         data.currency_for_total = "$";
         data.total = "0.00";
@@ -504,12 +506,12 @@ function load_previous_session(pretty, ignore_errors) {
             part.row = jQuery.parseJSON(part.row);
             part = build_row(part);
             jQuery('#abundaCalcTbl').append(part.row_html);
-            
+            new_qty = part.total_qty;
 
             display_totals(part, ignore_errors);
         }
         jQuery(window).scrollTop(top);
-        if (pretty && jQuery(window).width() > 450) {
+        if ((original_qty != new_qty) || (pretty && jQuery(window).width() > 450)) {
             //scroll to bottom
             var view_height = jQuery(window).height();
             var submit_button = jQuery("#submitList").offset().top;
