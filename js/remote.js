@@ -488,12 +488,12 @@ function load_previous_session(pretty, ignore_errors) {
         data.total = "0.00";
 
         if (jQuery(window).width() > 450) {
-            if (!loggedIn) {
+            if (loggedIn) {
                 data.reverse();
             }
         }
         else {
-            if (loggedIn) {
+            if (!loggedIn) {
                 data.reverse();
             }
         }
