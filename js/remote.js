@@ -489,7 +489,7 @@ function load_previous_session(pretty, ignore_errors) {
         data.currency_for_total = "$";
         data.total = "0.00";
 
-        if (loggedIn) {
+        if (!loggedIn) {
             data.reverse();
         }
 
@@ -498,17 +498,22 @@ function load_previous_session(pretty, ignore_errors) {
             part.row = jQuery.parseJSON(part.row);
             part = build_row(part);
             jQuery('#abundaCalcTbl').prepend(part.row_html);
-            if (pretty) {
-                jQuery('td:contains("' + part.product_code + '")').parent()
-                    .find('td')
-                    .wrapInner('<div style="display: none;" />')
-                    .parent()
-                    .find('td > div')
-                    .slideDown("slow", function () { var $set = jQuery(this); $set.replaceWith($set.contents()); })
-            }
+            
 
             display_totals(part, ignore_errors);
         }
+
+        if (pretty) {
+            //scroll to bottom
+
+            var view_height = jQuery(window).height();
+            var submit_button = jQuery("#submitList").offset().top;
+            var scrollTo = submit_button - view_height + 35;
+            jQuery('html,body').animate({
+                scrollTop: scrollTo
+            }, 2000);
+        }
+
         //build_row(data);
         //jQuery('#abundaCalcTbl > tbody').prepend(data.row_html);
         //jQuery('#abundaCalcTbl').prepend(data.row_html);
@@ -556,7 +561,7 @@ function Remove_Item(product_code) {
 function waitFor(product_code) {
     jQuery('#product_code').val('');
     row_html = "<tr class='new response'> <td style='display:none;' class='upc'>" + product_code + "</td> <td colspan='2' class='details'> <div class='td_details'> <strong>Getting the realtime values for " + product_code + "</strong><br /><em></em></div> <div class='td_image'> <img src='" + abundacalc.url + "/images/spinner.gif" + "' alt='waiting' /> </div> </td> <td class='quantity'></td> <td class='values'></td> <td class='delete'></tr>";
-    jQuery('#abundaCalcTbl').prepend(row_html);
+    jQuery('#abundaCalcTbl').append(row_html);
 }
 
 /* 
@@ -602,7 +607,7 @@ function lookup_item(obj) {
                 Remove_Item(data.product_code);
                 build_row(data);
                 lastItem = data;
-                jQuery('#abundaCalcTbl').prepend(data.row_html);
+                jQuery('#abundaCalcTbl').append(data.row_html);
                 /*jQuery('td:contains("' + data.product_code + '")').parent()
                     .find('td')
                     .wrapInner('<div style="display: none;" />')
@@ -610,6 +615,15 @@ function lookup_item(obj) {
                     .find('td > div')
                     .slideDown("100", function () { var $set = jQuery(this); $set.replaceWith($set.contents()); })*/
                 display_totals(data);
+
+                //scroll to bottom
+                
+                var view_height = jQuery(window).height();
+                var submit_button = jQuery("#submitList").offset().top;
+                var scrollTo = submit_button - view_height + 35;
+                jQuery('html,body').animate({
+                    scrollTop: scrollTo
+                }, 1000);
             });
 
             request.fail(function (jqXHR, textStatus, errorThrown) {
@@ -1263,7 +1277,7 @@ jQuery(document).ready(function () {
         * Load previous session data from backend.
         *
         */
-        load_previous_session(false);
+        load_previous_session(true);
 
         /* Form Submit
         *
@@ -1343,11 +1357,18 @@ jQuery(document).ready(function () {
     }
 
     el = jQuery("#calc_follow");
+    stop = jQuery("#ready2go");
     elpos = el.offset().top;
+    stopos = stop.offset().top;
+    distance = stopos - elpos;
     jQuery(window).scroll(function () {
         var y = jQuery(this).scrollTop();
+        stopos = stop.offset().top;
         if (y < elpos) { el.stop().animate({ 'top': 0 }, 200); }
+        else if (stopos - y < distance) { el.stop().animate({ 'top': stopos - distance - elpos }, 200); }
         else { el.stop().animate({ 'top': y - elpos + 10 }, 200); }
+        console.log(y - elpos + 10);
+        console.log("y:" + y + ", elpos:" + el.offset().top + ", stopos:" + stopos + ", distance:" + distance);
     });
 });
 
