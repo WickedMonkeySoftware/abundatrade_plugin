@@ -1274,6 +1274,10 @@ jQuery(document).ready(function () {
         jQuery('form[name=icpsignup]').submit(submitGiftCard);
     }
 
+    if (window.location.pathname == "/recommerce/calculator") {
+        jQuery(".entry-header").css("display", "none");
+    }
+
     if (jQuery("#login_status_abundatrade").val() != null) {
         if (abundacalc.upload_id) {
             display_bulk_upload(true);
