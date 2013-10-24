@@ -191,11 +191,7 @@
     text-align: center !important;
 }
 
-/ * Product Details */
-
-#abundaCalcTbl{
+/* Product Details */ #abundaCalcTbl {
     width: 900px;
     background-color: #000;
-   
 }
-
