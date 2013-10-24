@@ -83,51 +83,53 @@
         }
 
 .bulkuploadbox {
-    float:left;
-    padding-right:20px;
-    font-size:10px;
-    font-style:italic;
-    margin-top:21px;
+    float: left;
+    padding-right: 20px;
+    font-size: 10px;
+    font-style: italic;
+    margin-top: 21px;
 }
 
-.bulkuploadbox a{
-    color:#006699;
-}
+    .bulkuploadbox a {
+        color: #006699;
+    }
 
 .prevaluationbox {
-    height:auto;
-    color:#000;
-    font-weight:bold;
-    margin-top:15px;
-    float:left;
+    height: auto;
+    color: #000;
+    font-weight: bold;
+    margin-top: 15px;
+    float: left;
+}
+
+.overstock {
+    font-size: 10px;
+    color: #EB4949;
 }
 
 #bulk {
-    
 }
 
 
 
- /* -------Table Body---------- */
+/* -------Table Body---------- */
 
-    .abundaCalcTbl tbody tr {
-        background: #fff !important;
-        width: 874px;
-        text-align: left;
-    }
+.abundaCalcTbl tbody tr {
+    background: #fff !important;
+    width: 874px;
+    text-align: left;
+}
 
 .td_image {
     float: left !important;
     height: 98% !important;
     min-width: 90px !important;
-    
 }
 
     .td_image img {
         margin-left: auto !important;
         margin-right: auto !important;
         padding: 8px;
-       
     }
 
 .td_details {
@@ -144,7 +146,6 @@
     max-height: 400px !important;
     border-left: 1px #CCC solid !important;
     text-align: left;
-    
 }
 
     .abundaCalcTbl tbody td {
