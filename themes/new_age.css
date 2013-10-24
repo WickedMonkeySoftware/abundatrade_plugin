@@ -1,0 +1,95 @@
+﻿.calchead {
+    width: auto;
+    height: auto;
+    background-color: #ccc;
+    border-bottom: thick solid gray;
+    -moz-box-sizing: content-box !important;
+    -webkit-box-sizing: content-box !important;
+    box-sizing: content-box !important;
+}
+
+.searchby {
+    float: left;
+    padding-right: 10px;
+}
+
+.upcetc {
+    float: left;
+    margin-right: 40px;
+    margin-top: 14px;
+}
+
+.upcinputbox {
+    width: 100%;
+    padding: 10px;
+    border: 0px;
+    font-family: Arial,Helvetica,sans-serif;
+    background-color: #e8e8e8;
+}
+
+.quantitybox {
+    float: left;
+    padding-right: 10px;
+}
+
+.quantitylabel {
+    margin-top: 17px;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+    .quantitylabel span {
+        margin-right: 10px;
+    }
+
+.quantityinputbox {
+    width: 20px;
+    height: 20px;
+    border: 0px;
+    font-family: inherit;
+    background-color: #e8e8e8;
+    padding: 7px;
+}
+
+.addbuttonbox {
+    float: left;
+    margin-top: 17px;
+    padding-right: 20px;
+}
+
+    .addbuttonbox input[type="submit"] {
+        background: none;
+        border-bottom: none;
+        background-color: #006699;
+        color: #fff;
+        font-family: Arial;
+        font-size: 12px;
+        font-weight: normal;
+        padding: 7px;
+        text-decoration: none;
+    }
+
+        .addbuttonbox input[type="submit"] :hover {
+            background: none;
+            border-bottom: none;
+            background-color: #006699;
+            color: #fff;
+            font-family: Arial;
+            font-size: 12px;
+            font-weight: normal;
+            padding: 7px;
+            text-decoration: none;
+        }
+
+.bulkuploadbox {
+    float:left;
+    padding-right:20px;
+    font-size:10px;
+    font-style:italic;
+    margin-top:21px;
+}
+
+.bulkuploadbox a{
+    color:#006699;
+}

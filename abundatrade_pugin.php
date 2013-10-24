@@ -564,17 +564,44 @@ class abundatrade_withinboredom {
 
         $status = "<div id=\"login_status_abundatrade\"></div>";
 
+        $newtop = "<div class='calchead'><form id='abundaInput' onsubmit='return false;' method='post'>
+<div class='searchby'><img src='" . $this->folders['PluginUrl'] . "/css/images/searchby.png'></div>
+<div class='upcetc'>
+<input id='product_code' name='product_code' onkeyup='return; doSearch();' onblur='clean_product_code(this);' autocomplete='off' placeholder='UPC,ASIN,ISBN,Title, or Artist' type='text' class='upcinputbox'></div>
+<div class='quantitybox'>
+<div class='quantitylabel'>
+<span style='margin-right:10px;'>QTY.</span>
+<input id='product_qty' name='product_qty' value='1' type='text' class='quantityinputbox'>
+</div></div>
+<div class='addbuttonbox'>
+<input type='submit' class='addbutton' value='+ Add'>
+</div>
+<div class='bulkuploadbox'>
+Have a lot of items?
+<br>
+<a href='#' onclick='return bulk_open()'>Bulk Upload</a>
+</div>
+<div class='prevaluationbox'>
+total: <span id='total_prevaluation' class='valuationtotal'>$0.00</span>
+<br>
+# Items: <span id='total_item_count' class='itemtotal'>0</span>
+</div>
+<div class='clear'></div>
+</form>
+</div>";
+        
         $display .= $status;
         $display .= $bulk;
         $display .= "<div id='calc_follow' style='position:relative'>";
         $display .= $gadget_begin;
         $display .= $gadget_selector;
         $display .= $endtop;
-        $display .= $top;
-        $display .= $endform;
-        $display .= $bulk_button;
-        $display .= $switch_back;
-        $display .= $second;
+        $display .= $newtop;
+        //$display .= $top;
+        //$display .= $endform;
+        //$display .= $bulk_button;
+        //$display .= $switch_back;
+        //$display .= $second;
         $display .= $table_head;
         $display .= "</table></div><table id='abundaCalcTbl' class='abundaCalcTbl'>";
         $display .= $table_body;
