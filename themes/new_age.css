@@ -105,3 +105,96 @@
 #bulk {
     
 }
+
+
+
+ /* -------Table Body---------- */
+
+    .abundaCalcTbl tbody tr {
+        background: #fff !important;
+        width: 874px;
+        text-align: left;
+    }
+
+.td_image {
+    float: left !important;
+    height: 98% !important;
+    min-width: 90px !important;
+    
+}
+
+    .td_image img {
+        margin-left: auto !important;
+        margin-right: auto !important;
+        padding: 8px;
+       
+    }
+
+.td_details {
+    float: left !important;
+    width: 73% !important;
+    height: 98% !important;
+    text-align: left !important;
+    font-size: 12px;
+    float: left;
+    padding: 8px;
+}
+
+.abundaCalcTbl tbody {
+    max-height: 400px !important;
+    border-left: 1px #CCC solid !important;
+    text-align: left;
+    
+}
+
+    .abundaCalcTbl tbody td {
+        border-right: 1px solid silver !important;
+        border-bottom: 1px solid silver !important;
+        padding: 3px 8px 2px 6px !important;
+        color: #333 !important;
+        font-size: 14px !important;
+        text-align: left !important;
+        vertical-align: middle !important;
+        width: 874px;
+    }
+
+        .abundaCalcTbl tbody td.upc {
+            width: 95px !important;
+            text-align: left;
+        }
+
+        .abundaCalcTbl tbody td.quantity {
+            width: 40px !important;
+        }
+
+        .abundaCalcTbl tbody td.item {
+            width: 95px !important;
+            text-align: right !important;
+        }
+
+            .abundaCalcTbl tbody td.item div {
+            }
+
+        .abundaCalcTbl tbody td.values {
+            width: 80px !important;
+            text-align: center !important;
+        }
+
+        .abundaCalcTbl tbody td.delete {
+            width: 70px !important;
+        }
+
+.blatent {
+    color: black !important;
+    font-weight: bold !important;
+    text-align: center !important;
+}
+
+/ * Product Details */
+
+#abundaCalcTbl{
+    width: 900px;
+    background-color: #000;
+   
+}
+

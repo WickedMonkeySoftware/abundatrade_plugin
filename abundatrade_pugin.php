@@ -423,14 +423,14 @@ class abundatrade_withinboredom {
         $endtop = "</div>";
         $supershow = "<a id='super_show' href='#' onclick='toggle_show(); return false;'>Show all zero value items</a>";
         $endAll = "</div>";
-        $table_head = '<table cellspacing="0" cellpadding="0" id="abundaCalcTblTop" class="abundaCalcTbl" style="'.$hide.'">
+        $table_head = '<table cellspacing="0" bgcolor="#fff" cellpadding="0" id="abundaCalcTblTop" class="abundaCalcTbl" style="'.$hide.'">
                   <thead>
                     <tr>
                       <th style="display:none;" class="calcbg3 calc_color3">UPC</th>
-                      <th colspan="2" class="calcbg3 calc_color3">Product Details</th>
-                      <th class="calcbg3 calc_color3">Qty</th>
+                      <th colspan="2" class="calcbg3 calc_color3" width="638px" style="text-align:left;">Product Details</th>
+                      <th class="calcbg3 calc_color3" style="padding-right:40px">Qty</th>
                       <!--<th class="calcbg3 calc_color3">Offers</th>-->
-                      <th id="TheBestOffer" class="calcbg3 calc_color3 txtright">Best Offer</th>
+                      <th id="TheBestOffer" class="calcbg3 calc_color3 txtright" style="padding-right:44px">Offer</th>
                       <th class="calcbg3 calc_color3"><a class="calc_linkS3" onclick="clear_session()">Start Over</a></th>
                       <th style="display: none;">ID</th>
                     </tr>
