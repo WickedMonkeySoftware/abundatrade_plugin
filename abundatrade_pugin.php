@@ -586,7 +586,7 @@ total: <span id='total_prevaluation' class='valuationtotal'>$0.00</span>
 <br>
 # Items: <span id='total_item_count' class='itemtotal'>0</span>
 </div>
-<div class='clear'></div>
+<div class='clear'></div> 
 </form>
 </div>";
         
