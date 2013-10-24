@@ -1966,10 +1966,10 @@ function ExpandOrClose(arrow_id, list_num, list_name) {
 
 function clear_results() {
     clearTimeout(waitforpause);
-    jQuery("#search_results_list").get(0).innerHTML = "";
+    /*jQuery("#search_results_list").get(0).innerHTML = "";
     jQuery("#search_results_list").height(jQuery("#abundatrade").height() - 68);
     jQuery("#search_results_list").css("overflow-y", "auto");
-    jQuery("#search_results_list").hide();
+    jQuery("#search_results_list").hide();*/
 }
 
 function addCode(code) {

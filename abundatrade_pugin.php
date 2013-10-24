@@ -564,7 +564,7 @@ class abundatrade_withinboredom {
 
         $status = "<div id=\"login_status_abundatrade\"></div>";
 
-        $newtop = "<div class='calchead'><form id='abundaInput' onsubmit='return false;' method='post'>
+        $newtop = "<div id='top_input_section' class='calchead'><form id='abundaInput' onsubmit='return false;' method='post'>
 <div class='searchby'><img src='" . $this->folders['PluginUrl'] . "/css/images/searchby.png'></div>
 <div class='upcetc'>
 <input id='product_code' name='product_code' onkeyup='return; doSearch();' onblur='clean_product_code(this);' autocomplete='off' placeholder='UPC,ASIN,ISBN,Title, or Artist' type='text' class='upcinputbox'></div>

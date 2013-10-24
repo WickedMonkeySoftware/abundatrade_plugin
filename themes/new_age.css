@@ -93,3 +93,11 @@
 .bulkuploadbox a{
     color:#006699;
 }
+
+.prevaluationbox {
+    height:auto;
+    color:#000;
+    font-weight:bold;
+    margin-top:15px;
+    float:left;
+}
