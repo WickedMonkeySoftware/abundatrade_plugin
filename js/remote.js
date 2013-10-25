@@ -87,7 +87,10 @@ function abundatrade_logout() {
         dataType: 'jsonp'
     });
     request.done(function (data) {
-        get_login_status();
+        var stop = setInterval(function () {
+            clearInterval(stop);
+            get_login_status();
+        }, 500);
     });
 
     SetConfirmation(true);
