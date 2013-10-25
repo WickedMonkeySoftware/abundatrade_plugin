@@ -30,6 +30,7 @@
 .quantitybox {
     float: left;
     padding-right: 10px;
+    
 }
 
 .quantitylabel {
@@ -166,6 +167,8 @@
 
         .abundaCalcTbl tbody td.quantity {
             width: 40px !important;
+            text-align: center !important;
+            
         }
 
         .abundaCalcTbl tbody td.item {
@@ -183,6 +186,7 @@
 
         .abundaCalcTbl tbody td.delete {
             width: 70px !important;
+            text-align: center !important;
         }
 
 .blatent {
@@ -194,8 +198,8 @@
 /* Product Details */
 
 #abundaCalcTbl{
-    width: 900px;
-    background-color: #000;
+    width: 870px;
+   
    
 }
 

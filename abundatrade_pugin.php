@@ -582,9 +582,9 @@ Have a lot of items?
 <a href='#' onclick='return bulk_open()'>Bulk Upload</a>
 </div>
 <div class='prevaluationbox'>
-total: <span id='total_prevaluation' class='valuationtotal'>$0.00</span>
+Pre-valuation total: <span id='total_prevaluation' class='valuationtotal'>$0.00</span>
 <br>
-# Items: <span id='total_item_count' class='itemtotal'>0</span>
+Item Total: <span id='total_item_count' class='itemtotal'>0</span>
 </div>
 <div class='clear'></div> 
 </form>
