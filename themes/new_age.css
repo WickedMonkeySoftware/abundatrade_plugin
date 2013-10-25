@@ -30,7 +30,6 @@
 .quantitybox {
     float: left;
     padding-right: 10px;
-    
 }
 
 .quantitylabel {
@@ -61,7 +60,7 @@
 
     .addbuttonbox input[type="submit"] {
         background: none;
-        border:none;
+        border: none;
         background-color: #999;
         color: #fff;
         font-family: Arial;
@@ -112,8 +111,6 @@
     display: none;
 }
 
-
-
 /* -------Table Body---------- */
 
 .abundaCalcTbl tbody tr {
@@ -140,7 +137,6 @@
     height: 98% !important;
     text-align: left !important;
     font-size: 12px;
-    float: left;
     padding: 8px;
 }
 
@@ -169,7 +165,6 @@
         .abundaCalcTbl tbody td.quantity {
             width: 40px !important;
             text-align: center !important;
-            
         }
 
         .abundaCalcTbl tbody td.item {
@@ -190,7 +185,7 @@
             text-align: center !important;
         }
 
-.addbutton{
+.addbutton {
     border: none !important;
     padding: 7px !important;
     background-color: #999 !important;
@@ -204,33 +199,62 @@
 
 /* Product Details */
 
-#abundaCalcTbl{
+#abundaCalcTbl {
     background-color: #000;
     width: 870px;
-    border-spacing:0px;
+    border-spacing: 0px;
 }
 
 /*Very Bottom*/
-#very_bottom{
+#very_bottom {
     width: auto;
-    height:37px;
+    height: 37px;
     background-color: #ccc;
-    border-top:solid thick gray;
+    border-top: solid thick gray;
 }
 
-#very_bottom div {
-    padding:7px 20px;
-    float:right;
-}
+    #very_bottom div {
+        padding: 7px 20px;
+        float: right;
+    }
 
 .likebutton {
-    border:1px solid #dcdcdc;
-    color:#fff;
-    font-family:Arial;
-    font-size:18px;
-    font-weight:bold;
-    text-decoration:none;
-    background-color:#999;
-    padding:3px;
-    cursor:default;
+    border: 1px solid #dcdcdc;
+    color: #fff;
+    font-family: Arial;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: #999;
+    padding: 3px;
+    cursor: default;
+}
+
+/* Bulk Upload */
+
+#bulk {
+    background-color: #666;
+    border: medium solid #999;
+    display: none;
+}
+
+#bulk_help {
+    margin: auto;
+    width: 25%;
+    padding: 7px;
+    margin-top: 25px;
+    background-color: #999;
+    text-align: justify;
+    color: #fff;
+}
+
+#bulk_text_holder {
+    margin:auto;
+    width:22%;
+}
+
+#bulk_button_holder {
+    margin:auto;
+    width:22.5%;
+    margin-top:11px;
 }

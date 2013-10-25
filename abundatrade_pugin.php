@@ -395,10 +395,9 @@ class abundatrade_withinboredom {
         $bulk = '
             <div id="bulk" class="calcbg1">
                 <div id="bulk_help" class="abunda_text calc_color1">You can cut and paste directly from popular office programs<br/> like Excel and Word.</div>
-                <textarea placeholder="02454352525998" cols=20 rows=10 id="bulk_upload" name="bulk_upload">
-                </textarea><p>
-                <a href="#" class="btn1 btnbg1 btn_link1 marleft" onclick="return bulk_close_window();">Go back</a>
-                <a href="#" class="btn1 btnbg1 btn_link1 marright" onclick="bulk_submit_items();">Submit List</a></p>
+                <div id="bulk_text_holder"><textarea placeholder="02454352525998" cols=20 rows=10 id="bulk_upload" name="bulk_upload"></textarea></div>
+                <div id="bulk_button_holder"><a href="#" class="likebutton" onclick="return bulk_close_window();">Go back</a>
+                <a href="#" class="likebutton" onclick="bulk_submit_items();">Submit List</a></div>
 	            <p class="calcbg1 bottomcurve">&nbsp;</p>
             </div>';
 	    $second = '
