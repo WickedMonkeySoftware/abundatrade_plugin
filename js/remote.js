@@ -78,6 +78,9 @@ function validateEmail(email, confirm) {
 }
 
 function abundatrade_logout() {
+
+    clearInterval(stop_live_status);
+
     var request = jQuery.ajax({
         type: 'POST',
         url: sec() + abundacalc.server + '/trade/process/user/logout/',
@@ -793,9 +796,11 @@ function display_promo() {
     }
 }
 
+var stop_live_status;
+
 /** Live Lookups */
 function check_for_new() {
-    var stop = setInterval(function () {
+    var stop_live_status = setInterval(function () {
         if (loggedIn) {
             load_previous_session(false, true);
             get_login_status(true);
