@@ -305,7 +305,7 @@ function bulk_open() {
     jQuery("#abundaCalcTblTop").fadeOut(400).delay(100);
     jQuery("#second_content").slideUp(500);
     jQuery("#top_input_section").fadeOut(500);
-    jQuery("#very_bottom").fadeOut(500);
+    jQuery("#very_bottom").slideUp(500);
     jQuery("#bulk").slideDown(500);
     return false;
 }
