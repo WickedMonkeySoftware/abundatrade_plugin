@@ -30,7 +30,6 @@
 .quantitybox {
     float: left;
     padding-right: 10px;
-    
 }
 
 .quantitylabel {
@@ -61,7 +60,7 @@
 
     .addbuttonbox input[type="submit"] {
         background: none;
-        border:none;
+        border: none;
         background-color: #999;
         color: #fff;
         font-family: Arial;
@@ -84,52 +83,43 @@
         }
 
 .bulkuploadbox {
-    float:left;
-    padding-right:20px;
-    font-size:10px;
-    font-style:italic;
-    margin-top:21px;
+    float: left;
+    padding-right: 20px;
+    font-size: 10px;
+    font-style: italic;
+    margin-top: 21px;
 }
 
-.bulkuploadbox a{
-    color:#006699;
-}
+    .bulkuploadbox a {
+        color: #006699;
+    }
 
 .prevaluationbox {
-    height:auto;
-    color:#000;
-    font-weight:bold;
-    margin-top:15px;
-    float:left;
+    height: auto;
+    color: #000;
+    font-weight: bold;
+    margin-top: 15px;
+    float: left;
 }
 
-#bulk {
-    display: none;
-    
+/* -------Table Body---------- */
+
+.abundaCalcTbl tbody tr {
+    background: #fff !important;
+    width: 874px;
+    text-align: left;
 }
-
-
-
- /* -------Table Body---------- */
-
-    .abundaCalcTbl tbody tr {
-        background: #fff !important;
-        width: 874px;
-        text-align: left;
-    }
 
 .td_image {
     float: left !important;
     height: 98% !important;
     min-width: 90px !important;
-    
 }
 
     .td_image img {
         margin-left: auto !important;
         margin-right: auto !important;
         padding: 8px;
-       
     }
 
 .td_details {
@@ -138,7 +128,6 @@
     height: 98% !important;
     text-align: left !important;
     font-size: 12px;
-    float: left;
     padding: 8px;
 }
 
@@ -146,7 +135,6 @@
     max-height: 400px !important;
     border-left: 1px #CCC solid !important;
     text-align: left;
-    
 }
 
     .abundaCalcTbl tbody td {
@@ -168,7 +156,6 @@
         .abundaCalcTbl tbody td.quantity {
             width: 40px !important;
             text-align: center !important;
-            
         }
 
         .abundaCalcTbl tbody td.item {
@@ -189,7 +176,7 @@
             text-align: center !important;
         }
 
-.addbutton{
+.addbutton {
     border: none !important;
     padding: 7px !important;
     background-color: #999 !important;
@@ -203,33 +190,61 @@
 
 /* Product Details */
 
-#abundaCalcTbl{
+#abundaCalcTbl {
     width: 870px;
-    border-spacing:0px;
-   
+    border-spacing: 0px;
 }
 
 /*Very Bottom*/
-#very_bottom{
+#very_bottom {
     width: auto;
-    height:37px;
+    height: 37px;
     background-color: #ccc;
-    border-top:solid thick gray;
+    border-top: solid thick gray;
 }
 
-#very_bottom div {
-    padding:7px 20px;
-    float:right;
-}
+    #very_bottom div {
+        padding: 7px 20px;
+        float: right;
+    }
 
 .likebutton {
-    border:1px solid #dcdcdc;
-    color:#fff;
-    font-family:Arial;
-    font-size:18px;
-    font-weight:bold;
-    text-decoration:none;
-    background-color:#999;
-    padding:3px;
-    cursor:default;
+    border: 1px solid #dcdcdc;
+    color: #fff;
+    font-family: Arial;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: #999;
+    padding: 3px;
+    cursor: default;
+}
+
+/* Bulk Upload */
+
+#bulk {
+    background-color: #666;
+    border: medium solid #999;
+    display: none;
+}
+
+#bulk_help {
+    margin: auto;
+    width: 25%;
+    padding: 7px;
+    margin-top: 25px;
+    background-color: #999;
+    text-align: justify;
+    color: #fff;
+}
+
+#bulk_text_holder {
+    margin:auto;
+    width:22%;
+}
+
+#bulk_button_holder {
+    margin:auto;
+    width:22.5%;
+    margin-top:11px;
 }

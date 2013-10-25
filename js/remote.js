@@ -299,6 +299,7 @@ function bulk_open() {
     jQuery("#abundaCalcTblTop").fadeOut(400).delay(100);
     jQuery("#second_content").slideUp(500);
     jQuery("#top_input_section").fadeOut(500);
+    jQuery("#very_bottom").fadeOut(500);
     jQuery("#bulk").slideDown(500);
     return false;
 }
@@ -313,6 +314,7 @@ function bulk_close_window() {
     jQuery("#abundaCalcTbl").delay(100).fadeIn(400);
     jQuery("#abundaCalcTblTop").delay(100).fadeIn(400);
     jQuery("#bulk_button").slideDown(1000);
+    jQuery("#very_bottom").slideDown(500);
     load_previous_session(false);
     return false;
 }
