@@ -577,7 +577,7 @@ class abundatrade_withinboredom {
 <input id='product_qty' name='product_qty' value='1' type='text' class='quantityinputbox'>
 </div></div>
 <div class='addbuttonbox'>
-<input type='submit' class='addbutton' value='+ Add'>
+<input type='submit' class='likebutton' value='+ Add'>
 </div>
 <div class='bulkuploadbox'>
 <a href='#' onclick='return bulk_open()'>Bulk Upload</a>
