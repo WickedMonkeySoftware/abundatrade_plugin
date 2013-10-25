@@ -208,3 +208,9 @@
     background-color: #000;
     width: 870px;
 }
+
+/*Very Bottom*/
+#very_bottom{
+    width: 870px !important;
+    background-color: #ccc !important;
+}
