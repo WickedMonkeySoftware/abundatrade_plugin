@@ -190,6 +190,12 @@
             text-align: center !important;
         }
 
+.addbutton{
+    border: none !important;
+    padding: 7px !important;
+    background-color: #999 !important;
+}
+
 .blatent {
     color: black !important;
     font-weight: bold !important;
