@@ -213,12 +213,24 @@
 /*Very Bottom*/
 #very_bottom{
     width: auto;
-    height:30px;
+    height:37px;
     background-color: #ccc;
     border-top:solid thick gray;
 }
 
 #very_bottom div {
-    padding:4px 20px;
+    padding:7px 20px;
     float:right;
+}
+
+.likebutton {
+    border:1px solid #dcdcdc;
+    color:#fff;
+    font-family:Arial;
+    font-size:18px;
+    font-weight:bold;
+    text-decoration:none;
+    background-color:#999;
+    padding:3px;
+    cursor:default;
 }
