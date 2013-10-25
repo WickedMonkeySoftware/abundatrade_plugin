@@ -460,7 +460,7 @@ class abundatrade_withinboredom {
         $very_bottom = '
         
 		<div id="very_bottom" style="'.$hide.'" class="calcbg2 bottomcurve"><div style="" class="second_content_sec4">
-                <a id="submitList" class="btnbg2 btn_link2" onclick="submit_the_list(this);">Continue</a>
+                <a id="submitList" class="likebutton" onclick="submit_the_list(this);">Continue</a>
             </div></div>'
             
             
@@ -581,9 +581,9 @@ class abundatrade_withinboredom {
 <input type='submit' class='addbutton' value='+ Add'>
 </div>
 <div class='bulkuploadbox'>
-Have a lot of items?
-<br>
 <a href='#' onclick='return bulk_open()'>Bulk Upload</a>
+<br>
+<a href='#' onclick='transform_into_full_calc('gadget');'>Add a Gadget</a>
 </div>
 <div class='prevaluationbox'>
 Pre-valuation total: <span id='total_prevaluation' class='valuationtotal'>$0.00</span>
