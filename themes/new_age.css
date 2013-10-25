@@ -60,20 +60,20 @@
 
     .addbuttonbox input[type="submit"] {
         background: none;
-        border-bottom: none;
-        background-color: #006699;
+        border:none;
+        background-color: #999;
         color: #fff;
         font-family: Arial;
         font-size: 12px;
         font-weight: normal;
-        padding: 7px;
+        padding: 8px;
         text-decoration: none;
     }
 
         .addbuttonbox input[type="submit"] :hover {
             background: none;
-            border-bottom: none;
-            background-color: #006699;
+            border: none;
+            background-color: #333;
             color: #fff;
             font-family: Arial;
             font-size: 12px;
@@ -108,6 +108,7 @@
 }
 
 #bulk {
+    display: none;
 }
 
 
@@ -191,7 +192,9 @@
     text-align: center !important;
 }
 
-/* Product Details */ #abundaCalcTbl {
+/* Product Details */
+
+#abundaCalcTbl{
     width: 900px;
     background-color: #000;
 }

@@ -600,11 +600,14 @@ SECTION 3 & 4 - Table
     float: left !important;
     height: 98% !important;
     min-width: 90px !important;
+    
 }
 
     .td_image img {
         margin-left: auto !important;
         margin-right: auto !important;
+        padding: 20px;
+        background-color: #ccc;
     }
 
 .td_details {
