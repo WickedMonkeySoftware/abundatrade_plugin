@@ -207,10 +207,18 @@
 #abundaCalcTbl{
     background-color: #000;
     width: 870px;
+    border-spacing:0px;
 }
 
 /*Very Bottom*/
 #very_bottom{
-    width: 870px !important;
-    background-color: #ccc !important;
+    width: auto;
+    height:30px;
+    background-color: #ccc;
+    border-top:solid thick gray;
+}
+
+#very_bottom div {
+    padding:4px 20px;
+    float:right;
 }
