@@ -1373,17 +1373,19 @@ jQuery(document).ready(function () {
     // auto scroll the top of the calculator.
     el = jQuery("#calc_follow");
     stop = jQuery("#ready2go");
-    elpos = el.offset().top;
-    stopos = stop.offset().top;
-    distance = stopos - elpos;
-    if (jQuery(window).width() > 450) {
-        jQuery(window).scroll(function () {
-            var y = jQuery(this).scrollTop();
-            stopos = stop.offset().top;
-            if (y < elpos) { el.stop().animate({ 'top': 0 }, 200); }
-            else if (stopos - y < distance) { el.stop().animate({ 'top': stopos - distance - elpos }, 200); }
-            else { el.stop().animate({ 'top': y - elpos + 10 }, 200); }
-        });
+    if (el.length > 0) {
+        elpos = el.offset().top;
+        stopos = stop.offset().top;
+        distance = stopos - elpos;
+        if (jQuery(window).width() > 450) {
+            jQuery(window).scroll(function () {
+                var y = jQuery(this).scrollTop();
+                stopos = stop.offset().top;
+                if (y < elpos) { el.stop().animate({ 'top': 0 }, 200); }
+                else if (stopos - y < distance) { el.stop().animate({ 'top': stopos - distance - elpos }, 200); }
+                else { el.stop().animate({ 'top': y - elpos + 10 }, 200); }
+            });
+        }
     }
 });
 
