@@ -633,6 +633,7 @@ class abundatrade_withinboredom {
         wp_register_script("abundatrade_register", $this->folders['PluginUrl'] . '/js/register.js', array('jquery', 'abundatrade_remote'));
         wp_register_script("abundatrade_gadgets", $this->folders['PluginUrl'] . '/js/abunda_gadgets_short.js', array('jquery'));
         wp_register_script("abundatrade_qtip_js", $this->folders['PluginUrl'] . '/js/jquery.qtip.js', array('jquery'));
+        wp_register_script("abundatrade_perm_prod", $this->folders['PluginUrl'] . '/js/perm_prods.js', array('jquery'));
         
         wp_enqueue_style("abundatrade_jsui");
         wp_enqueue_style("abundatrade_qtip");
@@ -645,6 +646,7 @@ class abundatrade_withinboredom {
         wp_enqueue_script("abundatrade_impromptu");
         wp_enqueue_script("abundatrade_register");
         wp_enqueue_script("abundatrade_gadgets");
+        wp_enqueue_script("abundatrade_perm_prod");
         if (!isset($this->export)) {
             $this->export = array();
         }
