@@ -95,7 +95,7 @@ jQuery(document).ready(function () {
             if (data.output.success) {
 
                 products = data.output.data;
-                sortedProducts = $(products).sort(sortByTitle);
+                sortedProducts = jQuery(products).sort(sortByTitle);
 
                 jQuery.each(sortedProducts, function () {
                     // add a row to the table
