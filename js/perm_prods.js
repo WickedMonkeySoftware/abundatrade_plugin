@@ -90,7 +90,7 @@ jQuery(document).ready(function () {
 
 
     // fetch the data for this category
-    jQuery.getJSON('trade/process/ajax-post-public.php', { 'action': 'get', 'object': 'TradePermProductData', 'category_id': current_category }, function (data) {
+    jQuery.getJSON('/trade/process/ajax-post-public.php', { 'action': 'get', 'object': 'TradePermProductData', 'category_id': current_category }, function (data) {
         if (data.valid) {
             if (data.output.success) {
 
