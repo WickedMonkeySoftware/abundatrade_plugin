@@ -473,7 +473,7 @@ class abundatrade_withinboredom {
         $gadget_selector = 
             '<form id="abundaGadgetInput" class="abundaInput" style="margin-top: 6px;" onsubmit="return false;" method="post" >
             
-            <div id="new_gad_cat">
+            <div id="new_gad_cat" class="gadget_holder">
                 <div class="abundaGadget_cat" onclick="setNewCat(1);">
                     <img src="' . $this->folders['PluginUrl'] . '/images/icons/cats/gadgets_icon01.jpg" />
                     <p>iPhone</p>
@@ -518,7 +518,7 @@ class abundatrade_withinboredom {
         
         
             
-            $gadget_selector .= '<div id="new_gad_man" style="display:none;">
+        $gadget_selector .= '<div id="new_gad_man" class="gadget_holder" style="display:none;">
                 <div id="man_content" style="display:none;"></div>
                 <div id="man_loader" style="width:30%; margin:auto; background-color:white; transition:background-color 1s ease 0;">
                     <div style="width:16px; margin:auto;">
@@ -528,7 +528,7 @@ class abundatrade_withinboredom {
                 </div>
             </div>
             
-            <div id="new_gad_dev" style="display:none;">
+            <div id="new_gad_dev" class="gadget_holder" style="display:none;">
                 <div id="dev_content" style="display:none;"></div>
                 <div id="dev_loader" style="width:30%; margin:auto; background-color:white; transition:background-color 1s ease 0;">
                     <div style="width:16px; margin:auto;">
@@ -538,7 +538,7 @@ class abundatrade_withinboredom {
                 </div>
             </div>
             
-            <div id="new_gad_car" style="display:none;">
+            <div id="new_gad_car" class="gadget_holder" style="display:none;">
                 <div id="car_content" style="display:none;"></div>
                 <div id="car_loader" style="width:30%; margin:auto; background-color:white; transition:background-color 1s ease 0;">
                     <div style="width:16px; margin:auto;">
@@ -548,7 +548,7 @@ class abundatrade_withinboredom {
                 </div>
             </div>
             
-            <div id="new_gad" style="display:none;">
+            <div id="new_gad" class="gadget_holder" style="display:none;">
                 <div class="gad_big_pict">
                     <img src="" />
                 </div>
@@ -582,7 +582,7 @@ class abundatrade_withinboredom {
 <div class='bulkuploadbox'>
 <a href='#' onclick='return bulk_open()'>Bulk Upload</a>
 <br>
-<a href='#' onclick='transform_into_full_calc('gadget');'>Add a Gadget</a>
+<a href='#' onclick='transform_into_full_calc(\"gadget\");'>Add a Gadget</a>
 </div>
 <div class='prevaluationbox'>
 Pre-valuation total: <span id='total_prevaluation' class='valuationtotal'>$0.00</span>

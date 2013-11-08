@@ -266,3 +266,14 @@
     width:22.5%;
     margin-top:11px;
 }
+
+.abundaGadget_cat {
+    display:inline-block;
+    text-align:center;
+    margin:2px;
+}
+
+.gadget_holder {
+    padding:5px;
+    background-color:lightgrey;
+}
