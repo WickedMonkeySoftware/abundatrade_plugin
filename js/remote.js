@@ -142,7 +142,7 @@ function get_login_status(secret) {
             {
                 type: 'POST',
                 url: sec() + abundacalc.server + '/trade/process/user/status/',
-                dataType: 'jsonp'
+                dataType: 'json'
             }
         );
         request.done(function (data) {
