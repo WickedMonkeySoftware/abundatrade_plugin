@@ -1523,7 +1523,7 @@ var tourstates = [
         html: 'Press add item to add it on to your list',
         buttons: { Back: -1, Next: 1 },
         focus: 1,
-        position: { container: '[value=\'+ Add\']', x: -50, y: -150, width: 200, arrow: 'bc' },
+        position: { container: '[value=\'+ Add \']', x: -50, y: -150, width: 200, arrow: 'bc' },
         submit: tour_func
     },
     {
