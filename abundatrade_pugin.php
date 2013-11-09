@@ -568,7 +568,7 @@ class abundatrade_withinboredom {
         $status = "<div id=\"login_status_abundatrade\"></div>";
 
         $newtop = "<div id='top_input_section' class='calchead'><form id='abundaInput' onsubmit='return false;' method='post'>
-<div class='searchby'><img src='" . $this->folders['PluginUrl'] . "/css/images/searchby.png'></div>
+<div class='searchby'><img src='" . $this->folders['PluginUrl'] . "/css/images/searchby.png'/></div>
 <div class='upcetc'>
 <input id='product_code' name='product_code' onkeyup='return; doSearch();' onblur='clean_product_code(this);' autocomplete='off' placeholder='UPC,ASIN,ISBN,Title, or Artist' type='text' class='upcinputbox'></div>
 <div class='quantitybox'>
@@ -577,7 +577,7 @@ class abundatrade_withinboredom {
 <input id='product_qty' name='product_qty' value='1' type='text' class='quantityinputbox'>
 </div></div>
 <div class='addbuttonbox'>
-<input type='submit' class='likebutton' value='+ Add '>
+<input type='submit' class='likebutton' value='+ Add '/>
 </div>
 <div class='bulkuploadbox'>
 <a href='#' onclick='return bulk_open()'>Bulk Upload</a>
@@ -586,7 +586,7 @@ class abundatrade_withinboredom {
 </div>
 <div class='prevaluationbox'>
 Pre-valuation total: <span id='total_prevaluation' class='valuationtotal'>$0.00</span>
-<br>
+<br/>
 Item Total: <span id='total_item_count' class='itemtotal'>0</span>
 </div>
 <div class='clear'></div> 
