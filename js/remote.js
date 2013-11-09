@@ -140,7 +140,7 @@ function get_login_status(secret) {
         }
         var request = jQuery.ajax(
             {
-                type: 'POST',
+                type: 'GET',
                 url: sec() + abundacalc.server + '/trade/process/user/status/' + "?token=" + jQuery.cookie("PHPSESSID"),
                 dataType: 'jsonp'
             }
@@ -366,7 +366,7 @@ function display_bulk_upload(display_prompt, id) {
     var stop = setInterval(function () {
         var request = jQuery.ajax(
             {
-                type: 'POST',
+                type: 'GET',
                 url: sec() + abundacalc.bulk + '/trade/process/request.php',
                 data: "action=get_status&id=" + id + "&a=" + jQuery("#a").val() + "&token=" + jQuery.cookie("PHPSESSID"),
                 dataType: 'jsonp'
