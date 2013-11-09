@@ -570,18 +570,18 @@ class abundatrade_withinboredom {
         $newtop = "<div id='top_input_section' class='calchead'><form id='abundaInput' onsubmit='return false;' method='post'>
 <div class='searchby'><img src='" . $this->folders['PluginUrl'] . "/css/images/searchby.png'/></div>
 <div class='upcetc'>
-<input id='product_code' name='product_code' onkeyup='return; doSearch();' onblur='clean_product_code(this);' autocomplete='off' placeholder='UPC,ASIN,ISBN,Title, or Artist' type='text' class='upcinputbox'></div>
+<input id='product_code' name='product_code' onkeyup='return; doSearch();' onblur='clean_product_code(this);' autocomplete='off' placeholder='UPC,ASIN,ISBN,Title, or Artist' type='text' class='upcinputbox'/></div>
 <div class='quantitybox'>
 <div class='quantitylabel'>
 <span style='margin-right:10px;'>QTY.</span>
-<input id='product_qty' name='product_qty' value='1' type='text' class='quantityinputbox'>
+<input id='product_qty' name='product_qty' value='1' type='text' class='quantityinputbox'/>
 </div></div>
 <div class='addbuttonbox'>
 <input type='submit' class='likebutton' value='+ Add '/>
 </div>
 <div class='bulkuploadbox'>
 <a href='#' onclick='return bulk_open()'>Bulk Upload</a>
-<br>
+<br/>
 <a href='#' onclick='transform_into_full_calc(\"gadget\");'>Add a Gadget</a>
 </div>
 <div class='prevaluationbox'>
@@ -606,7 +606,7 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
         //$display .= $switch_back;
         //$display .= $second;
         $display .= $table_head;
-        $display .= "</table></div><table id='abundaCalcTbl' class='abundaCalcTbl'>";
+        $display .= "</table></div><table class='abundaCalcTbl'>";
         $display .= $table_body;
         $display .= $very_bottom;
         $display .= $endAll;
