@@ -681,7 +681,7 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
             $this->export = array();
         }
         
-        $abundacalc = array('server' => 'abundatrade.com', 
+        $abundacalc = array('server' => 'future.abundatrade.com', 
             'bulk' => 'stable.abundatrade.com',
             'url' => $this->folders['PluginUrl'],
             'export' => $this->export,
