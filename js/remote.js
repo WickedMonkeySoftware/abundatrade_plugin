@@ -142,7 +142,7 @@ function get_login_status(secret) {
             {
                 type: 'POST',
                 url: sec() + abundacalc.server + '/trade/process/user/status/',
-                dataType: 'json'
+                dataType: 'jsonp'
             }
         );
         request.done(function (data) {
@@ -1389,9 +1389,9 @@ jQuery(document).ready(function () {
             jQuery(window).scroll(function () {
                 var y = jQuery(this).scrollTop();
                 stopos = stop.offset().top;
-                if (y < elpos) { el.stop().animate({ 'top': 0 }, 0); }
+                if (y < elpos) { el.stop().animate({ 'top': 0 }, 200); }
                 else if (stopos - y < distance) { el.stop().animate({ 'top': stopos - distance - elpos }, 200); }
-                else { el.stop().animate({ 'top': y - elpos + 10 }, 0); }
+                else { el.stop().animate({ 'top': y - elpos + 10 }, 200); }
             });
         }
     }
