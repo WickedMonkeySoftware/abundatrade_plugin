@@ -606,7 +606,7 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
         //$display .= $switch_back;
         //$display .= $second;
         $display .= $table_head;
-        $display .= "</table></div><table class='abundaCalcTbl'>";
+        $display .= "</table></div><table id='abundaCalcTbl' class='abundaCalcTbl'>";
         $display .= $table_body;
         $display .= $very_bottom;
         $display .= $endAll;
@@ -681,7 +681,7 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
             $this->export = array();
         }
         
-        $abundacalc = array('server' => 'future.abundatrade.com', 
+        $abundacalc = array('server' => 'abundatrade.com', 
             'bulk' => 'stable.abundatrade.com',
             'url' => $this->folders['PluginUrl'],
             'export' => $this->export,
