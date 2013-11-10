@@ -113,8 +113,12 @@
 
 /* -------Table Body---------- */
 
+.abundaCalcTbl {
+    background-color: white;
+}
+
 .abundaCalcTbl tbody tr {
-    background: #fff !important;
+    background: white !important;
     width: 874px;
     text-align: left;
 }
