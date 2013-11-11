@@ -809,7 +809,7 @@ var last_update = new Date().getTime() / 1000;
 function check_for_new() {
     var stop_live_status = setInterval(function () {
         var seconds = new Date().getTime() / 1000;
-        if (seconds - last_update < 5 && number_checks > 120) { return; }
+        if (seconds - last_update < 5 || number_checks > 120) { return; }
         last_update = seconds;
         if (loggedIn) {
             number_checks += 1;
