@@ -809,16 +809,12 @@ var last_update = new Date().getTime() / 1000;
 function check_for_new() {
     var stop_live_status = setInterval(function () {
         var seconds = new Date().getTime() / 1000;
-        if (seconds - last_update < 5) { return; }
+        if (seconds - last_update < 5 && number_checks > 120) { return; }
         last_update = seconds;
         if (loggedIn) {
             number_checks += 1;
             load_previous_session(false, true);
             get_login_status(true);
-
-            if (number_checks > 120) {
-                clearInterval(stop_live_status);
-            }
         }
     }, 5000);
 }
@@ -1398,14 +1394,11 @@ jQuery(document).ready(function () {
         if (jQuery(window).width() > 450) {
             jQuery(window).scroll(function () {
                 number_checks = 0;
-                clearInterval(stop_live_status);
                 var y = jQuery(this).scrollTop();
                 stopos = stop.offset().top;
                 if (y < elpos) { el.stop().animate({ 'top': 0 }, 200); }
                 else if (stopos - y < distance) { el.stop().animate({ 'top': stopos - distance - elpos }, 200); }
                 else { el.stop().animate({ 'top': y - elpos + 10 }, 200); }
-
-                check_for_new();
             });
         }
     }
