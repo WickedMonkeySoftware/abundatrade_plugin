@@ -79,7 +79,7 @@ function validateEmail(email, confirm) {
 
 function abundatrade_logout() {
 
-    clearInterval(stop_live_status);
+    number_checks = 150;
 
     var request = jQuery.ajax({
         type: 'POST',
