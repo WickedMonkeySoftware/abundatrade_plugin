@@ -803,10 +803,14 @@ function display_promo() {
 
 var stop_live_status;
 var number_checks = 0;
+var last_update = new Date().getTime() / 1000;
 
 /** Live Lookups */
 function check_for_new() {
     var stop_live_status = setInterval(function () {
+        var seconds = new Date().getTime() / 1000;
+        if (seconds - last_update < 5) { return; }
+        last_update = seconds;
         if (loggedIn) {
             number_checks += 1;
             load_previous_session(false, true);
