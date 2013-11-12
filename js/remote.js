@@ -1214,9 +1214,10 @@ function submit_my_list(f) {
             SetConfirmation(false);
             display_totals(data);
             //jQuery.prompt('Your list has been received.<br/>Thank you for submitting your list to Abundatrade.');
-            window.location = abundacalc.thanks;
+            //window.location = abundacalc.thanks;
             new_session();
             load_previous_session();
+            window.location = abundacalc.thanks;
         } else {
             jQuery.prompt('Your list could not be sent.<br/>' + data.error);
             please_wait(false);
