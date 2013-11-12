@@ -570,6 +570,7 @@ class abundatrade_withinboredom {
         $newtop = "<div id='top_input_section' class='calchead'><form id='abundaInput' onsubmit='return false;' method='post'>
 <div class='searchby'><img src='" . $this->folders['PluginUrl'] . "/css/images/searchby.png'/></div>
 <div class='upcetc'>
+<input id='a' value='$affid' type='hidden'/>
 <input id='product_code' name='product_code' onkeyup='return; doSearch();' onblur='clean_product_code(this);' autocomplete='off' placeholder='UPC,ASIN,ISBN,Title, or Artist' type='text' class='upcinputbox'/></div>
 <div class='quantitybox'>
 <div class='quantitylabel'>
