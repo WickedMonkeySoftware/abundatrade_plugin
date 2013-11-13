@@ -205,6 +205,11 @@ function clear_session(obj) {
 }
 
 function report_error(error_function, response) {
+
+    if (_gaq) {
+        _gaq.push(['_trackEvent', 'Calculator', 'Error']);
+    }
+
     jQuery.prompt("Please send us an error report or select OK to just continue", {
         title: "There was some kind of error!!", buttons: { "Submit Error Report": true, "OK": false }, submit: function (e, v, m, f) {
             if (v) {
@@ -421,6 +426,10 @@ function submit_bulk(val) {
     str += '&token=' + jQuery.cookie("PHPSESSID");
     str += '&life=jsonp';
     str += '&location=' + window.location.href;
+
+    if (_gaq) {
+        _gaq.push(['_trackEvent', 'Calculator', 'Submit', 'Bulk Upload', '15']);
+    }
 
     var request = jQuery.ajax(
 {
@@ -1201,6 +1210,10 @@ function submit_my_list(f) {
         str += '&guest=true';
     }
 
+    if (_gaq) {
+        _gaq.push(['_trackEvent', 'Calculator', 'Submit', 'List', jQuery("#total_prevaluation").get(0).innerHTML.substring(1)]);
+    }
+
     var request = jQuery.ajax(
                             {
                                 type: 'GET',
@@ -1609,7 +1622,15 @@ function addGadget(ean, condition) {
                             });
 
     request.done(function (data) {
+        var original = parseFloat(jQuery("#total_prevaluation").get(0).innerHTML.substring(1));
+
         transform_into_full_calc('main');
+
+        var change = parseFloat(jQuery("#total_prevaluation").get(0).innerHTML.substring(1)) - original;
+
+        if (_gaq) {
+            _gaq.push(['_trackEvent', 'Calculator', 'Add Gadget', ean, change]);
+        }
         // No errors
         /*
         if (data != '') {
