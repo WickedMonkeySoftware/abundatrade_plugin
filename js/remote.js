@@ -1457,6 +1457,43 @@ jQuery(document).ready(function () {
     if (getParameterByName('product_id') != "") {
         lookup_item(this);
     }
+
+    if (jQuery("#homeSearch").length > 0) {
+        jQuery('#product_code').catcomplete({
+            source: function (request, response) {
+                jQuery.ajax({
+                    url: sec() + abundacalc.server + "/trade/process/TextSearch.php",
+                    dataType: "jsonp",
+                    data: {
+                        search: request.term
+                    },
+                    success: function (data) {
+                        response(jQuery.map(data.results, function (item) {
+                            return {
+                                label: item.display,
+                                value: item.code,
+                                category: item.category,
+                                code: item.code,
+                                image: item.images
+                            };
+                        }));
+                    }
+                });
+            },
+            minLength: 2,
+            select: function (event, ui) {
+                jQuery("#product_code").val(ui.item.value);
+                jQuery("#abunda_input").submit();
+            },
+            autoFocus: true,
+            open: function () {
+                jQuery(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+            },
+            close: function () {
+                jQuery(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+            }
+        });
+    }
 });
 
 jQuery.widget("custom.catcomplete", jQuery.ui.autocomplete, {
