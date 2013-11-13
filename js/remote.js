@@ -1452,6 +1452,11 @@ jQuery(document).ready(function () {
             });
         }
     }
+
+    //auto add included item
+    if (getParameterByName('product_id') != "") {
+        lookup_item(this);
+    }
 });
 
 jQuery.widget("custom.catcomplete", jQuery.ui.autocomplete, {
