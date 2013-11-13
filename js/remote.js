@@ -1318,7 +1318,7 @@ jQuery(document).ready(function () {
     if (jQuery('#gmfs-cg').length > 0) {
         jQuery('#gmfs-cg').click(function () {
             if (_gaq) {
-                _gaq.push(['_trackEvent', 'Calculator', 'Submit', 'Cash 4 Gold Shipping Label', '15']);
+                jQuery('#gmfs').attr('onclick', "_gaq.push(['_trackEvent', 'Calculator', 'Submit', 'Cash 4 Gold Shipping Label', '15'])");
             }
         });
     }
@@ -1326,7 +1326,7 @@ jQuery(document).ready(function () {
     if (jQuery('#gmfs-tl').length > 0) {
         jQuery('#gmfs-tl').click(function () {
             if (_gaq) {
-                _gaq.push(['_trackEvent', 'Calculator', 'Submit', 'Time Life Shipping Label', '15']);
+                jQuery('#gmfs').attr('onclick', "_gaq.push(['_trackEvent', 'Calculator', 'Submit', 'Time Life Shipping Label', '15'])");
             }
         });
     }
@@ -1334,7 +1334,7 @@ jQuery(document).ready(function () {
     if (jQuery('#gmfs').length > 0) {
         jQuery('#gmfs').click(function () {
             if (_gaq) {
-                _gaq.push(['_trackEvent', 'Calculator', 'Submit', 'Shipping Label', '15']);
+                jQuery('#gmfs').attr('onclick', "_gaq.push(['_trackEvent', 'Calculator', 'Submit', 'Shipping Label', '15'])");
             }
         });
     }
