@@ -1311,6 +1311,30 @@ jQuery(document).ready(function () {
         jQuery(".entry-header").css("display", "none");
     }
 
+    if (jQuery('#gmfs-cg').length > 0) {
+        jQuery('#gmfs-cg').click(function () {
+            if (_gaq) {
+                _gaq.push(['_trackEvent', 'Calculator', 'Submit', 'Cash 4 Gold Shipping Label', '15']);
+            }
+        });
+    }
+
+    if (jQuery('#gmfs-tl').length > 0) {
+        jQuery('#gmfs-tl').click(function () {
+            if (_gaq) {
+                _gaq.push(['_trackEvent', 'Calculator', 'Submit', 'Time Life Shipping Label', '15']);
+            }
+        });
+    }
+
+    if (jQuery('#gmfs').length > 0) {
+        jQuery('#gmfs').click(function () {
+            if (_gaq) {
+                _gaq.push(['_trackEvent', 'Calculator', 'Submit', 'Shipping Label', '15']);
+            }
+        });
+    }
+
     if (jQuery("#login_status_abundatrade").val() != null) {
         if (abundacalc.upload_id) {
             display_bulk_upload(true);
