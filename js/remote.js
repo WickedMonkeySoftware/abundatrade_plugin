@@ -1232,8 +1232,12 @@ function submit_my_list(f) {
             //jQuery.prompt('Your list has been received.<br/>Thank you for submitting your list to Abundatrade.');
             //window.location = abundacalc.thanks;
             new_session();
-            load_previous_session();
-            window.location = abundacalc.thanks;
+            setTimeout(function () {
+                load_previous_session();
+                setTimeout(function () {
+                    window.location = abundacalc.thanks;
+                }, 3000);
+            }, 800);
         } else {
             jQuery.prompt('Your list could not be sent.<br/>' + data.error);
             please_wait(false);
