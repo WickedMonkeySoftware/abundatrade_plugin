@@ -631,6 +631,11 @@ function lookup_item(obj) {
                 Remove_Item(data.product_code);
                 build_row(data);
                 lastItem = data;
+
+                if (_gaq) {
+                    _gaq.push(['_trackEvent', 'Calculator', 'Scan', jQuery("#a").val() + ' Item Added']);
+                }
+
                 jQuery('#abundaCalcTbl').append(data.row_html);
                 /*jQuery('td:contains("' + data.product_code + '")').parent()
                     .find('td')
