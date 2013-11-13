@@ -3,9 +3,9 @@
     height: auto;
     background-color: #ccc;
     border-bottom: thick solid gray;
-    -moz-box-sizing: content-box !important;
-    -webkit-box-sizing: content-box !important;
-    box-sizing: content-box !important;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
 }
 
 .searchby {
@@ -117,88 +117,88 @@
     background-color: white;
 }
 
-.abundaCalcTbl tbody tr {
-    background: white !important;
-    width: 874px;
-    text-align: left;
-}
+    .abundaCalcTbl tbody tr {
+        background: white;
+        width: 874px;
+        text-align: left;
+    }
 
 .td_image {
-    float: left !important;
-    height: 98% !important;
-    min-width: 90px !important;
+    float: left;
+    height: 98%;
+    min-width: 90px;
 }
 
     .td_image img {
-        margin-left: auto !important;
-        margin-right: auto !important;
+        margin-left: auto;
+        margin-right: auto;
         padding: 8px;
     }
 
 .td_details {
-    float: left !important;
-    width: 73% !important;
-    height: 98% !important;
-    text-align: left !important;
+    float: left;
+    width: 73%;
+    height: 98%;
+    text-align: left;
     font-size: 12px;
     padding: 8px;
 }
 
 .abundaCalcTbl tbody {
-    max-height: 400px !important;
-    border-left: 1px #CCC solid !important;
+    max-height: 400px;
+    border-left: 1px #CCC solid;
     text-align: left;
 }
 
     .abundaCalcTbl tbody td {
-        border-right: 1px solid silver !important;
-        border-bottom: 1px solid silver !important;
-        padding: 3px 8px 2px 6px !important;
-        color: #333 !important;
-        font-size: 14px !important;
-        text-align: left !important;
-        vertical-align: middle !important;
+        border-right: 1px solid silver;
+        border-bottom: 1px solid silver;
+        padding: 3px 8px 2px 6px;
+        color: #333;
+        font-size: 14px;
+        text-align: left;
+        vertical-align: middle;
         width: 874px;
     }
 
         .abundaCalcTbl tbody td.upc {
-            width: 95px !important;
+            width: 95px;
             text-align: left;
         }
 
         .abundaCalcTbl tbody td.quantity {
-            width: 40px !important;
-            text-align: center !important;
+            width: 40px;
+            text-align: center;
         }
 
         .abundaCalcTbl tbody td.item {
-            width: 95px !important;
-            text-align: right !important;
+            width: 95px;
+            text-align: right;
         }
 
             .abundaCalcTbl tbody td.item div {
             }
 
         .abundaCalcTbl tbody td.values {
-            width: 80px !important;
-            text-align: center !important;
+            width: 80px;
+            text-align: center;
         }
 
         .abundaCalcTbl tbody td.delete {
-            width: 70px !important;
-            text-align: center !important;
+            width: 70px;
+            text-align: center;
         }
 
 .addbutton {
-    border: none !important;
-    padding: 7px !important;
-    background-color: #999 !important;
+    border: none;
+    padding: 7px;
+    background-color: #999;
 }
 
 .blatent {
-    color: black !important;
-    font-weight: bold !important;
-    text-align: center !important;
+    color: black;
+    font-weight: bold;
+    text-align: center;
 }
 
 /* Product Details */
@@ -206,7 +206,7 @@
 #abundaCalcTbl {
     width: 870px;
     border-spacing: 0px;
-    background-color:white;
+    background-color: white;
 }
 
 /*Very Bottom*/
@@ -234,13 +234,13 @@
     cursor: default;
 }
 
-.likebutton:hover {
-    box-shadow: 1px 1px 2px 1px #333;
-}
+    .likebutton:hover {
+        box-shadow: 1px 1px 2px 1px #333;
+    }
 
-.likebutton:active {
-    box-shadow: 1px 1px 2px 1px #333 inset;
-}
+    .likebutton:active {
+        box-shadow: 1px 1px 2px 1px #333 inset;
+    }
 
 /* Bulk Upload */
 
@@ -261,79 +261,79 @@
 }
 
 #bulk_text_holder {
-    margin:auto;
-    width:22%;
+    margin: auto;
+    width: 22%;
 }
 
 #bulk_button_holder {
-    margin:auto;
-    width:22.5%;
-    margin-top:11px;
+    margin: auto;
+    width: 22.5%;
+    margin-top: 11px;
 }
 
 .abundaGadget_cat {
-    display:inline-block;
-    text-align:center;
-    margin:2px;
+    display: inline-block;
+    text-align: center;
+    margin: 2px;
 }
 
 .gadget_holder {
-    padding:5px;
-    background-color:lightgrey;
+    padding: 5px;
+    background-color: lightgrey;
 }
 
 #search_results_list {
-    position: absolute !important;
-    background: white !important;
-    left: 207px !important;
-    top: 69px !important;
-    width: 75% !important;
-    height:auto !important;
-    display:none !important;
+    position: absolute;
+    background: white;
+    left: 207px;
+    top: 69px;
+    width: 75%;
+    height: auto;
+    display: none;
 }
 
 .searchHeader {
-    background-color:#6699ff !important;
-    color:#ffffff !important;
-    border:#cccccc 1px solid !important;
-    font-weight:bold !important;
-    font-size:15px !important;
+    background-color: #6699ff;
+    color: #ffffff;
+    border: #cccccc 1px solid;
+    font-weight: bold;
+    font-size: 15px;
 }
 
 .search_results_li {
-    margin-bottom: 0px !important;
-    margin-top: -1px !important;
-    margin-left: 0px !important;
+    margin-bottom: 0px;
+    margin-top: -1px;
+    margin-left: 0px;
 }
 
     .search_results_li li {
-        list-style: none !important;
-        display: block !important;
-        padding: 2px !important;
-        font-weight: normal !important;
-        font-size: 15px !important;
+        list-style: none;
+        display: block;
+        padding: 2px;
+        font-weight: normal;
+        font-size: 15px;
     }
 
 .inlineblock {
-    display:inline-block !important;
-    padding-left:5px !important;
+    display: inline-block;
+    padding-left: 5px;
 }
 
 .search_result_row {
-    background-color: #ffffff !important;
-    color: #333333 !important;
-    border-left: #cccccc 1px solid !important;
-    border-right: #cccccc 1px solid !important;
-    border-bottom: #cccccc 1px solid !important;
+    background-color: #ffffff;
+    color: #333333;
+    border-left: #cccccc 1px solid;
+    border-right: #cccccc 1px solid;
+    border-bottom: #cccccc 1px solid;
 }
 
-    .search_results_li :hover {
-        background-color:#ddd !important;
-        cursor:default !important;
-    }
+.search_results_li :hover {
+    background-color: #ddd;
+    cursor: default;
+}
 
-    .search_result_row a {
-        text-decoration: none !important;
-        color: #333 !important;
-        cursor:default !important;
-    }
+.search_result_row a {
+    text-decoration: none;
+    color: #333;
+    cursor: default;
+}
