@@ -428,7 +428,7 @@ function submit_bulk(val) {
     str += '&location=' + window.location.href;
 
     if (_gaq) {
-        _gaq.push(['_trackEvent', 'Calculator', 'Submit', jQuery("#a").val() + ' Bulk Upload', '15']);
+        _gaq.push(['_trackEvent', 'Calculator', 'Submit', jQuery("#a").val() + ' Bulk Upload', 15]);
     }
 
     var request = jQuery.ajax(
@@ -1211,7 +1211,7 @@ function submit_my_list(f) {
     }
 
     if (_gaq) {
-        _gaq.push(['_trackEvent', 'Calculator', 'Submit', jQuery("#a").val() + ' List', jQuery("#total_prevaluation").get(0).innerHTML.substring(1)]);
+        _gaq.push(['_trackEvent', 'Calculator', 'Submit', jQuery("#a").val() + ' List', Math.round(parseFloat(jQuery("#total_prevaluation").get(0).innerHTML.substring(1)))]);
     }
 
     var request = jQuery.ajax(
@@ -1318,7 +1318,7 @@ jQuery(document).ready(function () {
     if (jQuery('#gmfs-cg').length > 0) {
         jQuery('#gmfs-cg').click(function () {
             if (_gaq) {
-                jQuery('#gmfs').attr('onclick', "_gaq.push(['_trackEvent', 'Calculator', 'Submit', 'Cash 4 Gold Shipping Label', '15'])");
+                jQuery('#gmfs').click(function () { _gaq.push(['_trackEvent', 'Calculator', 'Submit', 'Cash 4 Gold Shipping Label', 15]); });
             }
         });
     }
@@ -1326,7 +1326,7 @@ jQuery(document).ready(function () {
     if (jQuery('#gmfs-tl').length > 0) {
         jQuery('#gmfs-tl').click(function () {
             if (_gaq) {
-                jQuery('#gmfs').attr('onclick', "_gaq.push(['_trackEvent', 'Calculator', 'Submit', 'Time Life Shipping Label', '15'])");
+                jQuery('#gmfs').click(function () { _gaq.push(['_trackEvent', 'Calculator', 'Submit', 'Time Life Shipping Label', 15]); });
             }
         });
     }
@@ -1334,7 +1334,7 @@ jQuery(document).ready(function () {
     if (jQuery('#gmfs').length > 0) {
         jQuery('#gmfs').click(function () {
             if (_gaq) {
-                jQuery('#gmfs').attr('onclick', "_gaq.push(['_trackEvent', 'Calculator', 'Submit', 'Shipping Label', '15'])");
+                jQuery('#gmfs').click(function () { _gaq.push(['_trackEvent', 'Calculator', 'Submit', 'Shipping Label', 15]); });
             }
         });
     }
@@ -1655,6 +1655,8 @@ function addGadget(ean, condition) {
         transform_into_full_calc('main');
 
         var change = parseFloat(jQuery("#total_prevaluation").get(0).innerHTML.substring(1)) - original;
+
+        change = Math.round(change);
 
         if (_gaq) {
             _gaq.push(['_trackEvent', 'Calculator', jQuery("#a").val() + ' Add Gadget', ean, change]);
