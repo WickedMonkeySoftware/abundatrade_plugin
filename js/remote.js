@@ -1310,6 +1310,18 @@ var SetConfirmation = function (doSet) {
 *
 */
 jQuery(document).ready(function () {
+
+    jQuery('[class=submenu]').hide();
+    jQuery('[class=menutitle]').click(function () {
+        var myid = "#sub" + this.id.substring(1);
+        if (jQuery(myid).is(":visible")) {
+            jQuery(myid).slideUp('fast');
+        }
+        else {
+            jQuery(myid).slideDown('slow');
+        }
+    });
+
     if (getParameterByName('act') == 'gift') {
         jQuery('input[name=fields_email]').val(getParameterByName('email'));
         //jQuery('input[name=Submit]').attr('onclick','return submitGiftCard();');
