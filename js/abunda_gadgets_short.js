@@ -388,6 +388,11 @@ function makeUnknown(ival) {
 }
 
 function finalize_quote() {
+
+    if (_gaq) {
+        _gaq.push(['_trackEvent', 'Calculator', 'Submit', 'Featured/Custom Quote', getParameterByName('quote_val')]);
+    }
+
     var request = jQuery.ajax("http://" + abundacalc.server + "/trade/process/finalize_quote.php", {
         dataType: 'jsonp',
         data: {
