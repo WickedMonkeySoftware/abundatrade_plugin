@@ -1482,6 +1482,7 @@ jQuery(document).ready(function () {
             },
             minLength: 2,
             select: function (event, ui) {
+                _gaq.push(['_trackEvent', 'Calculator', 'Search']);
                 jQuery("#product_code").val(ui.item.value);
                 jQuery("#abunda_input").submit();
             },
