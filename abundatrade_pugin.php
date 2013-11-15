@@ -571,7 +571,7 @@ class abundatrade_withinboredom {
 <div class='searchby'><img src='" . $this->folders['PluginUrl'] . "/css/images/searchby.png'/></div>
 <div class='upcetc'>
 <input id='a' value='$affid' type='hidden'/>
-<input id='product_code' " . (isset($_GET['product_id']) ? "value='{$_GET['product_id']}'" : "") . " name='product_code' onkeyup='return; doSearch();' onblur='clean_product_code(this);' autocomplete='off' placeholder='UPC,ASIN,ISBN,Title, or Artist' type='text' class='upcinputbox'/></div>
+<input id='product_code' " . (isset($_POST['product_id']) ? "value='{$_POST['product_id']}'" : "") . " name='product_code' onkeyup='return; doSearch();' onblur='clean_product_code(this);' autocomplete='off' placeholder='UPC,ASIN,ISBN,Title, or Artist' type='text' class='upcinputbox'/></div>
 <div class='quantitybox'>
 <div class='quantitylabel'>
 <span style='margin-right:10px;'>QTY.</span>
