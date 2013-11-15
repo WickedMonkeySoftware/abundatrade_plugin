@@ -1466,7 +1466,7 @@ jQuery(document).ready(function () {
     }
 
     //auto add included item
-    if (getParameterByName('product_id') != "") {
+    if (abundacalc.search_for != "") {
         lookup_item(this);
     }
 

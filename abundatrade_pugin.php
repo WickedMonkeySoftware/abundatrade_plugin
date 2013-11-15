@@ -686,6 +686,7 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
             'bulk' => 'stable.abundatrade.com',
             'url' => $this->folders['PluginUrl'],
             'export' => $this->export,
+            'search_for' => (isset($_POST['product_id']) ? $_POST['product_id'] : ""),
             'thanks' => $this->settings->Thank_you_page);
         if (isset($_REQUEST['upload_id']) && $_REQUEST['upload_id'] != '') {
             $abundacalc['upload_id'] = $_REQUEST['upload_id'];
