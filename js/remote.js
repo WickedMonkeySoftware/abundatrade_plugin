@@ -633,7 +633,7 @@ function lookup_item(obj) {
                 lastItem = data;
 
                 if (_gaq) {
-                    _gaq.push(['_trackEvent', 'Calculator', 'Scan', jQuery("#a").val() + ' Item Added: ' + data.product_code, Math.round(parseFloat(data.price))]);
+                    _gaq.push(['_trackEvent', 'Calculator', 'Scan', jQuery("#a").val() + ' Item Added', Math.round(parseFloat(data.price))]);
                 }
 
                 jQuery('#abundaCalcTbl').append(data.row_html);
