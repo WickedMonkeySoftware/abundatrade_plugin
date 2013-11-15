@@ -1435,6 +1435,7 @@ jQuery(document).ready(function () {
             },
             minLength: 2,
             select: function (event, ui) {
+                jQuery("#product_code").val(ui.item.value);
             },
             autoFocus: true,
             open: function () {
