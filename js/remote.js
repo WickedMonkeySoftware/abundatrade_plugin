@@ -1255,6 +1255,20 @@ function submit_my_list(f) {
     });
 }
 
+var validations = Array();
+
+function validateField(name, default_value) {
+    var n = name;
+    var d = default_value;
+    validations.push(function () {
+        if (jQuery('[name="' + n + '"]').val() != d) {
+            jQuery('[name="' + n + '"]').css('border', ''); return true; 
+        }
+        jQuery('[name="' + n + '"]').css('border', 'solid #ff0000 2px');
+        return false;
+    });
+
+
 function submitGiftCard() {
     jQuery('input[name=Submit]').attr("disabled", "disabled");
     jQuery('input[name=Submit]').attr("value", "Creating your giftcard ... please wait")
