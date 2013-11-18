@@ -1262,12 +1262,12 @@ function validateField(name, default_value) {
     var d = default_value;
     validations.push(function () {
         if (jQuery('[name="' + n + '"]').val() != d) {
-            jQuery('[name="' + n + '"]').css('border', ''); return true; 
+            jQuery('[name="' + n + '"]').css('border', ''); return true;
         }
         jQuery('[name="' + n + '"]').css('border', 'solid #ff0000 2px');
         return false;
     });
-
+}
 
 function submitGiftCard() {
     jQuery('input[name=Submit]').attr("disabled", "disabled");
