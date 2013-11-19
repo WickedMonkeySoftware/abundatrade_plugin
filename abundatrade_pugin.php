@@ -709,6 +709,7 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
         add_shortcode("abundagadgets", array($this, "dogadgets"));
         add_shortcode("user", array($this, "doprofile"));
         add_shortcode("is_logged_in", array($this, "is_logged_in"));
+        add_shortcode("save_button", array($this, "save_button"));
         
         add_filter("abundatrade(settings)", array($this, "getSettings"), 200, 0);
         
@@ -720,6 +721,28 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
         
         //load settings last for updates
         $this->settings = new skel__settings();
+    }
+    
+    public function save_button($atts) {
+        $save_text = "Save";
+        $edit_text = "Edit";
+        
+        if(isset($atts['save_text'])) {
+            $save_text = $atts['save_text'];
+        }
+        
+        if(isset($atts['edit_text'])) {
+            $edit_text = $atts['edit_text'];
+        }
+        
+        if (isset($_REQUEST['save_button']) && $_REQUEST['save_button'] == $edit_text) {
+            $text = $save_text;
+        }
+        else {
+            $text = $edit_text;
+        }
+        
+        return "<input type='submit' name='save_button' value='$text' />";
     }
     
     public function doprofile($atts) {
