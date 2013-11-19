@@ -785,6 +785,7 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
         
         $edit_on = "Edit Info";
         $save_on = "Save Info";
+        $class = (isset($atts['class']) ? $atts['class'] : '');
         
         if (isset($_POST['save_button']) && $_POST['save_button'] == $edit_on) {
             return "<input type='text' value='{$_SESSION['user'][$atts['user']]}' name='{$atts['user']}' />";
