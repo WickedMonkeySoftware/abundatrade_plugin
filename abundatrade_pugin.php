@@ -710,6 +710,7 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
         add_shortcode("user", array($this, "doprofile"));
         add_shortcode("is_logged_in", array($this, "is_logged_in"));
         add_shortcode("save_button", array($this, "save_button"));
+        add_shortcode("goto_next_if_saved", array($this, "next_address"));
         
         add_filter("abundatrade(settings)", array($this, "getSettings"), 200, 0);
         
@@ -723,9 +724,43 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
         $this->settings = new skel__settings();
     }
     
+    public function next_address($atts) {
+        $edit_address = "#";
+        $next_address = "#";
+        $check_var = "Save";
+        $name = "save_button";
+        
+        if(isset($atts['edit_address'])) {
+            $edit_address = $atts['edit_address'];
+        }
+        
+        if(isset($atts['next_address'])) {
+            $next_address = $atts['next_address'];
+        }
+        
+        if(isset($atts['name'])) {
+            $name = $atts['name'];
+        }
+        
+        if(isset($atts['check_var'])) {
+            $check_var = $atts['check_var'];
+        }
+        
+        if(isset($_REQUEST[$name]) && $_REQUEST[$name] == $check_var) {
+            return $next_address;
+        }
+        
+        return $edit_address;
+    }
+    
     public function save_button($atts) {
         $save_text = "Save";
         $edit_text = "Edit";
+        $name = "save_button";
+        
+        if(isset($atts['name'])) {
+            $name = $atts['name'];
+        }
         
         if(isset($atts['save_text'])) {
             $save_text = $atts['save_text'];
@@ -742,7 +777,7 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
             $text = $edit_text;
         }
         
-        return "<input type='submit' name='save_button' value='$text' />";
+        return "<input type='submit' name='$name' value='$text' />";
     }
     
     public function doprofile($atts) {
