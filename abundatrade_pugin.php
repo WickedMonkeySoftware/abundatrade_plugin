@@ -727,7 +727,7 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
     public function next_address($atts) {
         $edit_address = "#";
         $next_address = "#";
-        $check_var = "Save";
+        $check_var = "Edit";
         $name = "save_button";
         
         if(isset($atts['edit_address'])) {
@@ -782,6 +782,17 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
     
     public function doprofile($atts) {
         require_once("/var/www/trade/config.php");
+        
+        $edit_on = "Edit Info";
+        $save_on = "Save Info";
+        
+        if (isset($_POST['save_button']) && $_POST['save_button'] == $edit_on) {
+            return "<input type='text' value='{$_SESSION['user'][$atts['user']]}' name='{$atts['user']}' />";
+        }
+        
+        if (isset($_POST['save_button']) && $_POST['save_button'] == $save_on) {
+            return $_POST[$atts['user']];
+        }
         
         return $_SESSION['user'][$atts['user']];
     }
