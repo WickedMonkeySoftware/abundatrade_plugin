@@ -708,6 +708,7 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
         add_shortcode("abundatrade", array($this, "doshortcode"));
         add_shortcode("abundagadgets", array($this, "dogadgets"));
         add_shortcode("user", array($this, "doprofile"));
+        add_shortcode("is_logged_in", array($this, "is_logged_in"));
         
         add_filter("abundatrade(settings)", array($this, "getSettings"), 200, 0);
         
@@ -722,7 +723,17 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
     }
     
     public function doprofile($atts) {
-        echo $_SESSION['user'][$atts['user']];
+        require_once("/var/www/trade/config.php");
+        
+        return $_SESSION['user'][$atts['user']];
+    }
+    
+    public function is_logged_in() {
+        if (isset($_SESSION['user'])) {
+            return "My Account";
+        }
+        
+        return "Log In";
     }
     
     /**
