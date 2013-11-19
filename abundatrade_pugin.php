@@ -707,6 +707,7 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
         //////////////////// shortcode defs
         add_shortcode("abundatrade", array($this, "doshortcode"));
         add_shortcode("abundagadgets", array($this, "dogadgets"));
+        add_shortcode("user", array($this, "doprofile"));
         
         add_filter("abundatrade(settings)", array($this, "getSettings"), 200, 0);
         
@@ -718,6 +719,10 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
         
         //load settings last for updates
         $this->settings = new skel__settings();
+    }
+    
+    public function doprofile($atts) {
+        echo $_SESSION['user'][$atts['user']];
     }
     
     /**
