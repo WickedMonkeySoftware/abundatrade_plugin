@@ -746,7 +746,7 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
         
         $page = ($page < 0 ? 0 : $page);
         
-        return "$next/?val_page=$page";
+        return "$next?val_page=$page";
     }
     
     public function next_page($atts) {
@@ -758,7 +758,7 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
         
         $page = ($page < 0 ? 0 : $page);
         
-        return "$next/?val_page=$page";
+        return "$next?val_page=$page";
     }
     
     public function valuations_page($atts) {
