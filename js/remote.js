@@ -528,7 +528,7 @@ function load_previous_session(pretty, ignore_errors) {
             display_totals(part, ignore_errors);
         }
         jQuery(window).scrollTop(top);
-        if ((original_qty != new_qty) || (pretty && jQuery(window).width() > 450)) {
+        if ((original_qty != new_qty) && jQuery(window).width() > 450) {
             //scroll to bottom
             var view_height = jQuery(window).height();
             var submit_button = jQuery("#submitList").offset().top;
@@ -1492,6 +1492,25 @@ jQuery(document).ready(function () {
                 jQuery(this).removeClass("ui-corner-top").addClass("ui-corner-all");
             }
         });
+    }
+
+    // auto scroll the top of the calculator.
+    el = jQuery("#calc_follow");
+    stop = jQuery("#ready2go");
+    if (el.length > 0) {
+        elpos = el.offset().top;
+        stopos = stop.offset().top;
+        distance = stopos - elpos;
+        if (jQuery(window).width() > 450) {
+            jQuery(window).scroll(function () {
+                number_checks = 0;
+                var y = jQuery(this).scrollTop();
+                stopos = stop.offset().top;
+                if (y < elpos) { el.stop().animate({ 'top': 0 }, 200); }
+                else if (stopos - y < distance) { el.stop().animate({ 'top': stopos - distance - elpos }, 200); }
+                else { el.stop().animate({ 'top': y - elpos + 10 }, 200); }
+            });
+        }
     }
 
     //auto add included item
