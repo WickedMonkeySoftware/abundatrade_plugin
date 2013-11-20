@@ -731,8 +731,8 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
     public $current_page = 0;
     
     public function set_page() {
-        if (isset($_REQUEST['page']) && is_numeric($_REQUEST['page'])) {
-            $this->current_page = $_REQUEST['page'];
+        if (isset($_REQUEST['val_page']) && is_numeric($_REQUEST['val_page'])) {
+            $this->current_page = $_REQUEST['val_page'];
         }
     }
     
@@ -746,7 +746,7 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
         
         $page = ($page < 0 ? 0 : $page);
         
-        return "$next?page=$page";
+        return "$next/?val_page=$page";
     }
     
     public function next_page($atts) {
@@ -758,7 +758,7 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
         
         $page = ($page < 0 ? 0 : $page);
         
-        return "$next?page=$page";
+        return "$next/?val_page=$page";
     }
     
     public function valuations_page($atts) {
