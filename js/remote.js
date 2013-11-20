@@ -592,6 +592,33 @@ function waitFor(product_code) {
 * function: lookup_item
 *
 */
+var added_scroll = false;
+
+function do_scroll_setup() {
+    if (added_scroll) {
+        return;
+    }
+    added_scroll = true;
+    // auto scroll the top of the calculator.
+    el = jQuery("#calc_follow");
+    stop = jQuery("#ready2go");
+    if (el.length > 0) {
+        elpos = el.offset().top;
+        stopos = stop.offset().top;
+        distance = stopos - elpos;
+        if (jQuery(window).width() > 450) {
+            jQuery(window).scroll(function () {
+                number_checks = 0;
+                var y = jQuery(this).scrollTop();
+                stopos = stop.offset().top;
+                if (y < elpos) { el.stop().animate({ 'top': 0 }, 200); }
+                else if (stopos - y < distance) { el.stop().animate({ 'top': stopos - distance - elpos }, 200); }
+                else { el.stop().animate({ 'top': y - elpos + 10 }, 200); }
+            });
+        }
+    }
+}
+
 function lookup_item(obj) {
     if (loggedIn) {
         SetConfirmation(false);
@@ -631,25 +658,6 @@ function lookup_item(obj) {
                 Remove_Item(data.product_code);
                 build_row(data);
                 lastItem = data;
-
-                // auto scroll the top of the calculator.
-                el = jQuery("#calc_follow");
-                stop = jQuery("#ready2go");
-                if (el.length > 0) {
-                    elpos = el.offset().top;
-                    stopos = stop.offset().top;
-                    distance = stopos - elpos;
-                    if (jQuery(window).width() > 450) {
-                        jQuery(window).scroll(function () {
-                            number_checks = 0;
-                            var y = jQuery(this).scrollTop();
-                            stopos = stop.offset().top;
-                            if (y < elpos) { el.stop().animate({ 'top': 0 }, 200); }
-                            else if (stopos - y < distance) { el.stop().animate({ 'top': stopos - distance - elpos }, 200); }
-                            else { el.stop().animate({ 'top': y - elpos + 10 }, 200); }
-                        });
-                    }
-                }
 
                 if (_gaq) {
                     _gaq.push(['_trackEvent', 'Calculator', 'Scan', jQuery("#a").val() + ' Item Added', Math.round(parseFloat(data.price))]);
