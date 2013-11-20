@@ -665,6 +665,7 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
         wp_register_script("abundatrade_gadgets", $this->folders['PluginUrl'] . '/js/abunda_gadgets_short.js', array('jquery'));
         wp_register_script("abundatrade_qtip_js", $this->folders['PluginUrl'] . '/js/jquery.qtip.js', array('jquery'));
         wp_register_script("abundatrade_perm_prod", $this->folders['PluginUrl'] . '/js/perm_prods.js', array('jquery'));
+        wp_register_script("abundatrade_animate_shadow", $this->folders['PluginUrl'] . '/js/jquery.animate-shadow-min.js', array('jquery'));
         
         wp_enqueue_style("abundatrade_jsui");
         wp_enqueue_style("abundatrade_qtip");
@@ -678,6 +679,7 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
         wp_enqueue_script("abundatrade_register");
         wp_enqueue_script("abundatrade_gadgets");
         wp_enqueue_script("abundatrade_perm_prod");
+        wp_enqueue_script("abundatrade_animate_shadow");
         if (!isset($this->export)) {
             $this->export = array();
         }
