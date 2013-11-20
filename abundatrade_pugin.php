@@ -873,9 +873,13 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
         
         $r = "";
         
+        $_SESSION['my_nonce'] = md5(time());
+        
         foreach($this->valuation as $row_num => $valuation) {
             $r .= $this->DisplayValuations($valuation);
         }
+        
+        $_SESSION['check_nonce'] = $_SESSION['my_nonce'];
         
         return $r;
     }
