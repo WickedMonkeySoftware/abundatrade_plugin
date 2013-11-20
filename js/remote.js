@@ -1272,7 +1272,7 @@ function validateField(name, default_value) {
 function update_status(valuation_id, nonce) {
     var action = jQuery('#sel' + valuation_id).val();
     jQuery('#sel' + valuation_id).val(0);
-    window.location.href = "http://" + window.location.host + window.location.pathname + "?do_action=" + action + "&on_id=" + valuation_id + '&nonce=' + nonce;
+    window.location.href = "https://www.abundatrade.com/trade/user/profile/update_valuation.php?do_action=" + action + "&on_id=" + valuation_id + '&nonce=' + nonce;
 }
 
 function submitGiftCard() {
