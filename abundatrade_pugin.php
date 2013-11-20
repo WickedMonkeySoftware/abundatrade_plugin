@@ -758,6 +758,8 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
         $r .= "<select></select>";
         $r .= "</td>";
         $r .= "</tr>";
+        
+        return $r;
     }
     
     public function next_address($atts) {
