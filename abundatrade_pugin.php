@@ -738,12 +738,27 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
     
     public function previous_page($atts) {
         $this->set_page();
-        return "#";
+        
+        $next = $atts['next'];
+        
+        $page = $this->current_page;
+        $page -= 1;
+        
+        $page = ($page < 0 ? 0 : $page);
+        
+        return "$next?page=$page";
     }
     
     public function next_page($atts) {
         $this->set_page();
-        return "#";
+        $next = $atts['next'];
+        
+        $page = $this->current_page;
+        $page += 1;
+        
+        $page = ($page < 0 ? 0 : $page);
+        
+        return "$next?page=$page";
     }
     
     public function valuations_page($atts) {
@@ -761,6 +776,8 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
         $this->valuation = $result->fetchAll();
         
         if (count($valuation) <= $limit) $this->last_page = true;
+        
+        $this->total_pages = count($valuation);
     }
     
     public function GetStatus($valuation) {
