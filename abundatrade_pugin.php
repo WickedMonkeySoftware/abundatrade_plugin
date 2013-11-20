@@ -776,7 +776,7 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
     }
     
     public function GenerateTotal($valuation) {
-        switch (GetTrueStatusId($valuation)) {
+        switch ($this->GetTrueStatusId($valuation)) {
             case 1:
             case 2:
             case 8:
