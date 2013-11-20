@@ -792,8 +792,20 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
         }
     }
     
+    function GetTrueStatusId($valuation) {
+        $status_id = $valuation['status_id'];
+        if ($valuation['accepted'] == 't') {
+            $status_id = 5;
+        }
+        if ($valuation['completed'] == 't') {
+            $status_id = 5;
+        }
+        
+        return $status_id;
+    }
+    
     public function GenerateActions($valuation) {
-        switch (GetTrueStatusId($valuation)) {
+        switch ($this->GetTrueStatusId($valuation)) {
             case 1:
                 if ($valuation['editable'] == 't') {
                     return array('html' => "<option value='1'>Edit</option><option value='2'>Mark as Sent</option><option value='3'>Mark as Cancelled</option>", 'allowed' => array( 1, 2, 3));
