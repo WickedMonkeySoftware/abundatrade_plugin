@@ -752,7 +752,7 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
     }
     
     public function get_customer_valuations($limit = 10) {
-        $this->db = new TradeDB();
+        $db = new TradeDB();
         
         $page = $this->current_page * $limit;
         $query = "select completed, accepted, created_date > now() - interval '14 days' as editable, valuation_id, status, num_items, initial_total_string, reviewed_total_string, accepted_total_string, status_id from valuation_details where customer_id = :id and num_items > 0 and archived = 'f' limit :limit offset :page";
