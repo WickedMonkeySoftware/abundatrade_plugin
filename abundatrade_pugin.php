@@ -728,36 +728,124 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
         $this->settings = new skel__settings();
     }
     
+    public $current_page = 0;
+    
+    public function set_page() {
+        if (isset($_REQUEST['page']) && is_numeric($_REQUEST['page'])) {
+            $this->current_page = $_REQUEST['page'];
+        }
+    }
+    
     public function previous_page($atts) {
+        $this->set_page();
         return "#";
     }
     
     public function next_page($atts) {
+        $this->set_page();
         return "#";
     }
     
     public function valuations_page($atts) {
-        return "1";
+        $this->set_page();
+        return $this->current_page + 1;
+    }
+    
+    public function get_customer_valuations($limit = 10) {
+        $this->db = new TradeDB();
+        
+        $page = $this->current_page * $limit;
+        $query = "select completed, accepted, created_date > now() - interval '14 days' as editable, valuation_id, status, num_items, initial_total_string, reviewed_total_string, accepted_total_string, status_id from valuation_details where customer_id = :id and num_items > 0 and archived = 'f' limit :limit offset :page";
+        $statement = $db->db()->prepare($query);
+        $result = $statement->execute(array('id' => $_SESSION['user']['customer_id'], 'limit' => $limit, 'page' => $page));
+        $this->valuation = $result->fetchAll();
+        
+        if (count($valuation) <= $limit) $this->last_page = true;
+    }
+    
+    public function GetStatus($valuation) {
+        $display_status = substr($valuation['status'], 0, strpos($valuation['status'], ' '));
+        if ($valuation['accepted'] == 't') {
+            $display_status = 'Accepted';
+        }
+        if ($valuation['completed'] == 't') {
+            $display_status = 'Complete';
+        }
+        
+        return $display_status;
+    }
+    
+    public function GenerateTotal($valuation) {
+        switch (GetTrueStatusId($valuation)) {
+            case 1:
+            case 2:
+            case 8:
+            case 9:
+                return $valuation['initial_total_string'];
+            case 3:
+            case 4:
+            case 6:
+            case 7:
+                return $valuation['reviewed_total_string'];
+            case 5:
+                return $valuation['accepted_total_string'];
+        }
+    }
+    
+    public function GenerateActions($valuation) {
+        switch (GetTrueStatusId($valuation)) {
+            case 1:
+                if ($valuation['editable'] == 't') {
+                    return array('html' => "<option value='1'>Edit</option><option value='2'>Mark as Sent</option><option value='3'>Mark as Cancelled</option>", 'allowed' => array( 1, 2, 3));
+                }
+                return array('html' => "<option value='2'>Mark as Sent</option><option value='3'>Mark as Cancelled</option>", 'allowed' => array(2, 3));
+            case 4:
+            case 6:
+            case 7:
+                return array('html' => "<option value='4'>Accept Payment</option>", 'allowed' => array(4));
+            case 8:
+                return array('html' => "<option value='5'>Unmark as Sent</option>", 'allowed' => array(5));
+            case 9:
+                return array('html' => "<option value='6'>Unmark as Cancelled</option>", 'allowed' => array(6));
+            default:
+                return array('html' => '', 'allowed' => array());
+        }
+    }
+    
+    public function DisplayValuations($valuation) {
+        $display_status = $this->GetStatus($valuation);
+        $display_total = $this->GenerateTotal($valuation);
+        $actions = $this->GenerateActions($valuation);
+        
+        $r = "<tr>";
+        $r .= "<td>";
+        $r .= $valuation['valuation_id'];
+        $r .= "</td>";
+        $r .= "<td>";
+        $r .= $display_status;
+        $r .= "</td>";
+        $r .= "<td>";
+        $r .= $valuation['num_items'];
+        $r .= "</td>";
+        $r .= "<td>";
+        $r .= $display_total;
+        $r .= "</td>";
+        $r .= "<td>";
+        $r .= "<select id='sel{$valuation['valuation_id']}' onchange='update_status({$valuation['valuation_id']}, \"{$_SESION['my_nonce']}\"); return false;' name='do_action'><option value='0'>Action</option>" . $actions['html'] . "</select>";
+        $r .= "</td>";
+        $r .= "</tr>";
+        
+        return $r;
     }
     
     public function show_valuations($atts) {
-        $r = "<tr>";
-        $r .= "<td>";
-        $r .= "12345";
-        $r .= "</td>";
-        $r .= "<td>";
-        $r .= "New";
-        $r .= "</td>";
-        $r .= "<td>";
-        $r .= "5";
-        $r .= "</td>";
-        $r .= "<td>";
-        $r .= "$15.00";
-        $r .= "</td>";
-        $r .= "<td>";
-        $r .= "<select></select>";
-        $r .= "</td>";
-        $r .= "</tr>";
+        $this->set_page();
+        
+        $r = "";
+        
+        foreach($this->valuation as $row_num => $valuation) {
+            $r .= $this->DisplayValuations($valuation);
+        }
         
         return $r;
     }
