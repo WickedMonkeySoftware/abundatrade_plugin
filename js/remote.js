@@ -592,33 +592,6 @@ function waitFor(product_code) {
 * function: lookup_item
 *
 */
-var added_scroll = false;
-
-function do_scroll_setup() {
-    if (added_scroll) {
-        return;
-    }
-    added_scroll = true;
-    // auto scroll the top of the calculator.
-    el = jQuery("#calc_follow");
-    stop = jQuery("#ready2go");
-    if (el.length > 0) {
-        elpos = el.offset().top;
-        stopos = stop.offset().top;
-        distance = stopos - elpos;
-        if (jQuery(window).width() > 450) {
-            jQuery(window).scroll(function () {
-                number_checks = 0;
-                var y = jQuery(this).scrollTop();
-                stopos = stop.offset().top;
-                if (y < elpos) { el.stop().animate({ 'top': 0 }, 200); }
-                else if (stopos - y < distance) { el.stop().animate({ 'top': stopos - distance - elpos }, 200); }
-                else { el.stop().animate({ 'top': y - elpos + 10 }, 200); }
-            });
-        }
-    }
-}
-
 function lookup_item(obj) {
     if (loggedIn) {
         SetConfirmation(false);
@@ -1352,11 +1325,63 @@ var SetConfirmation = function (doSet) {
     }
 }
 
+var original_pos = 0;
+var changing = false;
+
 /* 
 * When the document has been loaded...
 *
 */
 jQuery(document).ready(function () {
+
+    original_pos = jQuery("#menu-wrapper").offset();
+    changing = false;
+
+    jQuery("#menu-wrapper").hover(
+        function () {
+            setTimeout(function () {
+                jQuery("#menu-wrapper").css("overflow", "visible");
+            }, 500);
+        },
+        function () {
+            jQuery("#menu-wrapper").css("overflow", "hidden");
+        }
+        );
+
+    jQuery(window).on('scroll', false, function () {
+        var window_top = jQuery(window).scrollTop();
+        var pos = jQuery("#menu-wrapper").offset();
+        if (window_top > 65 && jQuery("#menu-wrapper").attr("class") != "small_wrapper" && !changing) {
+            changing = true;
+            jQuery("#menu-wrapper").css("overflow", "hidden");
+            jQuery("#menu-wrapper").css("left", pos.left);
+            jQuery("#menu-wrapper").css("top", pos.top);
+            jQuery("#menu-wrapper").css("position", "fixed");
+            jQuery("#menu-wrapper").animate({ left: (pos.left - 70) + "px", height: "65px", width: "65px" }, "400", "swing", function () {
+                jQuery("#menu-wrapper").css("width", "");
+                jQuery("#menu-wrapper").css("height", "");
+            });
+            jQuery("#menu-wrapper").toggleClass("wrapper small_wrapper");
+            jQuery("[class='logo']").css("margin-top", "85px");
+            jQuery("#menu-wrapper").css("width", "");
+            jQuery("#menu-wrapper").css("height", "");
+            changing = false;
+        }
+        if (window_top < 60 && jQuery("#menu-wrapper").attr("class") == "small_wrapper" && !changing) {
+            jQuery("#menu-wrapper").css("overflow", "hidden");
+            jQuery("#menu-wrapper").css("position", "fixed");
+            jQuery("#menu-wrapper").css("left", pos.left);
+            jQuery("#menu-wrapper").css("height", "65px");
+            jQuery("#menu-wrapper").css("width", "65px");
+            jQuery("#menu-wrapper").toggleClass("small_wrapper wrapper");
+            jQuery("#menu-wrapper").animate({ left: original_pos.left, height: "65px", width: "870px" }, "400", "swing", function () {
+                //jQuery("#menu-wrapper").css("position", "static");
+                jQuery("[class='logo']").attr("style", "");
+                jQuery("#menu-wrapper").attr("style", "");
+                changing = false;
+            });
+        }
+    });
 
     jQuery('[class=submenu]').hide();
     jQuery('[class=menutitle]').click(function () {
