@@ -840,6 +840,7 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
     
     public function show_valuations($atts) {
         $this->set_page();
+        $this->get_customer_valuations();
         
         $r = "";
         
