@@ -711,6 +711,10 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
         add_shortcode("is_logged_in", array($this, "is_logged_in"));
         add_shortcode("save_button", array($this, "save_button"));
         add_shortcode("goto_next_if_saved", array($this, "next_address"));
+        add_shortcode("show_valuations", array($this, "show_valuations"));
+        add_shortcode("valuations_page", array($this, "valuations_page"));
+        add_shortcode("previous_page", array($this, "previous_page"));
+        add_shortcode("next_page", array($this, "next_page"));
         
         add_filter("abundatrade(settings)", array($this, "getSettings"), 200, 0);
         
@@ -722,6 +726,38 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
         
         //load settings last for updates
         $this->settings = new skel__settings();
+    }
+    
+    public function previous_page($atts) {
+        return "#";
+    }
+    
+    public function next_page($atts) {
+        return "#";
+    }
+    
+    public function valuations_page($atts) {
+        return "1";
+    }
+    
+    public function show_valuations($atts) {
+        $r = "<tr>";
+        $r .= "<td>";
+        $r .= "12345";
+        $r .= "</td>";
+        $r .= "<td>";
+        $r .= "New";
+        $r .= "</td>";
+        $r .= "<td>";
+        $r .= "5";
+        $r .= "</td>";
+        $r .= "<td>";
+        $r .= "$15.00";
+        $r .= "</td>";
+        $r .= "<td>";
+        $r .= "<select></select>";
+        $r .= "</td>";
+        $r .= "</tr>";
     }
     
     public function next_address($atts) {
