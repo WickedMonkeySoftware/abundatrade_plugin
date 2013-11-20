@@ -860,7 +860,7 @@ Item Total: <span id='total_item_count' class='itemtotal'>0</span>
         $r .= $display_total;
         $r .= "</td>";
         $r .= "<td>";
-        $r .= "<select id='sel{$valuation['valuation_id']}' onchange='update_status({$valuation['valuation_id']}, \"{$_SESION['my_nonce']}\"); return false;' name='do_action'><option value='0'>Action</option>" . $actions['html'] . "</select>";
+        $r .= "<select id='sel{$valuation['valuation_id']}' onchange='update_status({$valuation['valuation_id']}, \"{$_SESSION['my_nonce']}\"); return false;' name='do_action'><option value='0'>Action</option>" . $actions['html'] . "</select>";
         $r .= "</td>";
         $r .= "</tr>";
         
