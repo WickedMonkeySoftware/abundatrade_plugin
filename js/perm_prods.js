@@ -101,7 +101,7 @@ jQuery(document).ready(function () {
                     // add a row to the table
                     var good = new Number(this.good_price);
                     var like_new = new Number(this.like_new_price);
-                    if (jQuery("a.button").count > 0) {
+                    if (jQuery("a.button").length > 0) {
                         table.append('<tr><td><a href="' + jQuery('a.button').get(0).href + '?ean=' + this.ean + '">' + this.title + '</a></td><td><a href="' + jQuery('a.button').get(0).href + '?ean=' + this.ean + '&gad_cond=1">$' + get_price(jQuery(this.prices), 'Like New') + '</a></td><td><a href="' + jQuery('a.button').get(0).href + '?ean=' + this.ean + '&gad_cond=0">$' + get_price(jQuery(this.prices), 'Good') + '</a></td></tr>');
                     }
                 });
