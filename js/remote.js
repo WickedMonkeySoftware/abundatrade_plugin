@@ -1522,9 +1522,10 @@ jQuery(document).ready(function () {
     // auto scroll the top of the calculator.
     el = jQuery("#calc_follow");
     stop = jQuery("#ready2go");
-    elpos = el.offset().top;
-    stopos = stop.offset().top;
+
     if (el.length > 0) {
+        elpos = el.offset().top;
+        stopos = stop.offset().top;
         distance = stopos - elpos;
         if (jQuery(window).width() > 450) {
             jQuery(window).scroll(function () {
