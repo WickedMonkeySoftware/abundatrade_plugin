@@ -1523,11 +1523,12 @@ jQuery(document).ready(function () {
     el = jQuery("#calc_follow");
     stop = jQuery("#ready2go");
     if (el.length > 0) {
-        elpos = el.offset().top;
-        stopos = stop.offset().top;
         distance = stopos - elpos;
         if (jQuery(window).width() > 450) {
             jQuery(window).scroll(function () {
+                elpos = el.offset().top;
+                stopos = stop.offset().top;
+
                 number_checks = 0;
                 var y = jQuery(this).scrollTop();
                 stopos = stop.offset().top;
