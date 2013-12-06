@@ -1328,6 +1328,74 @@ var SetConfirmation = function (doSet) {
 var original_pos = 0;
 var changing = false;
 
+/*
+Handle loading dynamic pages
+*/
+
+function displayData(data) {
+    jQuery.each(data, function (idx, value) {
+        jQuery("#" + idx).get(0).innerHTML = value;
+    });
+
+    jQuery("#details").slideDown();
+
+    loadTable();
+}
+
+function loadTable() {
+    var request = jQuery.ajax({
+        type: "GET",
+        url: "/trade/ViewValuation.php",
+        dataType: "json",
+        data: {
+            info_id: getParameterByName("info_id"),
+            ajx: 'true',
+            ajxtbl: 'true'
+        },
+        success: function (data) {
+            displayTable(data);
+        }
+    });
+}
+
+function displayTable(data) {
+    jQuery.each(data, function (idx, value) {
+        if (idx == 'data') {
+            addRows(value);
+        }
+        else if (idx == 'show_form') {
+
+        }
+        else {
+            jQuery("#" + idx).get(0).innerHTML = value;
+        }
+    });
+}
+
+function addRows(data) {
+    jQuery("#abundaCalcTbl_View tbody").children().remove();
+    jQuery.each(data, function(idx, value) {
+        jQuery("#abundaCalcTbl_View tbody").append("<tr class='response'><td class='quantity_abunda'>" + value.quantity + "</td><td class='details'><strong>" + value.title + "</strong><br><em>" + value.author + "</em><br><em>" + value.code + "</em></td><td class='values'>$" + value.value + "</td><td>" + value.status + "</td><td colspan='2' class='valuation_notes'>" + value.notes + "</td>");
+    });
+}
+
+jQuery(document).ready(function () {
+    if (getParameterByName("info_id") != "") {
+        var request = jQuery.ajax({
+            type: "GET",
+            url: "/trade/ViewValuation.php",
+            dataType: "json",
+            data: {
+                info_id: getParameterByName("info_id"),
+                ajx: 'true'
+            },
+            success: function(data) {
+                displayData(data);
+            }
+        });
+    }
+});
+
 /* 
 * When the document has been loaded...
 *
