@@ -1343,19 +1343,37 @@ function displayData(data) {
 }
 
 function loadTable() {
-    var request = jQuery.ajax({
-        type: "GET",
-        url: "/trade/ViewValuation.php",
-        dataType: "json",
-        data: {
-            info_id: getParameterByName("info_id"),
-            ajx: 'true',
-            ajxtbl: 'true'
-        },
-        success: function (data) {
-            displayTable(data);
-        }
-    });
+    if (getParameterByName("info_id") != "") {
+        var request = jQuery.ajax({
+            type: "GET",
+            url: "/trade/ViewValuation.php",
+            dataType: "json",
+            data: {
+                info_id: getParameterByName("info_id"),
+                ajx: 'true',
+                ajxtbl: 'true'
+            },
+            success: function (data) {
+                displayTable(data);
+            }
+        });
+    }
+    else if (getParameterByName("valuation_id") != "" && getParameterByName("k") != "") {
+        var request = jQuery.ajax({
+            type: "GET",
+            url: "/trade/ViewValuation.php",
+            dataType: "json",
+            data: {
+                valuation_id: getParameterByName("valuation_id"),
+                k: getParameterByName("k"),
+                ajx: 'true',
+                ajxtbl: 'true'
+            },
+            success: function (data) {
+                displayTable(data);
+            }
+        });
+    }
 }
 
 function displayTable(data) {
