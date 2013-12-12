@@ -1394,6 +1394,21 @@ jQuery(document).ready(function () {
             }
         });
     }
+    else if (getParameterByName("valuation_id") != "" && getParameterByName("k") != "") {
+        var request = jQuery.ajax({
+            type: "GET",
+            url: "/trade/ViewValuation.php",
+            dataType: "json",
+            data: {
+                valuation_id: getParameterByName("valuation_id"),
+                k: getParameterByName("k"),
+                ajx: 'true'
+            },
+            success: function (data) {
+                displayData(data);
+            }
+        });
+    }
 });
 
 /* 
