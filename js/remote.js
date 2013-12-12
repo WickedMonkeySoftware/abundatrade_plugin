@@ -1334,8 +1334,14 @@ Handle loading dynamic pages
 
 function displayData(data) {
     jQuery.each(data, function (idx, value) {
-        jQuery("#" + idx).get(0).innerHTML = value;
+        if (idx != 'redeem_status') {
+            jQuery("#" + idx).get(0).innerHTML = value;
+        }
     });
+
+    if (data.redeem_status) {
+
+    }
 
     jQuery("#details").slideDown();
 
