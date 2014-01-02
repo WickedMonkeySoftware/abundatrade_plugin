@@ -1440,67 +1440,6 @@ jQuery(document).ready(function () {
 *
 */
 jQuery(document).ready(function () {
-
-    original_pos = jQuery("#menu-wrapper").offset();
-    changing = false;
-
-    jQuery("#menu-wrapper").hover(
-        function () {
-            setTimeout(function () {
-                jQuery("#menu-wrapper").css("overflow", "visible");
-            }, 500);
-        },
-        function () {
-            jQuery("#menu-wrapper").css("overflow", "hidden");
-        }
-        );
-
-    jQuery(window).on('scroll', false, function () {
-        var window_top = jQuery(window).scrollTop();
-        var pos = jQuery("#menu-wrapper").offset();
-        if (window_top > 65 && jQuery("#menu-wrapper").attr("class") != "small_wrapper" && !changing) {
-            changing = true;
-            jQuery("#menu-wrapper").css("overflow", "hidden");
-            jQuery("#menu-wrapper").css("left", pos.left);
-            jQuery("#menu-wrapper").css("top", pos.top);
-            jQuery("#menu-wrapper").css("position", "fixed");
-            jQuery("#menu-wrapper").animate({ left: (pos.left - 70) + "px", height: "65px", width: "65px" }, "400", "swing", function () {
-                jQuery("#menu-wrapper").css("width", "");
-                jQuery("#menu-wrapper").css("height", "");
-            });
-            jQuery("#menu-wrapper").toggleClass("wrapper small_wrapper");
-            jQuery("[class='logo']").css("margin-top", "85px");
-            jQuery("#menu-wrapper").css("width", "");
-            jQuery("#menu-wrapper").css("height", "");
-            changing = false;
-        }
-        if (window_top < 60 && jQuery("#menu-wrapper").attr("class") == "small_wrapper" && !changing) {
-            jQuery("#menu-wrapper").css("overflow", "hidden");
-            jQuery("#menu-wrapper").css("position", "fixed");
-            jQuery("#menu-wrapper").css("left", pos.left);
-            jQuery("#menu-wrapper").css("height", "65px");
-            jQuery("#menu-wrapper").css("width", "65px");
-            jQuery("#menu-wrapper").toggleClass("small_wrapper wrapper");
-            jQuery("#menu-wrapper").animate({ left: original_pos.left, height: "65px", width: "870px" }, "400", "swing", function () {
-                //jQuery("#menu-wrapper").css("position", "static");
-                jQuery("[class='logo']").attr("style", "");
-                jQuery("#menu-wrapper").attr("style", "");
-                changing = false;
-            });
-        }
-    });
-
-    jQuery('[class=submenu]').hide();
-    jQuery('[class=menutitle]').click(function () {
-        var myid = "#sub" + this.id.substring(1);
-        if (jQuery(myid).is(":visible")) {
-            jQuery(myid).slideUp('fast');
-        }
-        else {
-            jQuery(myid).slideDown('slow');
-        }
-    });
-
     if (getParameterByName('act') == 'gift') {
         jQuery('input[name=fields_email]').val(getParameterByName('email'));
         //jQuery('input[name=Submit]').attr('onclick','return submitGiftCard();');
