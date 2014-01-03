@@ -1575,7 +1575,6 @@ jQuery(document).ready(function () {
         distance = stopos - elpos;
         if (jQuery(window).width() > 450) {
             jQuery(window).scroll(function () {
-                elpos = el.offset().top;
                 stopos = stop.offset().top;
                 distance = stopos - elpos;
 
@@ -1583,6 +1582,7 @@ jQuery(document).ready(function () {
                 var y = jQuery(this).scrollTop();
                 stopos = stop.offset().top;
                 if (y < elpos) {
+                    el.css("position", "relative");
                     el.stop().animate({ 'top': 0 }, 200);
                     console.log("1");
                 }
@@ -1592,6 +1592,7 @@ jQuery(document).ready(function () {
                 }
                 else {
                     console.log("3");
+                    el.css("position", "fixed");
                     el.stop().animate({ 'top': y - elpos + 10 }, 200);
                 }
             });
