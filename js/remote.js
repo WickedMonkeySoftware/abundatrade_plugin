@@ -1587,7 +1587,7 @@ jQuery(document).ready(function () {
                     console.log("1");
                 }
                 else if (stopos - y < 65) {
-                    el.stop().animate({ 'top': stopos - distance - elpos }, 200);
+                    el.stop().animate({ 'top': stopos - y - 65 }, 200);
                     console.log("2");
                 }
                 else {
