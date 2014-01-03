@@ -1593,7 +1593,7 @@ jQuery(document).ready(function () {
                 else {
                     console.log("3");
                     el.css("position", "fixed");
-                    el.stop().animate({ 'top': y - elpos + 10 }, 200);
+                    el.stop().animate({ 'top': 0 }, 200);
                 }
             });
         }
