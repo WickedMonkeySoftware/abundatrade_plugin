@@ -8,6 +8,10 @@
     box-sizing: content-box;
 }
 
+.calc_follow {
+    z-index:10;
+}
+
 .searchby {
     float: left;
     padding-right: 10px;
