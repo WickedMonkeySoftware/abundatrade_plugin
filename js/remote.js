@@ -1577,6 +1577,7 @@ jQuery(document).ready(function () {
             jQuery(window).scroll(function () {
                 elpos = el.offset().top;
                 stopos = stop.offset().top;
+                distance = stopos - elpos;
 
                 number_checks = 0;
                 var y = jQuery(this).scrollTop();
