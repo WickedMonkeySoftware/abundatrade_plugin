@@ -1587,7 +1587,6 @@ jQuery(document).ready(function () {
                     console.log("1");
                 }
                 else if (stopos - y < 50) {
-                    el.css("position", "relative");
                     el.stop().animate({ 'top': stopos - distance - elpos }, 200);
                     console.log("2");
                 }
