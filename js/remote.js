@@ -1581,9 +1581,18 @@ jQuery(document).ready(function () {
                 number_checks = 0;
                 var y = jQuery(this).scrollTop();
                 stopos = stop.offset().top;
-                if (y < elpos) { el.stop().animate({ 'top': 0 }, 200); }
-                else if (stopos - y < distance) { el.stop().animate({ 'top': stopos - distance - elpos }, 200); }
-                else { el.stop().animate({ 'top': y - elpos + 10 }, 200); }
+                if (y < elpos) {
+                    el.stop().animate({ 'top': 0 }, 200);
+                    console.log("1");
+                }
+                else if (stopos - y < distance) {
+                    el.stop().animate({ 'top': stopos - distance - elpos }, 200);
+                    console.log("2");
+                }
+                else {
+                    console.log("3");
+                    el.stop().animate({ 'top': y - elpos + 10 }, 200);
+                }
             });
         }
     }
