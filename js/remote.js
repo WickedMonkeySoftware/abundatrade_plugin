@@ -428,7 +428,12 @@ function submit_bulk(val) {
     str += '&location=' + window.location.href;
 
     if (_gaq) {
-        _gaq.push(['_trackEvent', 'Calculator', 'Submit', jQuery("#a").val() + ' Bulk Upload', 15]);
+        if (is_updating) {
+            _gaq.push(['_trackEvent', 'Calculator', 'Submit [updated]', jQuery("#a").val() + ' Bulk Upload', 15]);
+        }
+        else {
+            _gaq.push(['_trackEvent', 'Calculator', 'Submit', jQuery("#a").val() + ' Bulk Upload', 15]);
+        }
     }
 
     var request = jQuery.ajax(
@@ -1216,7 +1221,12 @@ function submit_my_list(f) {
     }
 
     if (_gaq) {
-        _gaq.push(['_trackEvent', 'Calculator', 'Submit', jQuery("#a").val() + ' List', Math.round(parseFloat(jQuery("#total_prevaluation").get(0).innerHTML.substring(1)))]);
+        if (is_updating) {
+            _gaq.push(['_trackEvent', 'Calculator', 'Submit [updated]', jQuery("#a").val() + ' List', Math.round(parseFloat(jQuery("#total_prevaluation").get(0).innerHTML.substring(1)))]);
+        }
+        else {
+            _gaq.push(['_trackEvent', 'Calculator', 'Submit', jQuery("#a").val() + ' List', Math.round(parseFloat(jQuery("#total_prevaluation").get(0).innerHTML.substring(1)))]);
+        }
     }
 
     var request = jQuery.ajax(
@@ -1402,6 +1412,14 @@ function addRows(data) {
         jQuery("#abundaCalcTbl_View tbody").append("<tr class='response'><td class='quantity_abunda'>" + value.quantity + "</td><td class='details'><strong>" + value.title + "</strong><br><em>" + value.author + "</em><br><em>" + value.code + "</em></td><td class='values'>$" + value.value + "</td><td>" + value.status + "</td><td colspan='2' class='valuation_notes'>" + value.notes + "</td>");
     });
 }
+
+var is_updating = false;
+
+jQuery(document).ready(function () {
+    if (getParameterByName("update") === "true") {
+        is_updating = true;
+    }
+});
 
 jQuery(document).ready(function () {
     if (getParameterByName("info_id") != "") {
