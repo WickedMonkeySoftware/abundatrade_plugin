@@ -1,0 +1,18 @@
+﻿{
+	"name": "abundatrade",
+	"version": "0.1.0",
+	"jsFile": "remote",
+	"devDependencies": {
+		"grunt": "~0.4.2",
+		"grunt-contrib-jshint": "~0.6.3",
+		"grunt-contrib-nodeunit": "~0.2.0",
+		"grunt-contrib-uglify": "~0.2.2",
+		"grunt-contrib-qunit": ">=0.2.1",
+		"grunt-contrib-watch": ">=0.3.1",
+		"grunt-php": ">=0.3.2",
+		"grunt-phplint": ">=0.0.5",
+		"grunt-phpunit": ">=0.3.2",
+		"grunt-php-analyzer": ">=0.1.0",
+		"grunt-phpcs": ">=0.2.1"
+	}
+}

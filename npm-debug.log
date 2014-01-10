@@ -1,0 +1,67 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   '-g',
+1 verbose cli   'phpunit' ]
+2 info using npm@1.3.17
+3 info using node@v0.10.23
+4 verbose node symlink C:\Program Files\nodejs\\node.exe
+5 verbose cache add [ 'phpunit', null ]
+6 verbose cache add name=undefined spec="phpunit" args=["phpunit",null]
+7 verbose parsed url { protocol: null,
+7 verbose parsed url   slashes: null,
+7 verbose parsed url   auth: null,
+7 verbose parsed url   host: null,
+7 verbose parsed url   port: null,
+7 verbose parsed url   hostname: null,
+7 verbose parsed url   hash: null,
+7 verbose parsed url   search: null,
+7 verbose parsed url   query: null,
+7 verbose parsed url   pathname: 'phpunit',
+7 verbose parsed url   path: 'phpunit',
+7 verbose parsed url   href: 'phpunit' }
+8 silly lockFile cd00448f-phpunit phpunit
+9 verbose lock phpunit C:\Users\Robert\AppData\Roaming\npm-cache\cd00448f-phpunit.lock
+10 silly lockFile cd00448f-phpunit phpunit
+11 silly lockFile cd00448f-phpunit phpunit
+12 verbose addNamed [ 'phpunit', '' ]
+13 verbose addNamed [ null, '*' ]
+14 silly lockFile 72986483-phpunit phpunit@
+15 verbose lock phpunit@ C:\Users\Robert\AppData\Roaming\npm-cache\72986483-phpunit.lock
+16 silly addNameRange { name: 'phpunit', range: '*', hasData: false }
+17 verbose url raw phpunit
+18 verbose url resolving [ 'https://registry.npmjs.org/', './phpunit' ]
+19 verbose url resolved https://registry.npmjs.org/phpunit
+20 info trying registry request attempt 1 at 17:16:27
+21 http GET https://registry.npmjs.org/phpunit
+22 http 404 https://registry.npmjs.org/phpunit
+23 silly registry.get cb [ 404,
+23 silly registry.get   { date: 'Fri, 10 Jan 2014 22:16:28 GMT',
+23 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R15B03)',
+23 silly registry.get     'content-type': 'application/json',
+23 silly registry.get     'cache-control': 'max-age=0',
+23 silly registry.get     'content-length': '52',
+23 silly registry.get     'accept-ranges': 'bytes',
+23 silly registry.get     via: '1.1 varnish',
+23 silly registry.get     age: '0',
+23 silly registry.get     'x-served-by': 'cache-v37-ASH',
+23 silly registry.get     'x-cache': 'MISS',
+23 silly registry.get     'x-cache-hits': '0',
+23 silly registry.get     'x-timer': 'S1389392188.597336292,VS0,VE128',
+23 silly registry.get     'keep-alive': 'timeout=10, max=50',
+23 silly registry.get     connection: 'Keep-Alive' } ]
+24 silly lockFile 72986483-phpunit phpunit@
+25 silly lockFile 72986483-phpunit phpunit@
+26 error 404 'phpunit' is not in the npm registry.
+26 error 404 You should bug the author to publish it
+26 error 404
+26 error 404 Note that you can also install from a
+26 error 404 tarball, folder, or http url, or git url.
+27 error System Windows_NT 6.2.9200
+28 error command "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "-g" "phpunit"
+29 error cwd C:\users\robert\Documents\My Web Sites\AbundatradeTest\wp-content\plugins\abundatrade_plugin
+30 error node -v v0.10.23
+31 error npm -v 1.3.17
+32 error code E404
+33 verbose exit [ 1, true ]
