@@ -1,2 +1,3 @@
 /skel/build/
 node_modules/
+*.min.js
