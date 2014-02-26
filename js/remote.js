@@ -465,7 +465,7 @@ function delete_the_row(obj) {
         {
             type: 'GET',
             url: sec() + abundacalc.server + '/trade/process/deleteItem.php',
-            data: 'product=' + product_code + "id=" + product_id,
+            data: 'product=' + product_code + "&id=" + product_id,
             dataType: 'jsonp'
         });
 
