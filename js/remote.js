@@ -460,13 +460,12 @@ function submit_bulk(val) {
 */
 function delete_the_row(obj) {
     var product_code = jQuery(obj).parents('tr').children('.upc').text();
-    var product_id = jQuery(obj).attr('id');
-    console.log(product_id);
+    var product_id = jQuery(obj).attr('id').replace("del_", "");
     var request = jQuery.ajax(
         {
             type: 'GET',
             url: sec() + abundacalc.server + '/trade/process/deleteItem.php',
-            data: 'product=' + product_code,
+            data: 'product=' + product_code + "id=" + product_id,
             dataType: 'jsonp'
         });
 
