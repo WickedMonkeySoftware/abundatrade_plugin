@@ -460,6 +460,8 @@ function submit_bulk(val) {
 */
 function delete_the_row(obj) {
     var product_code = jQuery(obj).parents('tr').children('.upc').text();
+    var product_id = jQuery(obj).attr('id');
+    console.log(product_id);
     var request = jQuery.ajax(
         {
             type: 'GET',
