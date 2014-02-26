@@ -1603,14 +1603,11 @@ jQuery(document).ready(function () {
                 if (y < elpos) {
                     el.css("position", "relative");
                     el.stop().animate({ 'top': 0 }, 200);
-                    console.log("1");
                 }
                 else if (stopos - y < 65) {
                     el.stop().animate({ 'top': stopos - y - 65 }, 200);
-                    console.log("2");
                 }
                 else {
-                    console.log("3");
                     el.css("position", "fixed");
                     el.stop().animate({ 'top': 0 }, 200);
                 }
