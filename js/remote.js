@@ -474,11 +474,11 @@ function delete_the_row(obj) {
     });
 
     //count affected rows
-    x = jQuery('td:contains("del_' + product_id + '")');
+    x = jQuery(obj);
     number_item -= x.length;
 
     //jQuery(obj).parents('tr').remove();
-    jQuery('td:contains("' + product_code + '")').parent()
+    jQuery(obj).closest("tr")
          .find('td')
          .wrapInner('<div style="display: block;" />')
          .parent()
